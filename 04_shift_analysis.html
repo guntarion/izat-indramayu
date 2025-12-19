@@ -14,7 +14,13 @@
                 <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
                 <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
             </div>
-            <nav class="nav">
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <nav class="nav" id="mainNav">
                 <a href="index.html" class="nav-link">Beranda</a>
                 <div class="nav-dropdown">
                     <button class="nav-dropdown-toggle">Data Cleansing</button>
@@ -631,10 +637,12 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="logo-text">PT PLN Nusantara Power</div>
-                <p>Unit Pembangkitan Indramayu</p>
-                <p>Analisis Data IZAT K3 - Periode 2020-2024</p>
-                <p>&copy; 2024 PT PLN Nusantara Power. All rights reserved.</p>
+                <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+                <p>Basic Analysis Report - Data IZAT K3</p>
+                <p>Analisis Pola Shift & Hari</p>
+                <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+                    UP Indramayu &copy; 2025 | GTR | Intended for Internal Use Only
+                </p>
             </div>
         </div>
     </footer>
@@ -753,5 +761,8 @@
             }
         });
     </script>
+
+    <!-- Mobile Menu Component -->
+    <script src="assets/js/components.js"></script>
 </body>
 </html>
