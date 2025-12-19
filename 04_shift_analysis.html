@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Pola Shift & Hari - IZAT K3 UP Indramayu</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+                <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Beranda</a>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Data Cleansing</button>
+                    <div class="nav-dropdown-menu cleansing-menu">
+                        <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+                        <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+                        <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+                        <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+                        <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+                        <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+                        <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle active">Basic Analysis</button>
+                    <div class="nav-dropdown-menu">
+                        <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+                        <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+                        <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+                        <a href="04_shift_analysis.html" class="active"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+                        <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Advanced Analysis</button>
+                    <div class="nav-dropdown-menu ai-menu">
+                        <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+                        <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+                        <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Analisis Pola Shift & Hari</h1>
+                <p>Analisis komprehensif pola pelaporan IZAT K3 berdasarkan shift kerja dan hari dalam seminggu</p>
+                <span class="hero-badge">Periode: 2020-2024</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Section II.4.1: Shift Performance Analysis -->
+        <section class="section">
+            <div class="section-header">
+                <h2>📊 A. Analisis Kinerja Per Shift</h2>
+                <p>Evaluasi kinerja pelaporan K3 berdasarkan shift kerja (Pagi, Siang, Malam)</p>
+            </div>
+
+            <!-- Shift Performance Summary -->
+            <div class="stat-cards">
+                <div class="stat-card primary">
+                    <div class="stat-label">Shift A (Pagi) - Dominan</div>
+                    <div class="stat-value">3.537</div>
+                    <div class="stat-change">63% dari total laporan</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-label">Shift C (Malam) - Tertinggi</div>
+                    <div class="stat-value">25,7%</div>
+                    <div class="stat-change">Detection Rate Unsafe</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-label">Shift B (Siang) - Perlu Perhatian</div>
+                    <div class="stat-value">17,1%</div>
+                    <div class="stat-change">Detection Rate Terendah</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-label">Rata-rata Resolusi Shift C</div>
+                    <div class="stat-value">201 hari</div>
+                    <div class="stat-change">Paling lama diselesaikan</div>
+                </div>
+            </div>
+
+            <!-- Shift Performance Table -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h3>🔍 Detail Kinerja Per Shift</h3>
+                    <button class="btn-data-view" onclick="openDataModal('shiftPerformance')">
+                        <span class="icon">📊</span> Lihat Data Lengkap
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Shift</th>
+                                    <th>Total Laporan</th>
+                                    <th>Avg Quality Score</th>
+                                    <th>Detection Rate Unsafe</th>
+                                    <th>Avg Risk Score</th>
+                                    <th>Avg Resolusi (hari)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-primary">Shift A (Pagi)</span></td>
+                                    <td><strong>3.537</strong></td>
+                                    <td>2,31</td>
+                                    <td><span class="badge badge-info">24,1%</span></td>
+                                    <td>1,27</td>
+                                    <td>181 hari</td>
+                                    <td><span class="badge badge-success">Baik</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-warning">Shift B (Siang)</span></td>
+                                    <td><strong>1.603</strong></td>
+                                    <td>2,02</td>
+                                    <td><span class="badge badge-danger">17,1%</span></td>
+                                    <td>1,22</td>
+                                    <td>156 hari</td>
+                                    <td><span class="badge badge-warning">Perlu Peningkatan</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-info">Shift C (Malam)</span></td>
+                                    <td><strong>435</strong></td>
+                                    <td>2,43</td>
+                                    <td><span class="badge badge-success">25,7%</span></td>
+                                    <td>1,44</td>
+                                    <td>201 hari</td>
+                                    <td><span class="badge badge-success">Sangat Baik</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shift Analysis Insights -->
+            <div class="analysis-box mt-4">
+                <h4>💡 Analisis Kinerja Shift</h4>
+                <ul>
+                    <li><strong>Shift A (Pagi) mendominasi volume:</strong> Dengan 3.537 laporan (63%), shift pagi menjadi periode paling aktif sesuai dengan jam kerja normal dan aktivitas operasional utama</li>
+                    <li><strong>Shift C (Malam) paling efektif dalam deteksi:</strong> Meskipun volume rendah (435 laporan), shift malam memiliki detection rate unsafe tertinggi (25,7%) dan quality score terbaik (2,43)</li>
+                    <li><strong>Shift B (Siang) memerlukan perhatian:</strong> Detection rate terendah (17,1%) dan quality score terendah (2,02) mengindikasikan kurangnya awareness atau fokus K3</li>
+                    <li><strong>Korelasi volume vs kualitas:</strong> Volume tinggi tidak menjamin kualitas - Shift A dengan volume 8x Shift C memiliki detection rate lebih rendah</li>
+                    <li><strong>Waktu resolusi berbanding lurus dengan kompleksitas:</strong> Shift C dengan risk score tertinggi (1,44) juga memiliki waktu resolusi terlama (201 hari)</li>
+                </ul>
+            </div>
+
+            <!-- Shift Visualizations -->
+            <div class="image-grid mt-4">
+                <figure class="image-card">
+                    <img src="assets/images/II.4.1_shift_performance_overview.png" alt="Overview Kinerja Shift">
+                    <figcaption>Gambar 4.1.1: Perbandingan Kinerja Antar Shift - Volume, Quality, dan Detection Rate</figcaption>
+                </figure>
+                <figure class="image-card">
+                    <img src="assets/images/II.4.1_hourly_distribution.png" alt="Distribusi Per Jam">
+                    <figcaption>Gambar 4.1.2: Distribusi Laporan Per Jam - Pola Pelaporan Sepanjang Hari</figcaption>
+                </figure>
+                <figure class="image-card">
+                    <img src="assets/images/II.4.1_shift_kategori_distribution.png" alt="Distribusi Kategori Per Shift">
+                    <figcaption>Gambar 4.1.3: Distribusi Kategori Temuan Berdasarkan Shift Kerja</figcaption>
+                </figure>
+                <figure class="image-card">
+                    <img src="assets/images/II.4.1_shift_zona_heatmap.png" alt="Heatmap Shift-Zona">
+                    <figcaption>Gambar 4.1.4: Heatmap Intensitas Laporan Berdasarkan Shift dan Zona</figcaption>
+                </figure>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.4.1_monthly_shift_trend.png" alt="Tren Bulanan Per Shift">
+                        <figcaption>Gambar 4.1.5: Tren Pelaporan Bulanan Berdasarkan Shift - Pola Tahunan</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section II.4.2: Day of Week Pattern Analysis -->
+        <section class="section">
+            <div class="section-header">
+                <h2>📅 B. Analisis Pola Hari dalam Seminggu</h2>
+                <p>Evaluasi pola pelaporan K3 berdasarkan hari dalam seminggu dan perbandingan weekday vs weekend</p>
+            </div>
+
+            <!-- Day Pattern Summary -->
+            <div class="stat-cards">
+                <div class="stat-card primary">
+                    <div class="stat-label">Senin - Volume Tertinggi</div>
+                    <div class="stat-value">1.454</div>
+                    <div class="stat-change">26% dari total laporan</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-label">Rabu - Detection Rate Tertinggi</div>
+                    <div class="stat-value">30,6%</div>
+                    <div class="stat-change">Quality Score: 2,58</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-label">Minggu - Terendah</div>
+                    <div class="stat-value">9,3%</div>
+                    <div class="stat-change">Detection rate minimal</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-label">Weekday vs Weekend</div>
+                    <div class="stat-value">77%</div>
+                    <div class="stat-change">Lebih produktif di weekday</div>
+                </div>
+            </div>
+
+            <!-- Day of Week Performance Table -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h3>🔍 Detail Kinerja Per Hari</h3>
+                    <button class="btn-data-view" onclick="openDataModal('dayOfWeek')">
+                        <span class="icon">📊</span> Lihat Data Lengkap
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Hari</th>
+                                    <th>Total Laporan</th>
+                                    <th>Avg Quality Score</th>
+                                    <th>Detection Rate Unsafe</th>
+                                    <th>Avg Risk Score</th>
+                                    <th>Tipe</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Senin</strong></td>
+                                    <td><strong>1.454</strong></td>
+                                    <td>1,81</td>
+                                    <td><span class="badge badge-danger">13,5%</span></td>
+                                    <td>1,08</td>
+                                    <td><span class="badge badge-info">Weekday</span></td>
+                                    <td><span class="badge badge-warning">Perlu Peningkatan</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Selasa</strong></td>
+                                    <td><strong>849</strong></td>
+                                    <td>2,56</td>
+                                    <td><span class="badge badge-success">28,5%</span></td>
+                                    <td>1,26</td>
+                                    <td><span class="badge badge-info">Weekday</span></td>
+                                    <td><span class="badge badge-success">Baik</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Rabu</strong></td>
+                                    <td><strong>673</strong></td>
+                                    <td>2,58</td>
+                                    <td><span class="badge badge-success">30,6%</span></td>
+                                    <td>1,48</td>
+                                    <td><span class="badge badge-info">Weekday</span></td>
+                                    <td><span class="badge badge-success">Sangat Baik</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kamis</strong></td>
+                                    <td><strong>719</strong></td>
+                                    <td>2,56</td>
+                                    <td><span class="badge badge-success">30,3%</span></td>
+                                    <td>1,50</td>
+                                    <td><span class="badge badge-info">Weekday</span></td>
+                                    <td><span class="badge badge-success">Sangat Baik</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Jumat</strong></td>
+                                    <td><strong>854</strong></td>
+                                    <td>2,26</td>
+                                    <td><span class="badge badge-info">24,5%</span></td>
+                                    <td>1,34</td>
+                                    <td><span class="badge badge-info">Weekday</span></td>
+                                    <td><span class="badge badge-success">Baik</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sabtu</strong></td>
+                                    <td><strong>368</strong></td>
+                                    <td>2,50</td>
+                                    <td><span class="badge badge-success">28,3%</span></td>
+                                    <td>1,49</td>
+                                    <td><span class="badge badge-warning">Weekend</span></td>
+                                    <td><span class="badge badge-success">Baik</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Minggu</strong></td>
+                                    <td><strong>658</strong></td>
+                                    <td>1,85</td>
+                                    <td><span class="badge badge-danger">9,3%</span></td>
+                                    <td>1,04</td>
+                                    <td><span class="badge badge-warning">Weekend</span></td>
+                                    <td><span class="badge badge-danger">Kurang Efektif</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekday vs Weekend Comparison -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h3>📊 Perbandingan Weekday vs Weekend</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tipe Hari</th>
+                                    <th>Total Laporan</th>
+                                    <th>% dari Total</th>
+                                    <th>Avg Quality Score</th>
+                                    <th>Detection Rate Unsafe</th>
+                                    <th>Avg Resolusi</th>
+                                    <th>Avg Laporan/Hari</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-primary">Weekday (Sen-Jum)</span></td>
+                                    <td><strong>4.549</strong></td>
+                                    <td>81,6%</td>
+                                    <td>2,27</td>
+                                    <td><span class="badge badge-success">23,6%</span></td>
+                                    <td>180 hari</td>
+                                    <td>910 laporan/hari</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-warning">Weekend (Sab-Min)</span></td>
+                                    <td><strong>1.026</strong></td>
+                                    <td>18,4%</td>
+                                    <td>2,08</td>
+                                    <td><span class="badge badge-warning">16,1%</span></td>
+                                    <td>157 hari</td>
+                                    <td>513 laporan/hari</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <p><strong>Kesimpulan:</strong></p>
+                        <ul>
+                            <li>Weekday menghasilkan <strong>77% lebih banyak</strong> laporan per hari dibanding weekend (910 vs 513)</li>
+                            <li>Detection rate unsafe di weekday <strong>46% lebih tinggi</strong> dibanding weekend (23,6% vs 16,1%)</li>
+                            <li>Quality score weekday <strong>9% lebih baik</strong> dibanding weekend (2,27 vs 2,08)</li>
+                            <li>Namun, waktu resolusi weekend <strong>13% lebih cepat</strong> (157 vs 180 hari) - kemungkinan kasus lebih sederhana</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day Pattern Analysis Insights -->
+            <div class="analysis-box mt-4">
+                <h4>💡 Analisis Pola Hari</h4>
+                <ul>
+                    <li><strong>Senin: Volume tinggi, kualitas rendah (1.454 laporan, 13,5% detection rate):</strong> Fenomena "Monday Effect" - kemungkinan besar laporan bersifat administratif/backlog dari akhir pekan, bukan temuan aktif</li>
+                    <li><strong>Rabu-Kamis: Periode paling produktif (30%+ detection rate):</strong> Pertengahan minggu menunjukkan fokus dan awareness K3 optimal, pekerja sudah "warmed up" dan belum lelah</li>
+                    <li><strong>Jumat: Mulai menurun (24,5%):</strong> Tren penurunan menjelang akhir pekan, namun masih cukup baik</li>
+                    <li><strong>Sabtu: Anomali positif (28,3% detection rate):</strong> Meskipun weekend, quality dan detection rate tinggi - kemungkinan tim khusus/lembur dengan fokus lebih baik</li>
+                    <li><strong>Minggu: Terendah (9,3% detection rate):</strong> Aktivitas minimal, hanya operasional rutin, kurangnya inspeksi proaktif</li>
+                    <li><strong>Pola weekday vs weekend jelas terlihat:</strong> Perbedaan 77% dalam produktivitas harian menunjukkan pentingnya penjadwalan inspeksi di hari kerja</li>
+                </ul>
+            </div>
+
+            <!-- Day Pattern Visualizations -->
+            <div class="image-grid mt-4">
+                <figure class="image-card">
+                    <img src="assets/images/II.4.2_daily_distribution.png" alt="Distribusi Per Hari">
+                    <figcaption>Gambar 4.2.1: Distribusi Laporan Per Hari dalam Seminggu</figcaption>
+                </figure>
+                <figure class="image-card">
+                    <img src="assets/images/II.4.2_weekday_vs_weekend.png" alt="Weekday vs Weekend">
+                    <figcaption>Gambar 4.2.2: Perbandingan Kinerja Weekday vs Weekend</figcaption>
+                </figure>
+                <figure class="image-card">
+                    <img src="assets/images/II.4.2_day_shift_heatmap.png" alt="Heatmap Hari-Shift">
+                    <figcaption>Gambar 4.2.3: Heatmap Intensitas Laporan Berdasarkan Hari dan Shift</figcaption>
+                </figure>
+                <figure class="image-card">
+                    <img src="assets/images/II.4.2_day_zona_heatmap.png" alt="Heatmap Hari-Zona">
+                    <figcaption>Gambar 4.2.4: Heatmap Intensitas Laporan Berdasarkan Hari dan Zona</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Key Insights Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>🎯 Key Insights</h2>
+                <p>Temuan kunci dari analisis pola shift dan hari</p>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-item">
+                    <div class="insight-title">Dominasi Shift Pagi</div>
+                    <div class="insight-value">Shift A menghasilkan 63% laporan (3.537 dari 5.575), mencerminkan aktivitas operasional utama di jam kerja normal</div>
+                </div>
+                <div class="insight-item success">
+                    <div class="insight-title">Shift Malam Paling Efektif</div>
+                    <div class="insight-value">Shift C memiliki detection rate tertinggi (25,7%) dan quality score terbaik (2,43) meskipun volume rendah - indikasi tim fokus dan berpengalaman</div>
+                </div>
+                <div class="insight-item warning">
+                    <div class="insight-title">Shift Siang Perlu Perhatian</div>
+                    <div class="insight-value">Shift B memiliki detection rate terendah (17,1%) dan quality terendah (2,02) - kemungkinan kurangnya supervisi atau awareness</div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">Efek "Monday Effect"</div>
+                    <div class="insight-value">Senin volume tertinggi (1.454) tapi detection rate terendah (13,5%) - indikasi laporan administratif/backlog akhir pekan</div>
+                </div>
+                <div class="insight-item success">
+                    <div class="insight-title">Produktivitas Pertengahan Minggu</div>
+                    <div class="insight-value">Rabu-Kamis menunjukkan kinerja optimal dengan detection rate ~30% dan quality score >2,5</div>
+                </div>
+                <div class="insight-item warning">
+                    <div class="insight-title">Weekend Kurang Efektif</div>
+                    <div class="insight-value">Detection rate weekend (16,1%) 47% lebih rendah dari weekday (23,6%) - aktivitas inspeksi minimal</div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-title">Anomali Sabtu Positif</div>
+                    <div class="insight-value">Sabtu menunjukkan detection rate 28,3% (tinggi untuk weekend) - kemungkinan tim lembur yang lebih fokus</div>
+                </div>
+                <div class="insight-item danger">
+                    <div class="insight-title">Minggu Paling Rendah</div>
+                    <div class="insight-value">Detection rate Minggu hanya 9,3% - operasional minimal, perlu evaluasi jadwal patrol</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>💡 Rekomendasi Strategis</h2>
+                <p>Langkah-langkah perbaikan berdasarkan analisis pola shift dan hari</p>
+            </div>
+
+            <div class="recommendation-box">
+                <h4>🎯 Rekomendasi Berdasarkan Pola Shift</h4>
+                <ol>
+                    <li>
+                        <strong>Tingkatkan Awareness K3 untuk Shift B (Siang):</strong>
+                        <ul>
+                            <li>Lakukan safety briefing khusus sebelum Shift B dimulai</li>
+                            <li>Tambahkan supervisor K3 dedicated untuk Shift B</li>
+                            <li>Evaluasi faktor penyebab rendahnya detection rate (kelelahan, kurangnya pelatihan, dll)</li>
+                            <li>Implementasi sistem insentif untuk peningkatan kualitas pelaporan</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Pelajari dan Replikasi Best Practice dari Shift C (Malam):</strong>
+                        <ul>
+                            <li>Identifikasi faktor keberhasilan Shift C (komposisi tim, prosedur, tools)</li>
+                            <li>Transfer knowledge dari tim Shift C ke shift lainnya</li>
+                            <li>Standardisasi checklist inspeksi berdasarkan metode Shift C</li>
+                            <li>Pertimbangkan rotasi personel untuk knowledge sharing</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Optimasi Alokasi Sumber Daya Berdasarkan Shift:</strong>
+                        <ul>
+                            <li>Alokasikan lebih banyak inspector K3 untuk Shift A (volume tertinggi)</li>
+                            <li>Pastikan ketersediaan tools dan equipment untuk semua shift</li>
+                            <li>Evaluasi jadwal maintenance untuk tidak overlap dengan peak reporting hours</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="recommendation-box mt-4">
+                <h4>🎯 Rekomendasi Berdasarkan Pola Hari</h4>
+                <ol>
+                    <li>
+                        <strong>Program "Monday Safety Refresh" untuk Mengatasi Monday Effect:</strong>
+                        <ul>
+                            <li>Implementasi safety toolbox meeting setiap Senin pagi</li>
+                            <li>Review incident/near miss dari minggu sebelumnya</li>
+                            <li>Re-energize awareness K3 setelah weekend break</li>
+                            <li>Fokus pada inspeksi aktif, bukan hanya laporan administratif</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Maksimalkan Produktivitas Rabu-Kamis:</strong>
+                        <ul>
+                            <li>Jadwalkan inspeksi dan audit K3 utama di pertengahan minggu</li>
+                            <li>Alokasikan tugas kompleks/critical untuk Rabu-Kamis ketika fokus optimal</li>
+                            <li>Manfaatkan periode ini untuk training dan assessment</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Evaluasi dan Perbaiki Efektivitas Patrol di Weekend:</strong>
+                        <ul>
+                            <li>Review jadwal dan coverage patrol weekend - apakah sudah memadai?</li>
+                            <li>Tingkatkan intensitas inspeksi di hari Minggu (saat ini detection rate 9,3%)</li>
+                            <li>Pertimbangkan incentive khusus untuk tim weekend patrol</li>
+                            <li>Implementasi remote monitoring untuk supplement patrol fisik</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Optimalkan Penjadwalan Inspeksi:</strong>
+                        <ul>
+                            <li>Prioritaskan scheduled inspection di weekday (terutama Selasa-Kamis)</li>
+                            <li>Alokasikan minimal 80% resource untuk weekday sesuai dengan produktivitas</li>
+                            <li>Weekend fokus pada routine patrol dan emergency response</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Investigasi Anomali Sabtu (detection rate 28,3%):</strong>
+                        <ul>
+                            <li>Identifikasi apa yang membuat Sabtu lebih efektif dari Minggu</li>
+                            <li>Apakah ada tim khusus? Prosedur berbeda? Jenis aktivitas tertentu?</li>
+                            <li>Replikasi success factors ke hari Minggu</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="recommendation-box mt-4">
+                <h4>🎯 Rekomendasi Strategis Terintegrasi</h4>
+                <ol>
+                    <li>
+                        <strong>Implementasi Dynamic Scheduling System:</strong>
+                        <ul>
+                            <li>Alokasikan resource berdasarkan analisis pola (lebih banyak di Shift A, Rabu-Kamis)</li>
+                            <li>Flexible deployment berdasarkan historical patterns</li>
+                            <li>Real-time adjustment berdasarkan workload</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Program Peningkatan Kualitas Berkelanjutan:</strong>
+                        <ul>
+                            <li>Set target detection rate minimum 25% untuk semua shift dan hari</li>
+                            <li>Monthly review dan feedback untuk shift/hari dengan performance rendah</li>
+                            <li>Recognition program untuk shift/hari dengan performance terbaik</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Enhanced Training Program:</strong>
+                        <ul>
+                            <li>Shift-specific training berdasarkan kelemahan masing-masing</li>
+                            <li>Cross-training antar shift untuk knowledge sharing</li>
+                            <li>Refresher training khusus untuk Senin dan Minggu</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Monitoring dan Evaluasi Berkelanjutan:</strong>
+                        <ul>
+                            <li>Dashboard real-time untuk tracking performance per shift/hari</li>
+                            <li>Weekly review meeting untuk membahas trends dan anomalies</li>
+                            <li>Quarterly assessment untuk mengukur improvement</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Summary Section -->
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>📋 Ringkasan Eksekutif</h3>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">
+                        Analisis pola shift dan hari mengungkapkan <strong>disparitas signifikan</strong> dalam kinerja pelaporan K3
+                        di PT PLN Nusantara Power UP Indramayu. Temuan utama menunjukkan:
+                    </p>
+
+                    <div class="grid-2 mb-3">
+                        <div>
+                            <h4 class="mb-2">Pola Shift:</h4>
+                            <ul>
+                                <li><strong>Shift A (Pagi)</strong> mendominasi volume (63%) namun bukan yang terbaik dalam kualitas</li>
+                                <li><strong>Shift C (Malam)</strong> paling efektif dengan detection rate 25,7% dan quality score 2,43</li>
+                                <li><strong>Shift B (Siang)</strong> memerlukan intervensi mendesak - detection rate hanya 17,1%</li>
+                                <li>Gap kinerja antar shift mencapai <strong>50%</strong> (25,7% vs 17,1%)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="mb-2">Pola Hari:</h4>
+                            <ul>
+                                <li><strong>Rabu-Kamis</strong> periode paling produktif (detection rate ~30%)</li>
+                                <li><strong>Senin</strong> volume tertinggi tapi kualitas rendah - "Monday Effect"</li>
+                                <li><strong>Minggu</strong> paling tidak efektif (detection rate 9,3%)</li>
+                                <li>Weekday <strong>77% lebih produktif</strong> dari weekend per harinya</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="analysis-box">
+                        <h4>🎯 Implikasi Strategis</h4>
+                        <p>
+                            Perbedaan kinerja yang signifikan ini mengindikasikan <strong>peluang optimasi besar</strong> melalui:
+                        </p>
+                        <ul>
+                            <li>Redistribusi resource berdasarkan pola volume dan kompleksitas</li>
+                            <li>Program peningkatan targeted untuk shift/hari dengan performance rendah</li>
+                            <li>Knowledge transfer dari shift/hari berkinerja tinggi</li>
+                            <li>Penjadwalan strategis untuk inspeksi dan audit critical</li>
+                        </ul>
+                        <p class="mt-3">
+                            Dengan implementasi rekomendasi yang tepat, diperkirakan dapat meningkatkan <strong>overall detection rate
+                            hingga 28-30%</strong> (dari rata-rata 23,6% saat ini) dan mengurangi variabilitas kualitas antar shift/hari.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-text">PT PLN Nusantara Power</div>
+                <p>Unit Pembangkitan Indramayu</p>
+                <p>Analisis Data IZAT K3 - Periode 2020-2024</p>
+                <p>&copy; 2024 PT PLN Nusantara Power. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-overlay" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img src="" alt="" id="lightbox-img">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Data Modal -->
+    <div class="data-modal-overlay" id="dataModal">
+        <div class="data-modal-content">
+            <div class="data-modal-header">
+                <h3 id="dataModalTitle">Data Tabel</h3>
+                <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+            </div>
+            <div class="data-modal-body" id="dataModalBody">
+                <!-- Table will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data untuk modal tables
+        const modalData = {
+            shiftPerformance: {
+                title: 'Data Lengkap Kinerja Per Shift',
+                headers: ['Shift', 'Total Reports', 'Avg Quality Score', 'Unsafe Detection (%)', 'Avg Risk Score', 'Avg Resolution (Hari)'],
+                rows: [
+                    ['A (Pagi)', '3,537', '2.31', '24.1%', '1.27', '181'],
+                    ['B (Siang)', '1,603', '2.02', '17.1%', '1.22', '156'],
+                    ['C (Malam)', '435', '2.43', '25.7%', '1.44', '201']
+                ]
+            },
+            dayOfWeek: {
+                title: 'Data Lengkap Kinerja Per Hari dalam Seminggu',
+                headers: ['Day', 'Total Reports', 'Avg Quality', 'Unsafe Detection (%)', 'Avg Risk Score', 'Is Weekend'],
+                rows: [
+                    ['Monday', '1,454', '1.81', '13.5%', '1.08', 'Weekday'],
+                    ['Tuesday', '849', '2.56', '28.5%', '1.26', 'Weekday'],
+                    ['Wednesday', '673', '2.58', '30.6%', '1.48', 'Weekday'],
+                    ['Thursday', '719', '2.56', '30.3%', '1.50', 'Weekday'],
+                    ['Friday', '854', '2.26', '24.5%', '1.34', 'Weekday'],
+                    ['Saturday', '368', '2.50', '28.3%', '1.49', 'Weekend'],
+                    ['Sunday', '658', '1.85', '9.3%', '1.04', 'Weekend']
+                ]
+            }
+        };
+
+        function openDataModal(dataKey) {
+            const data = modalData[dataKey];
+            const modal = document.getElementById('dataModal');
+            const title = document.getElementById('dataModalTitle');
+            const body = document.getElementById('dataModalBody');
+
+            title.textContent = data.title;
+
+            let tableHtml = '<table class="data-table-simple"><thead><tr>';
+            data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+            tableHtml += '</tr></thead><tbody>';
+            data.rows.forEach((row, idx) => {
+                const highlight = idx < 3 ? ' class="highlight"' : '';
+                tableHtml += `<tr${highlight}>`;
+                row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+                tableHtml += '</tr>';
+            });
+            tableHtml += '</tbody></table>';
+
+            body.innerHTML = tableHtml;
+            modal.classList.add('active');
+        }
+
+        function closeDataModal() {
+            document.getElementById('dataModal').classList.remove('active');
+        }
+    </script>
+
+    <script>
+        // Lightbox functionality
+        document.querySelectorAll('.image-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                const caption = this.querySelector('figcaption');
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+                const lightboxCaption = document.getElementById('lightbox-caption');
+
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxCaption.textContent = caption ? caption.textContent : '';
+                lightbox.classList.add('active');
+            });
+        });
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Close on overlay click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+        document.getElementById('dataModal').addEventListener('click', function(e) {
+            if (e.target === this) closeDataModal();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closeDataModal();
+            }
+        });
+    </script>
+</body>
+</html>

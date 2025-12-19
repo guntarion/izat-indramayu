@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 6: Report Quality & PIC Workload - Pembersihan Data IZAT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Data Cleansing</button>
+          <div class="nav-dropdown-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html" class="active"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Report Quality Score & PIC Workload</h1>
+        <p>Pengukuran Kualitas Pelaporan dan Beban Kerja PIC untuk Optimasi Performa</p>
+        <span class="hero-badge" style="background: linear-gradient(135deg, #35B971, #2D9E5F);">
+          <span>🧹</span> Data Cleansing - Step 6
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Overview Stats -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card success">
+          <div class="stat-label">Kolom Baru Ditambahkan</div>
+          <div class="stat-value">5</div>
+          <div class="stat-change">Quality score, grade, PIC metrics</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-label">Rata-rata Quality Score</div>
+          <div class="stat-value">2.28</div>
+          <div class="stat-change">Dari skala 0-5 (perlu improvement)</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">PIC Overloaded</div>
+          <div class="stat-value">1 PIC</div>
+          <div class="stat-change">2,613 temuan - perlu redistribusi</div>
+        </div>
+        <div class="stat-card primary">
+          <div class="stat-label">Total Kolom Sekarang</div>
+          <div class="stat-value">66</div>
+          <div class="stat-change positive">Dari 31 kolom awal (+113%)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Quality & Workload Matter -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🎯</span>
+          Mengapa Mengukur Quality & Workload?
+        </h2>
+        <p>Pentingnya metrik kualitas dan beban kerja untuk continuous improvement program K3</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>📝 Report Quality Score</h3>
+          </div>
+          <div class="card-body">
+            <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+              Kualitas laporan IZAT menentukan <strong>kecepatan respon</strong> dan <strong>efektivitas tindak lanjut</strong>.
+              Laporan berkualitas rendah menyebabkan:
+            </p>
+            <ul style="color: var(--pln-gray-600); padding-left: 1.5rem;">
+              <li><strong>Ambiguitas</strong> - PIC kesulitan memahami masalah</li>
+              <li><strong>Delay resolusi</strong> - Butuh klarifikasi bolak-balik</li>
+              <li><strong>Tindakan tidak tepat</strong> - Salah interpretasi kondisi</li>
+              <li><strong>Potensi unsafe berulang</strong> - Root cause tidak teridentifikasi</li>
+            </ul>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(53, 185, 113, 0.1); border-radius: 0.5rem;">
+              <strong style="color: #35B971;">Manfaat:</strong>
+              <span style="color: var(--pln-gray-600);">
+                Identifikasi reporter yang perlu training, tracking improvement, dan benchmarking antar tim
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>👷 PIC Workload Metrics</h3>
+          </div>
+          <div class="card-body">
+            <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+              Distribusi beban kerja yang tidak merata menyebabkan:
+            </p>
+            <ul style="color: var(--pln-gray-600); padding-left: 1.5rem;">
+              <li><strong>Burnout PIC</strong> - Kualitas penyelesaian menurun</li>
+              <li><strong>SLA tidak tercapai</strong> - Temuan menumpuk</li>
+              <li><strong>High-risk terabaikan</strong> - Prioritas tidak jelas</li>
+              <li><strong>Turnover tinggi</strong> - PIC resign karena workload berlebihan</li>
+            </ul>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(0, 175, 240, 0.1); border-radius: 0.5rem;">
+              <strong style="color: #00AFF0;">Manfaat:</strong>
+              <span style="color: var(--pln-gray-600);">
+                Optimasi alokasi resource, early warning overload, dan data untuk workforce planning
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>💡 Business Value</h4>
+        <ul>
+          <li><strong>Proactive management</strong> - Deteksi bottleneck sebelum bermasalah</li>
+          <li><strong>Data-driven training</strong> - Program pelatihan berdasarkan gap analysis</li>
+          <li><strong>Fair workload distribution</strong> - Mencegah overload dan underutilization</li>
+          <li><strong>Predictable performance</strong> - Correlation antara quality score dan resolution time</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Quality Scoring Methodology -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📐</span>
+          Metodologi Report Quality Score
+        </h2>
+        <p>5 kriteria objektif untuk mengukur kualitas laporan IZAT</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Kriteria Penilaian (Max Score: 5)</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kriteria</th>
+                  <th>Kondisi</th>
+                  <th>Poin</th>
+                  <th>Rasional</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Judul Informatif</strong></td>
+                  <td>Minimal 3 kata</td>
+                  <td><span class="badge badge-success">+1</span></td>
+                  <td>Judul deskriptif (bukan "apar" tapi "apar lantai 2 rusak")</td>
+                </tr>
+                <tr>
+                  <td><strong>2. Kondisi Deskriptif</strong></td>
+                  <td>Minimal 3 kata</td>
+                  <td><span class="badge badge-success">+1</span></td>
+                  <td>Penjelasan detail (bukan "rusak" tapi "bocor di bagian valve")</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Rekomendasi Actionable</strong></td>
+                  <td>Bukan sekadar "ok/baik"</td>
+                  <td><span class="badge badge-success">+1</span></td>
+                  <td>Saran konkret (bukan "baik" tapi "segera perbaiki valve")</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Lokasi Spesifik</strong></td>
+                  <td>&gt;5 karakter, bukan "lt 1"</td>
+                  <td><span class="badge badge-success">+1</span></td>
+                  <td>Keterangan detail memudahkan lokasi temuan</td>
+                </tr>
+                <tr>
+                  <td><strong>5. Kategori Effort</strong></td>
+                  <td>Bukan Positive</td>
+                  <td><span class="badge badge-success">+1</span></td>
+                  <td>Unsafe reporting memerlukan effort deteksi lebih tinggi</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Mapping Score ke Grade</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Score</th>
+                    <th>Grade</th>
+                    <th>Kategori</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>4-5</td>
+                    <td><span class="badge badge-success">A</span></td>
+                    <td>Excellent - Laporan sangat informatif</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td><span class="badge badge-info">B</span></td>
+                    <td>Good - Cukup informatif, minor gap</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td><span class="badge badge-warning">C</span></td>
+                    <td>Fair - Butuh improvement signifikan</td>
+                  </tr>
+                  <tr>
+                    <td>0-1</td>
+                    <td><span class="badge badge-danger">D</span></td>
+                    <td>Poor - Tidak memenuhi standar</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Distribusi Aktual</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Grade</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="badge badge-success">A</span></td>
+                    <td>1,108</td>
+                    <td>19.9%</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-info">B</span></td>
+                    <td>1,043</td>
+                    <td>18.7%</td>
+                  </tr>
+                  <tr class="highlight">
+                    <td><span class="badge badge-warning">C</span></td>
+                    <td>1,770</td>
+                    <td><strong>31.7%</strong></td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-danger">D</span></td>
+                    <td>1,654</td>
+                    <td>29.7%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(245, 158, 11, 0.1); border-radius: 0.5rem;">
+              <strong style="color: #F59E0B;">⚠️ Temuan Kritis:</strong>
+              <span style="color: var(--pln-gray-600); font-size: 0.875rem;">
+                61.4% laporan grade C-D memerlukan program improvement
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item warning">
+          <div class="insight-title">Mayoritas Laporan Fair/Poor</div>
+          <div class="insight-value">31.7% grade C, 29.7% grade D - lebih dari 3.400 laporan perlu training</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Top Performers Identified</div>
+          <div class="insight-value">19.9% grade A dapat dijadikan benchmark dan mentor bagi reporter lain</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-title">Gap Analysis per Kriteria</div>
+          <div class="insight-value">Rekomendasi actionable paling lemah - 70% laporan hanya tulis "ok/baik"</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PIC Workload Methodology -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">⚖️</span>
+          Metodologi PIC Workload Index
+        </h2>
+        <p>Perhitungan beban kerja berdasarkan volume, kompleksitas, dan risiko</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Formula Workload Index</h3>
+        </div>
+        <div class="card-body">
+          <div style="background: var(--pln-gray-50); padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 1rem;">
+            <code style="font-size: 1.1rem; color: var(--pln-dark-blue); font-weight: 600;">
+              Workload Index = (Total Findings × 0.4) + (Avg Resolution Days × 0.3) + (High Risk Count × 0.3)
+            </code>
+          </div>
+          <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+            <strong>Komponen:</strong>
+          </p>
+          <ul style="color: var(--pln-gray-600); padding-left: 1.5rem;">
+            <li><strong>Total Findings (40%)</strong> - Volume temuan yang di-assign ke PIC</li>
+            <li><strong>Avg Resolution Days (30%)</strong> - Kompleksitas penyelesaian rata-rata</li>
+            <li><strong>High Risk Count (30%)</strong> - Jumlah temuan HIGH/CRITICAL yang memerlukan prioritas</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Kategori Workload</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Index Range</th>
+                    <th>Kategori</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>&gt;500</td>
+                    <td><span class="badge badge-danger">OVERLOADED</span></td>
+                    <td>🔴 Perlu redistribusi ASAP</td>
+                  </tr>
+                  <tr>
+                    <td>200-500</td>
+                    <td><span class="badge badge-warning">HIGH</span></td>
+                    <td>🟡 Monitor ketat</td>
+                  </tr>
+                  <tr>
+                    <td>50-200</td>
+                    <td><span class="badge badge-info">NORMAL</span></td>
+                    <td>🟢 Workload sehat</td>
+                  </tr>
+                  <tr>
+                    <td>&lt;50</td>
+                    <td><span class="badge badge-success">LOW</span></td>
+                    <td>✅ Bisa terima lebih</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Distribusi Aktual (16 PIC)</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kategori</th>
+                    <th>Jumlah PIC</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><span class="badge badge-danger">OVERLOADED</span></td>
+                    <td><strong>1</strong></td>
+                    <td>6.2%</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-warning">HIGH</span></td>
+                    <td>3</td>
+                    <td>18.8%</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-info">NORMAL</span></td>
+                    <td>2</td>
+                    <td>12.5%</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-success">LOW</span></td>
+                    <td>10</td>
+                    <td>62.5%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(239, 68, 68, 0.1); border-radius: 0.5rem;">
+              <strong style="color: #EF4444;">🚨 Critical Issue:</strong>
+              <span style="color: var(--pln-gray-600); font-size: 0.875rem;">
+                4 PIC handle 81% total temuan - distribusi sangat tidak merata
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>📊 Analisis Distribusi Workload</h4>
+        <ul>
+          <li><strong>Extreme imbalance</strong> - 1 PIC (Andrian Denofan) handle 46.9% temuan (2,613 dari 5,575)</li>
+          <li><strong>Top 4 PIC handle 81%</strong> - Sisa 12 PIC hanya 19% (avg 88 temuan/PIC)</li>
+          <li><strong>62.5% PIC underutilized</strong> - 10 PIC kategori LOW dapat menerima lebih banyak assignment</li>
+          <li><strong>Risk: PIC overloaded memiliki avg resolution 4.6 hari</strong> - masih cepat tapi potensi burnout tinggi</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Source Code Highlight -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">💻</span>
+          Source Code Implementation
+        </h2>
+        <p>Fungsi Python untuk menghitung quality score dan workload category</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>📝 calculate_report_quality()</h3>
+        </div>
+        <div class="card-body">
+          <pre style="background: var(--pln-gray-900); color: #E2E8F0; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; font-size: 0.875rem; line-height: 1.6;"><code><span style="color: #F59E0B;">def</span> <span style="color: #35B971;">calculate_report_quality</span>(row):
+    <span style="color: #94A3B8;">"""
+    Menghitung skor kualitas laporan (0-5)
+
+    Kriteria:
+    1. Judul informatif (>= 3 kata) -> +1
+    2. Kondisi deskriptif (>= 3 kata) -> +1
+    3. Rekomendasi actionable (bukan hanya ok/baik) -> +1
+    4. Keterangan lokasi spesifik (> 5 char) -> +1
+    5. Kategori selain Positive (effort deteksi) -> +1
+
+    Returns: (quality_score, quality_grade)
+    """</span>
+    score = <span style="color: #00AFF0;">0</span>
+
+    <span style="color: #94A3B8;"># 1. Judul informatif (>= 3 kata)</span>
+    judul = <span style="color: #F59E0B;">str</span>(row.get(<span style="color: #35B971;">'judul'</span>, <span style="color: #35B971;">''</span>))
+    <span style="color: #F59E0B;">if</span> <span style="color: #F59E0B;">len</span>(judul.split()) >= <span style="color: #00AFF0;">3</span>:
+        score += <span style="color: #00AFF0;">1</span>
+
+    <span style="color: #94A3B8;"># 2. Kondisi deskriptif (>= 3 kata)</span>
+    kondisi = <span style="color: #F59E0B;">str</span>(row.get(<span style="color: #35B971;">'kondisi'</span>, <span style="color: #35B971;">''</span>))
+    <span style="color: #F59E0B;">if</span> <span style="color: #F59E0B;">len</span>(kondisi.split()) >= <span style="color: #00AFF0;">3</span>:
+        score += <span style="color: #00AFF0;">1</span>
+
+    <span style="color: #94A3B8;"># 3. Rekomendasi actionable</span>
+    rekomendasi = <span style="color: #F59E0B;">str</span>(row.get(<span style="color: #35B971;">'rekomendasi'</span>, <span style="color: #35B971;">''</span>)).lower()
+    generic_terms = [<span style="color: #35B971;">'ok'</span>, <span style="color: #35B971;">'baik'</span>, <span style="color: #35B971;">'lanjutkan'</span>, <span style="color: #35B971;">'-'</span>, <span style="color: #35B971;">''</span>, <span style="color: #35B971;">'good'</span>, <span style="color: #35B971;">'oke'</span>]
+    <span style="color: #F59E0B;">if</span> rekomendasi <span style="color: #F59E0B;">not in</span> generic_terms <span style="color: #F59E0B;">and</span> <span style="color: #F59E0B;">len</span>(rekomendasi) > <span style="color: #00AFF0;">5</span>:
+        score += <span style="color: #00AFF0;">1</span>
+
+    <span style="color: #94A3B8;"># 4. Keterangan lokasi spesifik</span>
+    keterangan = <span style="color: #F59E0B;">str</span>(row.get(<span style="color: #35B971;">'keterangan_lokasi'</span>, <span style="color: #35B971;">''</span>))
+    simple_locations = [<span style="color: #35B971;">'lt 1'</span>, <span style="color: #35B971;">'lantai 1'</span>, <span style="color: #35B971;">'lt 2'</span>, <span style="color: #35B971;">'lantai 2'</span>, <span style="color: #35B971;">''</span>, <span style="color: #35B971;">'-'</span>]
+    <span style="color: #F59E0B;">if</span> <span style="color: #F59E0B;">len</span>(keterangan) > <span style="color: #00AFF0;">5</span> <span style="color: #F59E0B;">and</span> keterangan.lower() <span style="color: #F59E0B;">not in</span> simple_locations:
+        score += <span style="color: #00AFF0;">1</span>
+
+    <span style="color: #94A3B8;"># 5. Kategori selain Positive</span>
+    <span style="color: #F59E0B;">if</span> row.get(<span style="color: #35B971;">'temuan_kategori'</span>) != <span style="color: #35B971;">'Positive'</span>:
+        score += <span style="color: #00AFF0;">1</span>
+
+    <span style="color: #94A3B8;"># Map ke grade</span>
+    <span style="color: #F59E0B;">if</span> score >= <span style="color: #00AFF0;">4</span>:
+        grade = <span style="color: #35B971;">'A'</span>
+    <span style="color: #F59E0B;">elif</span> score >= <span style="color: #00AFF0;">3</span>:
+        grade = <span style="color: #35B971;">'B'</span>
+    <span style="color: #F59E0B;">elif</span> score >= <span style="color: #00AFF0;">2</span>:
+        grade = <span style="color: #35B971;">'C'</span>
+    <span style="color: #F59E0B;">else</span>:
+        grade = <span style="color: #35B971;">'D'</span>
+
+    <span style="color: #F59E0B;">return</span> score, grade</code></pre>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>⚖️ calculate_workload_category()</h3>
+        </div>
+        <div class="card-body">
+          <pre style="background: var(--pln-gray-900); color: #E2E8F0; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; font-size: 0.875rem; line-height: 1.6;"><code><span style="color: #F59E0B;">def</span> <span style="color: #35B971;">calculate_workload_category</span>(row):
+    total = row[<span style="color: #35B971;">'pic_total_findings'</span>]
+    avg_days = row[<span style="color: #35B971;">'pic_avg_resolution_days'</span>]
+    high_risk = row[<span style="color: #35B971;">'pic_high_risk_count'</span>]
+
+    <span style="color: #94A3B8;"># Weighted workload index</span>
+    workload_index = (total * <span style="color: #00AFF0;">0.4</span>) + (avg_days * <span style="color: #00AFF0;">0.3</span>) + (high_risk * <span style="color: #00AFF0;">0.3</span>)
+
+    <span style="color: #94A3B8;"># Kategorisasi berdasarkan threshold</span>
+    <span style="color: #F59E0B;">if</span> workload_index > <span style="color: #00AFF0;">500</span>:
+        <span style="color: #F59E0B;">return</span> <span style="color: #35B971;">'OVERLOADED'</span>
+    <span style="color: #F59E0B;">elif</span> workload_index > <span style="color: #00AFF0;">200</span>:
+        <span style="color: #F59E0B;">return</span> <span style="color: #35B971;">'HIGH'</span>
+    <span style="color: #F59E0B;">elif</span> workload_index > <span style="color: #00AFF0;">50</span>:
+        <span style="color: #F59E0B;">return</span> <span style="color: #35B971;">'NORMAL'</span>
+    <span style="color: #F59E0B;">else</span>:
+        <span style="color: #F59E0B;">return</span> <span style="color: #35B971;">'LOW'</span>
+
+<span style="color: #94A3B8;"># Agregasi per PIC</span>
+pic_metrics = df.groupby(<span style="color: #35B971;">'nama_pic'</span>).agg({
+    <span style="color: #35B971;">'kode_temuan'</span>: <span style="color: #35B971;">'count'</span>,
+    <span style="color: #35B971;">'sla_days'</span>: <span style="color: #35B971;">'mean'</span>,
+    <span style="color: #35B971;">'risk_severity'</span>: <span style="color: #F59E0B;">lambda</span> x: (x == <span style="color: #35B971;">'CRITICAL'</span>).<span style="color: #F59E0B;">sum</span>() + (x == <span style="color: #35B971;">'HIGH'</span>).<span style="color: #F59E0B;">sum</span>()
+})
+
+pic_metrics[<span style="color: #35B971;">'pic_workload_category'</span>] = pic_metrics.apply(calculate_workload_category, axis=<span style="color: #00AFF0;">1</span>)</code></pre>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>🔧 Implementation Notes</h4>
+        <ul>
+          <li><strong>Objective scoring</strong> - Kriteria terukur, tidak subjektif (word count, string matching)</li>
+          <li><strong>Scalable</strong> - Dapat diterapkan ke dataset besar tanpa manual review</li>
+          <li><strong>Configurable thresholds</strong> - Nilai threshold (3 kata, 5 char, dll) dapat disesuaikan</li>
+          <li><strong>Weighted index</strong> - Workload formula dapat di-tune sesuai kebijakan manajemen</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Detailed Analysis Results -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📈</span>
+          Analisis Quality per Perusahaan & Zona
+        </h2>
+        <p>Perbedaan kualitas pelaporan berdasarkan kategori perusahaan dan lokasi kerja</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Quality Score per Kategori Perusahaan</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Perusahaan</th>
+                    <th>Avg Score</th>
+                    <th>Jumlah</th>
+                    <th>Komentar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>PLN_NP_ORGANIK</strong></td>
+                    <td><strong>3.61</strong></td>
+                    <td>165</td>
+                    <td><span class="badge badge-success">Tertinggi</span></td>
+                  </tr>
+                  <tr>
+                    <td>PLN_NPS</td>
+                    <td>2.28</td>
+                    <td>1,836</td>
+                    <td><span class="badge badge-info">Fair</span></td>
+                  </tr>
+                  <tr>
+                    <td>VENDOR_LAIN</td>
+                    <td>2.18</td>
+                    <td>2,849</td>
+                    <td><span class="badge badge-warning">Perlu training</span></td>
+                  </tr>
+                  <tr>
+                    <td>MKP</td>
+                    <td>2.03</td>
+                    <td>725</td>
+                    <td><span class="badge badge-danger">Terendah</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Quality Score per Zona</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Zona</th>
+                    <th>Avg Score</th>
+                    <th>Jumlah</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>UNKNOWN</td>
+                    <td>3.03</td>
+                    <td>69</td>
+                    <td><span class="badge badge-success">Good</span></td>
+                  </tr>
+                  <tr>
+                    <td>SUPPORT</td>
+                    <td>2.63</td>
+                    <td>1,708</td>
+                    <td><span class="badge badge-info">Above avg</span></td>
+                  </tr>
+                  <tr>
+                    <td>UTILITY</td>
+                    <td>2.26</td>
+                    <td>602</td>
+                    <td><span class="badge badge-warning">Fair</span></td>
+                  </tr>
+                  <tr>
+                    <td>COAL_HANDLING</td>
+                    <td>2.12</td>
+                    <td>580</td>
+                    <td><span class="badge badge-warning">Fair</span></td>
+                  </tr>
+                  <tr class="highlight">
+                    <td><strong>MAIN_UNIT</strong></td>
+                    <td><strong>1.97</strong></td>
+                    <td>2,616</td>
+                    <td><span class="badge badge-danger">Terendah</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item success">
+          <div class="insight-title">PLN Organik Unggul</div>
+          <div class="insight-value">Score 3.61 - 59.4% grade A menunjukkan pemahaman K3 lebih baik</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Gap Vendor vs PLN</div>
+          <div class="insight-value">Vendor (2.18) vs PLN_NPS (2.28) - perlukan training standar untuk vendor</div>
+        </div>
+        <div class="insight-item danger">
+          <div class="insight-title">MAIN_UNIT Lowest Quality</div>
+          <div class="insight-value">Score 1.97 dengan 2,616 laporan - area terbesar tapi quality terendah, high priority improvement</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Performers & Overloaded PICs -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🏆</span>
+          Top Performers & Critical Workload
+        </h2>
+        <p>Reporter berkualitas tinggi dan PIC yang memerlukan bantuan segera</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>🌟 Top Quality Reporters (min 20 laporan)</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Reporter</th>
+                    <th>Avg Score</th>
+                    <th>Total</th>
+                    <th>Badge</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>ADE ROSIKIN</strong></td>
+                    <td><strong>4.40</strong></td>
+                    <td>20</td>
+                    <td><span class="badge badge-gold">🥇 Gold</span></td>
+                  </tr>
+                  <tr class="highlight">
+                    <td><strong>MUHAMMAD SAFEI</strong></td>
+                    <td><strong>4.40</strong></td>
+                    <td>25</td>
+                    <td><span class="badge badge-gold">🥇 Gold</span></td>
+                  </tr>
+                  <tr>
+                    <td>ROSDA LIA YANTI</td>
+                    <td>3.73</td>
+                    <td>22</td>
+                    <td><span class="badge badge-silver">🥈 Silver</span></td>
+                  </tr>
+                  <tr>
+                    <td>Suparman</td>
+                    <td>3.71</td>
+                    <td>34</td>
+                    <td><span class="badge badge-silver">🥈 Silver</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(53, 185, 113, 0.1); border-radius: 0.5rem;">
+              <strong style="color: #35B971;">💡 Recommendation:</strong>
+              <span style="color: var(--pln-gray-600); font-size: 0.875rem;">
+                Jadikan top performers sebagai mentor dalam training program
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>🚨 PIC dengan Beban Kerja Kritis</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>PIC</th>
+                    <th>Temuan</th>
+                    <th>Avg Days</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>Andrian Denofan</strong></td>
+                    <td><strong>2,613</strong></td>
+                    <td>4.6</td>
+                    <td><span class="badge badge-danger">OVERLOADED</span></td>
+                  </tr>
+                  <tr>
+                    <td>TAUFIQ ISMAIL</td>
+                    <td>951</td>
+                    <td>7.8</td>
+                    <td><span class="badge badge-warning">HIGH</span></td>
+                  </tr>
+                  <tr>
+                    <td>ASEP SETYAWAN</td>
+                    <td>696</td>
+                    <td>14.5</td>
+                    <td><span class="badge badge-warning">HIGH</span></td>
+                  </tr>
+                  <tr>
+                    <td>DOVAN PAHALATUA</td>
+                    <td>553</td>
+                    <td>9.7</td>
+                    <td><span class="badge badge-warning">HIGH</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(239, 68, 68, 0.1); border-radius: 0.5rem;">
+              <strong style="color: #EF4444;">⚠️ Action Required:</strong>
+              <span style="color: var(--pln-gray-600); font-size: 0.875rem;">
+                Redistribusi 1,000+ temuan dari Andrian ke PIC kategori LOW
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="anomaly-alert">
+        <h4>🎯 Rekomendasi Tindakan Segera</h4>
+        <p style="color: var(--pln-gray-700);">
+          <strong>1. Redistributing Workload:</strong> Transfer 1,000-1,500 temuan dari Andrian Denofan ke 10 PIC kategori LOW (avg 100-150 per PIC).
+          <br><br>
+          <strong>2. Quality Training Program:</strong> Program khusus untuk MKP dan VENDOR_LAIN yang memiliki avg score &lt;2.2.
+          <br><br>
+          <strong>3. Mentorship Pairing:</strong> Pair top performers (ADE ROSIKIN, MUHAMMAD SAFEI) dengan reporter grade D untuk coaching 1-on-1.
+          <br><br>
+          <strong>4. MAIN_UNIT Deep Dive:</strong> Investigasi mengapa zona terbesar (2,616 laporan) memiliki quality terendah (1.97) - kemungkinan faktor waktu/tekanan operasional.
+        </p>
+      </div>
+    </section>
+
+    <!-- Summary Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📋</span>
+          Ringkasan Step 6
+        </h2>
+        <p>Output dan next steps dari kolom performa turunan</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Kolom Baru yang Ditambahkan</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kolom</th>
+                  <th>Deskripsi</th>
+                  <th>Nilai</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>report_quality_score</code></td>
+                  <td>Skor kualitas laporan</td>
+                  <td>0-5</td>
+                </tr>
+                <tr>
+                  <td><code>report_quality_grade</code></td>
+                  <td>Grade kualitas laporan</td>
+                  <td>A, B, C, D</td>
+                </tr>
+                <tr>
+                  <td><code>pic_total_findings</code></td>
+                  <td>Total temuan yang di-assign ke PIC</td>
+                  <td>numeric</td>
+                </tr>
+                <tr>
+                  <td><code>pic_avg_resolution_days</code></td>
+                  <td>Rata-rata hari penyelesaian per PIC</td>
+                  <td>numeric (days)</td>
+                </tr>
+                <tr>
+                  <td><code>pic_workload_category</code></td>
+                  <td>Kategori beban kerja PIC</td>
+                  <td>LOW, NORMAL, HIGH, OVERLOADED</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>Next Steps - Step 7: Kolom Tren & Komparasi</h4>
+        <ul>
+          <li><strong>Kolom periode waktu</strong> - year_month untuk grouping temporal</li>
+          <li><strong>Benchmark per zona</strong> - zona_avg_quality, zona_avg_risk, zona_avg_resolution</li>
+          <li><strong>Komparasi dengan benchmark</strong> - quality_vs_zona, risk_vs_zona, resolution_vs_zona</li>
+          <li><strong>Metrik bulanan</strong> - month_findings_count, month_unsafe_rate</li>
+          <li><strong>Month-over-Month trend</strong> - mom_change_pct, mom_trend</li>
+        </ul>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Key Takeaways</h4>
+        <ul>
+          <li><strong>61.4% laporan grade C-D</strong> memerlukan quality improvement program</li>
+          <li><strong>4 PIC handle 81% temuan</strong> - distribusi sangat tidak merata, perlu rebalancing</li>
+          <li><strong>PLN Organik unggul</strong> (score 3.61) dapat menjadi benchmark untuk unit lain</li>
+          <li><strong>MAIN_UNIT priority area</strong> - zona terbesar dengan quality terendah (1.97)</li>
+          <li><strong>Top performers identified</strong> - ADE ROSIKIN & MUHAMMAD SAFEI (score 4.40) siap jadi mentor</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Pembersihan Data IZAT K3</p>
+        <p>Step 6: Report Quality Score & PIC Workload Analysis</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+          Generated: Desember 2025 | Confidential - Internal Use Only
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close modals on overlay click or Escape key
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>

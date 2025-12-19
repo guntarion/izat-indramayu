@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Tracking Aset - IZAT K3 Analysis | PT PLN UP Indramayu</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+                <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Beranda</a>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Data Cleansing</button>
+                    <div class="nav-dropdown-menu cleansing-menu">
+                        <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+                        <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+                        <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+                        <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+                        <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+                        <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+                        <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle active">Basic Analysis</button>
+                    <div class="nav-dropdown-menu">
+                        <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+                        <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+                        <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+                        <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+                        <a href="05_asset_tracking.html" class="active"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Advanced Analysis</button>
+                    <div class="nav-dropdown-menu ai-menu">
+                        <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+                        <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+                        <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Analisis Tracking Aset</h1>
+                <p>Evaluasi Komprehensif Kritikalitas Aset Berdasarkan Temuan K3</p>
+                <span class="hero-badge">Asset Criticality Analysis</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Asset Criticality Overview -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Ringkasan Kritikalitas Aset</h2>
+                <p>Penilaian prioritas aset berdasarkan volume temuan, tingkat risiko, dan kecepatan penyelesaian</p>
+            </div>
+
+            <div class="stat-cards">
+                <div class="stat-card primary">
+                    <div class="stat-label">Total Kategori Aset</div>
+                    <div class="stat-value">9</div>
+                    <div class="stat-change">Kategori aktif</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-label">Aset Prioritas Tinggi</div>
+                    <div class="stat-value">3</div>
+                    <div class="stat-change">OTHER, WAREHOUSE, H2 PLANT</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-label">Aset Terkontrol Baik</div>
+                    <div class="stat-value">4</div>
+                    <div class="stat-change">BOILER, TURBINE, COAL, ADMIN</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-label">Rata-rata Resolusi</div>
+                    <div class="stat-value">185</div>
+                    <div class="stat-change">Hari penyelesaian</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Asset Criticality Table -->
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Tabel Kritikalitas Aset Lengkap</h3>
+                    <button class="btn-data-view" onclick="openDataModal('assetCriticality')">
+                        <span class="icon">📊</span> Lihat Data Lengkap
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Kategori Aset</th>
+                                    <th>Total Temuan</th>
+                                    <th>Avg Risk</th>
+                                    <th>Unsafe Count</th>
+                                    <th>Avg Resolusi (Hari)</th>
+                                    <th>Unsafe Rate</th>
+                                    <th>High/Critical</th>
+                                    <th>Criticality Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-danger">OTHER</span></td>
+                                    <td><strong>2.126</strong></td>
+                                    <td>1,27</td>
+                                    <td>682</td>
+                                    <td>204</td>
+                                    <td><span class="badge-warning badge">32,1%</span></td>
+                                    <td>176</td>
+                                    <td><strong>2,97</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-warning">WAREHOUSE</span></td>
+                                    <td>95</td>
+                                    <td>1,52</td>
+                                    <td>43</td>
+                                    <td>255</td>
+                                    <td><span class="badge-danger badge">45,3%</span></td>
+                                    <td>7</td>
+                                    <td><strong>2,02</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-warning">H2 PLANT</span></td>
+                                    <td>11</td>
+                                    <td><strong>2,18</strong></td>
+                                    <td>4</td>
+                                    <td>228</td>
+                                    <td><span class="badge-warning badge">36,4%</span></td>
+                                    <td>0</td>
+                                    <td><strong>1,96</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-info">BOILER SYSTEM</span></td>
+                                    <td><strong>1.725</strong></td>
+                                    <td>1,35</td>
+                                    <td>181</td>
+                                    <td>149</td>
+                                    <td><span class="badge-success badge">10,5%</span></td>
+                                    <td>91</td>
+                                    <td>1,63</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-info">COOLING WATER</span></td>
+                                    <td>85</td>
+                                    <td>1,09</td>
+                                    <td>29</td>
+                                    <td>190</td>
+                                    <td><span class="badge-warning badge">34,1%</span></td>
+                                    <td>3</td>
+                                    <td>1,49</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-info">WATER TREATMENT</span></td>
+                                    <td>260</td>
+                                    <td>0,97</td>
+                                    <td>72</td>
+                                    <td>187</td>
+                                    <td><span class="badge-warning badge">27,7%</span></td>
+                                    <td>17</td>
+                                    <td>1,36</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-info">TURBINE SYSTEM</span></td>
+                                    <td>562</td>
+                                    <td>1,50</td>
+                                    <td>73</td>
+                                    <td><strong>145</strong></td>
+                                    <td><span class="badge-success badge">13,0%</span></td>
+                                    <td>40</td>
+                                    <td>1,33</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-info">COAL HANDLING</span></td>
+                                    <td>161</td>
+                                    <td>1,58</td>
+                                    <td>28</td>
+                                    <td>144</td>
+                                    <td><span class="badge-success badge">17,4%</span></td>
+                                    <td>13</td>
+                                    <td>1,26</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-success">ADMINISTRATIVE</span></td>
+                                    <td>550</td>
+                                    <td>0,80</td>
+                                    <td>125</td>
+                                    <td>167</td>
+                                    <td><span class="badge-warning badge">22,7%</span></td>
+                                    <td>28</td>
+                                    <td>1,24</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <strong>Catatan:</strong> Criticality Score dihitung berdasarkan kombinasi volume temuan, tingkat risiko, unsafe rate, dan waktu penyelesaian. Skor tinggi menunjukkan prioritas penanganan yang lebih urgent.
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Distribution Visualization -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Distribusi Kategori Aset</h2>
+                <p>Proporsi temuan K3 berdasarkan kategori aset</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Distribusi Volume Temuan per Aset</h3>
+                    </div>
+                    <div class="card-body">
+                        <figure class="image-card">
+                            <img src="assets/images/II.5_asset_category_distribution.png" alt="Distribusi Kategori Aset">
+                            <figcaption>Pie chart menunjukkan dominasi kategori OTHER (38%) dan BOILER SYSTEM (31%)</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Criticality Score per Kategori</h3>
+                    </div>
+                    <div class="card-body">
+                        <figure class="image-card">
+                            <img src="assets/images/II.5_asset_criticality_score.png" alt="Criticality Score">
+                            <figcaption>Bar chart menampilkan skor kritikalitas tertinggi pada OTHER (2,97), WAREHOUSE (2,02), dan H2 PLANT (1,96)</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-box">
+                <h4>Analisis Distribusi Aset</h4>
+                <ul>
+                    <li><strong>Kategori OTHER mendominasi</strong> dengan 2.126 temuan (38% dari total) - menunjukkan perlunya reklasifikasi lebih detail untuk analisis yang lebih akurat</li>
+                    <li><strong>BOILER SYSTEM di peringkat kedua</strong> dengan 1.725 temuan (31%) namun memiliki kontrol yang baik dengan unsafe rate hanya 10,5%</li>
+                    <li><strong>Ketimpangan volume</strong> terlihat signifikan - kategori terbesar (OTHER) 193x lebih banyak dari yang terkecil (H2 PLANT)</li>
+                    <li><strong>Aset kritikal (BOILER, TURBINE, COAL)</strong> menyumbang 44% dari total temuan dengan manajemen risiko yang relatif baik</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Heatmap Analysis -->
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Heatmap Multi-Dimensi Aset</h3>
+                </div>
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.5_asset_issue_heatmap.png" alt="Asset Issue Heatmap">
+                        <figcaption>Heatmap menunjukkan korelasi antara unsafe count, high/critical issues, dan rata-rata hari penyelesaian per kategori aset</figcaption>
+                    </figure>
+
+                    <div class="analysis-box mt-3">
+                        <h4>Key Findings dari Heatmap</h4>
+                        <ul>
+                            <li><strong>OTHER</strong> - Unsafe count tertinggi (682) dengan resolusi terlama (204 hari), menunjukkan kompleksitas penanganan</li>
+                            <li><strong>WAREHOUSE</strong> - Waktu resolusi terlama (255 hari) meskipun volume rendah, indikasi prioritas rendah atau kompleksitas tinggi</li>
+                            <li><strong>BOILER SYSTEM</strong> - High/Critical issues tertinggi (91) namun unsafe count relatif rendah, menunjukkan program preventif yang efektif</li>
+                            <li><strong>TURBINE & COAL</strong> - Resolusi tercepat (144-145 hari) mencerminkan prioritas operasional yang tinggi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monthly Trend and Top Units -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Tren Temporal dan Unit Terdampak</h2>
+                <p>Pola perubahan temuan K3 per aset dari waktu ke waktu dan unit operasional dengan issues terbanyak</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Tren Bulanan per Kategori Aset</h3>
+                    </div>
+                    <div class="card-body">
+                        <figure class="image-card">
+                            <img src="assets/images/II.5_monthly_asset_trend.png" alt="Monthly Asset Trend">
+                            <figcaption>Time series menampilkan fluktuasi temuan per kategori aset sepanjang periode observasi</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Top 10 Unit dengan Issues Terbanyak</h3>
+                    </div>
+                    <div class="card-body">
+                        <figure class="image-card">
+                            <img src="assets/images/II.5_top_units_issues.png" alt="Top Units Issues">
+                            <figcaption>Bar chart horizontal menampilkan unit-unit operasional dengan frekuensi temuan tertinggi</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-box">
+                <h4>Interpretasi Tren dan Unit</h4>
+                <ul>
+                    <li><strong>Pola siklikal terlihat</strong> pada beberapa kategori aset - kemungkinan terkait schedule maintenance atau musiman</li>
+                    <li><strong>Spike temuan pada periode tertentu</strong> mengindikasikan campaign audit atau incident-driven inspection</li>
+                    <li><strong>Konsentrasi issues pada unit tertentu</strong> menunjukkan perlunya focused intervention pada area high-frequency findings</li>
+                    <li><strong>Tren penurunan pada beberapa aset</strong> (jika ada) mencerminkan efektivitas program perbaikan</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Fire Safety Focus -->
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Analisis Fire Safety per Aset</h3>
+                </div>
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.5_fire_safety_analysis.png" alt="Fire Safety Analysis">
+                        <figcaption>Visualisasi khusus untuk temuan terkait fire safety di berbagai kategori aset</figcaption>
+                    </figure>
+
+                    <div class="analysis-box mt-3">
+                        <h4>Fire Safety Insights</h4>
+                        <ul>
+                            <li><strong>Fire safety merupakan concern critical</strong> terutama pada aset dengan material mudah terbakar (coal handling, H2 plant)</li>
+                            <li><strong>Warehouse dan administrative areas</strong> perlu perhatian khusus terkait jalur evakuasi dan penyimpanan material berbahaya</li>
+                            <li><strong>Compliance dengan standar fire protection</strong> harus diprioritaskan pada semua kategori aset</li>
+                            <li><strong>Regular fire drill dan inspection</strong> equipment pemadam kebakaran perlu diintensifkan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Key Insights Kritikalitas Aset</h2>
+                <p>Temuan utama dari analisis tracking aset</p>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-item danger">
+                    <div class="insight-title">Kategori OTHER - Prioritas Reklasifikasi</div>
+                    <div class="insight-value">2.126 temuan (38%) dengan Criticality Score tertinggi (2,97). Perlu breakdown detail untuk actionable insights.</div>
+                </div>
+
+                <div class="insight-item warning">
+                    <div class="insight-title">WAREHOUSE - Unsafe Rate Tertinggi</div>
+                    <div class="insight-value">45,3% unsafe rate dan resolusi terlama (255 hari). Area penyimpanan memerlukan peningkatan kontrol K3 segera.</div>
+                </div>
+
+                <div class="insight-item warning">
+                    <div class="insight-title">H2 PLANT - High Risk Profile</div>
+                    <div class="insight-value">Avg risk score 2,18 (tertinggi) dan unsafe rate 36,4%. Meski volume rendah (11), potensi bahaya sangat tinggi.</div>
+                </div>
+
+                <div class="insight-item success">
+                    <div class="insight-title">BOILER SYSTEM - Controlled Excellence</div>
+                    <div class="insight-value">Volume tertinggi kedua (1.725) namun unsafe rate hanya 10,5%. Program K3 sudah efektif.</div>
+                </div>
+
+                <div class="insight-item success">
+                    <div class="insight-title">TURBINE SYSTEM - Fast Response</div>
+                    <div class="insight-value">Resolusi tercepat (145 hari) mencerminkan prioritas tinggi pada aset kritikal operasional.</div>
+                </div>
+
+                <div class="insight-item warning">
+                    <div class="insight-title">COOLING WATER - Moderate Alert</div>
+                    <div class="insight-value">Unsafe rate 34,1% dengan avg resolusi 190 hari. Perlu peningkatan monitoring dan preventive action.</div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-title">Aset Kritikal Terkontrol</div>
+                    <div class="insight-value">BOILER, TURBINE, dan COAL HANDLING menunjukkan manajemen risiko yang baik dengan unsafe rate di bawah 18%.</div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-title">Administrative Area</div>
+                    <div class="insight-value">550 temuan dengan avg risk 0,80 (terendah) namun unsafe rate 22,7%. Fokus pada housekeeping dan ergonomi.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations -->
+        <section class="section">
+            <div class="recommendation-box">
+                <h4>Rekomendasi Strategis Asset Management</h4>
+                <ol>
+                    <li><strong>Re-klasifikasi Kategori OTHER</strong> - Lakukan breakdown detail 2.126 temuan dalam kategori OTHER menjadi sub-kategori yang lebih spesifik untuk analisis dan action plan yang lebih terarah. Prioritas: URGENT</li>
+
+                    <li><strong>Intensive Intervention - WAREHOUSE</strong> - Implementasi program khusus untuk menurunkan unsafe rate dari 45,3% melalui:
+                        <ul>
+                            <li>Audit menyeluruh sistem penyimpanan dan material handling</li>
+                            <li>Training ulang petugas warehouse tentang K3</li>
+                            <li>Perbaikan sistem housekeeping dan marking</li>
+                            <li>Fast-track resolution untuk issues yang outstanding</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Special Attention - H2 PLANT</strong> - Meskipun volume rendah (11 temuan), avg risk score 2,18 menunjukkan potensi bahaya tinggi:
+                        <ul>
+                            <li>Tingkatkan frekuensi inspection dan monitoring</li>
+                            <li>Review dan update prosedur keselamatan</li>
+                            <li>Specialized training untuk operator H2 Plant</li>
+                            <li>Implementasi additional safety barriers</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Maintain Excellence - BOILER & TURBINE</strong> - Pertahankan program K3 yang sudah efektif dengan unsafe rate rendah (10,5% dan 13,0%):
+                        <ul>
+                            <li>Dokumentasi best practices untuk replikasi ke aset lain</li>
+                            <li>Continuous monitoring untuk mempertahankan performance</li>
+                            <li>Benchmarking dengan industri sejenis</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Improvement Program - COOLING WATER</strong> - Fokus menurunkan unsafe rate dari 34,1% melalui:
+                        <ul>
+                            <li>Review sistem cooling water treatment dan corrosion control</li>
+                            <li>Perbaikan accessibility untuk inspection dan maintenance</li>
+                            <li>Monitoring water quality parameter yang lebih ketat</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Predictive Maintenance Implementation</strong> - Manfaatkan data historical findings untuk:
+                        <ul>
+                            <li>Identifikasi pola failure dan recurring issues per aset</li>
+                            <li>Optimize preventive maintenance schedule</li>
+                            <li>Early warning system untuk potential hazards</li>
+                            <li>Resource allocation yang lebih efisien</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Prioritization Framework</strong> - Terapkan kriteria prioritas penanganan berdasarkan:
+                        <ul>
+                            <li>Criticality Score > 2,0 → Urgent intervention required</li>
+                            <li>Unsafe Rate > 30% → Intensive supervision needed</li>
+                            <li>Avg Risk > 1,5 → Enhanced safety measures</li>
+                            <li>Resolution time > 200 days → Process improvement focus</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Cross-functional Collaboration</strong> - Establish regular coordination antara:
+                        <ul>
+                            <li>Tim K3 dengan Maintenance untuk faster resolution</li>
+                            <li>Operations dengan Engineering untuk preventive design</li>
+                            <li>Management dengan Frontline untuk resource allocation</li>
+                        </ul>
+                    </li>
+
+                    <li><strong>Performance Dashboard</strong> - Develop real-time monitoring untuk:
+                        <ul>
+                            <li>Track Criticality Score per aset secara berkala</li>
+                            <li>Monitor progress penyelesaian issues</li>
+                            <li>Alert system untuk threshold violation</li>
+                            <li>Trend analysis untuk continuous improvement</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Kesimpulan Analisis Tracking Aset</h3>
+                </div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1rem;">
+                        Analisis tracking aset menunjukkan <strong>landscape kritikalitas yang heterogen</strong> di PT PLN UP Indramayu.
+                        Kategori OTHER dengan 2.126 temuan dan Criticality Score 2,97 menjadi prioritas utama yang memerlukan reklasifikasi
+                        detail untuk actionable insights.
+                    </p>
+
+                    <p style="margin-bottom: 1rem;">
+                        <strong>Area concern utama</strong> adalah WAREHOUSE (unsafe rate 45,3%) dan H2 PLANT (avg risk 2,18) yang memerlukan
+                        intensive intervention. Sebaliknya, <strong>aset kritikal operasional</strong> seperti BOILER SYSTEM, TURBINE SYSTEM,
+                        dan COAL HANDLING menunjukkan performance K3 yang baik dengan unsafe rate di bawah 18% dan resolution time yang cepat.
+                    </p>
+
+                    <p style="margin-bottom: 1rem;">
+                        Implementasi <strong>framework prioritization berbasis Criticality Score</strong> akan membantu alokasi resource yang
+                        lebih efisien. Focus pada reklasifikasi OTHER, improvement di WAREHOUSE, special attention untuk H2 PLANT, dan
+                        maintenance excellence di BOILER-TURBINE akan meningkatkan overall safety performance secara signifikan.
+                    </p>
+
+                    <p>
+                        <strong>Data-driven approach</strong> melalui predictive maintenance dan real-time monitoring dashboard akan menjadi
+                        kunci sustainable improvement dalam manajemen K3 berbasis aset di masa mendatang.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-text">PT PLN Nusantara Power</div>
+                <p>Unit Pembangkitan Indramayu</p>
+                <p>Analisis Data IZAT K3 - Asset Tracking Analysis</p>
+                <p style="margin-top: 1rem; opacity: 0.7;">© 2024 PT PLN Nusantara Power. Data bersifat confidential untuk keperluan internal.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-overlay" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img src="" alt="" id="lightbox-img">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Data Modal -->
+    <div class="data-modal-overlay" id="dataModal">
+        <div class="data-modal-content">
+            <div class="data-modal-header">
+                <h3 id="dataModalTitle">Data Tabel</h3>
+                <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+            </div>
+            <div class="data-modal-body" id="dataModalBody">
+                <!-- Table will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data untuk modal tables
+        const modalData = {
+            assetCriticality: {
+                title: 'Data Lengkap Kritikalitas Aset',
+                headers: ['Asset Category', 'Total Findings', 'Avg Risk', 'Unsafe Count', 'Avg Resolution (Hari)', 'Unsafe Rate (%)', 'High/Critical Count', 'Criticality Score'],
+                rows: [
+                    ['OTHER', '2,126', '1.27', '682', '204', '32.1%', '176', '2.97'],
+                    ['WAREHOUSE', '95', '1.52', '43', '255', '45.3%', '7', '2.02'],
+                    ['H2 PLANT', '11', '2.18', '4', '228', '36.4%', '0', '1.96'],
+                    ['BOILER SYSTEM', '1,725', '1.35', '181', '149', '10.5%', '91', '1.63'],
+                    ['COOLING WATER', '85', '1.09', '29', '190', '34.1%', '3', '1.49'],
+                    ['WATER TREATMENT', '260', '0.97', '72', '187', '27.7%', '17', '1.36'],
+                    ['TURBINE SYSTEM', '562', '1.50', '73', '145', '13.0%', '40', '1.33'],
+                    ['COAL HANDLING', '161', '1.58', '28', '144', '17.4%', '13', '1.26'],
+                    ['ADMINISTRATIVE', '550', '0.80', '125', '167', '22.7%', '28', '1.24']
+                ]
+            }
+        };
+
+        function openDataModal(dataKey) {
+            const data = modalData[dataKey];
+            const modal = document.getElementById('dataModal');
+            const title = document.getElementById('dataModalTitle');
+            const body = document.getElementById('dataModalBody');
+
+            title.textContent = data.title;
+
+            let tableHtml = '<table class="data-table-simple"><thead><tr>';
+            data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+            tableHtml += '</tr></thead><tbody>';
+            data.rows.forEach((row, idx) => {
+                const highlight = idx < 3 ? ' class="highlight"' : '';
+                tableHtml += `<tr${highlight}>`;
+                row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+                tableHtml += '</tr>';
+            });
+            tableHtml += '</tbody></table>';
+
+            body.innerHTML = tableHtml;
+            modal.classList.add('active');
+        }
+
+        function closeDataModal() {
+            document.getElementById('dataModal').classList.remove('active');
+        }
+    </script>
+
+    <script>
+        // Lightbox functionality
+        document.querySelectorAll('.image-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                const caption = this.querySelector('figcaption');
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+                const lightboxCaption = document.getElementById('lightbox-caption');
+
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxCaption.textContent = caption ? caption.textContent : '';
+                lightbox.classList.add('active');
+            });
+        });
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Close on overlay click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+        document.getElementById('dataModal').addEventListener('click', function(e) {
+            if (e.target === this) closeDataModal();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closeDataModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 5: Risk Severity & Issue Category - Pembersihan Data IZAT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Data Cleansing</button>
+          <div class="nav-dropdown-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html" class="active"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Risk Severity & Issue Category</h1>
+        <p>Kategorisasi Otomatis Tingkat Risiko dan Jenis Permasalahan K3</p>
+        <span class="hero-badge" style="background: linear-gradient(135deg, #35B971, #00A2B9);">
+          <span>🧹</span> Data Cleansing - Step 5
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Overview Stats -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card success">
+          <div class="stat-label">Kolom Baru Dibuat</div>
+          <div class="stat-value">3</div>
+          <div class="stat-change">risk_score, risk_severity, issue_category</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-label">Temuan CRITICAL Risk</div>
+          <div class="stat-value">2,1%</div>
+          <div class="stat-change">115 dari 5.575 temuan memerlukan perhatian mendesak</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">Issue Categories</div>
+          <div class="stat-value">8</div>
+          <div class="stat-change">Dari FIRE_SAFETY hingga PATROL_ROUTINE</div>
+        </div>
+        <div class="stat-card primary">
+          <div class="stat-label">Zona Risiko Tertinggi</div>
+          <div class="stat-value">UNKNOWN</div>
+          <div class="stat-change">15,9% temuan HIGH+CRITICAL (vs 5,6% MAIN_UNIT)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mengapa Diperlukan -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">💡</span>
+          Mengapa Risk Severity & Issue Category Diperlukan?
+        </h2>
+        <p>Pentingnya kategorisasi otomatis untuk analisis K3 yang efektif</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1));">
+            <h3>🎯 Prioritisasi Tindakan</h3>
+          </div>
+          <div class="card-body">
+            <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+              Dengan <strong>5.575 temuan</strong> dalam 10 bulan, tim K3 memerlukan sistem prioritas yang jelas.
+              Risk severity memberikan prioritas objektif berdasarkan:
+            </p>
+            <ul style="color: var(--pln-gray-600); padding-left: 1.5rem;">
+              <li><strong>Kategori temuan</strong> - Near Miss lebih kritis dari Positive</li>
+              <li><strong>Severity keywords</strong> - "bocor", "patah", "api" memerlukan tindakan cepat</li>
+              <li><strong>Lokasi kritikal</strong> - Boiler, Turbine, Coal Yard berisiko tinggi</li>
+            </ul>
+            <div class="analysis-box mt-3">
+              <p style="color: var(--pln-gray-700); margin: 0;">
+                <strong>Hasil:</strong> Tim dapat fokus pada <strong>115 temuan CRITICAL</strong> (2,1%)
+                dan <strong>260 temuan HIGH</strong> (4,7%) terlebih dahulu, bukan menangani semua temuan secara merata.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" style="background: linear-gradient(135deg, rgba(53, 185, 113, 0.1), rgba(0, 175, 240, 0.1));">
+            <h3>🔍 Identifikasi Pola Masalah</h3>
+          </div>
+          <div class="card-body">
+            <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+              Issue category memungkinkan analisis pola permasalahan K3 secara sistematis:
+            </p>
+            <ul style="color: var(--pln-gray-600); padding-left: 1.5rem;">
+              <li><strong>FIRE_SAFETY</strong> - 22,4% dari total (1.247 temuan) → perlu audit APAR/hydrant</li>
+              <li><strong>HOUSEKEEPING</strong> - 11,0% dari total → masalah kebersihan area kerja</li>
+              <li><strong>ELECTRICAL</strong> - 7,7% dari total → risiko kesetrum, kabel rusak</li>
+              <li><strong>STRUCTURAL</strong> - 12,0% dari total → kerusakan infrastruktur</li>
+            </ul>
+            <div class="analysis-box mt-3">
+              <p style="color: var(--pln-gray-700); margin: 0;">
+                <strong>Manfaat:</strong> Manajemen dapat mengalokasikan resources tepat sasaran -
+                misalnya, training khusus fire safety karena 22,4% temuan terkait kebakaran.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item warning">
+          <div class="insight-title">Automatisasi Scalable</div>
+          <div class="insight-value">Sistem dapat memproses ribuan temuan dalam hitungan detik, jauh lebih cepat dari review manual</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Konsistensi Penilaian</div>
+          <div class="insight-value">Eliminasi bias subjektif - setiap temuan dinilai dengan kriteria yang sama</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-title">Foundation untuk AI/ML</div>
+          <div class="insight-value">Risk severity & issue category menjadi features untuk model prediksi risiko dan smart recommendation</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metodologi Risk Severity -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🧮</span>
+          Metodologi Risk Severity
+        </h2>
+        <p>Algoritma kalkulasi skor risiko berdasarkan tiga komponen utama</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Formula Risk Score</h3>
+        </div>
+        <div class="card-body">
+          <div style="background: linear-gradient(135deg, rgba(0, 162, 185, 0.1), rgba(53, 185, 113, 0.1));
+                      padding: 2rem;
+                      border-radius: 0.75rem;
+                      text-align: center;
+                      margin-bottom: 2rem;
+                      border: 2px solid var(--pln-primary-blue);">
+            <div style="font-size: 1.5rem; font-weight: 700; color: var(--pln-dark-blue);">
+              Risk Score = Base Score + Keyword Modifier + Location Modifier
+            </div>
+            <div style="margin-top: 1rem; color: var(--pln-gray-600);">
+              Rentang: 0-7+ | Mapping: CRITICAL (≥5), HIGH (4), MEDIUM (2-3), LOW (0-1)
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="ml-feature-card" style="border-color: rgba(239, 68, 68, 0.3);">
+              <h4 style="color: #EF4444;">1️⃣ Base Score (0-4)</h4>
+              <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+                Berdasarkan kategori temuan:
+              </p>
+              <table style="width: 100%; font-size: 0.875rem;">
+                <tbody>
+                  <tr>
+                    <td style="padding: 0.5rem; border-bottom: 1px solid var(--pln-gray-200);"><strong>Near Miss</strong></td>
+                    <td style="padding: 0.5rem; border-bottom: 1px solid var(--pln-gray-200); text-align: right;"><span class="badge badge-danger">4</span></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.5rem; border-bottom: 1px solid var(--pln-gray-200);"><strong>Unsafe Action</strong></td>
+                    <td style="padding: 0.5rem; border-bottom: 1px solid var(--pln-gray-200); text-align: right;"><span class="badge badge-warning">3</span></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.5rem; border-bottom: 1px solid var(--pln-gray-200);"><strong>Unsafe Condition</strong></td>
+                    <td style="padding: 0.5rem; border-bottom: 1px solid var(--pln-gray-200); text-align: right;"><span class="badge badge-info">2</span></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.5rem;"><strong>Positive</strong></td>
+                    <td style="padding: 0.5rem; text-align: right;"><span class="badge badge-success">0</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="ml-feature-card" style="border-color: rgba(245, 158, 11, 0.3);">
+              <h4 style="color: #F59E0B;">2️⃣ Keyword Modifier (+0-2)</h4>
+              <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+                Analisis teks pada field <code>kondisi</code> dan <code>rekomendasi</code>:
+              </p>
+              <div style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                <strong style="color: #EF4444;">High Severity (+2)</strong>
+                <div style="font-size: 0.875rem; color: var(--pln-gray-600); margin-top: 0.5rem;">
+                  bocor, jebol, patah, rusak berat, api, ledak, jatuh, terbakar, meledak, runtuh,
+                  pecah, kesetrum, tersengat, luka, cedera, korban
+                </div>
+              </div>
+              <div style="background: rgba(245, 158, 11, 0.1); padding: 1rem; border-radius: 0.5rem;">
+                <strong style="color: #F59E0B;">Medium Severity (+1)</strong>
+                <div style="font-size: 0.875rem; color: var(--pln-gray-600); margin-top: 0.5rem;">
+                  rusak, mati, lepas, longgar, kotor, retak, keropos, bengkok, penyok,
+                  tumpah, terkelupas, berkarat, aus, tidak berfungsi, abnormal, getaran
+                </div>
+              </div>
+            </div>
+
+            <div class="ml-feature-card" style="border-color: rgba(139, 92, 246, 0.3);">
+              <h4 style="color: #8B5CF6;">3️⃣ Location Modifier (+0-1)</h4>
+              <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+                Area kritikal mendapat modifier +1:
+              </p>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="badge badge-primary">BOILER</span>
+                <span class="badge badge-primary">TURBINE</span>
+                <span class="badge badge-primary">H2 PLANT</span>
+                <span class="badge badge-primary">COAL YARD</span>
+                <span class="badge badge-primary">CONVEYOR</span>
+                <span class="badge badge-primary">CRUSHER</span>
+                <span class="badge badge-primary">TRANSFORMER</span>
+                <span class="badge badge-primary">JETTY</span>
+                <span class="badge badge-primary">COAL HANDLING</span>
+              </div>
+              <div style="margin-top: 1rem; padding: 1rem; background: rgba(139, 92, 246, 0.1); border-radius: 0.5rem;">
+                <strong style="color: #7C3AED;">Alasan:</strong>
+                <span style="color: var(--pln-gray-600); font-size: 0.875rem;">
+                  Area ini memiliki potensi dampak tinggi jika terjadi kecelakaan -
+                  shutdown unit, kerugian finansial besar, atau korban jiwa.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contoh Perhitungan -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>📋 Contoh Perhitungan Risk Score</h3>
+        </div>
+        <div class="card-body">
+          <div class="grid-2">
+            <div class="analysis-box" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1)); border-color: #EF4444;">
+              <h4 style="color: #EF4444;">Contoh: CRITICAL Risk (Score = 6)</h4>
+              <ul style="color: var(--pln-gray-700);">
+                <li><strong>Kategori:</strong> Near Miss → Base = 4</li>
+                <li><strong>Kondisi:</strong> "pipa bocor di turbine lantai 3" → Keyword (+2) + Location (+1)</li>
+                <li><strong>Total:</strong> 4 + 2 + 1 = <span style="color: #EF4444; font-weight: 700;">7 → CRITICAL</span></li>
+              </ul>
+              <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem;">
+                <strong>Justifikasi:</strong> Near Miss + kata "bocor" + lokasi "turbine" = potensi shutdown unit,
+                dampak miliaran rupiah. <strong>Tindakan immediate required!</strong>
+              </div>
+            </div>
+
+            <div class="analysis-box" style="background: linear-gradient(135deg, rgba(53, 185, 113, 0.1), rgba(0, 175, 240, 0.1)); border-color: #35B971;">
+              <h4 style="color: #35B971;">Contoh: LOW Risk (Score = 0)</h4>
+              <ul style="color: var(--pln-gray-700);">
+                <li><strong>Kategori:</strong> Positive → Base = 0</li>
+                <li><strong>Kondisi:</strong> "apar ready di admin building" → Keyword (+0) + Location (+0)</li>
+                <li><strong>Total:</strong> 0 + 0 + 0 = <span style="color: #35B971; font-weight: 700;">0 → LOW</span></li>
+              </ul>
+              <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem;">
+                <strong>Justifikasi:</strong> Positive finding, kata "ready" tidak ada di keyword severity,
+                admin building bukan area kritikal. <strong>Hanya monitoring rutin.</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Distribusi Risk Severity -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>📊 Distribusi Risk Severity</h3>
+          <button class="btn-data-view" onclick="openDataModal('riskDistribution')">
+            <span class="icon">📈</span> Lihat Detail per Zona
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="grid-2 mb-4">
+            <div>
+              <h4 style="color: var(--pln-dark-blue); margin-bottom: 1rem;">Overall Distribution</h4>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Risk Severity</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                    <th>Visual</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="badge badge-success">LOW</span></td>
+                    <td>3.965</td>
+                    <td><strong>71,1%</strong></td>
+                    <td>
+                      <div class="progress-bar">
+                        <div class="progress-fill success" style="width: 71.1%;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-info">MEDIUM</span></td>
+                    <td>1.235</td>
+                    <td><strong>22,2%</strong></td>
+                    <td>
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width: 22.2%; background: var(--pln-light-blue);"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-warning">HIGH</span></td>
+                    <td>260</td>
+                    <td><strong>4,7%</strong></td>
+                    <td>
+                      <div class="progress-bar">
+                        <div class="progress-fill warning" style="width: 47%;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="highlight">
+                    <td><span class="badge badge-danger">CRITICAL</span></td>
+                    <td>115</td>
+                    <td><strong>2,1%</strong></td>
+                    <td>
+                      <div class="progress-bar">
+                        <div class="progress-fill danger" style="width: 21%;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div>
+              <h4 style="color: var(--pln-dark-blue); margin-bottom: 1rem;">Cross-tab: Risk vs Kategori Temuan</h4>
+              <div class="table-container">
+                <table style="font-size: 0.875rem;">
+                  <thead>
+                    <tr>
+                      <th>Risk</th>
+                      <th>Near Miss</th>
+                      <th>Unsafe Action</th>
+                      <th>Unsafe Condition</th>
+                      <th>Positive</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="badge badge-danger">CRITICAL</span></td>
+                      <td>38</td>
+                      <td>22</td>
+                      <td>55</td>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-warning">HIGH</span></td>
+                      <td>15</td>
+                      <td>30</td>
+                      <td>215</td>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-info">MEDIUM</span></td>
+                      <td>0</td>
+                      <td>23</td>
+                      <td>839</td>
+                      <td>373</td>
+                    </tr>
+                    <tr>
+                      <td><span class="badge badge-success">LOW</span></td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>3.965</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 0.5rem;">
+                <strong style="color: #EF4444;">Insight Kunci:</strong>
+                <span style="color: var(--pln-gray-700); font-size: 0.875rem;">
+                  100% Near Miss yang mengandung high severity keywords menjadi CRITICAL/HIGH.
+                  Sementara 373 Positive (8,6%) dikategorikan MEDIUM karena ada keyword severity di text.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metodologi Issue Category -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🏷️</span>
+          Metodologi Issue Category
+        </h2>
+        <p>Text mining untuk kategorisasi jenis permasalahan K3</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Algoritma Kategorisasi</h3>
+        </div>
+        <div class="card-body">
+          <div class="analysis-box mb-4">
+            <h4>🔍 Text Mining Approach</h4>
+            <p style="color: var(--pln-gray-700);">
+              Sistem melakukan keyword matching pada field <strong>judul</strong>, <strong>kondisi</strong>,
+              dan <strong>rekomendasi</strong>. Setiap kategori memiliki dictionary keywords yang spesifik.
+            </p>
+            <ul style="color: var(--pln-gray-700);">
+              <li><strong>Prioritas matching:</strong> FIRE_SAFETY → ELECTRICAL → PPE_APD → FALL_PROTECTION → MACHINE → HOUSEKEEPING → STRUCTURAL → PATROL_ROUTINE</li>
+              <li><strong>First match wins:</strong> Jika temuan match dengan keyword FIRE_SAFETY, langsung dikategorikan (tidak cek kategori lain)</li>
+              <li><strong>Fallback:</strong> Jika tidak ada keyword yang match, masuk kategori "OTHER"</li>
+            </ul>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <h4 style="color: var(--pln-dark-blue); margin-bottom: 1rem;">8 Kategori Utama</h4>
+              <div class="table-container">
+                <table style="font-size: 0.875rem;">
+                  <thead>
+                    <tr>
+                      <th>Kategori</th>
+                      <th>Keywords</th>
+                      <th>Jumlah</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>FIRE_SAFETY</strong></td>
+                      <td style="font-size: 0.75rem;">apar, hydrant, api, kebakaran, sprinkler, smoke detector, fire alarm...</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td><strong>ELECTRICAL</strong></td>
+                      <td style="font-size: 0.75rem;">kabel, listrik, lampu, panel, switch, mcb, saklar, stopkontak, grounding...</td>
+                      <td>12</td>
+                    </tr>
+                    <tr>
+                      <td><strong>STRUCTURAL</strong></td>
+                      <td style="font-size: 0.75rem;">rusak, patah, jebol, keropos, retak, bocor, runtuh, pecah, penyok...</td>
+                      <td>11</td>
+                    </tr>
+                    <tr>
+                      <td><strong>HOUSEKEEPING</strong></td>
+                      <td style="font-size: 0.75rem;">kotor, sampah, berantakan, tumpah, oli, ceceran, berserakan, tidak rapi...</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td><strong>PPE_APD</strong></td>
+                      <td style="font-size: 0.75rem;">helm, sarung tangan, sepatu, safety, apd, kacamata, masker, rompi, harness...</td>
+                      <td>11</td>
+                    </tr>
+                    <tr>
+                      <td><strong>MACHINE</strong></td>
+                      <td style="font-size: 0.75rem;">getaran, suara, panas, abnormal, trip, mesin, pompa, motor, bearing, valve...</td>
+                      <td>11</td>
+                    </tr>
+                    <tr>
+                      <td><strong>FALL_PROTECTION</strong></td>
+                      <td style="font-size: 0.75rem;">railing, handrail, grating, tangga, lantai berlubang, guardrail, scaffold...</td>
+                      <td>10</td>
+                    </tr>
+                    <tr>
+                      <td><strong>PATROL_ROUTINE</strong></td>
+                      <td style="font-size: 0.75rem;">patrol, cek, rutin, ready, baik, normal, ok, aman, kondisi baik, tidak ada...</td>
+                      <td>11</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <h4 style="color: var(--pln-dark-blue); margin-bottom: 1rem;">Distribusi Issue Category</h4>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kategori</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>PATROL_ROUTINE</strong></td>
+                    <td>1.494</td>
+                    <td><strong>26,8%</strong></td>
+                  </tr>
+                  <tr class="highlight">
+                    <td><strong>FIRE_SAFETY</strong></td>
+                    <td>1.247</td>
+                    <td><strong>22,4%</strong></td>
+                  </tr>
+                  <tr>
+                    <td>OTHER</td>
+                    <td>775</td>
+                    <td>13,9%</td>
+                  </tr>
+                  <tr>
+                    <td>STRUCTURAL</td>
+                    <td>669</td>
+                    <td>12,0%</td>
+                  </tr>
+                  <tr>
+                    <td>HOUSEKEEPING</td>
+                    <td>614</td>
+                    <td>11,0%</td>
+                  </tr>
+                  <tr>
+                    <td>ELECTRICAL</td>
+                    <td>429</td>
+                    <td>7,7%</td>
+                  </tr>
+                  <tr>
+                    <td>PPE_APD</td>
+                    <td>187</td>
+                    <td>3,4%</td>
+                  </tr>
+                  <tr>
+                    <td>MACHINE</td>
+                    <td>115</td>
+                    <td>2,1%</td>
+                  </tr>
+                  <tr>
+                    <td>FALL_PROTECTION</td>
+                    <td>45</td>
+                    <td>0,8%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cross-tabulation -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>🔀 Cross-tabulation: Issue Category vs Risk Severity</h3>
+          <button class="btn-data-view" onclick="openDataModal('issueSeverityCross')">
+            <span class="icon">📊</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table style="font-size: 0.875rem;">
+              <thead>
+                <tr>
+                  <th>Issue Category</th>
+                  <th>LOW</th>
+                  <th>MEDIUM</th>
+                  <th>HIGH</th>
+                  <th>CRITICAL</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="highlight">
+                  <td><strong>STRUCTURAL</strong></td>
+                  <td>151</td>
+                  <td>331</td>
+                  <td>129</td>
+                  <td style="background: rgba(239, 68, 68, 0.15);"><strong>58</strong></td>
+                  <td>669</td>
+                </tr>
+                <tr>
+                  <td>FIRE_SAFETY</td>
+                  <td>1.024</td>
+                  <td>161</td>
+                  <td>42</td>
+                  <td>20</td>
+                  <td>1.247</td>
+                </tr>
+                <tr>
+                  <td>ELECTRICAL</td>
+                  <td>176</td>
+                  <td>205</td>
+                  <td>36</td>
+                  <td>12</td>
+                  <td>429</td>
+                </tr>
+                <tr>
+                  <td>HOUSEKEEPING</td>
+                  <td>442</td>
+                  <td>150</td>
+                  <td>13</td>
+                  <td>9</td>
+                  <td>614</td>
+                </tr>
+                <tr>
+                  <td>PATROL_ROUTINE</td>
+                  <td>1.291</td>
+                  <td>181</td>
+                  <td>18</td>
+                  <td>4</td>
+                  <td>1.494</td>
+                </tr>
+                <tr>
+                  <td>MACHINE</td>
+                  <td>71</td>
+                  <td>33</td>
+                  <td>6</td>
+                  <td>5</td>
+                  <td>115</td>
+                </tr>
+                <tr>
+                  <td>PPE_APD</td>
+                  <td>179</td>
+                  <td>8</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>187</td>
+                </tr>
+                <tr>
+                  <td>FALL_PROTECTION</td>
+                  <td>17</td>
+                  <td>23</td>
+                  <td>4</td>
+                  <td>1</td>
+                  <td>45</td>
+                </tr>
+                <tr>
+                  <td>OTHER</td>
+                  <td>614</td>
+                  <td>143</td>
+                  <td>12</td>
+                  <td>6</td>
+                  <td>775</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="insights-grid mt-4">
+            <div class="insight-item danger">
+              <div class="insight-title">STRUCTURAL paling berisiko</div>
+              <div class="insight-value">58 dari 115 CRITICAL findings (50,4%) adalah masalah struktural - patah, bocor, jebol</div>
+            </div>
+            <div class="insight-item success">
+              <div class="insight-title">PPE_APD rendah risiko</div>
+              <div class="insight-value">95,7% temuan APD adalah LOW risk - mayoritas temuan positif penggunaan APD</div>
+            </div>
+            <div class="insight-item warning">
+              <div class="insight-title">FIRE_SAFETY perlu perhatian</div>
+              <div class="insight-value">62 temuan HIGH+CRITICAL (5,0%) meski mayoritas low - ada APAR/hydrant rusak serius</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Source Code Highlight -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">💻</span>
+          Source Code: Implementasi Algoritma
+        </h2>
+        <p>Fungsi Python untuk kalkulasi risk severity dan issue categorization</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>calculate_risk_severity()</h3>
+          </div>
+          <div class="card-body">
+            <pre style="background: var(--pln-gray-50);
+                        padding: 1.5rem;
+                        border-radius: 0.5rem;
+                        overflow-x: auto;
+                        font-size: 0.875rem;
+                        line-height: 1.6;
+                        border: 1px solid var(--pln-gray-200);"><code>def calculate_risk_severity(row):
+    """
+    Menghitung severity risiko berdasarkan:
+    1. Base score dari kategori temuan
+    2. Modifier dari keyword pada kondisi
+    3. Modifier dari lokasi kritikal
+
+    Returns: (risk_score, risk_severity)
+    """
+    kategori = row.get('temuan_kategori', '')
+    kondisi = str(row.get('kondisi', '')).lower()
+    lokasi = str(row.get('nama_lokasi', '')).upper()
+    rekomendasi = str(row.get('rekomendasi', '')).lower()
+
+    # Base score by category
+    base = BASE_SCORES.get(kategori, 0)
+
+    # Modifier dari keyword
+    combined_text = kondisi + ' ' + rekomendasi
+    modifier = 0
+
+    for kw in HIGH_SEVERITY_KEYWORDS:
+        if kw in combined_text:
+            modifier = max(modifier, 2)
+            break
+
+    if modifier < 2:
+        for kw in MEDIUM_SEVERITY_KEYWORDS:
+            if kw in combined_text:
+                modifier = max(modifier, 1)
+                break
+
+    # Location modifier
+    location_modifier = 0
+    for loc in CRITICAL_LOCATIONS:
+        if loc in lokasi:
+            location_modifier = 1
+            break
+
+    # Final score
+    risk_score = base + modifier + location_modifier
+
+    # Map to severity level
+    if risk_score >= 5:
+        risk_severity = 'CRITICAL'
+    elif risk_score >= 4:
+        risk_severity = 'HIGH'
+    elif risk_score >= 2:
+        risk_severity = 'MEDIUM'
+    else:
+        risk_severity = 'LOW'
+
+    return risk_score, risk_severity</code></pre>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>categorize_issue()</h3>
+          </div>
+          <div class="card-body">
+            <pre style="background: var(--pln-gray-50);
+                        padding: 1.5rem;
+                        border-radius: 0.5rem;
+                        overflow-x: auto;
+                        font-size: 0.875rem;
+                        line-height: 1.6;
+                        border: 1px solid var(--pln-gray-200);"><code>def categorize_issue(row):
+    """
+    Mengkategorikan issue berdasarkan text mining
+    pada judul, kondisi, dan rekomendasi.
+
+    Prioritas: kategori pertama yang match.
+
+    Returns: issue_category
+    """
+    judul = str(row.get('judul', '')).lower()
+    kondisi = str(row.get('kondisi', '')).lower()
+    rekomendasi = str(row.get('rekomendasi', '')).lower()
+
+    combined_text = f"{judul} {kondisi} {rekomendasi}"
+
+    # Urutan prioritas: spesifik dulu
+    category_priority = [
+        'FIRE_SAFETY',
+        'ELECTRICAL',
+        'PPE_APD',
+        'FALL_PROTECTION',
+        'MACHINE',
+        'HOUSEKEEPING',
+        'STRUCTURAL',
+        'PATROL_ROUTINE'
+    ]
+
+    for category in category_priority:
+        keywords = ISSUE_CATEGORIES[category]
+        for kw in keywords:
+            if kw in combined_text:
+                return category
+
+    return 'OTHER'</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>📝 Code Highlights</h4>
+        <ul>
+          <li><strong>Efficient keyword matching:</strong> Gunakan <code>if kw in combined_text</code> untuk case-insensitive substring search</li>
+          <li><strong>Greedy high severity:</strong> Jika ada keyword high severity (+2), langsung break - tidak perlu cek medium</li>
+          <li><strong>Priority-based categorization:</strong> First match wins - FIRE_SAFETY dicek pertama karena paling critical</li>
+          <li><strong>Vectorized application:</strong> Fungsi di-apply dengan <code>df.apply()</code> untuk proses ribuan rows dalam detik</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contoh Output -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📤</span>
+          Contoh Output
+        </h2>
+        <p>Sampel data hasil kategorisasi risk severity dan issue category</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Sample Records dengan Risk Scoring</h3>
+          <button class="btn-data-view" onclick="openDataModal('sampleRecords')">
+            <span class="icon">📋</span> Lihat 20 Records
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table style="font-size: 0.875rem;">
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Kategori Temuan</th>
+                  <th>Judul</th>
+                  <th>Kondisi</th>
+                  <th>Lokasi</th>
+                  <th>Risk Score</th>
+                  <th>Risk Severity</th>
+                  <th>Issue Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background: rgba(239, 68, 68, 0.1);">
+                  <td style="font-size: 0.75rem;">KTID1320567</td>
+                  <td><span class="badge badge-danger">Near Miss</span></td>
+                  <td style="font-size: 0.75rem;">pipa bocor</td>
+                  <td style="font-size: 0.75rem;">bocor besar</td>
+                  <td style="font-size: 0.75rem;">BOILER #1</td>
+                  <td><strong>7</strong></td>
+                  <td><span class="badge badge-danger">CRITICAL</span></td>
+                  <td>STRUCTURAL</td>
+                </tr>
+                <tr style="background: rgba(245, 158, 11, 0.1);">
+                  <td style="font-size: 0.75rem;">KTID1321045</td>
+                  <td><span class="badge badge-warning">Unsafe Action</span></td>
+                  <td style="font-size: 0.75rem;">tidak pakai helm</td>
+                  <td style="font-size: 0.75rem;">pekerja tanpa APD</td>
+                  <td style="font-size: 0.75rem;">COAL YARD</td>
+                  <td><strong>4</strong></td>
+                  <td><span class="badge badge-warning">HIGH</span></td>
+                  <td>PPE_APD</td>
+                </tr>
+                <tr style="background: rgba(0, 175, 240, 0.1);">
+                  <td style="font-size: 0.75rem;">KTID1319890</td>
+                  <td><span class="badge badge-info">Unsafe Condition</span></td>
+                  <td style="font-size: 0.75rem;">lampu mati</td>
+                  <td style="font-size: 0.75rem;">lampu rusak</td>
+                  <td style="font-size: 0.75rem;">GEDUNG ADMIN</td>
+                  <td><strong>3</strong></td>
+                  <td><span class="badge badge-info">MEDIUM</span></td>
+                  <td>ELECTRICAL</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 0.75rem;">KTID1319208</td>
+                  <td><span class="badge badge-success">Positive</span></td>
+                  <td style="font-size: 0.75rem;">apar</td>
+                  <td style="font-size: 0.75rem;">ready</td>
+                  <td style="font-size: 0.75rem;">TURBINE #2</td>
+                  <td><strong>0</strong></td>
+                  <td><span class="badge badge-success">LOW</span></td>
+                  <td>FIRE_SAFETY</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 0.75rem;">KTID1320112</td>
+                  <td><span class="badge badge-success">Positive</span></td>
+                  <td style="font-size: 0.75rem;">patrol rutin</td>
+                  <td style="font-size: 0.75rem;">kondisi baik</td>
+                  <td style="font-size: 0.75rem;">UTILITY AREA</td>
+                  <td><strong>0</strong></td>
+                  <td><span class="badge badge-success">LOW</span></td>
+                  <td>PATROL_ROUTINE</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(0, 162, 185, 0.1), rgba(53, 185, 113, 0.1)); border-radius: 0.75rem;">
+            <h4 style="color: var(--pln-dark-blue); margin-bottom: 1rem;">✅ Output File</h4>
+            <div style="color: var(--pln-gray-700);">
+              <p><strong>Path:</strong> <code>data/processed/izat_indramayu_step5_kategorisasi_turunan.csv</code></p>
+              <p><strong>Rows:</strong> 5.575 | <strong>Columns:</strong> 61 (bertambah 3 kolom dari step 4)</p>
+              <p><strong>New Columns:</strong></p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                <li><code>risk_score</code> - Skor numerik 0-7+</li>
+                <li><code>risk_severity</code> - Kategori CRITICAL/HIGH/MEDIUM/LOW</li>
+                <li><code>issue_category</code> - Kategori masalah (8 kategori + OTHER)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🎯</span>
+          Rekomendasi Penggunaan
+        </h2>
+        <p>Cara memanfaatkan kolom risk severity dan issue category dalam analisis K3</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="recommendation-box">
+          <h4>1. Prioritas Tindakan Korektif</h4>
+          <ul>
+            <li><strong>CRITICAL (115 temuan):</strong> Tindakan immediate dalam 24 jam - libatkan engineering team senior</li>
+            <li><strong>HIGH (260 temuan):</strong> Resolusi dalam 3 hari - masukkan work order prioritas tinggi</li>
+            <li><strong>MEDIUM (1.235 temuan):</strong> Jadwal perbaikan dalam 1-2 minggu sesuai availability resources</li>
+            <li><strong>LOW (3.965 temuan):</strong> Monitoring rutin, tidak perlu tindakan khusus</li>
+          </ul>
+        </div>
+
+        <div class="recommendation-box">
+          <h4>2. Resource Allocation Berdasarkan Issue Category</h4>
+          <ul>
+            <li><strong>FIRE_SAFETY (22,4%):</strong> Audit menyeluruh APAR/hydrant, training fire drill</li>
+            <li><strong>STRUCTURAL (12,0%):</strong> Alokasikan budget maintenance preventif untuk infrastruktur</li>
+            <li><strong>HOUSEKEEPING (11,0%):</strong> Program 5S/5R intensif, tambah cleaning crew</li>
+            <li><strong>ELECTRICAL (7,7%):</strong> Rekrutmen electrician tambahan, stock spare parts lampu/kabel</li>
+          </ul>
+        </div>
+
+        <div class="recommendation-box">
+          <h4>3. Dashboard & Monitoring Real-time</h4>
+          <ul>
+            <li><strong>Harian:</strong> Monitor jumlah CRITICAL findings - alert jika >5 per hari</li>
+            <li><strong>Mingguan:</strong> Trend risk severity per zona - identifikasi area yang memburuk</li>
+            <li><strong>Bulanan:</strong> Distribusi issue category - apakah ada pergeseran pola masalah?</li>
+            <li><strong>Quarterly:</strong> Review keyword dictionary - tambah keyword baru yang muncul</li>
+          </ul>
+        </div>
+
+        <div class="recommendation-box">
+          <h4>4. Input untuk AI/ML Models</h4>
+          <ul>
+            <li><strong>Risk Prediction:</strong> <code>risk_severity</code> sebagai target variable untuk model prediktif</li>
+            <li><strong>Smart Recommendation:</strong> <code>issue_category</code> untuk group similar findings dan generate best practices</li>
+            <li><strong>Anomaly Detection:</strong> Deteksi jika zona tertentu tiba-tiba spike di kategori tertentu</li>
+            <li><strong>Text Classification:</strong> Train model NLP untuk auto-categorization lebih akurat</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Pembersihan Data IZAT K3</p>
+        <p>Step 5: Risk Severity & Issue Category - Data Cleansing Pipeline</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+          Generated: Desember 2025 | Confidential - Internal Use Only
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Data Modal -->
+  <div class="data-modal-overlay" id="dataModal">
+    <div class="data-modal-content">
+      <div class="data-modal-header">
+        <h3 id="dataModalTitle">Data Tabel</h3>
+        <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+      </div>
+      <div class="data-modal-body" id="dataModalBody">
+        <!-- Table will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Data untuk modal tables
+    const modalData = {
+      riskDistribution: {
+        title: 'Distribusi Risk Severity per Zona',
+        headers: ['Zona', 'LOW (%)', 'MEDIUM (%)', 'HIGH (%)', 'CRITICAL (%)'],
+        rows: [
+          ['UNKNOWN', '46,4%', '37,7%', '11,6%', '4,3%'],
+          ['SUPPORT', '62,5%', '29,4%', '6,4%', '1,6%'],
+          ['COAL_HANDLING', '65,7%', '25,5%', '6,2%', '2,6%'],
+          ['UTILITY', '68,3%', '26,9%', '4,3%', '0,5%'],
+          ['MAIN_UNIT', '79,2%', '15,1%', '3,1%', '2,5%']
+        ]
+      },
+      issueSeverityCross: {
+        title: 'Cross-tabulation: Issue Category vs Risk Severity (Full)',
+        headers: ['Issue', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL', 'Total', '% CRITICAL'],
+        rows: [
+          ['STRUCTURAL', '151', '331', '129', '58', '669', '8,7%'],
+          ['FIRE_SAFETY', '1.024', '161', '42', '20', '1.247', '1,6%'],
+          ['ELECTRICAL', '176', '205', '36', '12', '429', '2,8%'],
+          ['HOUSEKEEPING', '442', '150', '13', '9', '614', '1,5%'],
+          ['OTHER', '614', '143', '12', '6', '775', '0,8%'],
+          ['MACHINE', '71', '33', '6', '5', '115', '4,3%'],
+          ['PATROL_ROUTINE', '1.291', '181', '18', '4', '1.494', '0,3%'],
+          ['FALL_PROTECTION', '17', '23', '4', '1', '45', '2,2%'],
+          ['PPE_APD', '179', '8', '0', '0', '187', '0,0%']
+        ]
+      },
+      sampleRecords: {
+        title: 'Sample 20 Records dengan Risk Scoring',
+        headers: ['Kode', 'Kategori', 'Kondisi', 'Lokasi', 'Risk Score', 'Risk Severity', 'Issue'],
+        rows: [
+          ['KTID1320567', 'Near Miss', 'bocor besar', 'BOILER #1', '7', 'CRITICAL', 'STRUCTURAL'],
+          ['KTID1320892', 'Near Miss', 'api kecil', 'TURBINE #2', '6', 'CRITICAL', 'FIRE_SAFETY'],
+          ['KTID1321203', 'Unsafe Action', 'tidak pakai helm', 'COAL YARD', '4', 'HIGH', 'PPE_APD'],
+          ['KTID1319890', 'Unsafe Condition', 'lampu rusak', 'ADMIN', '3', 'MEDIUM', 'ELECTRICAL'],
+          ['KTID1320445', 'Unsafe Condition', 'railing lepas', 'CONVEYOR', '4', 'HIGH', 'FALL_PROTECTION'],
+          ['KTID1319208', 'Positive', 'apar ready', 'TURBINE #2', '0', 'LOW', 'FIRE_SAFETY'],
+          ['KTID1320112', 'Positive', 'kondisi baik', 'UTILITY', '0', 'LOW', 'PATROL_ROUTINE'],
+          ['KTID1320678', 'Unsafe Condition', 'kabel terkelupas', 'BOILER #1', '4', 'HIGH', 'ELECTRICAL'],
+          ['KTID1321456', 'Near Miss', 'getaran tinggi', 'CRUSHER', '6', 'CRITICAL', 'MACHINE'],
+          ['KTID1319567', 'Positive', 'helm lengkap', 'COAL HANDLING', '0', 'LOW', 'PPE_APD'],
+          ['KTID1320234', 'Unsafe Condition', 'lantai kotor', 'WORKSHOP', '2', 'MEDIUM', 'HOUSEKEEPING'],
+          ['KTID1321089', 'Unsafe Action', 'tidak pakai sarung tangan', 'MAINTENANCE', '3', 'HIGH', 'PPE_APD'],
+          ['KTID1319778', 'Positive', 'patroli normal', 'JETTY', '0', 'LOW', 'PATROL_ROUTINE'],
+          ['KTID1320901', 'Unsafe Condition', 'pipa retak', 'H2 PLANT', '4', 'HIGH', 'STRUCTURAL'],
+          ['KTID1321345', 'Near Miss', 'kabel kesetrum', 'PANEL ROOM', '6', 'CRITICAL', 'ELECTRICAL'],
+          ['KTID1319445', 'Positive', 'hydrant baik', 'ADMIN', '0', 'LOW', 'FIRE_SAFETY'],
+          ['KTID1320556', 'Unsafe Condition', 'tangga berkarat', 'STACK', '3', 'MEDIUM', 'STRUCTURAL'],
+          ['KTID1321567', 'Near Miss', 'pompa trip', 'WATER TREATMENT', '5', 'CRITICAL', 'MACHINE'],
+          ['KTID1319990', 'Positive', 'area rapi', 'CANTEEN', '0', 'LOW', 'HOUSEKEEPING'],
+          ['KTID1320789', 'Unsafe Condition', 'handrail longgar', 'COAL CONVEYOR', '3', 'MEDIUM', 'FALL_PROTECTION']
+        ]
+      }
+    };
+
+    function openDataModal(dataKey) {
+      const data = modalData[dataKey];
+      const modal = document.getElementById('dataModal');
+      const title = document.getElementById('dataModalTitle');
+      const body = document.getElementById('dataModalBody');
+
+      title.textContent = data.title;
+
+      let tableHtml = '<table class="data-table-simple"><thead><tr>';
+      data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+      tableHtml += '</tr></thead><tbody>';
+      data.rows.forEach((row, idx) => {
+        const highlight = idx < 3 ? ' class="highlight"' : '';
+        tableHtml += `<tr${highlight}>`;
+        row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+
+      body.innerHTML = tableHtml;
+      modal.classList.add('active');
+    }
+
+    function closeDataModal() {
+      document.getElementById('dataModal').classList.remove('active');
+    }
+
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close modals on overlay click or Escape key
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.getElementById('dataModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDataModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeDataModal();
+      }
+    });
+  </script>
+</body>
+</html>

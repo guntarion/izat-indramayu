@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Analisis Data IZAT - UP Indramayu | PT PLN Nusantara Power</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Additional styles for landing page */
+        .nav-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .nav-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--pln-gray-200);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 162, 185, 0.2);
+            transform: translateY(-4px);
+            border-color: var(--pln-primary-blue);
+        }
+
+        .nav-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav-card-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-card:hover .nav-card-icon {
+            transform: scale(1.1);
+        }
+
+        .nav-card-title {
+            font-size: 1,25rem;
+            font-weight: 700;
+            color: var(--pln-dark-blue);
+            margin-bottom: 0,75rem;
+        }
+
+        .nav-card-description {
+            font-size: 0,95rem;
+            color: var(--pln-gray-600);
+            line-height: 1,6;
+            margin-bottom: 1rem;
+        }
+
+        .nav-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--pln-primary-blue);
+            font-weight: 600;
+            font-size: 0,875rem;
+        }
+
+        .nav-card-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .nav-card:hover .nav-card-link::after {
+            transform: translateX(4px);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 2rem auto 0;
+        }
+
+        .hero-stat {
+            background: white;
+            border-radius: 0,75rem;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-stat-value {
+            font-size: 1,75rem;
+            font-weight: 700;
+            color: var(--pln-dark-blue);
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 0,875rem;
+            color: var(--pln-gray-600);
+            margin-top: 0,25rem;
+        }
+
+        .intro-text {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            border-left: 4px solid var(--pln-primary-blue);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin: 2rem 0;
+        }
+
+        .intro-text h3 {
+            color: var(--pln-dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .intro-text p {
+            color: var(--pln-gray-700);
+            line-height: 1,8;
+            margin-bottom: 0,75rem;
+        }
+
+        .period-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(0, 162, 185, 0.1), rgba(53, 185, 113, 0.1));
+            color: var(--pln-dark-blue);
+            padding: 0.5rem 1,25rem;
+            border-radius: 2rem;
+            font-size: 0,875rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 162, 185, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+                <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Beranda</a>
+
+                <!-- Data Cleansing Dropdown -->
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Data Cleansing</button>
+                    <div class="nav-dropdown-menu cleansing-menu">
+                        <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+                        <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+                        <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+                        <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+                        <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+                        <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+                        <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+                    </div>
+                </div>
+
+                <!-- Basic Analysis Dropdown -->
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Basic Analysis</button>
+                    <div class="nav-dropdown-menu">
+                        <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+                        <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+                        <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+                        <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+                        <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+                    </div>
+                </div>
+
+                <!-- Advanced Analysis Dropdown -->
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Advanced Analysis</button>
+                    <div class="nav-dropdown-menu ai-menu">
+                        <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+                        <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+                        <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="position: relative; overflow: hidden;">
+        <!-- Background Image with Overlay -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0;">
+            <img src="assets/images/aerial-back.JPG" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.35;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(0, 59, 91, 0.6), rgba(0, 162, 185, 0.4));"></div>
+        </div>
+        <div class="container" style="position: relative; z-index: 1;">
+            <div class="hero-content">
+                <h1 style="background: none !important; -webkit-text-fill-color: #ffffff !important; color: #ffffff !important; text-shadow: 2px 2px 4px rgba(0,0,0,0.4);">Laporan Analisis Data IZAT</h1>
+                <p style="color: rgba(255,255,255,0.95); text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">Unit Pembangkitan Indramayu</p>
+                <div class="period-badge" style="background: rgba(255,255,255,0.9); color: var(--pln-dark-blue);">Periode Januari - Oktober 2025</div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">5.575</span>
+                        <span class="hero-stat-label">Total Temuan</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">99,2%</span>
+                        <span class="hero-stat-label">Close Rate</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">2,28</span>
+                        <span class="hero-stat-label">Rata-rata Quality Score</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">21,9%</span>
+                        <span class="hero-stat-label">Deteksi Unsafe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="section">
+            <!-- Introduction -->
+            <div class="intro-text">
+                <h3>Tentang Laporan Ini</h3>
+                <p>
+                    Laporan ini menyajikan analisis komprehensif terhadap data IZAT (iZero Accident Assistant)
+                    di Unit Pembangkitan Indramayu periode Januari hingga Oktober 2025. IZAT merupakan sistem
+                    pelaporan temuan K3 (Keselamatan dan Kesehatan Kerja) yang bertujuan untuk menciptakan
+                    lingkungan kerja yang lebih aman melalui identifikasi proaktif terhadap potensi bahaya.
+                </p>
+                <p>
+                    Selama periode pelaporan, tercatat <strong>5.575 temuan</strong> dari <strong>823 pelapor</strong>
+                    yang berasal dari 9 perusahaan berbeda, mencakup <strong>46 area kerja</strong> di 5 zona utama.
+                    Dengan tingkat penyelesaian mencapai <strong>99,2%</strong>, data ini menunjukkan komitmen kuat
+                    terhadap budaya keselamatan kerja di lingkungan operasional pembangkit.
+                </p>
+            </div>
+
+            <!-- Summary Statistics -->
+            <div class="section-header">
+                <h2>Ringkasan Statistik</h2>
+                <p>Gambaran umum data IZAT periode Januari - Oktober 2025</p>
+            </div>
+
+            <div class="stat-cards">
+                <div class="stat-card primary">
+                    <div class="stat-label">Total Temuan K3</div>
+                    <div class="stat-value">5.575</div>
+                    <div class="stat-change">Dari 823 pelapor aktif</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-label">Tingkat Penyelesaian</div>
+                    <div class="stat-value">99,2%</div>
+                    <div class="stat-change positive">5.530 temuan telah diselesaikan</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-label">Rata-rata Quality Score</div>
+                    <div class="stat-value">2,28</div>
+                    <div class="stat-change">Skala 0-4 (Baik)</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-label">Deteksi Kondisi Unsafe</div>
+                    <div class="stat-value">21,9%</div>
+                    <div class="stat-change">1.221 dari 5.575 temuan</div>
+                </div>
+            </div>
+
+            <div class="grid-3 mt-4">
+                <div class="stat-card">
+                    <div class="stat-label">Total Zona</div>
+                    <div class="stat-value">5</div>
+                    <div class="stat-change">Area operasional pembangkit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Area Kerja</div>
+                    <div class="stat-value">46</div>
+                    <div class="stat-change">Cakupan seluruh unit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Penanggung Jawab (PIC)</div>
+                    <div class="stat-value">16</div>
+                    <div class="stat-change">Tim penanganan temuan</div>
+                </div>
+            </div>
+
+            <!-- Data Cleansing Section -->
+            <div class="section-header mt-4">
+                <h2>🧹 Data Cleansing Pipeline</h2>
+                <p>Dokumentasi proses pembersihan dan transformasi data IZAT</p>
+            </div>
+
+            <div class="nav-cards">
+                <a href="09_typo_correction.html" class="nav-card" style="border-left: 4px solid #35B971;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #35B971, #2DA55F);">✏️</div>
+                    <div class="nav-card-title">Koreksi Typo</div>
+                    <div class="nav-card-description">
+                        Fuzzy matching untuk koreksi typo pada field judul, kondisi, dan rekomendasi
+                        menggunakan algoritma rapidfuzz.
+                    </div>
+                    <span class="nav-card-link">Lihat Detail</span>
+                </a>
+
+                <a href="10_location_standardization.html" class="nav-card" style="border-left: 4px solid #35B971;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #35B971, #2DA55F);">📍</div>
+                    <div class="nav-card-title">Standardisasi Lokasi</div>
+                    <div class="nav-card-description">
+                        Parsing komponen lokasi: zona, area, unit number, dan lantai dengan
+                        kategorisasi zona operasional.
+                    </div>
+                    <span class="nav-card-link">Lihat Detail</span>
+                </a>
+
+                <a href="11_company_standardization.html" class="nav-card" style="border-left: 4px solid #35B971;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #35B971, #2DA55F);">🏢</div>
+                    <div class="nav-card-title">Standardisasi Perusahaan</div>
+                    <div class="nav-card-description">
+                        Kategorisasi perusahaan ke dalam PLN_NP_ORGANIK, PLN_NPS, MKP, dan VENDOR_LAIN
+                        untuk analisis vendor.
+                    </div>
+                    <span class="nav-card-link">Lihat Detail</span>
+                </a>
+
+                <a href="12_date_standardization.html" class="nav-card" style="border-left: 4px solid #35B971;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #35B971, #2DA55F);">📅</div>
+                    <div class="nav-card-title">Standardisasi Tanggal</div>
+                    <div class="nav-card-description">
+                        Parsing tanggal dan kolom waktu turunan: resolution_hours, SLA compliance,
+                        shift, day_of_week, dan month_year.
+                    </div>
+                    <span class="nav-card-link">Lihat Detail</span>
+                </a>
+
+                <a href="13_risk_severity.html" class="nav-card" style="border-left: 4px solid #35B971;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #35B971, #2DA55F);">⚠️</div>
+                    <div class="nav-card-title">Risk Severity</div>
+                    <div class="nav-card-description">
+                        Kalkulasi risk score dan severity (CRITICAL, HIGH, MEDIUM, LOW) plus
+                        issue category dari text mining.
+                    </div>
+                    <span class="nav-card-link">Lihat Detail</span>
+                </a>
+
+                <a href="14_quality_workload.html" class="nav-card" style="border-left: 4px solid #35B971;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #35B971, #2DA55F);">📈</div>
+                    <div class="nav-card-title">Quality & Workload</div>
+                    <div class="nav-card-description">
+                        Report quality score (0-5) dan PIC workload category untuk mengukur
+                        kualitas pelaporan dan beban kerja.
+                    </div>
+                    <span class="nav-card-link">Lihat Detail</span>
+                </a>
+
+                <a href="15_trend_comparison.html" class="nav-card" style="border-left: 4px solid #35B971;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #35B971, #2DA55F);">📊</div>
+                    <div class="nav-card-title">Tren & Komparasi</div>
+                    <div class="nav-card-description">
+                        Benchmark per zona, month-over-month comparison, dan trend metrics
+                        untuk analisis temporal.
+                    </div>
+                    <span class="nav-card-link">Lihat Detail</span>
+                </a>
+            </div>
+
+            <!-- Report Sections Navigation -->
+            <div class="section-header mt-4">
+                <h2>Jelajahi Laporan Detail</h2>
+                <p>Pilih bagian analisis yang ingin Anda telusuri</p>
+            </div>
+
+            <div class="nav-cards">
+                <a href="01_area_risk.html" class="nav-card">
+                    <div class="nav-card-icon">📍</div>
+                    <div class="nav-card-title">Analisis Risiko Area</div>
+                    <div class="nav-card-description">
+                        Identifikasi area dengan tingkat risiko tertinggi berdasarkan volume temuan,
+                        tingkat keparahan, dan status penyelesaian. Termasuk analisis zona MAIN_UNIT,
+                        COAL_HANDLING, SUPPORT, dan UTILITY.
+                    </div>
+                    <span class="nav-card-link">Lihat Analisis</span>
+                </a>
+
+                <a href="02_team_performance.html" class="nav-card">
+                    <div class="nav-card-icon">👥</div>
+                    <div class="nav-card-title">Performa Tim</div>
+                    <div class="nav-card-description">
+                        Evaluasi kinerja pelapor dan penanggung jawab berdasarkan kuantitas, kualitas,
+                        dan kecepatan penyelesaian temuan. Identifikasi kontributor terbaik dan area
+                        peningkatan tim.
+                    </div>
+                    <span class="nav-card-link">Lihat Analisis</span>
+                </a>
+
+                <a href="03_resolution_workflow.html" class="nav-card">
+                    <div class="nav-card-icon">⚙️</div>
+                    <div class="nav-card-title">Alur Penyelesaian</div>
+                    <div class="nav-card-description">
+                        Analisis timeline dan efisiensi proses penyelesaian temuan dari pelaporan hingga
+                        closing. Identifikasi bottleneck dan peluang optimalisasi workflow.
+                    </div>
+                    <span class="nav-card-link">Lihat Analisis</span>
+                </a>
+
+                <a href="04_shift_analysis.html" class="nav-card">
+                    <div class="nav-card-icon">🕐</div>
+                    <div class="nav-card-title">Pola Shift & Hari</div>
+                    <div class="nav-card-description">
+                        Temukan pola temporal dalam pelaporan temuan berdasarkan shift kerja, hari dalam
+                        seminggu, dan waktu pelaporan. Identifikasi periode dengan aktivitas tertinggi.
+                    </div>
+                    <span class="nav-card-link">Lihat Analisis</span>
+                </a>
+
+                <a href="05_asset_tracking.html" class="nav-card">
+                    <div class="nav-card-icon">🔧</div>
+                    <div class="nav-card-title">Tracking Aset</div>
+                    <div class="nav-card-description">
+                        Pelacakan equipment dan aset yang paling sering muncul dalam temuan K3.
+                        Identifikasi aset berisiko tinggi yang memerlukan perhatian khusus.
+                    </div>
+                    <span class="nav-card-link">Lihat Analisis</span>
+                </a>
+            </div>
+
+            <!-- Analisis Lanjutan Section -->
+            <div class="section-header mt-4">
+                <h2>🤖 Analisis Lanjutan (AI/ML)</h2>
+                <p>Analisis prediktif dan deteksi anomali menggunakan Machine Learning</p>
+            </div>
+
+            <div class="nav-cards">
+                <a href="06_risk_prediction.html" class="nav-card" style="border-left: 4px solid #8B5CF6;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);">📊</div>
+                    <div class="nav-card-title">Model Prediksi Risiko</div>
+                    <div class="nav-card-description">
+                        Prediksi probabilitas temuan unsafe berdasarkan zona, waktu, dan faktor historis
+                        menggunakan Random Forest Classifier.
+                    </div>
+                    <span class="nav-card-link">Lihat Prediksi</span>
+                </a>
+
+                <a href="07_smart_recommendation.html" class="nav-card" style="border-left: 4px solid #8B5CF6;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);">💡</div>
+                    <div class="nav-card-title">Smart Recommendation</div>
+                    <div class="nav-card-description">
+                        Sistem rekomendasi cerdas berbasis TF-IDF untuk menyarankan resolusi berdasarkan
+                        knowledge base dari penyelesaian sukses sebelumnya.
+                    </div>
+                    <span class="nav-card-link">Lihat Rekomendasi</span>
+                </a>
+
+                <a href="08_anomaly_detection.html" class="nav-card" style="border-left: 4px solid #8B5CF6;">
+                    <div class="nav-card-icon" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);">🔍</div>
+                    <div class="nav-card-title">Deteksi Anomali</div>
+                    <div class="nav-card-description">
+                        Identifikasi pola pelaporan tidak wajar menggunakan Isolation Forest untuk
+                        mendeteksi gaming, spike, dan perilaku anomali lainnya.
+                    </div>
+                    <span class="nav-card-link">Lihat Anomali</span>
+                </a>
+            </div>
+
+            <!-- Key Highlights -->
+            <div class="section-header mt-4">
+                <h2>Sorotan Utama</h2>
+                <p>Temuan penting dari analisis data IZAT</p>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-item success">
+                    <div class="insight-title">Tingkat Partisipasi Tinggi</div>
+                    <div class="insight-value">
+                        823 pelapor aktif dari 9 perusahaan menunjukkan budaya pelaporan yang kuat
+                        dan kesadaran K3 yang tinggi di seluruh organisasi.
+                    </div>
+                </div>
+
+                <div class="insight-item success">
+                    <div class="insight-title">Penyelesaian Efektif</div>
+                    <div class="insight-value">
+                        Close rate 99,2% mendemonstrasikan sistem respons yang responsif dan komitmen
+                        manajemen dalam menindaklanjuti setiap temuan K3.
+                    </div>
+                </div>
+
+                <div class="insight-item warning">
+                    <div class="insight-title">Perhatian Kondisi Unsafe</div>
+                    <div class="insight-value">
+                        21,9% temuan terdeteksi sebagai kondisi unsafe, memerlukan tindakan korektif
+                        prioritas untuk mencegah potensi kecelakaan kerja.
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-title">Kualitas Pelaporan Baik</div>
+                    <div class="insight-value">
+                        Quality score rata-rata 2,28 dari skala 0-4 menunjukkan pelaporan yang cukup
+                        detail dan berkualitas, dengan ruang untuk peningkatan.
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-title">Cakupan Komprehensif</div>
+                    <div class="insight-value">
+                        46 area kerja di 5 zona operasional tercakup dalam sistem pelaporan,
+                        memastikan monitoring menyeluruh di seluruh fasilitas.
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-title">Tim PIC Terdistribusi</div>
+                    <div class="insight-value">
+                        16 penanggung jawab mengelola penyelesaian temuan dengan distribusi beban
+                        kerja yang perlu dievaluasi untuk optimalisasi.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="recommendation-box mt-4">
+                <h4>Rekomendasi Strategis</h4>
+                <ol>
+                    <li>
+                        <strong>Pertahankan Momentum Pelaporan:</strong> Terus dorong partisipasi aktif
+                        dengan program penghargaan dan komunikasi rutin tentang dampak pelaporan IZAT.
+                    </li>
+                    <li>
+                        <strong>Fokus pada Kondisi Unsafe:</strong> Prioritaskan penanganan 21,9% temuan
+                        unsafe dengan response time lebih cepat dan tindakan korektif yang lebih agresif.
+                    </li>
+                    <li>
+                        <strong>Tingkatkan Kualitas Pelaporan:</strong> Berikan pelatihan dan panduan untuk
+                        meningkatkan quality score dari 2,28 menuju target 3,0+ melalui dokumentasi yang
+                        lebih detail.
+                    </li>
+                    <li>
+                        <strong>Optimalisasi Distribusi PIC:</strong> Evaluasi beban kerja 16 PIC untuk
+                        memastikan distribusi yang merata dan response time yang konsisten.
+                    </li>
+                    <li>
+                        <strong>Analisis Trend Berkelanjutan:</strong> Lakukan review bulanan untuk
+                        mengidentifikasi emerging risks dan pola baru dalam data pelaporan.
+                    </li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-text">PT PLN Nusantara Power</div>
+                <p>Unit Pembangkitan Indramayu</p>
+                <p>Laporan Analisis Data IZAT - Periode Januari - Oktober 2025</p>
+                <p style="margin-top: 1rem; opacity: 0.7;">
+                    Dokumen ini bersifat internal dan confidential
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,11 @@
+﻿feature;importance
+zona_total_findings;0.019558976787100564
+shift_encoded;0.02852933536482187
+lokasi_zona_encoded;0.031470687255379624
+zona_historical_unsafe_rate;0.035361796366275455
+perusahaan_kategori_encoded;0.0521847383524541
+lokasi_area_encoded;0.07875291663474271
+day_of_week_encoded;0.14507616236857088
+hour_of_day;0.16562937093431832
+area_historical_unsafe_rate;0.20231100930645632
+month;0.2411250066298801

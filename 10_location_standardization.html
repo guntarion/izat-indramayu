@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standardisasi Lokasi - Data Cleansing IZAT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Code Block Styling */
+    .code-block {
+      background: #1e293b;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    .code-block pre {
+      color: #e2e8f0;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .code-block .comment { color: #6b7280; }
+    .code-block .keyword { color: #f472b6; }
+    .code-block .string { color: #34d399; }
+    .code-block .function { color: #60a5fa; }
+
+    /* Data Cleansing Badge */
+    .cleansing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #35B971, #22c55e);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    /* Cleansing Navigation Menu */
+    .cleansing-menu {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border: 1px solid var(--pln-gray-200);
+      margin-bottom: 2rem;
+    }
+
+    .cleansing-menu h3 {
+      color: var(--pln-dark-blue);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .cleansing-menu a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--pln-gray-700);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+      border-radius: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .cleansing-menu a:hover {
+      background: linear-gradient(135deg, rgba(53, 185, 113, 0.1), rgba(0, 162, 185, 0.05));
+      color: var(--pln-primary-blue);
+      padding-left: 1.25rem;
+      border-left-color: #35B971;
+    }
+
+    .cleansing-menu a.active {
+      background: linear-gradient(135deg, rgba(53, 185, 113, 0.15), rgba(0, 162, 185, 0.1));
+      color: var(--pln-green);
+      font-weight: 600;
+      border-left-color: #35B971;
+    }
+
+    .cleansing-menu .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--pln-gray-200);
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--pln-gray-600);
+    }
+
+    .cleansing-menu a.active .step-number {
+      background: #35B971;
+      color: white;
+    }
+
+    /* Zone Badge */
+    .zone-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .zone-main-unit {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .zone-coal-handling {
+      background: rgba(245, 158, 11, 0.1);
+      color: #d97706;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .zone-utility {
+      background: rgba(0, 175, 240, 0.1);
+      color: #0284c7;
+      border: 1px solid rgba(0, 175, 240, 0.3);
+    }
+
+    .zone-support {
+      background: rgba(139, 92, 246, 0.1);
+      color: #7c3aed;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+
+    /* Example Table */
+    .example-table {
+      margin: 1.5rem 0;
+    }
+
+    .example-table table {
+      font-size: 0.875rem;
+    }
+
+    .example-table .before {
+      background: rgba(239, 68, 68, 0.05);
+    }
+
+    .example-table .after {
+      background: rgba(53, 185, 113, 0.05);
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(53, 185, 113, 0.05), rgba(0, 162, 185, 0.05));
+      border: 1px solid rgba(53, 185, 113, 0.3);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .highlight-box h4 {
+      color: var(--pln-green);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Data Cleansing</button>
+          <div class="nav-dropdown-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html" class="active"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Standardisasi Lokasi</h1>
+        <p>Parsing dan Kategorisasi Lokasi Temuan IZAT untuk Analisis Area yang Lebih Akurat</p>
+        <span class="cleansing-badge">
+          <span>🧹</span> Data Cleansing - Step 2
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Cleansing Navigation Menu -->
+    <section class="section">
+      <div class="cleansing-menu">
+        <h3>Pipeline Pembersihan Data</h3>
+        <a href="09_typo_correction.html">
+          <span class="step-number">1</span>
+          <span>Fuzzy Matching untuk Koreksi Typo</span>
+        </a>
+        <a href="10_location_standardization.html" class="active">
+          <span class="step-number">2</span>
+          <span>Standardisasi Lokasi</span>
+        </a>
+        <a href="#" style="opacity: 0.5; cursor: not-allowed;">
+          <span class="step-number">3</span>
+          <span>Standardisasi Perusahaan (Coming Soon)</span>
+        </a>
+        <a href="#" style="opacity: 0.5; cursor: not-allowed;">
+          <span class="step-number">4</span>
+          <span>Standardisasi Tanggal (Coming Soon)</span>
+        </a>
+        <a href="#" style="opacity: 0.5; cursor: not-allowed;">
+          <span class="step-number">5</span>
+          <span>Kolom Kategorisasi Turunan (Coming Soon)</span>
+        </a>
+        <a href="#" style="opacity: 0.5; cursor: not-allowed;">
+          <span class="step-number">6</span>
+          <span>Kolom Performa Turunan (Coming Soon)</span>
+        </a>
+        <a href="#" style="opacity: 0.5; cursor: not-allowed;">
+          <span class="step-number">7</span>
+          <span>Kolom Tren & Komparasi (Coming Soon)</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Why It's Needed -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">❓</span>
+          II.2.1 Mengapa Standardisasi Lokasi Diperlukan?
+        </h2>
+        <p>Tantangan dalam data lokasi IZAT dan dampaknya terhadap analisis</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Masalah Utama</h3>
+          </div>
+          <div class="card-body">
+            <div class="analysis-box">
+              <h4>Variasi Penulisan Lokasi</h4>
+              <ul>
+                <li><strong>Format tidak konsisten:</strong> "BOILER #1 LANTAI 3" vs "B#1 LT3" vs "BOILER 1 LANTAI 3"</li>
+                <li><strong>Singkatan beragam:</strong> "LT", "LANTAI", "Lt.", "Lantai" untuk kata yang sama</li>
+                <li><strong>Unit number berbeda:</strong> "#1", "NO 1", "NO. 1", "UNIT 1"</li>
+                <li><strong>Data tidak terstruktur:</strong> Informasi area, unit, dan lantai tercampur dalam satu field teks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Dampak terhadap Analisis</h3>
+          </div>
+          <div class="card-body">
+            <div class="insights-grid">
+              <div class="insight-item danger">
+                <div class="insight-title">Sulit Agregasi per Area</div>
+                <div class="insight-value">Tidak dapat menghitung total temuan per area karena nama tidak konsisten</div>
+              </div>
+              <div class="insight-item danger">
+                <div class="insight-title">Zona Tidak Teridentifikasi</div>
+                <div class="insight-value">Tidak dapat mengkategorikan lokasi ke zona operasional (MAIN_UNIT, COAL_HANDLING, dll)</div>
+              </div>
+              <div class="insight-item warning">
+                <div class="insight-title">Analisis Risiko Tidak Akurat</div>
+                <div class="insight-value">Risk heatmap dan distribusi geografis menjadi bias karena parsing lokasi yang salah</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h4>✅ Solusi: Parsing dan Standardisasi Otomatis</h4>
+        <p style="color: var(--pln-gray-700); margin-bottom: 0.5rem;">
+          Dengan memecah field <code>nama_lokasi</code> menjadi komponen terstruktur, kita dapat:
+        </p>
+        <ul style="color: var(--pln-gray-700); padding-left: 1.5rem;">
+          <li>Mengekstrak <strong>area utama</strong> (BOILER, TURBINE, JETTY, dll)</li>
+          <li>Mengidentifikasi <strong>nomor unit</strong> (#1, #2, #3)</li>
+          <li>Mendapatkan <strong>informasi lantai</strong> secara konsisten</li>
+          <li>Mengkategorikan ke <strong>zona operasional</strong> berdasarkan area</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">⚙️</span>
+          II.2.2 Metodologi Parsing Lokasi
+        </h2>
+        <p>Bagaimana sistem mengekstrak komponen lokasi secara otomatis</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Proses Parsing 3 Tahap</h3>
+        </div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div class="stat-card info">
+              <div class="stat-label">Tahap 1</div>
+              <div class="stat-value" style="font-size: 1.5rem;">Ekstrak Unit</div>
+              <div class="stat-change">Regex untuk mendeteksi #1, #2, NO 1, UNIT 1</div>
+            </div>
+            <div class="stat-card info">
+              <div class="stat-label">Tahap 2</div>
+              <div class="stat-value" style="font-size: 1.5rem;">Ekstrak Lantai</div>
+              <div class="stat-change">Pattern matching untuk LANTAI 1, LT 1, LT. 1</div>
+            </div>
+            <div class="stat-card info">
+              <div class="stat-label">Tahap 3</div>
+              <div class="stat-value" style="font-size: 1.5rem;">Identifikasi Area</div>
+              <div class="stat-change">Mapping area ke zona operasional</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Struktur Zona Operasional UP Indramayu</h4>
+        <p style="color: var(--pln-gray-700); margin-bottom: 1rem;">
+          Berdasarkan profil teknis UP Indramayu, lokasi dikategorikan ke 4 zona utama:
+        </p>
+
+        <div class="grid-2" style="gap: 1rem;">
+          <div>
+            <span class="zone-badge zone-main-unit">MAIN_UNIT</span>
+            <p style="font-size: 0.875rem; color: var(--pln-gray-600); margin-top: 0.5rem;">
+              <strong>Area pembangkitan utama:</strong> BOILER, TURBINE, GENERATOR, CCR
+            </p>
+          </div>
+          <div>
+            <span class="zone-badge zone-coal-handling">COAL_HANDLING</span>
+            <p style="font-size: 0.875rem; color: var(--pln-gray-600); margin-top: 0.5rem;">
+              <strong>Penanganan batu bara:</strong> JETTY, COAL YARD, CRUSHER, CONVEYOR, STACKER, RECLAIMER
+            </p>
+          </div>
+          <div>
+            <span class="zone-badge zone-utility">UTILITY</span>
+            <p style="font-size: 0.875rem; color: var(--pln-gray-600); margin-top: 0.5rem;">
+              <strong>Pendukung utilitas:</strong> WTP, CWP, WWTP, H2 PLANT, CHLORINE, FIRE STATION
+            </p>
+          </div>
+          <div>
+            <span class="zone-badge zone-support">SUPPORT</span>
+            <p style="font-size: 0.875rem; color: var(--pln-gray-600); margin-top: 0.5rem;">
+              <strong>Pendukung non-operasional:</strong> ADMIN, DORMITORY, GUDANG, BENGKEL, KANTIN, MESJID
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Source Code Highlight -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">💻</span>
+          II.2.3 Fungsi Parsing Lokasi
+        </h2>
+        <p>Source code utama untuk ekstraksi komponen lokasi</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Function: parse_lokasi()</h3>
+        </div>
+        <div class="card-body">
+          <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+            Fungsi ini menerima string lokasi dan mengembalikan dictionary berisi 4 komponen: area, unit_number, floor, dan zona.
+          </p>
+
+          <div class="code-block">
+            <pre><span class="keyword">def</span> <span class="function">parse_lokasi</span>(nama_lokasi):
+    <span class="comment">"""
+    Mengekstrak komponen dari nama lokasi.
+
+    Parameter:
+        nama_lokasi: string nama lokasi (contoh: "BOILER #1 LANTAI 3")
+
+    Return:
+        dictionary berisi:
+        - area: jenis area (BOILER, TURBINE, dll)
+        - unit_number: nomor unit (1, 2, 3, atau None)
+        - floor: lantai (1, 2, 3, dst atau None)
+        - zona: zona operasional (MAIN_UNIT, COAL_HANDLING, dll)
+    """</span>
+    <span class="keyword">if</span> pd.isna(nama_lokasi) <span class="keyword">or</span> nama_lokasi == <span class="string">''</span>:
+        <span class="keyword">return</span> {
+            <span class="string">'area'</span>: <span class="keyword">None</span>,
+            <span class="string">'unit_number'</span>: <span class="keyword">None</span>,
+            <span class="string">'floor'</span>: <span class="keyword">None</span>,
+            <span class="string">'zona'</span>: <span class="string">'UNKNOWN'</span>
+        }
+
+    lokasi = <span class="function">str</span>(nama_lokasi).upper().strip()
+    result = {
+        <span class="string">'area'</span>: <span class="keyword">None</span>,
+        <span class="string">'unit_number'</span>: <span class="keyword">None</span>,
+        <span class="string">'floor'</span>: <span class="keyword">None</span>,
+        <span class="string">'zona'</span>: <span class="string">'UNKNOWN'</span>
+    }
+
+    <span class="comment"># === EKSTRAK UNIT NUMBER ===</span>
+    <span class="comment"># Pola: #1, #2, #3, NO 1, NO 2, NO. 1</span>
+    unit_patterns = [
+        <span class="string">r'#(\d+)'</span>,           <span class="comment"># #1, #2, #3</span>
+        <span class="string">r'NO\.?\s*(\d+)'</span>,    <span class="comment"># NO 1, NO. 1</span>
+        <span class="string">r'UNIT\s*(\d+)'</span>,     <span class="comment"># UNIT 1</span>
+    ]
+    <span class="keyword">for</span> pattern <span class="keyword">in</span> unit_patterns:
+        match = re.search(pattern, lokasi)
+        <span class="keyword">if</span> match:
+            result[<span class="string">'unit_number'</span>] = <span class="function">int</span>(match.group(<span class="string">1</span>))
+            <span class="keyword">break</span>
+
+    <span class="comment"># === EKSTRAK LANTAI ===</span>
+    <span class="comment"># Pola: LANTAI 1, LT 1, LT. 1</span>
+    floor_patterns = [
+        <span class="string">r'LANTAI\s*(\d+)'</span>,   <span class="comment"># LANTAI 1</span>
+        <span class="string">r'LT\.?\s*(\d+)'</span>,    <span class="comment"># LT 1, LT. 1</span>
+    ]
+    <span class="keyword">for</span> pattern <span class="keyword">in</span> floor_patterns:
+        match = re.search(pattern, lokasi)
+        <span class="keyword">if</span> match:
+            result[<span class="string">'floor'</span>] = <span class="function">int</span>(match.group(<span class="string">1</span>))
+            <span class="keyword">break</span>
+
+    <span class="comment"># === EKSTRAK AREA ===</span>
+    <span class="comment"># Cek dari paling spesifik ke paling general</span>
+    all_areas = <span class="function">sorted</span>(AREA_TO_ZONA.keys(), key=<span class="function">len</span>, reverse=<span class="keyword">True</span>)
+
+    <span class="keyword">for</span> area <span class="keyword">in</span> all_areas:
+        <span class="keyword">if</span> area <span class="keyword">in</span> lokasi:
+            area_found = area
+            result[<span class="string">'zona'</span>] = AREA_TO_ZONA[area]
+            <span class="keyword">break</span>
+
+    result[<span class="string">'area'</span>] = area_found
+
+    <span class="keyword">return</span> result</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h4>🔍 Penjelasan Algoritma</h4>
+        <ol style="color: var(--pln-gray-700); padding-left: 1.5rem;">
+          <li><strong>Normalisasi input:</strong> Ubah ke uppercase dan trim whitespace untuk konsistensi</li>
+          <li><strong>Regex pattern matching:</strong> Gunakan multiple patterns untuk menangkap berbagai variasi penulisan unit dan lantai</li>
+          <li><strong>Longest match first:</strong> Sort area dari yang paling panjang untuk menghindari false positive (misal: "CCR MAIN UNIT" harus match "CCR MAIN UNIT" bukan hanya "CCR")</li>
+          <li><strong>Fallback ke kata pertama:</strong> Jika tidak ada area yang match, ambil kata pertama sebagai area</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Output Examples -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📊</span>
+          II.2.4 Contoh Output Parsing
+        </h2>
+        <p>Hasil ekstraksi komponen dari berbagai format penulisan lokasi</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Before & After: Transformasi Data Lokasi</h3>
+        </div>
+        <div class="card-body">
+          <div class="example-table">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Input (nama_lokasi)</th>
+                    <th>lokasi_area</th>
+                    <th>unit_number</th>
+                    <th>floor</th>
+                    <th>lokasi_zona</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="before"><strong>BOILER #1 LANTAI 3</strong></td>
+                    <td>BOILER</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td><span class="zone-badge zone-main-unit">MAIN_UNIT</span></td>
+                  </tr>
+                  <tr>
+                    <td class="before"><strong>JETTY</strong></td>
+                    <td>JETTY</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><span class="zone-badge zone-coal-handling">COAL_HANDLING</span></td>
+                  </tr>
+                  <tr>
+                    <td class="before"><strong>WTP LANTAI 2</strong></td>
+                    <td>WTP</td>
+                    <td>-</td>
+                    <td>2</td>
+                    <td><span class="zone-badge zone-utility">UTILITY</span></td>
+                  </tr>
+                  <tr>
+                    <td class="before"><strong>ADMIN BUILDING LANTAI 1</strong></td>
+                    <td>ADMIN</td>
+                    <td>-</td>
+                    <td>1</td>
+                    <td><span class="zone-badge zone-support">SUPPORT</span></td>
+                  </tr>
+                  <tr>
+                    <td class="before"><strong>TRANSFER TOWER NO 2 LANTAI 1</strong></td>
+                    <td>TRANSFER TOWER</td>
+                    <td>2</td>
+                    <td>1</td>
+                    <td><span class="zone-badge zone-coal-handling">COAL_HANDLING</span></td>
+                  </tr>
+                  <tr>
+                    <td class="before"><strong>CCR MAIN UNIT</strong></td>
+                    <td>CCR MAIN UNIT</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><span class="zone-badge zone-main-unit">MAIN_UNIT</span></td>
+                  </tr>
+                  <tr>
+                    <td class="before"><strong>POS 2 LANTAI 1</strong></td>
+                    <td>POS</td>
+                    <td>-</td>
+                    <td>1</td>
+                    <td><span class="zone-badge zone-support">SUPPORT</span></td>
+                  </tr>
+                  <tr>
+                    <td class="before"><strong>TURBINE #3 LANTAI 2</strong></td>
+                    <td>TURBINE</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td><span class="zone-badge zone-main-unit">MAIN_UNIT</span></td>
+                  </tr>
+                  <tr>
+                    <td class="before"><strong>COAL YARD</strong></td>
+                    <td>COAL YARD</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><span class="zone-badge zone-coal-handling">COAL_HANDLING</span></td>
+                  </tr>
+                  <tr>
+                    <td class="before"><strong>FIRE STATION</strong></td>
+                    <td>FIRE STATION</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><span class="zone-badge zone-utility">UTILITY</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Statistik Hasil Parsing</h3>
+          </div>
+          <div class="card-body">
+            <div class="stat-cards" style="grid-template-columns: 1fr;">
+              <div class="stat-card primary">
+                <div class="stat-label">Total Baris</div>
+                <div class="stat-value">5.575</div>
+                <div class="stat-change">100% data berhasil diproses</div>
+              </div>
+              <div class="stat-card success">
+                <div class="stat-label">Area Teridentifikasi</div>
+                <div class="stat-value">5.575</div>
+                <div class="stat-change positive">100% lokasi memiliki area</div>
+              </div>
+              <div class="stat-card info">
+                <div class="stat-label">Unit Number Diekstrak</div>
+                <div class="stat-value">2.841</div>
+                <div class="stat-change">51% data memiliki unit number</div>
+              </div>
+              <div class="stat-card info">
+                <div class="stat-label">Lantai Diekstrak</div>
+                <div class="stat-value">1.892</div>
+                <div class="stat-change">34% data memiliki info lantai</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Distribusi per Zona</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Zona</th>
+                    <th>Jumlah Temuan</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="zone-badge zone-main-unit">MAIN_UNIT</span></td>
+                    <td>2.284</td>
+                    <td>41,0%</td>
+                  </tr>
+                  <tr>
+                    <td><span class="zone-badge zone-coal-handling">COAL_HANDLING</span></td>
+                    <td>1.671</td>
+                    <td>30,0%</td>
+                  </tr>
+                  <tr>
+                    <td><span class="zone-badge zone-support">SUPPORT</span></td>
+                    <td>938</td>
+                    <td>16,8%</td>
+                  </tr>
+                  <tr>
+                    <td><span class="zone-badge zone-utility">UTILITY</span></td>
+                    <td>682</td>
+                    <td>12,2%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Interpretasi Hasil</h4>
+        <ul>
+          <li><strong>MAIN_UNIT mendominasi (41%)</strong> - Area pembangkitan utama seperti BOILER dan TURBINE adalah fokus utama pelaporan K3</li>
+          <li><strong>COAL_HANDLING signifikan (30%)</strong> - Penanganan batu bara dari JETTY hingga COAL YARD memiliki aktivitas pelaporan tinggi</li>
+          <li><strong>Unit number 51% terdeteksi</strong> - Sekitar setengah lokasi memiliki identifikasi unit (#1, #2, #3), sangat berguna untuk analisis per-unit</li>
+          <li><strong>Info lantai 34% tersedia</strong> - Cukup untuk analisis vertikal, misalnya risiko di lantai atas vs lantai bawah</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Impact & Benefits -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">✨</span>
+          Manfaat Standardisasi Lokasi
+        </h2>
+        <p>Dampak positif terhadap kualitas analisis data IZAT</p>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item success">
+          <div class="insight-title">Analisis Area Lebih Akurat</div>
+          <div class="insight-value">Dapat agregasi temuan per area dengan konsisten, menghitung risk score per zona operasional</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Risk Heatmap Geografis</div>
+          <div class="insight-value">Memungkinkan visualisasi peta risiko berdasarkan zona dan area untuk prioritas intervensi</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Analisis Per-Unit</div>
+          <div class="insight-value">51% data dengan unit number memungkinkan komparasi performa safety antar unit (#1 vs #2 vs #3)</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Identifikasi Pola Vertikal</div>
+          <div class="insight-value">Analisis temuan berdasarkan lantai untuk mengidentifikasi risiko ketinggian atau aksesibilitas</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-title">Filter & Drill-Down</div>
+          <div class="insight-value">User dapat filter dashboard berdasarkan zona, area, atau unit secara terstruktur</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-title">Machine Learning Features</div>
+          <div class="insight-value">Kolom zona dan area menjadi features penting untuk model prediksi risiko dan anomaly detection</div>
+        </div>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>Rekomendasi untuk Data Quality Improvement</h4>
+        <ol>
+          <li>
+            <strong>Standardisasi Input di Aplikasi IZAT:</strong> Tambahkan dropdown untuk pemilihan area dan unit agar data lebih terstruktur sejak awal
+          </li>
+          <li>
+            <strong>Auto-Complete Lokasi:</strong> Implementasikan autocomplete saat user mengetik nama lokasi untuk mengurangi variasi penulisan
+          </li>
+          <li>
+            <strong>Validasi Real-time:</strong> Berikan warning jika lokasi yang diinput tidak dikenali sistem untuk mendorong penggunaan format standar
+          </li>
+          <li>
+            <strong>Periodic Review:</strong> Lakukan review bulanan terhadap lokasi dengan zona UNKNOWN untuk update mapping area-zona
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="section">
+      <div class="card">
+        <div class="card-header">
+          <h3>Langkah Selanjutnya</h3>
+        </div>
+        <div class="card-body">
+          <p style="color: var(--pln-gray-700); margin-bottom: 1rem;">
+            Setelah standardisasi lokasi, data akan dilanjutkan ke tahap berikutnya dalam pipeline pembersihan:
+          </p>
+          <div class="grid-3">
+            <div class="stat-card">
+              <div class="stat-label">Step 3</div>
+              <div class="stat-value" style="font-size: 1.25rem;">Standardisasi Perusahaan</div>
+              <div class="stat-change">Kategorisasi PLN, VENDOR, OTHER</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Step 4</div>
+              <div class="stat-value" style="font-size: 1.25rem;">Standardisasi Tanggal</div>
+              <div class="stat-change">Parsing waktu, shift, quarter</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Step 5-7</div>
+              <div class="stat-value" style="font-size: 1.25rem;">Kolom Turunan</div>
+              <div class="stat-change">Risk score, quality score, trends</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Data Cleansing IZAT K3</p>
+        <p>Step 2: Standardisasi Lokasi</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+          Generated: Desember 2025 | Confidential - Internal Use Only
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close modals on overlay click or Escape key
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>

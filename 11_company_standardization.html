@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I.2.3 Standardisasi Perusahaan - Pembersihan Data IZAT K3</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Data Cleansing specific styling */
+    .cleansing-badge {
+      background: linear-gradient(135deg, #35B971, #059669);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cleansing-menu a {
+      border-left: 3px solid transparent;
+    }
+
+    .cleansing-menu a:hover {
+      border-left-color: #35B971;
+    }
+
+    .cleansing-menu a.active {
+      border-left-color: #35B971;
+      background: linear-gradient(135deg, rgba(53, 185, 113, 0.15), rgba(5, 150, 105, 0.1));
+      color: #35B971;
+      font-weight: 600;
+    }
+
+    /* Code Block Styling */
+    .code-block {
+      background: #1e293b;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .code-block pre {
+      color: #e2e8f0;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .code-block .comment {
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    .code-block .keyword {
+      color: #f472b6;
+      font-weight: 600;
+    }
+
+    .code-block .string {
+      color: #34d399;
+    }
+
+    .code-block .function {
+      color: #60a5fa;
+    }
+
+    .code-block .number {
+      color: #fbbf24;
+    }
+
+    .code-block .operator {
+      color: #f472b6;
+    }
+
+    .category-card {
+      background: white;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      border-left: 4px solid #35B971;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .category-card:hover {
+      box-shadow: 0 8px 12px rgba(53, 185, 113, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .category-card h4 {
+      color: #35B971;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .category-card .category-companies {
+      font-size: 0.875rem;
+      color: var(--pln-gray-600);
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .category-card .category-count {
+      display: inline-block;
+      background: rgba(53, 185, 113, 0.1);
+      color: #35B971;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .insight-item.cleansing {
+      border-left-color: #35B971;
+    }
+
+    .stat-card.cleansing {
+      border-left: 4px solid #35B971;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Data Cleansing</button>
+          <div class="nav-dropdown-menu cleansing-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html" class="active"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Standardisasi Perusahaan</h1>
+        <p>Kategorisasi dan Normalisasi Data Perusahaan untuk Analisis Kepegawaian</p>
+        <span class="cleansing-badge">
+          <span>🧹</span> Data Cleansing - Step 3
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Overview Stats -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card cleansing">
+          <div class="stat-label">Total Perusahaan Unik</div>
+          <div class="stat-value">11</div>
+          <div class="stat-change">Dikategorikan menjadi 4 grup utama</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">Kategori Terbesar</div>
+          <div class="stat-value">VENDOR_LAIN</div>
+          <div class="stat-change">51,1% dari total laporan (2.850 temuan)</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-label">Pegawai Organik</div>
+          <div class="stat-value">2,9%</div>
+          <div class="stat-change">163 laporan dari PLN NP organik</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-label">Kolom Baru Ditambahkan</div>
+          <div class="stat-value">3</div>
+          <div class="stat-change">perusahaan_kategori, perusahaan_clean, is_organik</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Needed Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🤔</span>
+          I.2.3.1 Mengapa Standardisasi Perusahaan Diperlukan?
+        </h2>
+        <p>Pentingnya mengkategorikan perusahaan untuk analisis pola pelaporan K3 berdasarkan jenis kepegawaian</p>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Tantangan Data Perusahaan</h4>
+        <ul>
+          <li><strong>11 perusahaan berbeda</strong> menciptakan kompleksitas dalam analisis komparatif antar-kategori kepegawaian</li>
+          <li><strong>Variasi penulisan nama perusahaan</strong> - ada yang menggunakan "PT.", ada yang tidak; ada yang nama lengkap, ada yang singkatan</li>
+          <li><strong>Kebutuhan membedakan pegawai organik vs non-organik</strong> - pola perilaku K3 berbeda antara keduanya</li>
+          <li><strong>Analisis performa vendor</strong> - perlu kategorisasi untuk membandingkan kualitas pelaporan dari berbagai vendor</li>
+          <li><strong>Insight strategis</strong> - memahami kontribusi setiap kategori perusahaan terhadap budaya K3 di unit</li>
+        </ul>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Sebelum Standardisasi</h3>
+          </div>
+          <div class="card-body">
+            <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">11 perusahaan terpisah tanpa kategorisasi jelas:</p>
+            <ul style="color: var(--pln-gray-600); line-height: 1.8;">
+              <li>PT PLN NUSANTARA POWER</li>
+              <li>PT PLN NP SERVICES</li>
+              <li>PT MKP (MITRA KARYA PRIMA)</li>
+              <li>PT RBU</li>
+              <li>PT GARDA BANGSA SECURINDO</li>
+              <li>PT DES</li>
+              <li>PT. ADHI GUNA PUTERA</li>
+              <li>... dan 4 lainnya</li>
+            </ul>
+            <div class="anomaly-alert warning" style="margin-top: 1rem;">
+              <p style="color: var(--pln-gray-700); font-size: 0.875rem;">
+                <strong>Masalah:</strong> Sulit membandingkan pola K3 antar grup kepegawaian
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Setelah Standardisasi</h3>
+          </div>
+          <div class="card-body">
+            <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">4 kategori terstruktur dengan makna bisnis jelas:</p>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div class="category-card" style="border-left-color: var(--pln-primary-blue);">
+                <h4 style="color: var(--pln-primary-blue);">PLN_NP_ORGANIK</h4>
+                <p style="font-size: 0.875rem; color: var(--pln-gray-600);">Pegawai organik</p>
+              </div>
+              <div class="category-card" style="border-left-color: var(--pln-light-blue);">
+                <h4 style="color: var(--pln-light-blue);">PLN_NPS</h4>
+                <p style="font-size: 0.875rem; color: var(--pln-gray-600);">Anak perusahaan O&M</p>
+              </div>
+              <div class="category-card" style="border-left-color: #F59E0B;">
+                <h4 style="color: #F59E0B;">MKP</h4>
+                <p style="font-size: 0.875rem; color: var(--pln-gray-600);">Mitra pemeliharaan utama</p>
+              </div>
+              <div class="category-card" style="border-left-color: var(--pln-gray-500);">
+                <h4 style="color: var(--pln-gray-700);">VENDOR_LAIN</h4>
+                <p style="font-size: 0.875rem; color: var(--pln-gray-600);">7 vendor tenaga alih daya</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">⚙️</span>
+          I.2.3.2 Metodologi Kategorisasi
+        </h2>
+        <p>Logika bisnis dan aturan kategorisasi perusahaan berdasarkan peran organisasional</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="category-card" style="border-left-color: var(--pln-primary-blue);">
+          <h4 style="color: var(--pln-primary-blue);">🏢 PLN_NP_ORGANIK</h4>
+          <div class="category-companies">
+            <strong>Perusahaan:</strong> PT PLN NUSANTARA POWER
+          </div>
+          <div class="category-count">163 laporan (2,9%)</div>
+          <p style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--pln-gray-600);">
+            Pegawai organik PLN Nusantara Power dengan status kepegawaian tetap.
+            Memiliki tanggung jawab struktural langsung terhadap operasional unit.
+          </p>
+        </div>
+
+        <div class="category-card" style="border-left-color: var(--pln-light-blue);">
+          <h4 style="color: var(--pln-light-blue);">🔧 PLN_NPS</h4>
+          <div class="category-companies">
+            <strong>Perusahaan:</strong> PT PLN NP SERVICES
+          </div>
+          <div class="category-count">1.029 laporan (18,5%)</div>
+          <p style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--pln-gray-600);">
+            Anak perusahaan PLN NP yang menangani Operation & Maintenance (O&M).
+            Peran strategis dalam operasional harian dan pemeliharaan preventive.
+          </p>
+        </div>
+
+        <div class="category-card" style="border-left-color: #F59E0B;">
+          <h4 style="color: #F59E0B;">🛠️ MKP</h4>
+          <div class="category-companies">
+            <strong>Perusahaan:</strong> PT MKP (MITRA KARYA PRIMA)
+          </div>
+          <div class="category-count">1.532 laporan (27,5%)</div>
+          <p style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--pln-gray-600);">
+            Mitra utama untuk pemeliharaan dan perbaikan. Kontrak jangka panjang dengan
+            volume pekerjaan signifikan, terutama untuk overhaul dan corrective maintenance.
+          </p>
+        </div>
+
+        <div class="category-card" style="border-left-color: var(--pln-gray-500);">
+          <h4 style="color: var(--pln-gray-700);">👷 VENDOR_LAIN</h4>
+          <div class="category-companies">
+            <strong>7 Perusahaan:</strong> PT RBU, PT GARDA BANGSA SECURINDO, PT DES,
+            PT ADHI GUNA PUTERA, PT CAHAYA BOGEG UTAMA, PT PANDU NUSA ENGINEERING,
+            PT RCC, PT PERTAMINA BINA MEDIKA IHC
+          </div>
+          <div class="category-count">2.850 laporan (51,1%)</div>
+          <p style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--pln-gray-600);">
+            Vendor tenaga alih daya untuk berbagai fungsi: keamanan, kebersihan, catering,
+            medis, engineering support, dan pekerjaan kontrak spesifik lainnya.
+          </p>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Logika Kategorisasi</h4>
+        <ul>
+          <li><strong>PLN_NP_ORGANIK</strong> - Identifikasi langsung dari nama "PT PLN NUSANTARA POWER" sebagai pegawai organik induk perusahaan</li>
+          <li><strong>PLN_NPS</strong> - Anak perusahaan PLN dengan peran strategis O&M, dikategorikan terpisah untuk analisis dedicated</li>
+          <li><strong>MKP</strong> - Vendor pemeliharaan dengan volume tertinggi, dikategorikan terpisah karena peran critical dalam maintenance</li>
+          <li><strong>VENDOR_LAIN</strong> - Semua vendor lainnya digabung untuk simplifikasi analisis, dengan kemampuan drill-down ke level individu jika diperlukan</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Source Code Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">💻</span>
+          I.2.3.3 Implementasi Source Code
+        </h2>
+        <p>Kode Python untuk mapping dan kategorisasi perusahaan</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Dictionary Mapping Kategori</h3>
+        </div>
+        <div class="card-body">
+          <div class="code-block">
+<pre><span class="comment"># Mapping perusahaan ke kategori</span>
+<span class="keyword">PERUSAHAAN_KATEGORI</span> <span class="operator">=</span> {
+    <span class="comment"># Kategori 1: PLN_NP_ORGANIK</span>
+    <span class="string">'PT PLN NUSANTARA POWER'</span>: <span class="string">'PLN_NP_ORGANIK'</span>,
+
+    <span class="comment"># Kategori 2: PLN_NPS</span>
+    <span class="string">'PT PLN NP SERVICES'</span>: <span class="string">'PLN_NPS'</span>,
+
+    <span class="comment"># Kategori 3: MKP</span>
+    <span class="string">'PT MKP (MITRA KARYA PRIMA)'</span>: <span class="string">'MKP'</span>,
+
+    <span class="comment"># Kategori 4: VENDOR_LAIN</span>
+    <span class="string">'PT RBU'</span>: <span class="string">'VENDOR_LAIN'</span>,
+    <span class="string">'PT GARDA BANGSA SECURINDO'</span>: <span class="string">'VENDOR_LAIN'</span>,
+    <span class="string">'PT DES'</span>: <span class="string">'VENDOR_LAIN'</span>,
+    <span class="string">'PT. ADHI GUNA PUTERA'</span>: <span class="string">'VENDOR_LAIN'</span>,
+    <span class="string">'PT CAHAYA BOGEG UTAMA'</span>: <span class="string">'VENDOR_LAIN'</span>,
+    <span class="string">'PT PANDU NUSA ENGINEERING'</span>: <span class="string">'VENDOR_LAIN'</span>,
+    <span class="string">'PT. RCC'</span>: <span class="string">'VENDOR_LAIN'</span>,
+    <span class="string">'PT. PERTAMINA BINA MEDIKA IHC'</span>: <span class="string">'VENDOR_LAIN'</span>,
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Standardisasi Nama Perusahaan</h3>
+        </div>
+        <div class="card-body">
+          <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+            Menghilangkan variasi penulisan (dengan/tanpa tanda titik) untuk konsistensi:
+          </p>
+          <div class="code-block">
+<pre><span class="comment"># Mapping untuk nama standar (hilangkan variasi "PT." vs "PT")</span>
+<span class="keyword">PERUSAHAAN_STANDAR</span> <span class="operator">=</span> {
+    <span class="string">'PT PLN NUSANTARA POWER'</span>: <span class="string">'PT PLN NUSANTARA POWER'</span>,
+    <span class="string">'PT PLN NP SERVICES'</span>: <span class="string">'PT PLN NP SERVICES'</span>,
+    <span class="string">'PT MKP (MITRA KARYA PRIMA)'</span>: <span class="string">'PT MKP'</span>,  <span class="comment"># singkat</span>
+    <span class="string">'PT. ADHI GUNA PUTERA'</span>: <span class="string">'PT ADHI GUNA PUTERA'</span>,  <span class="comment"># hilangkan titik</span>
+    <span class="string">'PT. RCC'</span>: <span class="string">'PT RCC'</span>,  <span class="comment"># hilangkan titik</span>
+    <span class="string">'PT. PERTAMINA BINA MEDIKA IHC'</span>: <span class="string">'PT PERTAMINA BINA MEDIKA IHC'</span>,  <span class="comment"># hilangkan titik</span>
+    <span class="comment"># ... dll</span>
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Penerapan Kategorisasi</h3>
+        </div>
+        <div class="card-body">
+          <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+            Menggunakan pandas .map() untuk menerapkan mapping ke dataframe:
+          </p>
+          <div class="code-block">
+<pre><span class="comment"># Terapkan mapping ke dataframe</span>
+df[<span class="string">'perusahaan_kategori'</span>] <span class="operator">=</span> df[<span class="string">'nama_perusahaan'</span>].<span class="function">map</span>(<span class="keyword">PERUSAHAAN_KATEGORI</span>)
+df[<span class="string">'perusahaan_clean'</span>] <span class="operator">=</span> df[<span class="string">'nama_perusahaan'</span>].<span class="function">map</span>(<span class="keyword">PERUSAHAAN_STANDAR</span>)
+
+<span class="comment"># Tambahkan flag boolean untuk pegawai organik</span>
+df[<span class="string">'is_organik'</span>] <span class="operator">=</span> df[<span class="string">'perusahaan_kategori'</span>] <span class="operator">==</span> <span class="string">'PLN_NP_ORGANIK'</span>
+
+<span class="function">print</span>(<span class="string">"Kategorisasi berhasil diterapkan."</span>)
+<span class="function">print</span>(<span class="string">f"Total baris: <span class="operator">{</span><span class="function">len</span>(df)<span class="operator">:</span>,<span class="operator">}</span>"</span>)
+<span class="function">print</span>(<span class="string">f"Kolom baru: <span class="operator">{</span><span class="function">len</span>(df.columns)<span class="operator">}</span>"</span>)</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Output Examples Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📊</span>
+          I.2.3.4 Contoh Output & Distribusi
+        </h2>
+        <p>Visualisasi hasil kategorisasi dan distribusi laporan per kategori perusahaan</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Distribusi Kategori Perusahaan</h3>
+            <button class="btn-data-view" onclick="openDataModal('companyDistribution')">
+              <span class="icon">📊</span> Lihat Data Lengkap
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kategori</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>VENDOR_LAIN</strong></td>
+                    <td>2.850</td>
+                    <td><span class="badge badge-info">51,1%</span></td>
+                  </tr>
+                  <tr>
+                    <td>MKP</td>
+                    <td>1.532</td>
+                    <td><span class="badge badge-warning">27,5%</span></td>
+                  </tr>
+                  <tr>
+                    <td>PLN_NPS</td>
+                    <td>1.029</td>
+                    <td><span class="badge badge-primary">18,5%</span></td>
+                  </tr>
+                  <tr>
+                    <td>PLN_NP_ORGANIK</td>
+                    <td>163</td>
+                    <td><span class="badge badge-success">2,9%</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Persentase Unsafe per Kategori</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Kategori</th>
+                    <th>% Unsafe</th>
+                    <th>Unsafe/Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>PLN_NP_ORGANIK</strong></td>
+                    <td><span class="badge badge-danger">37,0%</span></td>
+                    <td>60 / 163</td>
+                  </tr>
+                  <tr>
+                    <td>PLN_NPS</td>
+                    <td><span class="badge badge-warning">23,3%</span></td>
+                    <td>240 / 1.029</td>
+                  </tr>
+                  <tr>
+                    <td>MKP</td>
+                    <td><span class="badge badge-warning">21,5%</span></td>
+                    <td>329 / 1.532</td>
+                  </tr>
+                  <tr>
+                    <td>VENDOR_LAIN</td>
+                    <td><span class="badge badge-info">20,6%</span></td>
+                    <td>588 / 2.850</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item danger">
+          <div class="insight-title">Pegawai Organik: Rate Unsafe Tertinggi</div>
+          <div class="insight-value">
+            PLN_NP_ORGANIK memiliki 37,0% temuan unsafe - tertinggi dari semua kategori.
+            Mungkin karena lebih berani melaporkan kondisi kritis atau area tugas lebih berisiko.
+          </div>
+        </div>
+        <div class="insight-item cleansing">
+          <div class="insight-title">VENDOR_LAIN: Kontributor Terbesar</div>
+          <div class="insight-value">
+            51,1% laporan berasal dari vendor alih daya - mencerminkan volume tenaga kerja non-organik
+            yang dominan di operasional unit pembangkitan.
+          </div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">MKP: Mitra Strategis</div>
+          <div class="insight-value">
+            27,5% laporan dari MKP menunjukkan peran signifikan vendor pemeliharaan utama.
+            Rate unsafe 21,5% relatif rendah, mengindikasikan awareness K3 yang baik.
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Insight Strategis</h4>
+        <ul>
+          <li><strong>Mayoritas laporan dari non-organik (97,1%)</strong> - Mencerminkan struktur kepegawaian unit dengan banyak outsourcing</li>
+          <li><strong>PLN_NP_ORGANIK tertinggi unsafe rate (37,0%)</strong> - Kemungkinan: (1) Pegawai organik lebih berani lapor kondisi kritis, (2) Tugas struktural lebih banyak inspeksi area berisiko</li>
+          <li><strong>PLN_NPS sebagai O&M specialist (23,3% unsafe)</strong> - Rate unsafe moderate, sesuai dengan nature pekerjaan pemeliharaan yang inherently risky</li>
+          <li><strong>VENDOR_LAIN paling konsisten (20,6% unsafe)</strong> - Meskipun volume terbesar, rate unsafe paling rendah. Training K3 vendor perlu dicek apakah sudah optimal</li>
+          <li><strong>MKP sebagai benchmark (21,5% unsafe)</strong> - Vendor maintenance dengan volume tinggi namun unsafe rate terkendali, bisa jadi best practice untuk vendor lain</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">💡</span>
+          Rekomendasi Berdasarkan Kategorisasi
+        </h2>
+        <p>Tindakan strategis untuk setiap kategori perusahaan</p>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>1. PLN_NP_ORGANIK (Pegawai Organik)</h4>
+        <ul>
+          <li><strong>Investigasi mendalam</strong> mengapa unsafe rate tertinggi - apakah karena awareness baik atau exposure risk tinggi?</li>
+          <li><strong>Role model program</strong> - manfaatkan kesadaran tinggi pegawai organik untuk menjadi champion K3</li>
+          <li><strong>Leadership engagement</strong> - pastikan pegawai organik aktif dalam toolbox meeting dan safety patrol</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>2. PLN_NPS (Anak Perusahaan O&M)</h4>
+        <ul>
+          <li><strong>O&M safety protocol review</strong> - unsafe rate 23,3% wajar untuk maintenance work, tapi perlu continuous improvement</li>
+          <li><strong>Competency assurance</strong> - pastikan semua teknisi PLN NPS ter-sertifikasi untuk pekerjaan high-risk</li>
+          <li><strong>Near miss incentive</strong> - encourage lebih banyak lapor near miss untuk preventive action</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>3. MKP (Mitra Pemeliharaan Utama)</h4>
+        <ul>
+          <li><strong>Best practice sharing</strong> - unsafe rate 21,5% dengan volume tinggi adalah prestasi, share practice-nya ke vendor lain</li>
+          <li><strong>Vendor appreciation</strong> - recognize MKP sebagai safety champion vendor untuk motivasi berkelanjutan</li>
+          <li><strong>Continuous monitoring</strong> - jaga konsistensi kualitas K3 MKP seiring bertambahnya volume pekerjaan</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>4. VENDOR_LAIN (Vendor Tenaga Alih Daya)</h4>
+        <ul>
+          <li><strong>Drill-down analysis per vendor</strong> - unsafe rate 20,6% adalah agregat, perlu analisis individu apakah ada outlier</li>
+          <li><strong>Standardized K3 induction</strong> - pastikan semua vendor dapat training K3 yang sama quality-nya</li>
+          <li><strong>Vendor performance scorecard</strong> - tambahkan metrik K3 reporting quality dalam evaluasi kontrak vendor</li>
+          <li><strong>Quarterly safety forum</strong> - adakan forum antar-vendor untuk sharing safety best practices</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Pembersihan Data IZAT K3</p>
+        <p>I.2.3 Standardisasi Perusahaan - Data Cleansing Step 3</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+          Generated: Desember 2025 | Confidential - Internal Use Only
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Data Modal -->
+  <div class="data-modal-overlay" id="dataModal">
+    <div class="data-modal-content">
+      <div class="data-modal-header">
+        <h3 id="dataModalTitle">Data Tabel</h3>
+        <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+      </div>
+      <div class="data-modal-body" id="dataModalBody">
+        <!-- Table will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Data untuk modal tables
+    const modalData = {
+      companyDistribution: {
+        title: 'Distribusi Lengkap per Perusahaan',
+        headers: ['Perusahaan', 'Kategori', 'Jumlah Laporan', '%'],
+        rows: [
+          ['PT RBU', 'VENDOR_LAIN', '969', '17,4%'],
+          ['PT MKP', 'MKP', '1.532', '27,5%'],
+          ['PT PLN NP SERVICES', 'PLN_NPS', '1.029', '18,5%'],
+          ['PT GARDA BANGSA SECURINDO', 'VENDOR_LAIN', '746', '13,4%'],
+          ['PT DES', 'VENDOR_LAIN', '648', '11,6%'],
+          ['PT ADHI GUNA PUTERA', 'VENDOR_LAIN', '221', '4,0%'],
+          ['PT PLN NUSANTARA POWER', 'PLN_NP_ORGANIK', '163', '2,9%'],
+          ['PT CAHAYA BOGEG UTAMA', 'VENDOR_LAIN', '124', '2,2%'],
+          ['PT PANDU NUSA ENGINEERING', 'VENDOR_LAIN', '89', '1,6%'],
+          ['PT RCC', 'VENDOR_LAIN', '41', '0,7%'],
+          ['PT PERTAMINA BINA MEDIKA IHC', 'VENDOR_LAIN', '12', '0,2%']
+        ]
+      }
+    };
+
+    function openDataModal(dataKey) {
+      const data = modalData[dataKey];
+      const modal = document.getElementById('dataModal');
+      const title = document.getElementById('dataModalTitle');
+      const body = document.getElementById('dataModalBody');
+
+      title.textContent = data.title;
+
+      let tableHtml = '<table class="data-table-simple"><thead><tr>';
+      data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+      tableHtml += '</tr></thead><tbody>';
+      data.rows.forEach((row, idx) => {
+        const highlight = idx < 3 ? ' class="highlight"' : '';
+        tableHtml += `<tr${highlight}>`;
+        row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+
+      body.innerHTML = tableHtml;
+      modal.classList.add('active');
+    }
+
+    function closeDataModal() {
+      document.getElementById('dataModal').classList.remove('active');
+    }
+
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close modals on overlay click or Escape key
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.getElementById('dataModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDataModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeDataModal();
+      }
+    });
+  </script>
+</body>
+</html>

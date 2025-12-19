@@ -1,0 +1,47 @@
+﻿Area;Total Temuan;Avg Risk Score;Avg Resolution Days;High Risk Count;Unsafe Rate (%);Priority Score;Recommendations
+WORKSHOP;1;4.0;69.03333333333333;1;100.0;4.616483516483516;"URGENT: Tingkatkan frekuensi patrol dan inspeksi; Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+MUSHOLA;2;3.5;437.01666666666665;1;100.0;4.416483516483517;"URGENT: Tingkatkan frekuensi patrol dan inspeksi; Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+SUB;1;2.0;458.28333333333336;0;100.0;3.8;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+POWER;1;2.0;;0;100.0;3.8;Perkuat awareness program K3 di area ini
+I-FUN;8;2.375;249.21458333333334;3;75.0;3.2494505494505495;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+GOR;10;2.2;263.78000000000003;2;60.0;2.7129670329670326;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+SYAHBANDARAN;13;2.4615384615384617;333.26282051282055;5;53.84615384615385;2.6824175824175827;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+MAGNETIC;5;2.0;164.625;1;60.0;2.616483516483516;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+COMPRESSOR;5;2.0;204.58333333333331;0;60.0;2.5999999999999996;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+POS;515;1.4174757281553398;227.6153795379538;55;37.4757281553398;2.5978555425157364;"Perkuat awareness program K3 di area ini; Prioritaskan penyelesaian temuan HIGH/CRITICAL; Percepat waktu penyelesaian temuan"
+DORMITORY;74;1.837837837837838;267.50228310502285;11;54.054054054054056;2.538075438075438;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+SHIP UNLOADER;27;1.8888888888888888;219.13024691358024;5;55.55555555555556;2.5046398046398046;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+RECLAIMER;27;1.8148148148148149;249.4969135802469;3;55.55555555555556;2.4420431420431417;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+BOILER;1725;1.3536231884057972;149.06717083575722;91;10.492753623188406;2.356231884057971;"Prioritaskan penyelesaian temuan HIGH/CRITICAL; Percepat waktu penyelesaian temuan"
+CCR CHCB;96;1.5729166666666667;279.88159722222224;8;48.95833333333333;2.2297847985347983;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+PERIMETER;62;1.532258064516129;260.19139784946236;7;50.0;2.228287841191067;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+GUDANG;95;1.5157894736842106;255.326268115942;7;45.26315789473684;2.079595141700405;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+CHLORINE;38;1.4210526315789473;308.6039473684211;3;47.368421052631575;2.0389242336610756;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+H2 PLANT;11;2.1818181818181817;228.22878787878787;0;36.36363636363637;1.9636363636363638;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+CCR;34;1.3529411764705883;312.98480392156864;0;47.05882352941176;1.952941176470588;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+CONVEYOR;26;2.0;222.700641025641;4;34.61538461538461;1.9043956043956043;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+CCR MAIN UNIT;142;1.2253521126760563;220.99428571428572;8;41.54929577464789;1.8684878501779911;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+AERATION;5;1.4;260.3;0;40.0;1.7599999999999998;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+MAINTENANCE;160;1.2;182.12851153039833;16;33.75;1.7562362637362636;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+JETTY;233;1.742489270386266;168.61784140969164;26;18.88412017167382;1.6920907418761493;Percepat waktu penyelesaian temuan
+TURBINE;562;1.501779359430605;145.34125;40;12.98932384341637;1.6497321184153924;Percepat waktu penyelesaian temuan
+WTP;203;1.0049261083743843;184.81575456053068;15;29.55665024630542;1.5359226979916634;Percepat waktu penyelesaian temuan
+CWP;85;1.0941176470588236;190.0621568627451;3;34.11764705882353;1.5106270200387848;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+I;16;1.3125;197.09791666666666;2;31.25;1.495467032967033;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+PARKIR;23;1.391304347826087;292.19242424242424;1;30.434782608695656;1.4860487338748207;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+ADMIN;550;0.7963636363636364;166.7419403892944;28;22.727272727272727;1.4619020979020978;Percepat waktu penyelesaian temuan
+FOT;24;1.2916666666666667;232.00625;3;29.166666666666668;1.4411172161172163;Percepat waktu penyelesaian temuan
+BENGKEL;38;0.9736842105263158;168.7390350877193;0;31.57894736842105;1.3368421052631578;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+COAL YARD;56;1.625;178.94382716049384;6;17.857142857142858;1.2846153846153847;Percepat waktu penyelesaian temuan
+MESJID;39;1.205128205128205;236.7948717948718;1;25.64102564102564;1.2677655677655677;Percepat waktu penyelesaian temuan
+SAMPLER;10;0.9;299.975;0;30.0;1.26;"Perkuat awareness program K3 di area ini; Percepat waktu penyelesaian temuan"
+MED;142;0.7746478873239436;154.56166666666667;7;22.535211267605636;1.101300108342362;Percepat waktu penyelesaian temuan
+WWTP;44;0.8181818181818182;171.21174242424243;1;22.727272727272727;1.0255744255744255;Percepat waktu penyelesaian temuan
+CRUSHER;79;1.4050632911392404;92.68482905982907;3;11.39240506329114;0.9532480178049798;Percepat waktu penyelesaian temuan
+TRANSFER TOWER;132;0.7272727272727273;215.24103535353535;4;18.181818181818183;0.9022977022977023;Percepat waktu penyelesaian temuan
+WATER TREATMENT;13;0.9230769230769231;268.29615384615386;1;15.384615384615385;0.8472527472527474;Percepat waktu penyelesaian temuan
+ENGINE;1;2.0;114.43333333333334;0;0.0;0.8;Percepat waktu penyelesaian temuan
+CCB;57;0.38596491228070173;122.48187134502923;0;15.789473684210526;0.6280701754385964;Percepat waktu penyelesaian temuan
+FIRE STATION;171;0.5730994152046783;76.63830409356724;3;5.263157894736842;0.43658505237452605;Percepat waktu penyelesaian temuan
+PUMP HOUSE;13;0.0;59.341025641025645;0;0.0;0.0;Percepat waktu penyelesaian temuan
+SHIP;1;0.0;34.06666666666667;0;0.0;0.0;Percepat waktu penyelesaian temuan

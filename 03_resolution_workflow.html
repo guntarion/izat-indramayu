@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Alur Penyelesaian - IZAT UP Indramayu</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+                <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Beranda</a>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Data Cleansing</button>
+                    <div class="nav-dropdown-menu cleansing-menu">
+                        <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+                        <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+                        <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+                        <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+                        <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+                        <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+                        <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle active">Basic Analysis</button>
+                    <div class="nav-dropdown-menu">
+                        <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+                        <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+                        <a href="03_resolution_workflow.html" class="active"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+                        <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+                        <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <button class="nav-dropdown-toggle">Advanced Analysis</button>
+                    <div class="nav-dropdown-menu ai-menu">
+                        <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+                        <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+                        <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Analisis Alur Penyelesaian</h1>
+                <p>Evaluasi workflow, SLA compliance, dan bottleneck dalam penyelesaian temuan K3</p>
+                <span class="hero-badge">Periode: Januari - Oktober 2025</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Key Statistics -->
+        <section class="section">
+            <div class="stat-cards">
+                <div class="stat-card success">
+                    <div class="stat-label">Total Temuan Dibuat</div>
+                    <div class="stat-value">5.575</div>
+                    <div class="stat-change">Periode Januari - Oktober 2025</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-label">Close Rate</div>
+                    <div class="stat-value">99,2%</div>
+                    <div class="stat-change positive">5.531 temuan selesai</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-label">Temuan Masih Open</div>
+                    <div class="stat-value">44</div>
+                    <div class="stat-change">43 di Oktober 2025</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-label">SLA Compliance (Low Risk)</div>
+                    <div class="stat-value">12,9%</div>
+                    <div class="stat-change negative">Perlu peningkatan</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section II.3.1 - Workflow Analysis -->
+        <section class="section">
+            <div class="section-header">
+                <h2>A. Analisis Workflow Penyelesaian</h2>
+                <p>Analisis tahapan workflow dari pembuatan hingga penyelesaian temuan</p>
+            </div>
+
+            <!-- Workflow Funnel Table -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Funnel Workflow Penyelesaian</h3>
+                    <button class="btn-data-view" onclick="openDataModal('funnelAnalysis')">
+                        <span class="icon">📊</span> Lihat Data Lengkap
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tahapan</th>
+                                    <th class="text-right">Jumlah</th>
+                                    <th class="text-right">Persentase</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold">Total Temuan Dibuat</td>
+                                    <td class="text-right">5.575</td>
+                                    <td class="text-right">100%</td>
+                                    <td><span class="badge badge-info">Baseline</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Assigned to PIC</td>
+                                    <td class="text-right">5.532</td>
+                                    <td class="text-right">99,2%</td>
+                                    <td><span class="badge badge-success">Excellent</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold">Closed/Resolved</td>
+                                    <td class="text-right">5.531</td>
+                                    <td class="text-right">99,2%</td>
+                                    <td><span class="badge badge-success">Excellent</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <strong>Catatan:</strong> Tingkat penyelesaian sangat baik dengan 99,2% temuan telah diselesaikan. Hanya 44 temuan (0,8%) yang masih dalam status open.
+                </div>
+            </div>
+
+            <!-- Workflow Funnel Visualization -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Visualisasi Funnel Workflow</h3>
+                </div>
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.3.1_workflow_funnel.png" alt="Funnel Workflow Penyelesaian">
+                        <figcaption>Gambar 1: Funnel analysis menunjukkan tingkat completion yang sangat baik di setiap tahapan</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Status Distribution -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Distribusi Status Temuan</h3>
+                </div>
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.3.1_status_distribution.png" alt="Distribusi Status Temuan">
+                        <figcaption>Gambar 2: Mayoritas temuan dalam status Closed, menunjukkan proses penyelesaian yang efektif</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Monthly Close Rate -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Tren Close Rate Bulanan</h3>
+                    <button class="btn-data-view" onclick="openDataModal('monthlyCloseRate')">
+                        <span class="icon">📊</span> Lihat Data Lengkap
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-container mb-3">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Bulan</th>
+                                    <th class="text-right">Total Temuan</th>
+                                    <th class="text-right">Temuan Closed</th>
+                                    <th class="text-right">Close Rate</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Januari 2025</td>
+                                    <td class="text-right">758</td>
+                                    <td class="text-right">757</td>
+                                    <td class="text-right font-bold">99,9%</td>
+                                    <td><span class="badge badge-success">Perfect</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Februari 2025</td>
+                                    <td class="text-right">319</td>
+                                    <td class="text-right">319</td>
+                                    <td class="text-right font-bold">100%</td>
+                                    <td><span class="badge badge-success">Perfect</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Maret 2025</td>
+                                    <td class="text-right">691</td>
+                                    <td class="text-right">691</td>
+                                    <td class="text-right font-bold">100%</td>
+                                    <td><span class="badge badge-success">Perfect</span></td>
+                                </tr>
+                                <tr>
+                                    <td>April 2025</td>
+                                    <td class="text-right">317</td>
+                                    <td class="text-right">317</td>
+                                    <td class="text-right font-bold">100%</td>
+                                    <td><span class="badge badge-success">Perfect</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Mei 2025</td>
+                                    <td class="text-right">803</td>
+                                    <td class="text-right">803</td>
+                                    <td class="text-right font-bold">100%</td>
+                                    <td><span class="badge badge-success">Perfect</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Juni 2025</td>
+                                    <td class="text-right">322</td>
+                                    <td class="text-right">322</td>
+                                    <td class="text-right font-bold">100%</td>
+                                    <td><span class="badge badge-success">Perfect</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Juli 2025</td>
+                                    <td class="text-right">794</td>
+                                    <td class="text-right">794</td>
+                                    <td class="text-right font-bold">100%</td>
+                                    <td><span class="badge badge-success">Perfect</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Agustus 2025</td>
+                                    <td class="text-right">519</td>
+                                    <td class="text-right">519</td>
+                                    <td class="text-right font-bold">100%</td>
+                                    <td><span class="badge badge-success">Perfect</span></td>
+                                </tr>
+                                <tr>
+                                    <td>September 2025</td>
+                                    <td class="text-right">594</td>
+                                    <td class="text-right">594</td>
+                                    <td class="text-right font-bold">100%</td>
+                                    <td><span class="badge badge-success">Perfect</span></td>
+                                </tr>
+                                <tr style="background: rgba(245, 158, 11, 0,1);">
+                                    <td class="font-bold">Oktober 2025</td>
+                                    <td class="text-right font-bold">458</td>
+                                    <td class="text-right font-bold">415</td>
+                                    <td class="text-right font-bold" style="color: #F59E0B;">90,6%</td>
+                                    <td><span class="badge badge-warning">Perlu Perhatian</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <figure class="image-card">
+                        <img src="assets/images/II.3.1_monthly_close_rate_trend.png" alt="Tren Close Rate Bulanan">
+                        <figcaption>Gambar 3: Tren close rate bulanan menunjukkan performa konsisten hingga September, dengan penurunan di Oktober 2025</figcaption>
+                    </figure>
+                </div>
+                <div class="card-footer">
+                    <strong>Alert:</strong> Oktober 2025 mengalami penurunan close rate menjadi 90,6% dengan 43 temuan masih pending. Perlu investigasi dan tindak lanjut segera.
+                </div>
+            </div>
+
+            <!-- Close Rate by Category -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Close Rate Berdasarkan Kategori</h3>
+                </div>
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.3.1_close_rate_by_kategori.png" alt="Close Rate by Category">
+                        <figcaption>Gambar 4: Perbandingan tingkat penyelesaian temuan berdasarkan kategori K3</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Resolution by Risk -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Penyelesaian Berdasarkan Tingkat Risiko</h3>
+                </div>
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.3.1_resolution_by_risk.png" alt="Resolution by Risk Level">
+                        <figcaption>Gambar 5: Distribusi penyelesaian temuan berdasarkan severity level risiko</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section II.3.2 - SLA Analysis -->
+        <section class="section">
+            <div class="section-header">
+                <h2>B. Analisis SLA Compliance dan Bottleneck</h2>
+                <p>Evaluasi kepatuhan terhadap target waktu penyelesaian dan identifikasi hambatan</p>
+            </div>
+
+            <!-- SLA Compliance Table -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>SLA Compliance Berdasarkan Tingkat Risiko</h3>
+                    <button class="btn-data-view" onclick="openDataModal('slaCompliance')">
+                        <span class="icon">📊</span> Lihat Data Lengkap
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Risk Severity</th>
+                                    <th class="text-right">Total Temuan</th>
+                                    <th class="text-right">SLA Met</th>
+                                    <th class="text-right">Rata-rata Resolusi</th>
+                                    <th class="text-right">SLA Compliance</th>
+                                    <th class="text-right">Target SLA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-info">LOW</span></td>
+                                    <td class="text-right">3.954</td>
+                                    <td class="text-right">512</td>
+                                    <td class="text-right">141 hari</td>
+                                    <td class="text-right font-bold" style="color: #F59E0B;">12,9%</td>
+                                    <td class="text-right">14 hari</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-warning">MEDIUM</span></td>
+                                    <td class="text-right">1.215</td>
+                                    <td class="text-right">4</td>
+                                    <td class="text-right">262 hari</td>
+                                    <td class="text-right font-bold" style="color: #EF4444;">0,3%</td>
+                                    <td class="text-right">5 hari</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-danger">HIGH</span></td>
+                                    <td class="text-right">255</td>
+                                    <td class="text-right">0</td>
+                                    <td class="text-right">268 hari</td>
+                                    <td class="text-right font-bold" style="color: #EF4444;">0%</td>
+                                    <td class="text-right">2 hari</td>
+                                </tr>
+                                <tr style="background: rgba(239, 68, 68, 0,1);">
+                                    <td><span class="badge badge-danger">CRITICAL</span></td>
+                                    <td class="text-right">107</td>
+                                    <td class="text-right">0</td>
+                                    <td class="text-right">269 hari</td>
+                                    <td class="text-right font-bold" style="color: #EF4444;">0%</td>
+                                    <td class="text-right">1 hari</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <strong>Temuan Kritis:</strong> Tidak ada satu pun temuan HIGH dan CRITICAL yang memenuhi target SLA. Rata-rata waktu resolusi 268-269 hari vs target 1-2 hari menunjukkan kesenjangan yang sangat signifikan.
+                </div>
+            </div>
+
+            <!-- Resolution Time Distribution -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Distribusi Waktu Penyelesaian</h3>
+                </div>
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.3.2_resolution_time_distribution.png" alt="Resolution Time Distribution">
+                        <figcaption>Gambar 6: Distribusi waktu penyelesaian temuan menunjukkan mayoritas diselesaikan dalam waktu yang jauh melebihi target SLA</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- SLA Analysis Visualization -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Analisis SLA Compliance</h3>
+                </div>
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.3.2_sla_analysis.png" alt="SLA Compliance Analysis">
+                        <figcaption>Gambar 7: Perbandingan waktu resolusi aktual vs target SLA untuk setiap tingkat risiko</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Bottleneck by Zone -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Bottleneck Berdasarkan Zona</h3>
+                    <button class="btn-data-view" onclick="openDataModal('bottleneckZona')">
+                        <span class="icon">📊</span> Lihat Data Lengkap
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-container mb-3">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Zona</th>
+                                    <th class="text-right">Total Temuan</th>
+                                    <th class="text-right">Rata-rata (hari)</th>
+                                    <th class="text-right">SLA Compliance</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(239, 68, 68, 0,1);">
+                                    <td class="font-bold">UNKNOWN</td>
+                                    <td class="text-right">67</td>
+                                    <td class="text-right font-bold">250 hari</td>
+                                    <td class="text-right font-bold" style="color: #EF4444;">0%</td>
+                                    <td><span class="badge badge-danger">Critical</span></td>
+                                </tr>
+                                <tr style="background: rgba(245, 158, 11, 0,1);">
+                                    <td class="font-bold">SUPPORT</td>
+                                    <td class="text-right">1.688</td>
+                                    <td class="text-right font-bold">202 hari</td>
+                                    <td class="text-right font-bold" style="color: #F59E0B;">7,1%</td>
+                                    <td><span class="badge badge-warning">Poor</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold">COAL_HANDLING</td>
+                                    <td class="text-right">571</td>
+                                    <td class="text-right">179 hari</td>
+                                    <td class="text-right" style="color: #F59E0B;">8,1%</td>
+                                    <td><span class="badge badge-warning">Poor</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold">UTILITY</td>
+                                    <td class="text-right">599</td>
+                                    <td class="text-right">163 hari</td>
+                                    <td class="text-right" style="color: #F59E0B;">11,9%</td>
+                                    <td><span class="badge badge-warning">Low</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold">MAIN_UNIT</td>
+                                    <td class="text-right">2.606</td>
+                                    <td class="text-right">159 hari</td>
+                                    <td class="text-right" style="color: #F59E0B;">10,7%</td>
+                                    <td><span class="badge badge-warning">Low</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <figure class="image-card">
+                        <img src="assets/images/II.3.2_bottleneck_by_zona.png" alt="Bottleneck by Zone">
+                        <figcaption>Gambar 8: Identifikasi zona dengan waktu penyelesaian terlama dan SLA compliance terendah</figcaption>
+                    </figure>
+                </div>
+                <div class="card-footer">
+                    <strong>Zona Prioritas:</strong> UNKNOWN dan SUPPORT memerlukan perhatian khusus dengan rata-rata waktu penyelesaian 250 dan 202 hari serta SLA compliance di bawah 10%.
+                </div>
+            </div>
+
+            <!-- Backlog Age Distribution -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Distribusi Usia Backlog</h3>
+                </div>
+                <div class="card-body">
+                    <figure class="image-card">
+                        <img src="assets/images/II.3.2_backlog_age_distribution.png" alt="Backlog Age Distribution">
+                        <figcaption>Gambar 9: Distribusi usia temuan yang masih dalam backlog atau pending penyelesaian</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Temuan Kunci</h2>
+                <p>Insight penting dari analisis workflow dan SLA compliance</p>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-item success">
+                    <div class="insight-title">Close Rate Excellent</div>
+                    <div class="insight-value">Close rate mencapai 99,2% dengan hanya 44 temuan yang masih open dari total 5.575 temuan. Ini menunjukkan komitmen tinggi dalam menyelesaikan temuan K3.</div>
+                </div>
+
+                <div class="insight-item warning">
+                    <div class="insight-title">Penurunan di Oktober 2025</div>
+                    <div class="insight-value">Close rate Oktober turun menjadi 90,6% dengan 43 temuan pending. Perlu investigasi penyebab dan tindak lanjut untuk mencegah akumulasi backlog.</div>
+                </div>
+
+                <div class="insight-item danger">
+                    <div class="insight-title">SLA Compliance Sangat Rendah</div>
+                    <div class="insight-value">Rata-rata waktu resolusi 141-269 hari jauh melebihi target SLA 1-14 hari. SLA compliance tertinggi hanya 12,9% untuk risiko LOW.</div>
+                </div>
+
+                <div class="insight-item danger">
+                    <div class="insight-title">HIGH & CRITICAL: 0% SLA Compliance</div>
+                    <div class="insight-value">Tidak ada satu pun temuan HIGH (255 kasus) dan CRITICAL (107 kasus) yang memenuhi target SLA 1-2 hari. Rata-rata penyelesaian 268-269 hari.</div>
+                </div>
+
+                <div class="insight-item warning">
+                    <div class="insight-title">Zona SUPPORT Paling Lambat</div>
+                    <div class="insight-value">Zona SUPPORT memiliki rata-rata waktu penyelesaian terlama (202 hari) dengan 1.688 temuan dan SLA compliance hanya 7,1%.</div>
+                </div>
+
+                <div class="insight-item warning">
+                    <div class="insight-title">Zona UNKNOWN Perlu Klarifikasi</div>
+                    <div class="insight-value">67 temuan dengan zona UNKNOWN memiliki rata-rata penyelesaian 250 hari dan 0% SLA compliance. Perlu kategorisasi yang lebih baik.</div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-title">Gap Antara Completion dan Kecepatan</div>
+                    <div class="insight-value">Temuan cenderung diselesaikan (99,2%) namun dengan waktu yang sangat jauh dari target. Indikasi target SLA mungkin terlalu ambisius.</div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-title">Konsistensi Tinggi Jan-Sept 2025</div>
+                    <div class="insight-value">Close rate 100% konsisten selama 8 bulan (Februari-September) menunjukkan proses yang stabil sebelum gangguan di Oktober.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis Box -->
+        <section class="section">
+            <div class="analysis-box">
+                <h4>Analisis Mendalam</h4>
+                <ul>
+                    <li><strong>Paradoks Close Rate vs SLA:</strong> Close rate 99,2% yang sangat baik kontras dengan SLA compliance yang sangat rendah (0-12,9%). Ini menunjukkan bahwa temuan memang diselesaikan, namun dengan waktu yang jauh melebihi target. Perlu evaluasi apakah target SLA realistis atau perlu penyesuaian berdasarkan kompleksitas operasional.</li>
+
+                    <li><strong>Prioritas Risiko Tidak Tercermin:</strong> Temuan CRITICAL seharusnya diselesaikan dalam 1 hari, namun rata-ratanya 269 hari. Tidak ada perbedaan signifikan waktu penyelesaian antara LOW (141 hari) dan CRITICAL (269 hari). Sistem prioritas tidak berfungsi efektif.</li>
+
+                    <li><strong>Bottleneck Zona SUPPORT:</strong> Dengan 1.688 temuan (30% dari total), zona SUPPORT memiliki performa terburuk kedua (202 hari). Kemungkinan penyebab: keterbatasan resource, kompleksitas temuan, atau dependency dengan pihak eksternal.</li>
+
+                    <li><strong>Anomali Oktober 2025:</strong> Penurunan mendadak close rate dari 100% ke 90,6% perlu investigasi. Kemungkinan: perubahan proses, keterbatasan resource sementara, atau lonjakan kompleksitas temuan di bulan tersebut.</li>
+
+                    <li><strong>Data Quality Issue:</strong> 67 temuan dengan zona UNKNOWN menunjukkan gap dalam data entry atau kategorisasi. Perlu standarisasi proses input data untuk meningkatkan akurasi analisis.</li>
+
+                    <li><strong>Pola Resolusi Uniform:</strong> Rata-rata resolusi 141-269 hari untuk semua level risiko menunjukkan semua temuan diperlakukan serupa, tanpa pembeda berdasarkan urgency. Perlu mekanisme fast-track untuk HIGH/CRITICAL.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Recommendations -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Rekomendasi</h2>
+                <p>Langkah-langkah strategis untuk meningkatkan SLA compliance dan efisiensi workflow</p>
+            </div>
+
+            <div class="recommendation-box">
+                <h4>Rekomendasi Tindakan</h4>
+                <ol>
+                    <li>
+                        <strong>Revisi Target SLA Berbasis Data Aktual:</strong>
+                        <ul>
+                            <li>Evaluasi ulang target SLA berdasarkan rata-rata aktual dan kompleksitas operasional</li>
+                            <li>Pertimbangkan target bertahap: SHORT (LOW: 30 hari, MEDIUM: 21 hari), MEDIUM (HIGH: 14 hari), LONG (CRITICAL: 7 hari dengan review harian)</li>
+                            <li>Tetapkan SLA yang realistis namun tetap mendorong peningkatan bertahap</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Implementasi Sistem Prioritas Berbasis Risiko:</strong>
+                        <ul>
+                            <li>Buat mekanisme fast-track untuk temuan HIGH dan CRITICAL dengan eskalasi otomatis</li>
+                            <li>Assignment temuan HIGH/CRITICAL ke tim dedicated atau PIC senior</li>
+                            <li>Daily standup meeting untuk review progress temuan prioritas tinggi</li>
+                            <li>Notifikasi eskalasi otomatis ke management jika temuan CRITICAL > 3 hari</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Investigasi dan Penguatan Zona SUPPORT:</strong>
+                        <ul>
+                            <li>Root cause analysis mengapa zona SUPPORT memiliki waktu resolusi terlama (202 hari)</li>
+                            <li>Evaluasi kebutuhan penambahan resource atau pelatihan khusus</li>
+                            <li>Identifikasi apakah ada dependency dengan pihak eksternal yang memperlambat</li>
+                            <li>Pertimbangkan outsourcing atau partnership untuk mempercepat resolusi</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Tindak Lanjut Backlog Oktober 2025:</strong>
+                        <ul>
+                            <li>Investigasi segera 43 temuan pending di Oktober 2025</li>
+                            <li>Analisis penyebab penurunan close rate dari 100% ke 90,6%</li>
+                            <li>Buat action plan spesifik untuk menyelesaikan backlog dalam 30 hari</li>
+                            <li>Monitor trend November-Desember untuk memastikan tidak ada penurunan lebih lanjut</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Perbaikan Data Quality dan Kategorisasi:</strong>
+                        <ul>
+                            <li>Kategorisasi ulang 67 temuan dengan zona UNKNOWN</li>
+                            <li>Implementasi validasi mandatory field saat pembuatan temuan</li>
+                            <li>Pelatihan untuk reporter mengenai pentingnya data lengkap dan akurat</li>
+                            <li>Periodic data cleansing untuk memastikan konsistensi kategorisasi</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Monitoring dan Dashboard Real-time:</strong>
+                        <ul>
+                            <li>Buat dashboard SLA compliance real-time untuk visibility management</li>
+                            <li>Alert otomatis untuk temuan yang mendekati atau melewati SLA</li>
+                            <li>Weekly report aging temuan dengan prioritas tindak lanjut</li>
+                            <li>Monthly review SLA compliance dengan stakeholder terkait</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Optimasi Workflow Process:</strong>
+                        <ul>
+                            <li>Review dan streamline proses approval yang mungkin memperlambat resolusi</li>
+                            <li>Identifikasi bottleneck dalam workflow (assignment delay, PIC response time, approval lag)</li>
+                            <li>Implementasi parallel processing untuk temuan non-dependent</li>
+                            <li>Otomatisasi task repetitif untuk mempercepat penyelesaian</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Capacity Planning dan Resource Allocation:</strong>
+                        <ul>
+                            <li>Analisis beban kerja PIC berdasarkan volume dan kompleksitas temuan</li>
+                            <li>Balanced assignment untuk mencegah overload di zona tertentu</li>
+                            <li>Cross-training antar zona untuk fleksibilitas resource</li>
+                            <li>Pertimbangkan penambahan resource di zona dengan backlog tinggi</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Kesimpulan</h3>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2">
+                        <strong>Analisis workflow penyelesaian temuan K3 di UP Indramayu menunjukkan dua sisi yang kontras:</strong>
+                    </p>
+
+                    <p class="mb-2">
+                        <strong>Sisi Positif:</strong> Close rate 99,2% yang excellent menunjukkan komitmen tinggi dalam menyelesaikan temuan K3. Konsistensi 100% close rate selama 8 bulan berturut-turut (Februari-September 2025) membuktikan proses yang stabil dan efektif. Tingkat completion yang tinggi di setiap tahapan workflow (99,2% assignment dan resolution) menunjukkan sistem tracking yang baik.
+                    </p>
+
+                    <p class="mb-2">
+                        <strong>Sisi yang Memerlukan Perbaikan:</strong> SLA compliance yang sangat rendah (0-12,9%) dan rata-rata waktu resolusi 141-269 hari vs target 1-14 hari mengindikasikan kesenjangan besar antara target dan realitas operasional. Tidak adanya satu pun temuan HIGH (255 kasus) dan CRITICAL (107 kasus) yang memenuhi SLA menunjukkan sistem prioritas tidak berfungsi. Zona SUPPORT dan UNKNOWN menjadi bottleneck utama dengan performa terburuk.
+                    </p>
+
+                    <p class="mb-2">
+                        <strong>Penurunan close rate di Oktober 2025 menjadi 90,6%</strong> (43 temuan pending) adalah early warning yang perlu ditindaklanjuti segera untuk mencegah akumulasi backlog.
+                    </p>
+
+                    <p>
+                        <strong>Rekomendasi utama:</strong> Revisi target SLA berbasis data aktual, implementasi mekanisme fast-track untuk HIGH/CRITICAL, penguatan zona SUPPORT, dan perbaikan sistem prioritas. Dengan close rate yang sudah excellent, fokus improvement harus pada <em>kecepatan</em> penyelesaian, bukan hanya <em>completion</em>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-text">PT PLN Nusantara Power</div>
+                <p>Unit Pembangkitan Indramayu</p>
+                <p>Analisis Data IZAT K3 - Periode Januari - Oktober 2025</p>
+                <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+                    &copy; 2025 PT PLN Nusantara Power. Generated on 18 Desember 2025.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-overlay" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img src="" alt="" id="lightbox-img">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Data Modal -->
+    <div class="data-modal-overlay" id="dataModal">
+        <div class="data-modal-content">
+            <div class="data-modal-header">
+                <h3 id="dataModalTitle">Data Tabel</h3>
+                <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+            </div>
+            <div class="data-modal-body" id="dataModalBody">
+                <!-- Table will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data untuk modal tables
+        const modalData = {
+            funnelAnalysis: {
+                title: 'Funnel Analysis Workflow Penyelesaian',
+                headers: ['Stage', 'Count', 'Percentage'],
+                rows: [
+                    ['Total Created', '5,575', '100.0%'],
+                    ['Assigned to PIC', '5,532', '99.2%'],
+                    ['Closed/Resolved', '5,531', '99.2%']
+                ]
+            },
+            monthlyCloseRate: {
+                title: 'Tren Close Rate Bulanan (Januari - Oktober 2025)',
+                headers: ['Bulan', 'Total', 'Closed', 'Close Rate (%)'],
+                rows: [
+                    ['2025-01', '758', '757', '99.9%'],
+                    ['2025-02', '319', '319', '100.0%'],
+                    ['2025-03', '691', '691', '100.0%'],
+                    ['2025-04', '317', '317', '100.0%'],
+                    ['2025-05', '803', '803', '100.0%'],
+                    ['2025-06', '322', '322', '100.0%'],
+                    ['2025-07', '794', '794', '100.0%'],
+                    ['2025-08', '519', '519', '100.0%'],
+                    ['2025-09', '594', '594', '100.0%'],
+                    ['2025-10', '458', '415', '90.6%']
+                ]
+            },
+            slaCompliance: {
+                title: 'SLA Compliance Berdasarkan Tingkat Risiko',
+                headers: ['Risk Severity', 'Total', 'SLA Met', 'Avg Resolution (Hari)', 'SLA Compliance (%)', 'Target (Hari)'],
+                rows: [
+                    ['LOW', '3,954', '512', '141', '12.9%', '14'],
+                    ['MEDIUM', '1,215', '4', '262', '0.3%', '5'],
+                    ['HIGH', '255', '0', '268', '0.0%', '2'],
+                    ['CRITICAL', '107', '0', '269', '0.0%', '1']
+                ]
+            },
+            bottleneckZona: {
+                title: 'Bottleneck Berdasarkan Zona Operasi',
+                headers: ['Zona', 'Total', 'Avg Days', 'Median Days', 'Std Dev', 'SLA Compliance (%)'],
+                rows: [
+                    ['UNKNOWN', '67', '250', '240', '160', '0.0%'],
+                    ['SUPPORT', '1,688', '202', '154', '161', '7.1%'],
+                    ['COAL_HANDLING', '571', '179', '142', '150', '8.1%'],
+                    ['UTILITY', '599', '163', '73', '166', '11.9%'],
+                    ['MAIN_UNIT', '2,606', '159', '112', '147', '10.7%']
+                ]
+            }
+        };
+
+        function openDataModal(dataKey) {
+            const data = modalData[dataKey];
+            const modal = document.getElementById('dataModal');
+            const title = document.getElementById('dataModalTitle');
+            const body = document.getElementById('dataModalBody');
+
+            title.textContent = data.title;
+
+            let tableHtml = '<table class="data-table-simple"><thead><tr>';
+            data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+            tableHtml += '</tr></thead><tbody>';
+            data.rows.forEach((row, idx) => {
+                const highlight = idx < 3 ? ' class="highlight"' : '';
+                tableHtml += `<tr${highlight}>`;
+                row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+                tableHtml += '</tr>';
+            });
+            tableHtml += '</tbody></table>';
+
+            body.innerHTML = tableHtml;
+            modal.classList.add('active');
+        }
+
+        function closeDataModal() {
+            document.getElementById('dataModal').classList.remove('active');
+        }
+    </script>
+
+    <script>
+        // Lightbox functionality
+        document.querySelectorAll('.image-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                const caption = this.querySelector('figcaption');
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+                const lightboxCaption = document.getElementById('lightbox-caption');
+
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxCaption.textContent = caption ? caption.textContent : '';
+                lightbox.classList.add('active');
+            });
+        });
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Close on overlay click
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+        document.getElementById('dataModal').addEventListener('click', function(e) {
+            if (e.target === this) closeDataModal();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closeDataModal();
+            }
+        });
+    </script>
+</body>
+</html>

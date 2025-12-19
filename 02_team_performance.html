@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analisis Performa Tim - Laporan IZAT K3 UP Indramayu</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Data Cleansing</button>
+          <div class="nav-dropdown-menu cleansing-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html" class="active"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Analisis Performa Tim</h1>
+        <p>Evaluasi Kinerja Reporter, PIC, dan Vendor dalam Program IZAT K3</p>
+        <span class="hero-badge">Periode: Januari 2023 - November 2024</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Overview Stats -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card primary">
+          <div class="stat-label">Total Pelapor Aktif</div>
+          <div class="stat-value">652</div>
+          <div class="stat-change positive">Dari 15 perusahaan</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-label">Top Reporter</div>
+          <div class="stat-value">Suparman</div>
+          <div class="stat-change">34 laporan (70,6% detection rate)</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-label">PIC Overloaded</div>
+          <div class="stat-value">1</div>
+          <div class="stat-change">Andrian Denofan - 2.613 temuan (47%)</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">Vendor Tier Gold</div>
+          <div class="stat-value">2</div>
+          <div class="stat-change">PLN NP Services & Garda Bangsa</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section II.2.1 - Reporter Leaderboard -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🏆</span>
+          A. Papan Peringkat Reporter
+        </h2>
+        <p>Top performers dalam melaporkan temuan K3 dengan konsistensi dan kualitas tinggi</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Top 4 Reporter Terbaik</h3>
+          <button class="btn-data-view" onclick="openDataModal('reporterLeaderboard')">
+            <span class="icon">📊</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Peringkat</th>
+                  <th>Badge</th>
+                  <th>Nama</th>
+                  <th>Perusahaan</th>
+                  <th>Total Laporan</th>
+                  <th>Rata-rata Kualitas</th>
+                  <th>Detection Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1</strong></td>
+                  <td><span class="badge badge-gold">GOLD</span></td>
+                  <td><strong>Suparman</strong></td>
+                  <td>PT GARDA BANGSA SECURINDO</td>
+                  <td><strong>34</strong></td>
+                  <td>3,71</td>
+                  <td>
+                    <strong>70,6%</strong>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill" style="width: 70,6%"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>2</strong></td>
+                  <td><span class="badge badge-gold">GOLD</span></td>
+                  <td><strong>MUHAMMAD SAFEI</strong></td>
+                  <td>PT DES</td>
+                  <td><strong>25</strong></td>
+                  <td>4,4</td>
+                  <td>
+                    <strong>88,0%</strong>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill success" style="width: 88%"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>3</strong></td>
+                  <td><span class="badge badge-gold">GOLD</span></td>
+                  <td><strong>ADE ROSIKIN</strong></td>
+                  <td>PT PLN NP SERVICES</td>
+                  <td><strong>20</strong></td>
+                  <td>4,4</td>
+                  <td>
+                    <strong>70,0%</strong>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill" style="width: 70%"></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>4</strong></td>
+                  <td><span class="badge badge-silver">SILVER</span></td>
+                  <td><strong>ROSDA LIA YANTI</strong></td>
+                  <td>PT PLN NP SERVICES</td>
+                  <td><strong>22</strong></td>
+                  <td>3,73</td>
+                  <td>
+                    <strong>77,3%</strong>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill" style="width: 77,3%"></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <strong>Catatan:</strong> Detection Rate menunjukkan persentase temuan yang benar-benar memerlukan tindakan perbaikan
+        </div>
+      </div>
+
+      <!-- Reporter Visualizations -->
+      <div class="grid-2 mb-4">
+        <figure class="image-card">
+          <img src="assets/images/II.2.1_reporter_leaderboard_combined.png" alt="Reporter Leaderboard Combined">
+          <figcaption>Papan Peringkat Reporter Gabungan - Volume, Kualitas, dan Detection Rate</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.2.1_top_reporters_volume.png" alt="Top Reporters Volume">
+          <figcaption>Volume Laporan dari Top 10 Reporter</figcaption>
+        </figure>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <figure class="image-card">
+          <img src="assets/images/II.2.1_top_reporters_quality.png" alt="Top Reporters Quality">
+          <figcaption>Kualitas Laporan dari Top Reporter</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.2.1_reporter_by_company.png" alt="Reporter by Company">
+          <figcaption>Distribusi Reporter Berdasarkan Perusahaan</figcaption>
+        </figure>
+      </div>
+
+      <!-- Reporter Analysis -->
+      <div class="analysis-box">
+        <h4>Analisis Kinerja Reporter</h4>
+        <ul>
+          <li><strong>Suparman dari PT Garda Bangsa Securindo</strong> konsisten sebagai top reporter dengan 34 laporan dan detection rate 70,6%, menunjukkan kepekaan tinggi terhadap isu K3 lapangan</li>
+          <li><strong>Muhammad Safei (PT DES)</strong> memiliki kualitas tertinggi (4,4) dengan detection rate 88%, mencerminkan pelaporan yang sangat akurat dan berkualitas</li>
+          <li><strong>Tim Security (PT Garda Bangsa)</strong> mendominasi top reporter, menunjukkan efektivitas program patrol dan inspeksi keamanan</li>
+          <li><strong>Konsistensi tinggi</strong> dari top 4 reporter (20-34 laporan masing-masing) menunjukkan komitmen berkelanjutan terhadap keselamatan kerja</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section II.2.2 - PIC Performance -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">👥</span>
+          B. Kinerja Person In Charge (PIC)
+        </h2>
+        <p>Evaluasi beban kerja, tingkat penyelesaian, dan kecepatan resolusi PIC</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Performa PIC - Top 4 Berdasarkan Beban Kerja</h3>
+          <button class="btn-data-view" onclick="openDataModal('picPerformance')">
+            <span class="icon">📊</span> Lihat Data Lengkap (16 PIC)
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>PIC</th>
+                  <th>Total Temuan</th>
+                  <th>Selesai</th>
+                  <th>Close Rate</th>
+                  <th>Rata-rata Waktu Resolusi</th>
+                  <th>Status Beban Kerja</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Andrian Denofan</strong></td>
+                  <td><strong>2.613</strong></td>
+                  <td>2.612</td>
+                  <td>
+                    <span class="badge badge-success">100%</span>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill success" style="width: 100%"></div>
+                    </div>
+                  </td>
+                  <td>110 hari</td>
+                  <td><span class="badge badge-danger">OVERLOADED</span></td>
+                </tr>
+                <tr>
+                  <td><strong>TAUFIQ ISMAIL</strong></td>
+                  <td><strong>951</strong></td>
+                  <td>951</td>
+                  <td>
+                    <span class="badge badge-success">100%</span>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill success" style="width: 100%"></div>
+                    </div>
+                  </td>
+                  <td>188 hari</td>
+                  <td><span class="badge badge-warning">HIGH</span></td>
+                </tr>
+                <tr>
+                  <td><strong>ASEP SETYAWAN</strong></td>
+                  <td><strong>696</strong></td>
+                  <td>696</td>
+                  <td>
+                    <span class="badge badge-success">100%</span>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill success" style="width: 100%"></div>
+                    </div>
+                  </td>
+                  <td>348 hari</td>
+                  <td><span class="badge badge-warning">HIGH</span></td>
+                </tr>
+                <tr>
+                  <td><strong>DOVAN PAHALATUA</strong></td>
+                  <td><strong>553</strong></td>
+                  <td>553</td>
+                  <td>
+                    <span class="badge badge-success">100%</span>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill success" style="width: 100%"></div>
+                    </div>
+                  </td>
+                  <td>234 hari</td>
+                  <td><span class="badge badge-warning">HIGH</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <strong>Catatan:</strong> Andrian Denofan menangani 47% dari total temuan - memerlukan redistribusi beban kerja
+        </div>
+      </div>
+
+      <!-- PIC Visualizations -->
+      <div class="grid-3 mb-4">
+        <figure class="image-card">
+          <img src="assets/images/II.2.2_pic_workload_overview.png" alt="PIC Workload Overview">
+          <figcaption>Overview Beban Kerja PIC</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.2.2_pic_resolution_time.png" alt="PIC Resolution Time">
+          <figcaption>Waktu Resolusi Rata-rata per PIC</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.2.2_pic_performance_score.png" alt="PIC Performance Score">
+          <figcaption>Skor Performa PIC (Gabungan)</figcaption>
+        </figure>
+      </div>
+
+      <!-- PIC Analysis -->
+      <div class="analysis-box">
+        <h4>Analisis Kinerja PIC</h4>
+        <ul>
+          <li><strong>Close Rate 100% untuk semua PIC</strong> menunjukkan dedikasi tinggi dan tidak ada temuan yang diabaikan</li>
+          <li><strong>Andrian Denofan sangat overloaded</strong> dengan 2.613 temuan (47% total) - perlu segera redistribusi untuk mencegah burnout dan menjaga kualitas penyelesaian</li>
+          <li><strong>Waktu resolusi bervariasi signifikan</strong>: dari 110 hari (Andrian) hingga 348 hari (Asep Setyawan) - menunjukkan perlunya standarisasi SLA</li>
+          <li><strong>Andrian Denofan paling efisien</strong> dalam resolusi (110 hari) meski beban kerja tertinggi, namun perlu diwaspadai risiko kelelahan</li>
+          <li><strong>Perlu tambahan PIC</strong> atau redistribusi untuk meratakan beban kerja dan mempercepat resolusi</li>
+        </ul>
+      </div>
+
+      <!-- PIC Workload Alert -->
+      <div class="insights-grid mt-4">
+        <div class="insight-item danger">
+          <div class="insight-title">Risiko Burnout PIC</div>
+          <div class="insight-value">Andrian Denofan menangani beban kerja 2,7x lebih tinggi dari PIC rata-rata</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Tingkat Penyelesaian Sempurna</div>
+          <div class="insight-value">100% close rate di semua PIC menunjukkan komitmen penyelesaian yang luar biasa</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Waktu Resolusi Perlu Dipercepat</div>
+          <div class="insight-value">Rata-rata 220 hari untuk resolusi - target maksimal 90 hari untuk temuan kritis</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section II.2.3 - Vendor Performance -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🏢</span>
+          C. Scorecard Kinerja Vendor
+        </h2>
+        <p>Penilaian kontribusi, kualitas, dan detection rate dari seluruh vendor dan kontraktor</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Vendor Scorecard - Top 5 Vendor</h3>
+          <button class="btn-data-view" onclick="openDataModal('vendorScorecard')">
+            <span class="icon">📊</span> Lihat Data Lengkap (9 Vendor)
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Perusahaan</th>
+                  <th>Total Laporan</th>
+                  <th>Reporter Unik</th>
+                  <th>Rata-rata Kualitas</th>
+                  <th>Detection Rate</th>
+                  <th>Tier</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>PT PLN NP SERVICES</strong></td>
+                  <td><strong>1.836</strong></td>
+                  <td>278</td>
+                  <td>2,28</td>
+                  <td>
+                    <strong>21,9%</strong>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill warning" style="width: 21,9%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-gold">GOLD</span></td>
+                </tr>
+                <tr>
+                  <td><strong>PT GARDA BANGSA SECURINDO</strong></td>
+                  <td><strong>809</strong></td>
+                  <td>84</td>
+                  <td>2,68</td>
+                  <td>
+                    <strong>38,7%</strong>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill" style="width: 38,7%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-gold">GOLD</span></td>
+                </tr>
+                <tr>
+                  <td><strong>PT RBU</strong></td>
+                  <td><strong>1.000</strong></td>
+                  <td>152</td>
+                  <td>2,08</td>
+                  <td>
+                    <strong>9,8%</strong>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill danger" style="width: 9,8%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-silver">SILVER</span></td>
+                </tr>
+                <tr>
+                  <td><strong>PT MKP</strong></td>
+                  <td><strong>725</strong></td>
+                  <td>105</td>
+                  <td>2,03</td>
+                  <td>
+                    <strong>21,1%</strong>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill warning" style="width: 21,1%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-silver">SILVER</span></td>
+                </tr>
+                <tr>
+                  <td><strong>PT PLN NUSANTARA POWER</strong></td>
+                  <td><strong>165</strong></td>
+                  <td>33</td>
+                  <td>3,61</td>
+                  <td>
+                    <strong>37,0%</strong>
+                    <div class="progress-bar mt-1">
+                      <div class="progress-fill" style="width: 37%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-bronze">BRONZE</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <strong>Tier Ranking:</strong> GOLD = Volume tinggi + Detection rate baik | SILVER = Volume sedang | BRONZE = Volume rendah namun kualitas tinggi
+        </div>
+      </div>
+
+      <!-- Vendor Visualizations -->
+      <div class="grid-3 mb-4">
+        <figure class="image-card">
+          <img src="assets/images/II.2.3_vendor_distribution.png" alt="Vendor Distribution">
+          <figcaption>Distribusi Kontribusi Laporan per Vendor</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.2.3_vendor_scorecard.png" alt="Vendor Scorecard">
+          <figcaption>Scorecard Vendor - Kualitas vs Detection Rate</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.2.3_pln_vs_vendor_comparison.png" alt="PLN vs Vendor Comparison">
+          <figcaption>Perbandingan Kinerja PLN vs Vendor Eksternal</figcaption>
+        </figure>
+      </div>
+
+      <!-- Vendor Analysis -->
+      <div class="analysis-box">
+        <h4>Analisis Kinerja Vendor</h4>
+        <ul>
+          <li><strong>PT PLN NP Services mendominasi volume</strong> dengan 1.836 laporan (33% total) dan 278 reporter aktif - menunjukkan engagement tinggi namun detection rate masih perlu ditingkatkan (21,9%)</li>
+          <li><strong>PT Garda Bangsa Securindo (Security) paling efektif</strong> dengan detection rate 38,7% tertinggi - tim security berhasil mengidentifikasi temuan yang benar-benar memerlukan tindakan</li>
+          <li><strong>PT RBU memerlukan pelatihan mendesak</strong> - detection rate hanya 9,8% menunjukkan banyak laporan yang tidak substansial atau false positive</li>
+          <li><strong>PT PLN Nusantara Power (internal)</strong> memiliki kualitas tertinggi (3,61) dengan detection rate baik (37%) - meski volume rendah, kualitas pelaporan sangat baik</li>
+          <li><strong>278 reporter aktif dari PLN NP Services</strong> menunjukkan kultur safety yang kuat, namun perlu peningkatan training untuk akurasi pelaporan</li>
+        </ul>
+      </div>
+
+      <!-- Vendor Performance Insights -->
+      <div class="insights-grid mt-4">
+        <div class="insight-item success">
+          <div class="insight-title">Best Detection Rate</div>
+          <div class="insight-value">PT Garda Bangsa Securindo - 38,7% (Tim Security paling efektif)</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Perlu Training Intensif</div>
+          <div class="insight-value">PT RBU - Detection rate 9,8% (90% laporan tidak substansial)</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-title">Kontribusi Terbesar</div>
+          <div class="insight-value">PT PLN NP Services - 33% total laporan (1.836 laporan)</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Kualitas Tertinggi</div>
+          <div class="insight-value">PT PLN Nusantara Power - Rata-rata 3,61 (Internal quality benchmark)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Insights Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">💡</span>
+          Key Insights: Temuan Utama Performa Tim
+        </h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h3>Highlights Positif</h3>
+          </div>
+          <div class="card-body">
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--pln-green); font-weight: bold;">✓</span>
+                <strong>Close Rate 100%</strong> - Semua PIC menyelesaikan temuan yang ditugaskan tanpa ada yang terabaikan
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--pln-green); font-weight: bold;">✓</span>
+                <strong>Top reporter konsisten</strong> - Suparman (34 laporan) dan Muhammad Safei (25 laporan) menunjukkan dedikasi tinggi
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--pln-green); font-weight: bold;">✓</span>
+                <strong>Tim Security efektif</strong> - PT Garda Bangsa Securindo mencapai detection rate 38,7% tertinggi
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--pln-green); font-weight: bold;">✓</span>
+                <strong>Engagement tinggi</strong> - 652 reporter aktif dari 15 perusahaan menunjukkan kultur safety yang kuat
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--pln-green); font-weight: bold;">✓</span>
+                <strong>Kualitas internal terbaik</strong> - PLN Nusantara Power mencapai rata-rata kualitas 3,61
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Area Perbaikan Kritis</h3>
+          </div>
+          <div class="card-body">
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--status-danger); font-weight: bold;">!</span>
+                <strong>Andrian Denofan overloaded</strong> - Menangani 47% total temuan (2.613) perlu redistribusi segera
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--status-danger); font-weight: bold;">!</span>
+                <strong>PT RBU detection rate rendah</strong> - Hanya 9,8%, 90% laporan tidak substansial
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--status-warning); font-weight: bold;">⚠</span>
+                <strong>Waktu resolusi bervariasi</strong> - 110-348 hari, perlu standarisasi SLA
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--status-warning); font-weight: bold;">⚠</span>
+                <strong>Detection rate rendah</strong> - Rata-rata vendor hanya 21,9% (PLN NP Services)
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--status-warning); font-weight: bold;">⚠</span>
+                <strong>Gap pelatihan vendor</strong> - Kesenjangan besar antara vendor terbaik (38,7%) dan terburuk (9,8%)
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🎯</span>
+          Rekomendasi Strategis
+        </h2>
+        <p>Langkah-langkah konkret untuk meningkatkan performa tim dan efektivitas program IZAT K3</p>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>1. Program Recognition dan Reward untuk Top Reporters</h4>
+        <ul>
+          <li><strong>Apresiasi Bulanan:</strong> Memberikan penghargaan khusus untuk Suparman, Muhammad Safei, dan top reporters lainnya sebagai role model</li>
+          <li><strong>Incentive System:</strong> Mengembangkan sistem reward berbasis kualitas dan konsistensi pelaporan, bukan hanya volume</li>
+          <li><strong>Best Practice Sharing:</strong> Mengadakan forum untuk top reporters berbagi tips dan metode identifikasi temuan K3</li>
+          <li><strong>Badge System:</strong> Formalisasi sistem GOLD/SILVER/BRONZE badge dengan benefit konkret (sertifikat, point reward, dll)</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>2. Redistribusi Beban Kerja PIC - Prioritas Tertinggi</h4>
+        <ul>
+          <li><strong>Tambah PIC Baru:</strong> Rekrut minimal 2-3 PIC tambahan untuk mengurangi beban Andrian Denofan dari 2.613 menjadi maksimal 1.000 temuan</li>
+          <li><strong>Redistribusi Segera:</strong> Pindahkan 1.500-1.600 temuan dari Andrian ke PIC baru atau PIC dengan beban lebih ringan</li>
+          <li><strong>Workload Balancing:</strong> Implementasi sistem distribusi otomatis untuk meratakan beban kerja antar PIC</li>
+          <li><strong>Monitoring Burnout:</strong> Evaluasi rutin beban kerja dan wellbeing PIC untuk mencegah penurunan kualitas kerja</li>
+          <li><strong>Target SLA:</strong> Tetapkan target maksimal 90 hari untuk resolusi temuan kritis, 180 hari untuk temuan moderat</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>3. Program Pelatihan Intensif untuk Vendor Low Performance</h4>
+        <ul>
+          <li><strong>Training Khusus PT RBU:</strong> Program pelatihan mendesak untuk meningkatkan detection rate dari 9,8% ke minimal 25%</li>
+          <li><strong>Workshop Identifikasi Temuan:</strong> Pelatihan praktis cara membedakan temuan substansial vs non-substansial</li>
+          <li><strong>Benchmark dari Tim Security:</strong> PT Garda Bangsa Securindo (38,7%) menjadi trainer untuk vendor lain</li>
+          <li><strong>Quality Gate:</strong> Implementasi review oleh supervisor sebelum submit untuk vendor dengan detection rate <15%</li>
+          <li><strong>Penalty System:</strong> Vendor dengan detection rate <10% selama 3 bulan berturut-turut mendapat evaluasi kontrak</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>4. Benchmark dan Standardisasi Best Practices</h4>
+        <ul>
+          <li><strong>Security Excellence Model:</strong> Dokumentasi dan sosialisasi metode patrol dan inspeksi dari tim security yang sukses</li>
+          <li><strong>PLN NP Quality Standard:</strong> Jadikan kualitas rata-rata 3,61 dari PT PLN Nusantara Power sebagai benchmark minimal untuk semua vendor</li>
+          <li><strong>Sharing Session Rutin:</strong> Pertemuan bulanan antar vendor untuk berbagi learning dan best practices</li>
+          <li><strong>Quality Scoring System:</strong> Implementasi sistem penilaian komprehensif (volume + kualitas + detection rate + resolution time)</li>
+          <li><strong>Annual Vendor Performance Review:</strong> Evaluasi tahunan dengan kriteria jelas untuk renewal atau terminasi kontrak</li>
+        </ul>
+      </div>
+
+      <!-- Implementation Roadmap -->
+      <div class="card mt-4">
+        <div class="card-header">
+          <h3>Roadmap Implementasi (Q1-Q2 2025)</h3>
+        </div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div>
+              <h4 style="color: var(--pln-primary-blue); margin-bottom: 1rem;">Immediate (0-30 hari)</h4>
+              <ul style="font-size: 0.9rem;">
+                <li>Redistribusi 1.500 temuan dari Andrian Denofan</li>
+                <li>Launch program recognition untuk top reporters</li>
+                <li>Training intensif untuk PT RBU (detection rate 9,8%)</li>
+                <li>Implementasi quality gate untuk vendor low-performance</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="color: var(--pln-green); margin-bottom: 1rem;">Short-term (1-3 bulan)</h4>
+              <ul style="font-size: 0.9rem;">
+                <li>Rekrutmen 2-3 PIC baru</li>
+                <li>Workshop benchmark dari tim security</li>
+                <li>Implementasi workload balancing system</li>
+                <li>Formalisasi badge system (Gold/Silver/Bronze)</li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="color: var(--pln-dark-blue); margin-bottom: 1rem;">Medium-term (3-6 bulan)</h4>
+              <ul style="font-size: 0.9rem;">
+                <li>Annual vendor performance review</li>
+                <li>Standardisasi SLA (90/180 hari)</li>
+                <li>Quality scoring system implementation</li>
+                <li>Best practice documentation dan sosialisasi</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Summary Stats -->
+    <section class="section">
+      <div class="card">
+        <div class="card-header">
+          <h3>Ringkasan Performa Tim - Snapshot</h3>
+        </div>
+        <div class="card-body">
+          <div class="grid-4">
+            <div style="text-align: center; padding: 1rem;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--pln-primary-blue);">652</div>
+              <div style="font-size: 0,875rem; color: var(--pln-gray-500); margin-top: 0.5rem;">Total Reporter Aktif</div>
+            </div>
+            <div style="text-align: center; padding: 1rem;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--pln-green);">100%</div>
+              <div style="font-size: 0,875rem; color: var(--pln-gray-500); margin-top: 0.5rem;">Close Rate (Semua PIC)</div>
+            </div>
+            <div style="text-align: center; padding: 1rem;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--status-warning);">38,7%</div>
+              <div style="font-size: 0,875rem; color: var(--pln-gray-500); margin-top: 0.5rem;">Best Detection Rate (Security)</div>
+            </div>
+            <div style="text-align: center; padding: 1rem;">
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--pln-dark-blue);">15</div>
+              <div style="font-size: 0,875rem; color: var(--pln-gray-500); margin-top: 0.5rem;">Perusahaan Terlibat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+      <p>Laporan Analisis Data IZAT K3</p>
+      <p>Periode: Januari 2023 - November 2024</p>
+      <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+        Generated on: 18 Desember 2024 | Confidential - Internal Use Only
+      </p>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- Data Modal -->
+  <div class="data-modal-overlay" id="dataModal">
+    <div class="data-modal-content">
+      <div class="data-modal-header">
+        <h3 id="dataModalTitle">Data Tabel</h3>
+        <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+      </div>
+      <div class="data-modal-body" id="dataModalBody">
+        <!-- Table will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data untuk modal tables
+    const modalData = {
+      reporterLeaderboard: {
+        title: 'Papan Peringkat Reporter Terbaik',
+        headers: ['Rank', 'Badge', 'Nama', 'NID', 'Perusahaan', 'Total Reports', 'Avg Quality', 'Detection Rate', 'Combined Score'],
+        rows: [
+          ['1', 'GOLD', 'Suparman', '915000930', 'PT GARDA BANGSA SECURINDO', '34', '3.71', '70.6%', '87.1'],
+          ['2', 'GOLD', 'MUHAMMAD SAFEI', '10099DES', 'PT DES', '25', '4.40', '88.0%', '80.8'],
+          ['3', 'GOLD', 'ADE ROSIKIN', '9517146ID', 'PT PLN NP SERVICES', '20', '4.40', '70.0%', '73.4'],
+          ['4', 'SILVER', 'ROSDA LIA YANTI', '8916093PC', 'PT PLN NP SERVICES', '22', '3.73', '77.3%', '69.6']
+        ]
+      },
+      picPerformance: {
+        title: 'Data Lengkap Performa PIC (16 PIC)',
+        headers: ['PIC', 'Total Assigned', 'Closed', 'Avg Resolution (Hari)', 'Avg Risk Score', 'Workload', 'Close Rate', 'Grade'],
+        rows: [
+          ['Andrian Denofan', '2,613', '2,612', '110', '0.80', 'OVERLOADED', '100%', 'B+'],
+          ['TAUFIQ ISMAIL', '951', '951', '188', '1.05', 'HIGH', '100%', 'B+'],
+          ['ASEP SETYAWAN', '696', '696', '348', '1.34', 'HIGH', '100%', 'B+'],
+          ['DOVAN PAHALATUA', '553', '553', '234', '1.96', 'HIGH', '100%', 'B+'],
+          ['BAMBANG SETIA PERMANA', '301', '301', '248', '2.95', 'NORMAL', '100%', 'B+'],
+          ['RIZKY PUTRA PERTAMA', '189', '189', '109', '2.70', 'NORMAL', '100%', 'B+'],
+          ['ABDI ROBBI IKHSAN', '105', '105', '206', '2.06', 'LOW', '100%', 'B+'],
+          ['HANDI PERMANA PUTRA', '82', '82', '134', '2.10', 'LOW', '100%', 'B+'],
+          ['DWI OKI HARI PRASTOWO', '23', '23', '104', '1.96', 'LOW', '100%', 'B+'],
+          ['FAJAR SURYONO', '6', '6', '225', '1.17', 'LOW', '100%', 'B+'],
+          ['FAJAR ALFIANDARU', '4', '4', '109', '1.75', 'LOW', '100%', 'B+'],
+          ['Chandra Eka Saputra', '3', '3', '310', '0.67', 'LOW', '100%', 'B+'],
+          ['Ardi Yanto', '2', '2', '124', '3.00', 'LOW', '100%', 'B+'],
+          ['Fitrah Ayu Lestari', '2', '2', '92', '3.00', 'LOW', '100%', 'B+'],
+          ['Claransia Florentina T.', '1', '1', '786', '3.00', 'LOW', '100%', 'B+'],
+          ['VERY FAHREZA', '1', '1', '77', '3.00', 'LOW', '100%', 'B+']
+        ]
+      },
+      vendorScorecard: {
+        title: 'Vendor Scorecard Lengkap (9 Vendor)',
+        headers: ['Perusahaan', 'Total Reports', 'Unique Reporters', 'Avg Quality', 'Detection Rate', 'Composite Score', 'Rank', 'Tier'],
+        rows: [
+          ['PT PLN NP SERVICES', '1,836', '278', '2.28', '21.9%', '68.8', '1', 'GOLD'],
+          ['PT GARDA BANGSA SECURINDO', '809', '84', '2.68', '38.7%', '64.7', '2', 'GOLD'],
+          ['PT RBU', '1,000', '152', '2.08', '9.8%', '53.6', '3', 'SILVER'],
+          ['PT MKP', '725', '105', '2.03', '21.1%', '49.7', '4', 'SILVER'],
+          ['PT PLN NUSANTARA POWER', '165', '33', '3.61', '37.0%', '47.2', '5', 'BRONZE'],
+          ['PT ADHI GUNA PUTERA', '287', '42', '1.90', '13.6%', '41.1', '6', 'BRONZE'],
+          ['PT PANDU NUSA ENGINEERING', '69', '13', '2.67', '40.6%', '39.0', '7', 'STANDARD'],
+          ['PT DES', '496', '93', '1.77', '20.4%', '38.8', '8', 'STANDARD'],
+          ['PT CAHAYA BOGEG UTAMA', '138', '23', '1.82', '23.9%', '35.6', '9', 'STANDARD']
+        ]
+      }
+    };
+
+    function openDataModal(dataKey) {
+      const data = modalData[dataKey];
+      const modal = document.getElementById('dataModal');
+      const title = document.getElementById('dataModalTitle');
+      const body = document.getElementById('dataModalBody');
+
+      title.textContent = data.title;
+
+      let tableHtml = '<table class="data-table-simple"><thead><tr>';
+      data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+      tableHtml += '</tr></thead><tbody>';
+      data.rows.forEach((row, idx) => {
+        const highlight = idx < 3 ? ' class="highlight"' : '';
+        tableHtml += `<tr${highlight}>`;
+        row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+
+      body.innerHTML = tableHtml;
+      modal.classList.add('active');
+    }
+
+    function closeDataModal() {
+      document.getElementById('dataModal').classList.remove('active');
+    }
+  </script>
+
+  <script>
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close on overlay click
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.getElementById('dataModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDataModal();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeDataModal();
+      }
+    });
+  </script>
+</body>
+</html>

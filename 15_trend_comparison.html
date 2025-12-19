@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 7: Kolom Tren & Komparasi - Data Cleansing IZAT K3</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Data Cleansing</button>
+          <div class="nav-dropdown-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html" class="active"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Kolom Tren & Komparasi</h1>
+        <p>Benchmarking dan Analisis Perubahan Month-over-Month untuk Evaluasi Performa</p>
+        <span class="hero-badge" style="background: linear-gradient(135deg, #35B971, #00A2B9);">
+          <span>🧹</span> Data Cleansing - Step 7 (Final)
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Overview Stats -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card" style="border-left-color: #35B971;">
+          <div class="stat-label">Input Data</div>
+          <div class="stat-value">Step 6</div>
+          <div class="stat-change">66 kolom dari tahap sebelumnya</div>
+        </div>
+        <div class="stat-card" style="border-left-color: #35B971;">
+          <div class="stat-label">Output Data</div>
+          <div class="stat-value">Step 7 Final</div>
+          <div class="stat-change positive">+9 kolom baru (total 75 kolom)</div>
+        </div>
+        <div class="stat-card" style="border-left-color: #35B971;">
+          <div class="stat-label">Periode Analisis</div>
+          <div class="stat-value">10 Bulan</div>
+          <div class="stat-change">Januari - Oktober 2025</div>
+        </div>
+        <div class="stat-card" style="border-left-color: #35B971;">
+          <div class="stat-label">Benchmark Metrics</div>
+          <div class="stat-value">3 Dimensi</div>
+          <div class="stat-change">Quality, Risk, Resolution per Zona</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why This Matters -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">🎯</span>
+          II.4.1 Mengapa Diperlukan
+        </h2>
+        <p>Pentingnya analisis tren dan benchmarking untuk evaluasi performa yang objektif</p>
+      </div>
+
+      <div class="analysis-box" style="background: linear-gradient(135deg, rgba(53, 185, 113, 0.05), rgba(0, 162, 185, 0.05)); border-color: #35B971;">
+        <h4>Tantangan dalam Evaluasi Performa</h4>
+        <ul>
+          <li><strong>Evaluasi absolut tidak cukup kontekstual</strong> - Satu temuan dengan quality score 3.5 terlihat baik, tapi apakah ini di atas atau di bawah rata-rata zona tersebut?</li>
+          <li><strong>Tren perubahan sulit dipantau</strong> - Apakah jumlah temuan bulan ini naik atau turun dibanding bulan lalu? Berapa persen perubahannya?</li>
+          <li><strong>Komparasi antar zona tidak fair</strong> - Setiap zona memiliki karakteristik berbeda. SUPPORT area mungkin memang lebih berisiko daripada UTILITY.</li>
+          <li><strong>Identifikasi improvement atau degradasi memerlukan baseline</strong> - Tanpa benchmark, kita tidak tahu apakah performa membaik atau memburuk.</li>
+        </ul>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Manfaat Benchmarking</h3>
+          </div>
+          <div class="card-body">
+            <div class="insights-grid">
+              <div class="insight-item success">
+                <div class="insight-title">Konteks Zona</div>
+                <div class="insight-value">Setiap zona memiliki baseline performa yang berbeda berdasarkan historical data</div>
+              </div>
+              <div class="insight-item success">
+                <div class="insight-title">Identifikasi Outlier</div>
+                <div class="insight-value">Temuan yang jauh di atas/bawah zona average menjadi lebih visible</div>
+              </div>
+              <div class="insight-item success">
+                <div class="insight-title">Fair Comparison</div>
+                <div class="insight-value">Membandingkan apel dengan apel - SUPPORT vs SUPPORT, bukan vs MAIN_UNIT</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Manfaat Month-over-Month</h3>
+          </div>
+          <div class="card-body">
+            <div class="insights-grid">
+              <div class="insight-item success">
+                <div class="insight-title">Deteksi Tren</div>
+                <div class="insight-value">Lihat perubahan dari bulan ke bulan: apakah membaik, memburuk, atau stagnan?</div>
+              </div>
+              <div class="insight-item success">
+                <div class="insight-title">Early Warning</div>
+                <div class="insight-value">Lonjakan atau penurunan drastis (>30%) menjadi alert untuk investigasi</div>
+              </div>
+              <div class="insight-item success">
+                <div class="insight-title">Evaluasi Intervensi</div>
+                <div class="insight-value">Ukur efektivitas program K3 yang diluncurkan bulan sebelumnya</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benchmark Methodology -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📊</span>
+          II.4.2 Metodologi Benchmark
+        </h2>
+        <p>Cara menghitung rata-rata zona sebagai baseline untuk perbandingan</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="ml-feature-card" style="border-color: #35B971;">
+          <h4>🎯 Tiga Dimensi Benchmark</h4>
+          <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+            Setiap zona memiliki 3 metrik benchmark yang dihitung dari rata-rata historis:
+          </p>
+          <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; margin-bottom: 0.75rem;">
+            <strong style="color: #35B971;">1. zona_avg_quality</strong>
+            <span style="color: var(--pln-gray-600); display: block; font-size: 0.9rem; margin-top: 0.25rem;">
+              Rata-rata report_quality_score untuk semua temuan di zona tersebut
+            </span>
+          </div>
+          <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; margin-bottom: 0.75rem;">
+            <strong style="color: #35B971;">2. zona_avg_risk</strong>
+            <span style="color: var(--pln-gray-600); display: block; font-size: 0.9rem; margin-top: 0.25rem;">
+              Rata-rata risk_score untuk semua temuan di zona tersebut
+            </span>
+          </div>
+          <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem;">
+            <strong style="color: #35B971;">3. zona_avg_resolution</strong>
+            <span style="color: var(--pln-gray-600); display: block; font-size: 0.9rem; margin-top: 0.25rem;">
+              Rata-rata sla_days (durasi penyelesaian) untuk semua temuan di zona tersebut
+            </span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Benchmark per Zona</h3>
+            <button class="btn-data-view" onclick="openDataModal('zonaBenchmarks')">
+              <span class="icon">📊</span> Lihat Data Lengkap
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Zona</th>
+                    <th>Avg Quality</th>
+                    <th>Avg Risk</th>
+                    <th>Avg Resolution</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>COAL_HANDLING</strong></td>
+                    <td>2.12</td>
+                    <td>1.48</td>
+                    <td>7.44 hari</td>
+                  </tr>
+                  <tr>
+                    <td><strong>MAIN_UNIT</strong></td>
+                    <td>1.97</td>
+                    <td>1.37</td>
+                    <td>6.60 hari</td>
+                  </tr>
+                  <tr>
+                    <td><strong>SUPPORT</strong></td>
+                    <td>2.63</td>
+                    <td>1.16</td>
+                    <td>8.42 hari</td>
+                  </tr>
+                  <tr>
+                    <td><strong>UTILITY</strong></td>
+                    <td>2.26</td>
+                    <td>0.92</td>
+                    <td>6.81 hari</td>
+                  </tr>
+                  <tr>
+                    <td><strong>UNKNOWN</strong></td>
+                    <td>3.03</td>
+                    <td>1.75</td>
+                    <td>10.44 hari</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item warning">
+          <div class="insight-title">Quality: UNKNOWN Tertinggi</div>
+          <div class="insight-value">Zona UNKNOWN memiliki rata-rata quality 3.03 - tertinggi, mungkin karena laporan lebih detail/investigatif</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Risk: UNKNOWN Paling Berisiko</div>
+          <div class="insight-value">Zona UNKNOWN memiliki avg risk 1.75 - paling tinggi, area yang tidak terklasifikasi cenderung lebih bahaya</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Resolution: UNKNOWN Terlama</div>
+          <div class="insight-value">Zona UNKNOWN butuh 10.44 hari rata-rata - ketidakjelasan lokasi memperlambat penyelesaian</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trend Methodology -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📈</span>
+          II.4.3 Metodologi Trend (Month-over-Month)
+        </h2>
+        <p>Perhitungan perubahan bulanan dan indikator tren performa</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="ml-feature-card" style="border-color: #35B971;">
+          <h4>📅 Monthly Aggregation</h4>
+          <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+            Untuk setiap kombinasi <strong>month_year + lokasi_zona</strong>, hitung:
+          </p>
+          <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; margin-bottom: 0.75rem;">
+            <strong style="color: #35B971;">month_findings_count</strong>
+            <span style="color: var(--pln-gray-600); display: block; font-size: 0.9rem; margin-top: 0.25rem;">
+              Total temuan di bulan tersebut per zona
+            </span>
+          </div>
+          <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; margin-bottom: 0.75rem;">
+            <strong style="color: #35B971;">month_unsafe_rate</strong>
+            <span style="color: var(--pln-gray-600); display: block; font-size: 0.9rem; margin-top: 0.25rem;">
+              Persentase temuan unsafe (bukan Positive) di bulan tersebut
+            </span>
+          </div>
+          <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem;">
+            <strong style="color: #35B971;">prev_month_findings</strong>
+            <span style="color: var(--pln-gray-600); display: block; font-size: 0.9rem; margin-top: 0.25rem;">
+              Total temuan bulan sebelumnya (untuk perhitungan MoM change)
+            </span>
+          </div>
+        </div>
+
+        <div class="ml-feature-card" style="border-color: #35B971;">
+          <h4>🔄 Month-over-Month Change</h4>
+          <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+            Perhitungan perubahan dari bulan lalu ke bulan ini:
+          </p>
+          <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem; margin-bottom: 0.75rem;">
+            <strong style="color: #35B971;">Formula MoM Change %</strong>
+            <code style="display: block; background: var(--pln-gray-100); padding: 0.5rem; border-radius: 0.25rem; margin-top: 0.5rem; font-size: 0.85rem;">
+              mom_change_pct = ((current - previous) / previous) × 100
+            </code>
+          </div>
+          <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 0.5rem;">
+            <strong style="color: #35B971;">Interpretasi</strong>
+            <span style="color: var(--pln-gray-600); display: block; font-size: 0.9rem; margin-top: 0.25rem;">
+              • Positif (+): Peningkatan temuan<br>
+              • Negatif (-): Penurunan temuan<br>
+              • >30%: Perubahan signifikan, perlu investigasi
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Contoh: MoM Change Oktober 2025</h3>
+          <button class="btn-data-view" onclick="openDataModal('momOctober')">
+            <span class="icon">📊</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Zona</th>
+                  <th>Oktober</th>
+                  <th>September</th>
+                  <th>MoM Change</th>
+                  <th>Unsafe Rate Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="highlight">
+                  <td><strong>UTILITY</strong></td>
+                  <td>41</td>
+                  <td>107</td>
+                  <td><span style="color: var(--pln-green);">-61.7%</span></td>
+                  <td>+10.8pp</td>
+                </tr>
+                <tr class="highlight">
+                  <td><strong>UNKNOWN</strong></td>
+                  <td>6</td>
+                  <td>11</td>
+                  <td><span style="color: var(--pln-green);">-45.5%</span></td>
+                  <td>+1.5pp</td>
+                </tr>
+                <tr class="highlight">
+                  <td><strong>COAL_HANDLING</strong></td>
+                  <td>46</td>
+                  <td>68</td>
+                  <td><span style="color: var(--pln-green);">-32.4%</span></td>
+                  <td>+0.4pp</td>
+                </tr>
+                <tr>
+                  <td><strong>MAIN_UNIT</strong></td>
+                  <td>229</td>
+                  <td>270</td>
+                  <td><span style="color: var(--pln-green);">-15.2%</span></td>
+                  <td>-8.6pp</td>
+                </tr>
+                <tr>
+                  <td><strong>SUPPORT</strong></td>
+                  <td>136</td>
+                  <td>138</td>
+                  <td><span style="color: var(--pln-green);">-1.4%</span></td>
+                  <td>+3.8pp</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="anomaly-alert" style="border-color: #35B971;">
+        <h4>🔍 Insight MoM Oktober 2025</h4>
+        <p style="color: var(--pln-gray-700);">
+          <strong>UTILITY mengalami penurunan drastis -61.7%</strong> dari 107 temuan (Sep) ke 41 temuan (Okt).
+          Ini adalah perubahan signifikan yang perlu ditelusuri: <br>
+          • Apakah ada program K3 baru yang efektif? <br>
+          • Apakah ada underreporting karena SDM berkurang? <br>
+          • Apakah memang kondisi operasional lebih aman?<br><br>
+          <strong>Catatan:</strong> Meski temuan turun, unsafe rate NAIK +10.8pp - artinya proporsi temuan berbahaya meningkat.
+          Ini indikasi <strong>kualitas temuan menurun</strong> (lebih banyak positive yang tidak dilaporkan).
+        </p>
+      </div>
+    </section>
+
+    <!-- Source Code Highlights -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">💻</span>
+          II.4.4 Highlight Source Code
+        </h2>
+        <p>Fungsi-fungsi kunci untuk perhitungan benchmark dan trend analysis</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>1. Perhitungan Zona Benchmarks</h3>
+        </div>
+        <div class="card-body">
+          <pre style="background: var(--pln-gray-100); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.5;"><code># Rata-rata quality score, risk score, dan resolution time per zona
+zona_benchmarks = df.groupby('lokasi_zona').agg({
+    'report_quality_score': 'mean',
+    'risk_score': 'mean',
+    'sla_days': 'mean'
+}).rename(columns={
+    'report_quality_score': 'zona_avg_quality',
+    'risk_score': 'zona_avg_risk',
+    'sla_days': 'zona_avg_resolution'
+})
+
+# Join benchmark ke dataframe utama
+df = df.merge(zona_benchmarks.reset_index(), on='lokasi_zona', how='left')
+
+# Hitung selisih vs benchmark (positive = di atas rata-rata, negative = di bawah)
+df['quality_vs_zona_avg'] = (df['report_quality_score'] - df['zona_avg_quality']).round(2)
+df['risk_vs_zona_avg'] = (df['risk_score'] - df['zona_avg_risk']).round(2)</code></pre>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>2. Agregasi Monthly Metrics</h3>
+        </div>
+        <div class="card-body">
+          <pre style="background: var(--pln-gray-100); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.5;"><code># Agregasi bulanan per zona
+monthly_zona = df.groupby(['month_year', 'lokasi_zona']).agg({
+    'kode_temuan': 'count',
+    'temuan_kategori': lambda x: (x != 'Positive').sum(),
+    'report_quality_score': 'mean',
+    'risk_severity': lambda x: ((x == 'CRITICAL') | (x == 'HIGH')).sum()
+}).rename(columns={
+    'kode_temuan': 'month_findings_count',
+    'temuan_kategori': 'month_unsafe_count',
+    'report_quality_score': 'month_avg_quality',
+    'risk_severity': 'month_high_risk_count'
+})
+
+# Hitung unsafe rate per bulan
+monthly_zona['month_unsafe_rate'] = (
+    monthly_zona['month_unsafe_count'] / monthly_zona['month_findings_count'] * 100
+).round(1)</code></pre>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>3. Perhitungan Month-over-Month Change</h3>
+        </div>
+        <div class="card-body">
+          <pre style="background: var(--pln-gray-100); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.5;"><code># Sort by zona and month untuk sequence yang benar
+monthly_zona = monthly_zona.sort_values(['lokasi_zona', 'month_year'])
+
+# Shift values bulan sebelumnya per zona (menggunakan groupby + shift)
+monthly_zona['prev_month_findings'] = monthly_zona.groupby('lokasi_zona')['month_findings_count'].shift(1)
+monthly_zona['prev_month_unsafe_rate'] = monthly_zona.groupby('lokasi_zona')['month_unsafe_rate'].shift(1)
+
+# Calculate MoM change dalam persentase
+monthly_zona['mom_change_pct'] = (
+    (monthly_zona['month_findings_count'] - monthly_zona['prev_month_findings']) /
+    monthly_zona['prev_month_findings'] * 100
+).round(1)
+
+# Calculate perubahan unsafe rate (dalam percentage points)
+monthly_zona['mom_unsafe_change'] = (
+    monthly_zona['month_unsafe_rate'] - monthly_zona['prev_month_unsafe_rate']
+).round(1)</code></pre>
+        </div>
+      </div>
+
+      <div class="analysis-box" style="background: linear-gradient(135deg, rgba(53, 185, 113, 0.05), rgba(0, 162, 185, 0.05)); border-color: #35B971;">
+        <h4>Catatan Penting Implementasi</h4>
+        <ul>
+          <li><strong>groupby().shift(1)</strong> - Kunci untuk mendapatkan nilai bulan sebelumnya per zona. Tanpa groupby, shift akan mengambil baris sebelumnya tanpa mempertimbangkan zona berbeda.</li>
+          <li><strong>sort_values() sebelum shift</strong> - Sangat penting untuk memastikan urutan kronologis benar. Jika tidak di-sort, shift akan mengambil data yang salah.</li>
+          <li><strong>Handling NaN di bulan pertama</strong> - Bulan pertama (Januari 2025) tidak memiliki prev_month, sehingga mom_change_pct akan NaN. Ini normal dan expected.</li>
+          <li><strong>Percentage points vs percentage</strong> - Perubahan unsafe rate menggunakan pp (percentage points), bukan %. Contoh: 20% → 30% = +10pp, bukan +50%.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Example Output -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📋</span>
+          II.4.5 Contoh Output Kolom Turunan
+        </h2>
+        <p>Preview data setelah penambahan kolom tren dan komparasi</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Kolom Benchmark (vs Zona Average)</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode Temuan</th>
+                  <th>Zona</th>
+                  <th>Quality</th>
+                  <th>Zona Avg</th>
+                  <th>vs Avg</th>
+                  <th>Interpretasi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>KTID1319208</td>
+                  <td>MAIN_UNIT</td>
+                  <td>4.0</td>
+                  <td>1.97</td>
+                  <td><span style="color: var(--pln-green); font-weight: 600;">+2.03</span></td>
+                  <td>Kualitas jauh di atas rata-rata zona</td>
+                </tr>
+                <tr>
+                  <td>KTID1319345</td>
+                  <td>SUPPORT</td>
+                  <td>1.5</td>
+                  <td>2.63</td>
+                  <td><span style="color: var(--status-danger); font-weight: 600;">-1.13</span></td>
+                  <td>Kualitas di bawah rata-rata zona</td>
+                </tr>
+                <tr>
+                  <td>KTID1319512</td>
+                  <td>COAL_HANDLING</td>
+                  <td>2.0</td>
+                  <td>2.12</td>
+                  <td><span style="color: var(--pln-gray-600);">-0.12</span></td>
+                  <td>Mendekati rata-rata zona</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Kolom Monthly Trends</h3>
+          <button class="btn-data-view" onclick="openDataModal('monthlyTrends')">
+            <span class="icon">📊</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Zona</th>
+                  <th>Findings</th>
+                  <th>Prev Month</th>
+                  <th>MoM Change</th>
+                  <th>Unsafe Rate</th>
+                  <th>Trend</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="highlight">
+                  <td>2025-10</td>
+                  <td>UTILITY</td>
+                  <td>41</td>
+                  <td>107</td>
+                  <td><span style="color: var(--pln-green); font-weight: 600;">-61.7%</span></td>
+                  <td>36.6%</td>
+                  <td><span class="badge badge-success">Turun Drastis</span></td>
+                </tr>
+                <tr>
+                  <td>2025-10</td>
+                  <td>MAIN_UNIT</td>
+                  <td>229</td>
+                  <td>270</td>
+                  <td><span style="color: var(--pln-green); font-weight: 600;">-15.2%</span></td>
+                  <td>8.7%</td>
+                  <td><span class="badge badge-success">Turun</span></td>
+                </tr>
+                <tr>
+                  <td>2025-10</td>
+                  <td>SUPPORT</td>
+                  <td>136</td>
+                  <td>138</td>
+                  <td><span style="color: var(--pln-gray-600);">-1.4%</span></td>
+                  <td>53.7%</td>
+                  <td><span class="badge badge-info">Stabil</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Tren Bulanan (Total Semua Zona)</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Bulan</th>
+                    <th>Total Temuan</th>
+                    <th>Unsafe Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-01</td>
+                    <td>758</td>
+                    <td>8.7%</td>
+                  </tr>
+                  <tr>
+                    <td>2025-02</td>
+                    <td>319</td>
+                    <td>19.7%</td>
+                  </tr>
+                  <tr>
+                    <td>2025-03</td>
+                    <td>691</td>
+                    <td>11.9%</td>
+                  </tr>
+                  <tr class="highlight">
+                    <td>2025-08</td>
+                    <td>519</td>
+                    <td><strong>44.3%</strong></td>
+                  </tr>
+                  <tr>
+                    <td>2025-10</td>
+                    <td>458</td>
+                    <td>33.6%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Overall Benchmark</h3>
+          </div>
+          <div class="card-body">
+            <div class="insights-grid">
+              <div class="insight-item" style="border-left-color: #35B971;">
+                <div class="insight-title">Average Quality Score</div>
+                <div class="insight-value" style="font-size: 1.5rem; font-weight: 700; color: var(--pln-dark-blue);">2.23</div>
+              </div>
+              <div class="insight-item" style="border-left-color: #35B971;">
+                <div class="insight-title">Average Risk Score</div>
+                <div class="insight-value" style="font-size: 1.5rem; font-weight: 700; color: var(--pln-dark-blue);">1.27</div>
+              </div>
+              <div class="insight-item" style="border-left-color: #35B971;">
+                <div class="insight-title">Average Resolution Days</div>
+                <div class="insight-value" style="font-size: 1.5rem; font-weight: 700; color: var(--pln-dark-blue);">7.31</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="anomaly-alert warning">
+        <h4>⚠️ Anomali Terdeteksi: Agustus 2025</h4>
+        <p style="color: var(--pln-gray-700);">
+          <strong>Unsafe rate mencapai puncak 44.3%</strong> di bulan Agustus 2025 - hampir separuh dari semua temuan adalah unsafe.
+          Ini adalah anomali signifikan yang perlu investigasi mendalam:<br><br>
+          <strong>Kemungkinan penyebab:</strong><br>
+          • Shutdown/maintenance besar yang meningkatkan eksposur risiko<br>
+          • Kampanye reporting unsafe yang intensif (positive effect - awareness meningkat)<br>
+          • Turnover SDM atau supervisor baru yang lebih ketat standarnya<br>
+          • Kondisi operasional abnormal (cuaca ekstrem, gangguan supply)<br><br>
+          <strong>Follow-up action:</strong> Cross-check dengan log operasional Agustus 2025, wawancara PIC K3, dan review program K3 periode tersebut.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pipeline Complete Summary -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">✅</span>
+          Pipeline Pembersihan Data - Selesai
+        </h2>
+        <p>Ringkasan lengkap 7 tahapan transformasi data IZAT dari 31 kolom menjadi 75 kolom</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Rekap Lengkap 7 Tahapan</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Step</th>
+                  <th>Nama Tahap</th>
+                  <th>Output File</th>
+                  <th>Kolom</th>
+                  <th>Fokus Utama</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge-info">1</span></td>
+                  <td>Typo Correction</td>
+                  <td>step1_typo_corrected.csv</td>
+                  <td>37</td>
+                  <td>Fuzzy matching untuk koreksi typo</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">2</span></td>
+                  <td>Location Standardization</td>
+                  <td>step2_lokasi_standardized.csv</td>
+                  <td>41</td>
+                  <td>Parsing dan kategorisasi lokasi</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">3</span></td>
+                  <td>Company Standardization</td>
+                  <td>step3_perusahaan_standardized.csv</td>
+                  <td>44</td>
+                  <td>Grouping perusahaan vendor</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">4</span></td>
+                  <td>Date Standardization</td>
+                  <td>step4_tanggal_standardized.csv</td>
+                  <td>58</td>
+                  <td>Parsing waktu, shift, resolution time</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">5</span></td>
+                  <td>Risk & Category</td>
+                  <td>step5_kategorisasi_turunan.csv</td>
+                  <td>61</td>
+                  <td>Risk scoring dan issue categorization</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">6</span></td>
+                  <td>Performance Metrics</td>
+                  <td>step6_performa_turunan.csv</td>
+                  <td>66</td>
+                  <td>Quality score, PIC workload</td>
+                </tr>
+                <tr class="highlight">
+                  <td><span class="badge" style="background: linear-gradient(135deg, #35B971, #00A2B9); color: white;">7</span></td>
+                  <td><strong>Trend & Comparison</strong></td>
+                  <td><strong>step7_final.csv</strong></td>
+                  <td><strong>75</strong></td>
+                  <td><strong>Benchmarking dan MoM trends</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box" style="background: linear-gradient(135deg, rgba(53, 185, 113, 0.1), rgba(0, 162, 185, 0.1)); border-color: #35B971;">
+        <h4>🎉 Transformasi Data Berhasil Diselesaikan</h4>
+        <ul>
+          <li><strong>31 kolom asli → 75 kolom final</strong> - Peningkatan 142% dalam dimensi data yang tersedia untuk analisis</li>
+          <li><strong>44 kolom turunan baru</strong> - Setiap kolom dirancang dengan tujuan analisis spesifik dan berbasis best practices data science</li>
+          <li><strong>5.575 baris data</strong> - Semua diproses tanpa kehilangan data (no data loss)</li>
+          <li><strong>Pipeline reproducible</strong> - Setiap tahap terdokumentasi dalam Jupyter notebook yang dapat di-run ulang kapan saja</li>
+          <li><strong>Ready for advanced analysis</strong> - Data siap untuk ML modeling, time series forecasting, dan dashboard interaktif</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>Langkah Selanjutnya: Pemanfaatan Data</h4>
+        <ul>
+          <li><strong>Dashboard Real-Time</strong> - Bangun BI dashboard (Power BI/Tableau) dengan KPI cards untuk zona benchmarks dan MoM trends</li>
+          <li><strong>Automated Reporting</strong> - Setup scheduled reports yang mengirim MoM summary ke manajemen setiap bulan</li>
+          <li><strong>Predictive Analytics</strong> - Gunakan historical trends untuk forecast jumlah temuan dan unsafe rate bulan depan</li>
+          <li><strong>Anomaly Alerts</strong> - Implementasi threshold alerts jika MoM change >30% atau unsafe rate >40%</li>
+          <li><strong>Benchmarking External</strong> - Bandingkan zona benchmarks UP Indramayu dengan unit pembangkitan lain di PLN NP</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Data Cleansing - Analisis Data IZAT K3</p>
+        <p>Step 7: Kolom Tren & Komparasi (Final Pipeline)</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+          Generated: Desember 2025 | Confidential - Internal Use Only
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Data Modal -->
+  <div class="data-modal-overlay" id="dataModal">
+    <div class="data-modal-content">
+      <div class="data-modal-header">
+        <h3 id="dataModalTitle">Data Tabel</h3>
+        <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+      </div>
+      <div class="data-modal-body" id="dataModalBody">
+        <!-- Table will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Data untuk modal tables
+    const modalData = {
+      zonaBenchmarks: {
+        title: 'Benchmark Lengkap per Zona',
+        headers: ['Zona', 'Avg Quality Score', 'Avg Risk Score', 'Avg Resolution (hari)', 'Total Findings'],
+        rows: [
+          ['COAL_HANDLING', '2.12', '1.48', '7.44', '527'],
+          ['MAIN_UNIT', '1.97', '1.37', '6.60', '2,184'],
+          ['SUPPORT', '2.63', '1.16', '8.42', '2,046'],
+          ['UTILITY', '2.26', '0.92', '6.81', '709'],
+          ['UNKNOWN', '3.03', '1.75', '10.44', '109']
+        ]
+      },
+      momOctober: {
+        title: 'Month-over-Month Change - Oktober 2025',
+        headers: ['Zona', 'Okt 2025', 'Sep 2025', 'MoM Change %', 'Unsafe Rate Okt', 'Unsafe Change pp'],
+        rows: [
+          ['UTILITY', '41', '107', '-61.7%', '36.6%', '+10.8pp'],
+          ['UNKNOWN', '6', '11', '-45.5%', '33.3%', '+1.5pp'],
+          ['COAL_HANDLING', '46', '68', '-32.4%', '34.8%', '+0.4pp'],
+          ['MAIN_UNIT', '229', '270', '-15.2%', '8.7%', '-8.6pp'],
+          ['SUPPORT', '136', '138', '-1.4%', '53.7%', '+3.8pp']
+        ]
+      },
+      monthlyTrends: {
+        title: 'Tren Bulanan Lengkap (Jan - Okt 2025)',
+        headers: ['Bulan', 'Total Temuan', 'Unsafe Count', 'Unsafe Rate %', 'MoM Change'],
+        rows: [
+          ['2025-01', '758', '66', '8.7%', 'N/A (bulan pertama)'],
+          ['2025-02', '319', '63', '19.7%', '-57.9%'],
+          ['2025-03', '691', '82', '11.9%', '+116.6%'],
+          ['2025-04', '317', '57', '18.0%', '-54.1%'],
+          ['2025-05', '803', '154', '19.2%', '+153.3%'],
+          ['2025-06', '322', '120', '37.3%', '-59.9%'],
+          ['2025-07', '794', '117', '14.7%', '+146.6%'],
+          ['2025-08', '519', '230', '44.3%', '-34.6%'],
+          ['2025-09', '594', '194', '32.7%', '+14.5%'],
+          ['2025-10', '458', '154', '33.6%', '-22.9%']
+        ]
+      }
+    };
+
+    function openDataModal(dataKey) {
+      const data = modalData[dataKey];
+      const modal = document.getElementById('dataModal');
+      const title = document.getElementById('dataModalTitle');
+      const body = document.getElementById('dataModalBody');
+
+      title.textContent = data.title;
+
+      let tableHtml = '<table class="data-table-simple"><thead><tr>';
+      data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+      tableHtml += '</tr></thead><tbody>';
+      data.rows.forEach((row, idx) => {
+        const highlight = idx < 3 ? ' class="highlight"' : '';
+        tableHtml += `<tr${highlight}>`;
+        row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+
+      body.innerHTML = tableHtml;
+      modal.classList.add('active');
+    }
+
+    function closeDataModal() {
+      document.getElementById('dataModal').classList.remove('active');
+    }
+
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close modals on overlay click or Escape key
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.getElementById('dataModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDataModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeDataModal();
+      }
+    });
+  </script>
+</body>
+</html>

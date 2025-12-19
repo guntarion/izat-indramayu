@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IV.3 Deteksi Anomali - Analisis Lanjutan IZAT K3</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Data Cleansing</button>
+          <div class="nav-dropdown-menu cleansing-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html" class="active"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Deteksi Anomali</h1>
+        <p>Identifikasi Pola Tidak Wajar dalam Pelaporan K3 Menggunakan Machine Learning</p>
+        <span class="ai-badge">
+          <span>&#129302;</span> AI/ML Analysis - Isolation Forest & Z-Score
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Overview Stats -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card primary">
+          <div class="stat-label">Anomali Terdeteksi</div>
+          <div class="stat-value">15</div>
+          <div class="stat-change">Hari dengan pola tidak wajar</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-label">High Volume Days</div>
+          <div class="stat-value">9</div>
+          <div class="stat-change">Hari dengan temuan &gt;100 (di atas normal)</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">Zona Paling Banyak Anomali</div>
+          <div class="stat-value">MAIN_UNIT</div>
+          <div class="stat-change">9 kejadian anomali terdeteksi</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-label">Rata-rata Temuan/Hari</div>
+          <div class="stat-value">~28</div>
+          <div class="stat-change">Baseline normal untuk deteksi anomali</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Anomaly Timeline -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#128200;</span>
+          A. Timeline Anomali Harian
+        </h2>
+        <p>Deteksi hari-hari dengan pola pelaporan tidak wajar menggunakan Isolation Forest</p>
+      </div>
+
+      <div class="mb-4">
+        <figure class="image-card">
+          <img src="assets/images/IV.3_anomaly_detection_anomaly_timeline.png" alt="Anomaly Timeline">
+          <figcaption>Timeline Deteksi Anomali - Januari hingga Oktober 2025</figcaption>
+        </figure>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Tabel Hari dengan Anomali</h3>
+          <button class="btn-data-view" onclick="openDataModal('dailyAnomalies')">
+            <span class="icon">&#128200;</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tanggal</th>
+                  <th>Jumlah Temuan</th>
+                  <th>Unsafe Ratio</th>
+                  <th>Unique Reporters</th>
+                  <th>Tipe Anomali</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="highlight">
+                  <td><strong>14 Jan 2025</strong></td>
+                  <td><strong>198</strong></td>
+                  <td>1,5%</td>
+                  <td>198</td>
+                  <td><span class="badge badge-danger">HIGH_VOLUME</span></td>
+                </tr>
+                <tr class="highlight">
+                  <td><strong>21 Jul 2025</strong></td>
+                  <td><strong>171</strong></td>
+                  <td>1,2%</td>
+                  <td>148</td>
+                  <td><span class="badge badge-danger">HIGH_VOLUME</span></td>
+                </tr>
+                <tr>
+                  <td>16 Mar 2025</td>
+                  <td>160</td>
+                  <td>5,0%</td>
+                  <td>153</td>
+                  <td><span class="badge badge-danger">HIGH_VOLUME</span></td>
+                </tr>
+                <tr>
+                  <td>02 Jul 2025</td>
+                  <td>152</td>
+                  <td>5,3%</td>
+                  <td>144</td>
+                  <td><span class="badge badge-danger">HIGH_VOLUME</span></td>
+                </tr>
+                <tr>
+                  <td>17 Mar 2025</td>
+                  <td>151</td>
+                  <td>4,6%</td>
+                  <td>134</td>
+                  <td><span class="badge badge-danger">HIGH_VOLUME</span></td>
+                </tr>
+                <tr>
+                  <td>26 Agu 2025</td>
+                  <td>81</td>
+                  <td><strong>50,6%</strong></td>
+                  <td>77</td>
+                  <td><span class="badge badge-warning">NORMAL</span></td>
+                </tr>
+                <tr>
+                  <td>09 Agu 2025</td>
+                  <td>2</td>
+                  <td><strong>100%</strong></td>
+                  <td>1</td>
+                  <td><span class="badge badge-warning">NORMAL</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item danger">
+          <div class="insight-title">Volume Spike Ekstrem</div>
+          <div class="insight-value">14 Jan 2025 mencatat 198 temuan - 7x lipat dari rata-rata harian (~28)</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Unsafe Ratio Anomali</div>
+          <div class="insight-value">26 Agu 2025: 50,6% unsafe ratio vs normal ~22% - kemungkinan focused inspection</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-title">Pola Kampanye K3</div>
+          <div class="insight-value">Volume spike di Januari dan Juli - kemungkinan ada safety campaign/audit</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reporter Analysis -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#128101;</span>
+          B. Analisis Pola Reporter
+        </h2>
+        <p>Deteksi perilaku pelaporan tidak wajar yang mungkin mengindikasikan gaming atau anomali lain</p>
+      </div>
+
+      <div class="mb-4">
+        <figure class="image-card">
+          <img src="assets/images/IV.3_anomaly_detection_reporter_analysis.png" alt="Reporter Anomaly Analysis">
+          <figcaption>Analisis Pola Pelaporan - Deteksi Perilaku Tidak Wajar</figcaption>
+        </figure>
+      </div>
+
+      <div class="ml-feature-card mb-4">
+        <h4>&#128269; Gaming Detection</h4>
+        <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+          Sistem mendeteksi potensi "gaming" - perilaku pelaporan untuk memenuhi target/KPI tanpa substansi nyata:
+        </p>
+        <div class="grid-2">
+          <div>
+            <strong style="color: #7C3AED;">Indikator Gaming:</strong>
+            <ul style="color: var(--pln-gray-600); padding-left: 1.5rem; margin-top: 0.5rem;">
+              <li>Volume tinggi tapi kualitas rendah</li>
+              <li>Pelaporan berulang di waktu sama</li>
+              <li>Temuan mirip/duplikat</li>
+              <li>Ratio positive sangat tinggi (&gt;90%)</li>
+            </ul>
+          </div>
+          <div>
+            <strong style="color: var(--pln-green);">Hasil Deteksi:</strong>
+            <ul style="color: var(--pln-gray-600); padding-left: 1.5rem; margin-top: 0.5rem;">
+              <li>Tidak ditemukan gaming suspect yang signifikan</li>
+              <li>Distribusi pelaporan merata</li>
+              <li>Variasi konten temuan cukup tinggi</li>
+              <li>Ratio reports/reporter wajar (~1.0-1.5)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Interpretasi Pola Reporter</h4>
+        <ul>
+          <li><strong>Tidak ada indikasi gaming massal</strong> - Ratio reports per reporter pada hari anomali mendekati 1.0, menunjukkan pelaporan genuine</li>
+          <li><strong>High volume days memiliki unique reporters tinggi</strong> - 198 temuan dari 198 reporter (14 Jan) menunjukkan kampanye pelaporan massal yang terkoordinasi, bukan gaming individual</li>
+          <li><strong>Unsafe ratio rendah di high volume days</strong> - Mayoritas temuan positif saat volume tinggi, kemungkinan karena fokus pada observasi umum</li>
+          <li><strong>Hari dengan 100% unsafe ratio</strong> - Volume rendah (2-3 temuan) tapi semuanya unsafe, ini adalah targeted inspection bukan anomali negatif</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Area Anomalies -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#128205;</span>
+          C. Anomali per Area/Zona
+        </h2>
+        <p>Distribusi anomali berdasarkan zona operasional untuk identifikasi area bermasalah</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <figure class="image-card">
+          <img src="assets/images/IV.3_anomaly_detection_area_anomalies.png" alt="Area Anomalies">
+          <figcaption>Distribusi Anomali per Zona Operasional</figcaption>
+        </figure>
+        <div class="card">
+          <div class="card-header">
+            <h3>Anomali per Zona</h3>
+            <button class="btn-data-view" onclick="openDataModal('areaAnomalies')">
+              <span class="icon">&#128200;</span> Lihat Data Lengkap
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Zona</th>
+                    <th>Jumlah Anomali</th>
+                    <th>Max Count</th>
+                    <th>Max Unsafe Ratio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>MAIN_UNIT</strong></td>
+                    <td><strong>9</strong></td>
+                    <td>119</td>
+                    <td>3,3%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>UTILITY</strong></td>
+                    <td>8</td>
+                    <td>36</td>
+                    <td>9,5%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>COAL_HANDLING</strong></td>
+                    <td>7</td>
+                    <td>30</td>
+                    <td>43,8%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>SUPPORT</strong></td>
+                    <td>2</td>
+                    <td>196</td>
+                    <td>1,0%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>UNKNOWN</strong></td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>100%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="anomaly-alert warning">
+        <h4>&#9888; Perhatian: COAL_HANDLING</h4>
+        <p style="color: var(--pln-gray-700);">
+          Zona COAL_HANDLING memiliki anomali dengan <strong>unsafe ratio tertinggi (43,8%)</strong> pada 26 Agustus 2025.
+          Ini mengindikasikan kondisi K3 yang memburuk atau pelaksanaan targeted inspection.
+          <strong>Rekomendasi:</strong> Lakukan investigasi mendalam terhadap temuan di tanggal tersebut dan pastikan tindakan korektif sudah diambil.
+        </p>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item warning">
+          <div class="insight-title">MAIN_UNIT Paling Sering Anomali</div>
+          <div class="insight-value">9 kejadian anomali - area dengan volume tinggi cenderung memiliki fluktuasi lebih besar</div>
+        </div>
+        <div class="insight-item danger">
+          <div class="insight-title">UNKNOWN Zone 100% Unsafe</div>
+          <div class="insight-value">Temuan di zona tidak terkategorisasi selalu unsafe - perlu perbaikan kategorisasi</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">SUPPORT Stabil</div>
+          <div class="insight-value">Hanya 2 anomali meski volume tinggi (196 di satu hari) - pola pelaporan konsisten</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Findings -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#128161;</span>
+          Temuan Kunci Deteksi Anomali
+        </h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h3>Anomali Positif (Campaign Effect)</h3>
+          </div>
+          <div class="card-body">
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--pln-green); font-weight: bold;">&#10004;</span>
+                <strong>Volume spike terkoordinasi</strong> - High volume days memiliki unique reporters hampir sama dengan total temuan (genuine participation)
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--pln-green); font-weight: bold;">&#10004;</span>
+                <strong>Tidak ada gaming detected</strong> - Ratio reports per reporter konsisten rendah (~1.0)
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--pln-green); font-weight: bold;">&#10004;</span>
+                <strong>Safety campaign efektif</strong> - Spike di awal tahun (Januari) menunjukkan momentum program K3 baru
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--pln-green); font-weight: bold;">&#10004;</span>
+                <strong>Targeted inspection berhasil</strong> - Hari dengan 100% unsafe ratio dari focused inspection
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Anomali Perlu Perhatian</h3>
+          </div>
+          <div class="card-body">
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--status-danger); font-weight: bold;">!</span>
+                <strong>COAL_HANDLING 43,8% unsafe</strong> - Perlu investigasi kondisi K3 di area coal handling pada Agustus 2025
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--status-danger); font-weight: bold;">!</span>
+                <strong>UNKNOWN zone konsisten unsafe</strong> - 100% temuan unsafe menunjukkan area ini terabaikan
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--status-warning); font-weight: bold;">&#9888;</span>
+                <strong>Fluktuasi ekstrem MAIN_UNIT</strong> - 9 anomali mengindikasikan ketidakkonsistenan pelaporan
+              </li>
+              <li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--status-warning); font-weight: bold;">&#9888;</span>
+                <strong>Gap pelaporan</strong> - Perlu analisis hari-hari dengan zero report (jika ada)
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#127919;</span>
+          Rekomendasi Berbasis Deteksi Anomali
+        </h2>
+        <p>Tindakan korektif dan preventif berdasarkan hasil analisis anomali</p>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>1. Investigasi Anomali COAL_HANDLING</h4>
+        <ul>
+          <li><strong>Review temuan 26 Agustus 2025</strong> - 43,8% unsafe ratio memerlukan root cause analysis</li>
+          <li><strong>Audit kondisi K3 coal handling area</strong> - equipment, prosedur, dan awareness pekerja</li>
+          <li><strong>Verifikasi tindak lanjut</strong> - pastikan semua temuan unsafe sudah ditangani</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>2. Standarisasi Pelaporan Harian</h4>
+        <ul>
+          <li><strong>Set baseline target harian</strong> - minimum 20-30 temuan per hari untuk konsistensi</li>
+          <li><strong>Monitoring dashboard real-time</strong> - alert jika volume terlalu rendah atau terlalu tinggi</li>
+          <li><strong>Hindari "batch reporting"</strong> - distribusi pelaporan sepanjang shift, bukan di akhir</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>3. Perbaikan Kategorisasi UNKNOWN Zone</h4>
+        <ul>
+          <li><strong>Review semua temuan dengan zona UNKNOWN</strong> - kategorisasi ulang ke zona yang tepat</li>
+          <li><strong>Mandatory location selection</strong> di aplikasi IZAT - tidak boleh kosong</li>
+          <li><strong>Training pelapor</strong> tentang pentingnya akurasi lokasi untuk tindak lanjut yang tepat</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>4. Leverage Safety Campaign Effect</h4>
+        <ul>
+          <li><strong>Jadwalkan safety campaign bulanan</strong> - volume spike di Januari/Juli menunjukkan efektivitas</li>
+          <li><strong>Kombinasi kampanye dengan focused inspection</strong> - tingkatkan unsafe detection rate</li>
+          <li><strong>Reward program untuk partisipasi</strong> - dorong pelaporan berkualitas, bukan hanya volume</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>5. Continuous Anomaly Monitoring</h4>
+        <ul>
+          <li><strong>Implementasi automated alert</strong> - notifikasi jika pola anomali terdeteksi</li>
+          <li><strong>Weekly anomaly review</strong> - tim K3 mereview temuan minggu sebelumnya</li>
+          <li><strong>Update model secara berkala</strong> - threshold anomali perlu disesuaikan dengan tren terbaru</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Analisis Lanjutan Data IZAT K3</p>
+        <p>IV.3 Deteksi Anomali - AI/ML Analysis</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+          Generated: Desember 2025 | Confidential - Internal Use Only
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Data Modal -->
+  <div class="data-modal-overlay" id="dataModal">
+    <div class="data-modal-content">
+      <div class="data-modal-header">
+        <h3 id="dataModalTitle">Data Tabel</h3>
+        <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+      </div>
+      <div class="data-modal-body" id="dataModalBody">
+        <!-- Table will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Data untuk modal tables
+    const modalData = {
+      dailyAnomalies: {
+        title: 'Hari dengan Anomali Terdeteksi',
+        headers: ['Tanggal', 'Jumlah', 'Unsafe Ratio', 'Reporters', 'Reports/Reporter', 'Tipe'],
+        rows: [
+          ['14 Jan 2025', '198', '1,5%', '198', '1.00', 'HIGH_VOLUME'],
+          ['21 Jul 2025', '171', '1,2%', '148', '1.16', 'HIGH_VOLUME'],
+          ['16 Mar 2025', '160', '5,0%', '153', '1.05', 'HIGH_VOLUME'],
+          ['02 Jul 2025', '152', '5,3%', '144', '1.06', 'HIGH_VOLUME'],
+          ['17 Mar 2025', '151', '4,6%', '134', '1.13', 'HIGH_VOLUME'],
+          ['13 Jan 2025', '137', '2,9%', '132', '1.04', 'HIGH_VOLUME'],
+          ['12 Mei 2025', '109', '0,9%', '83', '1.31', 'HIGH_VOLUME'],
+          ['26 Agu 2025', '81', '50,6%', '77', '1.05', 'NORMAL'],
+          ['27 Agu 2025', '67', '58,2%', '66', '1.02', 'NORMAL'],
+          ['07 Feb 2025', '6', '66,7%', '4', '1.50', 'NORMAL'],
+          ['23 Mar 2025', '3', '66,7%', '2', '1.50', 'NORMAL'],
+          ['04 Okt 2025', '3', '100%', '2', '1.50', 'NORMAL'],
+          ['01 Sep 2025', '3', '100%', '2', '1.50', 'NORMAL'],
+          ['09 Agu 2025', '2', '100%', '1', '2.00', 'NORMAL'],
+          ['27 Sep 2025', '1', '100%', '1', '1.00', 'NORMAL']
+        ]
+      },
+      areaAnomalies: {
+        title: 'Anomali per Zona Operasional',
+        headers: ['Tanggal', 'Zona', 'Jumlah', 'Unsafe Ratio', 'Tipe Anomali'],
+        rows: [
+          ['14 Jan 2025', 'SUPPORT', '196', '1,0%', 'COUNT'],
+          ['13 Jan 2025', 'SUPPORT', '48', '0,0%', 'COUNT'],
+          ['21 Jul 2025', 'MAIN_UNIT', '119', '0,0%', 'COUNT'],
+          ['02 Jul 2025', 'MAIN_UNIT', '102', '2,9%', 'COUNT'],
+          ['16 Mar 2025', 'MAIN_UNIT', '96', '0,0%', 'COUNT'],
+          ['13 Jan 2025', 'MAIN_UNIT', '68', '0,0%', 'COUNT'],
+          ['12 Mei 2025', 'MAIN_UNIT', '68', '0,0%', 'COUNT'],
+          ['17 Mar 2025', 'MAIN_UNIT', '64', '0,0%', 'COUNT'],
+          ['26 Okt 2025', 'MAIN_UNIT', '60', '3,3%', 'COUNT'],
+          ['28 Jul 2025', 'MAIN_UNIT', '58', '1,7%', 'COUNT'],
+          ['14 Jul 2025', 'MAIN_UNIT', '54', '1,9%', 'COUNT'],
+          ['21 Sep 2025', 'UTILITY', '36', '0,0%', 'COUNT'],
+          ['07 Jan 2025', 'COAL_HANDLING', '30', '0,0%', 'COUNT'],
+          ['21 Jul 2025', 'UTILITY', '28', '0,0%', 'COUNT'],
+          ['17 Mar 2025', 'UTILITY', '25', '8,0%', 'COUNT'],
+          ['02 Jul 2025', 'COAL_HANDLING', '27', '3,7%', 'COUNT'],
+          ['17 Mar 2025', 'COAL_HANDLING', '23', '0,0%', 'COUNT'],
+          ['12 Sep 2025', 'UTILITY', '21', '9,5%', 'COUNT'],
+          ['10 Okt 2025', 'UTILITY', '21', '4,8%', 'COUNT'],
+          ['16 Mar 2025', 'COAL_HANDLING', '19', '10,5%', 'COUNT'],
+          ['26 Okt 2025', 'UTILITY', '18', '5,6%', 'COUNT'],
+          ['12 Mei 2025', 'COAL_HANDLING', '17', '5,9%', 'COUNT'],
+          ['26 Agu 2025', 'COAL_HANDLING', '16', '43,8%', 'COUNT'],
+          ['21 Agu 2025', 'UNKNOWN', '3', '100%', 'COUNT'],
+          ['16 Mar 2025', 'UNKNOWN', '3', '0,0%', 'COUNT']
+        ]
+      }
+    };
+
+    function openDataModal(dataKey) {
+      const data = modalData[dataKey];
+      const modal = document.getElementById('dataModal');
+      const title = document.getElementById('dataModalTitle');
+      const body = document.getElementById('dataModalBody');
+
+      title.textContent = data.title;
+
+      let tableHtml = '<table class="data-table-simple"><thead><tr>';
+      data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+      tableHtml += '</tr></thead><tbody>';
+      data.rows.forEach((row, idx) => {
+        const highlight = idx < 3 ? ' class="highlight"' : '';
+        tableHtml += `<tr${highlight}>`;
+        row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+
+      body.innerHTML = tableHtml;
+      modal.classList.add('active');
+    }
+
+    function closeDataModal() {
+      document.getElementById('dataModal').classList.remove('active');
+    }
+
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close modals on overlay click or Escape key
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.getElementById('dataModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDataModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeDataModal();
+      }
+    });
+  </script>
+</body>
+</html>

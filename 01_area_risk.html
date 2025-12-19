@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analisis Risiko Area - IZAT K3 UP Indramayu</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Data Cleansing</button>
+          <div class="nav-dropdown-menu cleansing-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html" class="active"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Analisis Risiko Area</h1>
+        <p>Identifikasi zona dan area dengan tingkat risiko K3 tertinggi berdasarkan temuan IZAT</p>
+        <span class="hero-badge">Analisis Zona & Prioritas Area</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Summary Statistics -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card primary">
+          <div class="stat-label">Total Zona Operasi</div>
+          <div class="stat-value">5</div>
+          <div class="stat-change">UNKNOWN, COAL_HANDLING, MAIN_UNIT, SUPPORT, UTILITY</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-label">Zona Risiko Tertinggi</div>
+          <div class="stat-value">UNKNOWN</div>
+          <div class="stat-change">Avg Risk Score: 1,75 | Unsafe Rate: 46,4%</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">Zona Volume Terbesar</div>
+          <div class="stat-value">MAIN_UNIT</div>
+          <div class="stat-change">2.616 temuan (47% dari total)</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-label">Area Prioritas Tinggi</div>
+          <div class="stat-value">7</div>
+          <div class="stat-change">Memerlukan tindakan segera</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section II.1.1: Zone Risk Analysis -->
+    <section class="section">
+      <div class="section-header">
+        <h2>A. Analisis Risiko Zona Operasi</h2>
+        <p>Distribusi temuan dan tingkat risiko K3 berdasarkan zona operasional pembangkit</p>
+      </div>
+
+      <!-- Zone Risk Table -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Tabel Risiko per Zona Operasi</h3>
+          <button class="btn-data-view" onclick="openDataModal('zonaRisk')">
+            <span class="icon">📊</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Zona</th>
+                  <th>Total Temuan</th>
+                  <th>Avg Risk Score</th>
+                  <th>Unsafe Rate</th>
+                  <th>High Risk Count</th>
+                  <th>Risk Level</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>UNKNOWN</strong></td>
+                  <td>69</td>
+                  <td><span class="badge badge-danger">1,75</span></td>
+                  <td>
+                    <div class="mb-1">46,4%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill danger" style="width: 46,4%"></div>
+                    </div>
+                  </td>
+                  <td>11</td>
+                  <td><span class="badge badge-warning">MEDIUM</span></td>
+                </tr>
+                <tr>
+                  <td><strong>COAL_HANDLING</strong></td>
+                  <td>580</td>
+                  <td><span class="badge badge-warning">1,48</span></td>
+                  <td>
+                    <div class="mb-1">21,7%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill warning" style="width: 21,7%"></div>
+                    </div>
+                  </td>
+                  <td>51</td>
+                  <td><span class="badge badge-info">LOW</span></td>
+                </tr>
+                <tr>
+                  <td><strong>MAIN_UNIT</strong></td>
+                  <td><strong>2.616</strong></td>
+                  <td><span class="badge badge-warning">1,37</span></td>
+                  <td>
+                    <div class="mb-1">14,7%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill success" style="width: 14,7%"></div>
+                    </div>
+                  </td>
+                  <td>147</td>
+                  <td><span class="badge badge-info">LOW</span></td>
+                </tr>
+                <tr>
+                  <td><strong>SUPPORT</strong></td>
+                  <td>1.708</td>
+                  <td><span class="badge badge-warning">1,16</span></td>
+                  <td>
+                    <div class="mb-1">32,5%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill warning" style="width: 32,5%"></div>
+                    </div>
+                  </td>
+                  <td>137</td>
+                  <td><span class="badge badge-info">LOW</span></td>
+                </tr>
+                <tr>
+                  <td><strong>UTILITY</strong></td>
+                  <td>602</td>
+                  <td><span class="badge badge-success">0,92</span></td>
+                  <td>
+                    <div class="mb-1">23,1%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill warning" style="width: 23,1%"></div>
+                    </div>
+                  </td>
+                  <td>29</td>
+                  <td><span class="badge badge-info">LOW</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zone Charts -->
+      <div class="image-grid">
+        <figure class="image-card">
+          <img src="assets/images/II.1.1_zona_distribution.png" alt="Distribusi Temuan per Zona">
+          <figcaption><strong>Gambar 1:</strong> Distribusi Volume Temuan per Zona Operasi</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.1.1_risk_score_by_zona.png" alt="Risk Score by Zona">
+          <figcaption><strong>Gambar 2:</strong> Perbandingan Risk Score Rata-rata per Zona</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.1.1_risk_heatmap_zona.png" alt="Risk Heatmap Zona">
+          <figcaption><strong>Gambar 3:</strong> Heatmap Risiko K3 Berdasarkan Zona</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.1.1_issue_category_heatmap.png" alt="Issue Category Heatmap">
+          <figcaption><strong>Gambar 4:</strong> Heatmap Kategori Temuan per Zona</figcaption>
+        </figure>
+      </div>
+
+      <!-- Zone Analysis Insights -->
+      <div class="analysis-box">
+        <h4>Interpretasi Analisis Zona</h4>
+        <ul>
+          <li><strong>MAIN_UNIT mendominasi volume temuan</strong> dengan 2.616 temuan (47% dari total), namun memiliki Unsafe Rate terendah (14,7%). Ini menunjukkan bahwa meskipun area ini intensif inspeksi, sebagian besar temuan bersifat observasi atau rekomendasi preventif.</li>
+          <li><strong>SUPPORT memiliki Unsafe Rate tinggi</strong> (32,5%) dengan 1.708 temuan - perlu perhatian khusus. Zona ini mencakup area pendukung seperti workshop, gudang, dan fasilitas umum yang mungkin kurang mendapat fokus dalam program K3.</li>
+          <li><strong>UNKNOWN zone menunjukkan risiko tertinggi</strong> dengan Risk Score 1,75 dan Unsafe Rate 46,4%. Meskipun hanya 69 temuan, tingkat severitas tinggi mengindikasikan perlunya kategorisasi yang lebih baik dan tindakan segera.</li>
+          <li><strong>COAL_HANDLING memiliki risiko moderat</strong> dengan 580 temuan dan Unsafe Rate 21,7%. Area ini menghadapi risiko khas industri batubara seperti debu, handling equipment, dan potensi kecelakaan mekanis.</li>
+          <li><strong>UTILITY menunjukkan performa terbaik</strong> dengan Risk Score terendah (0,92) meskipun Unsafe Rate-nya 23,1%. Area utilitas tampaknya memiliki kontrol K3 yang lebih baik dibanding zona lain.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section II.1.2: Priority Areas -->
+    <section class="section">
+      <div class="section-header">
+        <h2>B. Area Prioritas Tinggi</h2>
+        <p>Identifikasi area spesifik dengan Priority Score tertinggi yang memerlukan intervensi segera</p>
+      </div>
+
+      <!-- Priority Areas Table -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Top 7 Area Prioritas Berdasarkan Priority Score</h3>
+          <button class="btn-data-view" onclick="openDataModal('areaPriority')">
+            <span class="icon">📊</span> Lihat Data Lengkap (46 Area)
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Area</th>
+                  <th>Priority Score</th>
+                  <th>Total Temuan</th>
+                  <th>Unsafe Rate</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge-gold">1</span></td>
+                  <td><strong>WORKSHOP</strong></td>
+                  <td><span class="badge badge-danger">4,62</span></td>
+                  <td>1</td>
+                  <td>
+                    <div class="mb-1">100%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill danger" style="width: 100%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-danger">KRITIS</span></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-silver">2</span></td>
+                  <td><strong>MUSHOLA</strong></td>
+                  <td><span class="badge badge-danger">4,42</span></td>
+                  <td>2</td>
+                  <td>
+                    <div class="mb-1">100%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill danger" style="width: 100%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-danger">KRITIS</span></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-bronze">3</span></td>
+                  <td><strong>SUB</strong></td>
+                  <td><span class="badge badge-danger">3,80</span></td>
+                  <td>1</td>
+                  <td>
+                    <div class="mb-1">100%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill danger" style="width: 100%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-danger">KRITIS</span></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">4</span></td>
+                  <td><strong>POWER</strong></td>
+                  <td><span class="badge badge-danger">3,80</span></td>
+                  <td>1</td>
+                  <td>
+                    <div class="mb-1">100%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill danger" style="width: 100%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-danger">KRITIS</span></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">5</span></td>
+                  <td><strong>I-FUN</strong></td>
+                  <td><span class="badge badge-warning">3,25</span></td>
+                  <td>8</td>
+                  <td>
+                    <div class="mb-1">75%</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill danger" style="width: 75%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-warning">TINGGI</span></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">6</span></td>
+                  <td><strong>POS</strong></td>
+                  <td><span class="badge badge-warning">2,60</span></td>
+                  <td><strong>515</strong></td>
+                  <td>
+                    <div class="mb-1">Varied</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill warning" style="width: 50%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-warning">VOLUME TINGGI</span></td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">7</span></td>
+                  <td><strong>BOILER</strong></td>
+                  <td><span class="badge badge-warning">2,36</span></td>
+                  <td><strong>1.725</strong></td>
+                  <td>
+                    <div class="mb-1">Varied</div>
+                    <div class="progress-bar">
+                      <div class="progress-fill warning" style="width: 45%"></div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-warning">VOLUME TERTINGGI</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Priority Area Charts -->
+      <div class="image-grid">
+        <figure class="image-card">
+          <img src="assets/images/II.1.2_top_areas_distribution.png" alt="Top Areas Distribution">
+          <figcaption><strong>Gambar 5:</strong> Distribusi Temuan pada Area Prioritas Tinggi</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.1.2_priority_matrix_area.png" alt="Priority Matrix Area">
+          <figcaption><strong>Gambar 6:</strong> Matriks Prioritas Area (Risk vs Volume)</figcaption>
+        </figure>
+        <figure class="image-card">
+          <img src="assets/images/II.1.2_monthly_trend_top_areas.png" alt="Monthly Trend Top Areas">
+          <figcaption><strong>Gambar 7:</strong> Tren Bulanan Temuan pada Area Prioritas</figcaption>
+        </figure>
+      </div>
+
+      <!-- Priority Areas Analysis -->
+      <div class="analysis-box">
+        <h4>Interpretasi Area Prioritas</h4>
+        <ul>
+          <li><strong>Area WORKSHOP, MUSHOLA, SUB, dan POWER memiliki 100% Unsafe Rate</strong> - Meskipun volume rendah (1-2 temuan), setiap temuan yang ditemukan bersifat unsafe/bahaya. Ini mengindikasikan area-area ini mungkin jarang diinspeksi atau memiliki kondisi K3 yang sangat buruk.</li>
+          <li><strong>I-FUN menunjukkan pola konsisten</strong> dengan 75% Unsafe Rate dari 8 temuan. Area ini perlu audit menyeluruh untuk mengidentifikasi akar masalah.</li>
+          <li><strong>POS Security memiliki 515 temuan dengan Priority Score tinggi (2,60)</strong> - Kombinasi volume tinggi dan tingkat risiko moderat membuat area ini prioritas. Perlu review prosedur patrol dan awareness petugas keamanan.</li>
+          <li><strong>BOILER adalah area dengan volume temuan tertinggi (1.725)</strong> dengan Priority Score 2,36. Meskipun Risk Score tidak tertinggi, volume besar mengindikasikan area ini menjadi fokus intensif inspeksi dan memerlukan perbaikan sistematis.</li>
+          <li><strong>Pola umum: Area dengan volume rendah cenderung memiliki Unsafe Rate 100%</strong> - Ini bisa mengindikasikan bias inspeksi (hanya melaporkan yang benar-benar berbahaya) atau area yang memang terabaikan dalam program K3 rutin.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Key Insights Summary -->
+    <section class="section">
+      <div class="section-header">
+        <h2>Insight Kunci</h2>
+        <p>Ringkasan temuan utama dari analisis risiko area</p>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item danger">
+          <div class="insight-title">Zona Risiko Tertinggi</div>
+          <div class="insight-value">UNKNOWN zone dengan Risk Score 1,75 dan Unsafe Rate 46,4% memerlukan kategorisasi dan tindakan segera</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Volume Dominan</div>
+          <div class="insight-value">MAIN_UNIT mendominasi 47% temuan (2.616) namun Unsafe Rate rendah (14,7%) - indikasi inspeksi preventif efektif</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Unsafe Rate Tinggi</div>
+          <div class="insight-value">SUPPORT zone memiliki Unsafe Rate 32,5% dengan 1.708 temuan - perlu peningkatan awareness K3</div>
+        </div>
+        <div class="insight-item danger">
+          <div class="insight-title">Area Kritis 100%</div>
+          <div class="insight-value">WORKSHOP, MUSHOLA, SUB, POWER memiliki 100% Unsafe Rate - memerlukan root cause analysis mendalam</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">High Volume Area</div>
+          <div class="insight-value">BOILER (1.725 temuan) dan POS (515 temuan) memerlukan perbaikan sistematis dan review prosedur</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Performa Terbaik</div>
+          <div class="insight-value">UTILITY zone menunjukkan Risk Score terendah (0,92) - best practice dapat direplikasi ke zona lain</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="section">
+      <div class="recommendation-box">
+        <h4>Rekomendasi Tindakan</h4>
+        <ol>
+          <li><strong>Prioritaskan patrol dan inspeksi di area WORKSHOP, MUSHOLA, dan SUPPORT</strong> - Tingkatkan frekuensi inspeksi dan segera perbaiki semua temuan unsafe. Lakukan safety walk dengan manajemen senior untuk menunjukkan komitmen.</li>
+          <li><strong>Tingkatkan awareness K3 di zona SUPPORT yang memiliki Unsafe Rate tinggi (32,5%)</strong> - Selenggarakan training khusus untuk pekerja dan pengawas di area pendukung. Pasang signage K3 yang lebih visible dan lakukan kampanye safety culture.</li>
+          <li><strong>Lakukan root cause analysis untuk area dengan 100% Unsafe Rate</strong> - Bentuk tim investigasi khusus untuk mengaudit WORKSHOP, MUSHOLA, SUB, dan POWER. Identifikasi apakah masalahnya sistemik (budget, awareness, akses) atau insidental.</li>
+          <li><strong>Review efektivitas kontrol K3 di area BOILER mengingat volume temuan tinggi (1.725)</strong> - Evaluasi apakah volume tinggi disebabkan oleh kompleksitas area atau kurangnya kontrol engineering. Pertimbangkan implementasi kontrol hierarki K3 yang lebih tinggi (eliminasi/substitusi).</li>
+          <li><strong>Perbaiki prosedur patrol keamanan di POS Security</strong> - 515 temuan mengindikasikan petugas security berperan aktif dalam identifikasi hazard. Berikan training tambahan dan integrasikan checklist K3 dalam patrol rutin mereka.</li>
+          <li><strong>Kategorisasi ulang temuan di UNKNOWN zone</strong> - 69 temuan dengan Risk Score tinggi perlu dikategorikan dengan benar untuk memastikan accountability dan tindak lanjut yang tepat.</li>
+          <li><strong>Replikasi best practice dari UTILITY zone</strong> - Pelajari faktor-faktor yang membuat UTILITY memiliki Risk Score terendah dan terapkan ke zona lain, terutama SUPPORT dan COAL_HANDLING.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Analisis Data IZAT K3</p>
+        <p>Generated: Desember 2025 | Confidential - Internal Use Only</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- Data Modal -->
+  <div class="data-modal-overlay" id="dataModal">
+    <div class="data-modal-content">
+      <div class="data-modal-header">
+        <h3 id="dataModalTitle">Data Tabel</h3>
+        <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+      </div>
+      <div class="data-modal-body" id="dataModalBody">
+        <!-- Table will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data untuk modal tables
+    const modalData = {
+      zonaRisk: {
+        title: 'Data Lengkap Risiko per Zona Operasi',
+        headers: ['Zona', 'Total Temuan', 'Avg Risk Score', 'Unsafe Rate (%)', 'High Risk Count', 'Risk Level'],
+        rows: [
+          ['UNKNOWN', '69', '1.75', '46.4%', '11', 'MEDIUM'],
+          ['COAL_HANDLING', '580', '1.48', '21.7%', '51', 'LOW'],
+          ['MAIN_UNIT', '2,616', '1.37', '14.7%', '147', 'LOW'],
+          ['SUPPORT', '1,708', '1.16', '32.5%', '137', 'LOW'],
+          ['UTILITY', '602', '0.92', '23.1%', '29', 'LOW']
+        ]
+      },
+      areaPriority: {
+        title: 'Data Lengkap Analisis Prioritas Area (46 Area)',
+        headers: ['Area', 'Total Temuan', 'Avg Risk', 'Avg Resolution (Hari)', 'Unsafe Rate (%)', 'Priority Score'],
+        rows: [
+          ['WORKSHOP', '1', '4.00', '69.0', '100.0%', '4.62'],
+          ['MUSHOLA', '2', '3.50', '437.0', '100.0%', '4.42'],
+          ['SUB', '1', '2.00', '458.3', '100.0%', '3.80'],
+          ['POWER', '1', '2.00', '-', '100.0%', '3.80'],
+          ['I-FUN', '8', '2.38', '249.2', '75.0%', '3.25'],
+          ['GOR', '10', '2.20', '263.8', '60.0%', '2.71'],
+          ['SYAHBANDARAN', '13', '2.46', '333.3', '53.8%', '2.68'],
+          ['MAGNETIC', '5', '2.00', '164.6', '60.0%', '2.62'],
+          ['COMPRESSOR', '5', '2.00', '204.6', '60.0%', '2.60'],
+          ['POS', '515', '1.42', '227.6', '37.5%', '2.60'],
+          ['DORMITORY', '74', '1.84', '267.5', '54.1%', '2.54'],
+          ['SHIP UNLOADER', '27', '1.89', '219.1', '55.6%', '2.50'],
+          ['RECLAIMER', '27', '1.81', '249.5', '55.6%', '2.44'],
+          ['BOILER', '1,725', '1.35', '149.1', '10.5%', '2.36'],
+          ['CCR CHCB', '96', '1.57', '279.9', '49.0%', '2.23'],
+          ['PERIMETER', '62', '1.53', '260.2', '50.0%', '2.23'],
+          ['GUDANG', '95', '1.52', '255.3', '45.3%', '2.08'],
+          ['CHLORINE', '38', '1.42', '308.6', '47.4%', '2.04'],
+          ['H2 PLANT', '11', '2.18', '228.2', '36.4%', '1.96'],
+          ['CCR', '34', '1.35', '313.0', '47.1%', '1.95'],
+          ['CONVEYOR', '26', '2.00', '222.7', '34.6%', '1.90'],
+          ['CCR MAIN UNIT', '142', '1.23', '221.0', '41.5%', '1.87'],
+          ['AERATION', '5', '1.40', '260.3', '40.0%', '1.76'],
+          ['MAINTENANCE', '160', '1.20', '182.1', '33.8%', '1.76'],
+          ['JETTY', '233', '1.74', '168.6', '18.9%', '1.69'],
+          ['TURBINE', '562', '1.50', '145.3', '13.0%', '1.65'],
+          ['WTP', '203', '1.00', '184.8', '29.6%', '1.54'],
+          ['CWP', '85', '1.09', '190.1', '34.1%', '1.51'],
+          ['I', '16', '1.31', '197.1', '31.3%', '1.50'],
+          ['PARKIR', '23', '1.39', '292.2', '30.4%', '1.49'],
+          ['ADMIN', '550', '0.80', '166.7', '22.7%', '1.46'],
+          ['FOT', '24', '1.29', '232.0', '29.2%', '1.44'],
+          ['BENGKEL', '38', '0.97', '168.7', '31.6%', '1.34'],
+          ['COAL YARD', '56', '1.63', '178.9', '17.9%', '1.28'],
+          ['MESJID', '39', '1.21', '236.8', '25.6%', '1.27'],
+          ['SAMPLER', '10', '0.90', '300.0', '30.0%', '1.26'],
+          ['MED', '142', '0.77', '154.6', '22.5%', '1.10'],
+          ['WWTP', '44', '0.82', '171.2', '22.7%', '1.03'],
+          ['CRUSHER', '79', '1.41', '92.7', '11.4%', '0.95'],
+          ['TRANSFER TOWER', '132', '0.73', '215.2', '18.2%', '0.90'],
+          ['WATER TREATMENT', '13', '0.92', '268.3', '15.4%', '0.85'],
+          ['ENGINE', '1', '2.00', '114.4', '0.0%', '0.80'],
+          ['CCB', '57', '0.39', '122.5', '15.8%', '0.63'],
+          ['FIRE STATION', '171', '0.57', '76.6', '5.3%', '0.44'],
+          ['PUMP HOUSE', '13', '0.00', '59.3', '0.0%', '0.00'],
+          ['SHIP', '1', '0.00', '34.1', '0.0%', '0.00']
+        ]
+      }
+    };
+
+    function openDataModal(dataKey) {
+      const data = modalData[dataKey];
+      const modal = document.getElementById('dataModal');
+      const title = document.getElementById('dataModalTitle');
+      const body = document.getElementById('dataModalBody');
+
+      title.textContent = data.title;
+
+      let tableHtml = '<table class="data-table-simple"><thead><tr>';
+      data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+      tableHtml += '</tr></thead><tbody>';
+      data.rows.forEach((row, idx) => {
+        const highlight = idx < 3 ? ' class="highlight"' : '';
+        tableHtml += `<tr${highlight}>`;
+        row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+
+      body.innerHTML = tableHtml;
+      modal.classList.add('active');
+    }
+
+    function closeDataModal() {
+      document.getElementById('dataModal').classList.remove('active');
+    }
+  </script>
+
+  <script>
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close on overlay click
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeDataModal();
+      }
+    });
+
+    // Close data modal on overlay click
+    document.getElementById('dataModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDataModal();
+    });
+  </script>
+</body>
+</html>

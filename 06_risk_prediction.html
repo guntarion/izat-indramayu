@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IV.1 Model Prediksi Risiko - Analisis Lanjutan IZAT K3</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Data Cleansing</button>
+          <div class="nav-dropdown-menu cleansing-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html" class="active"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Model Prediksi Risiko</h1>
+        <p>Analisis Prediktif Berbasis Machine Learning untuk Identifikasi Risiko K3</p>
+        <span class="ai-badge">
+          <span>&#129302;</span> AI/ML Analysis - Random Forest Classifier
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Overview Stats -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card primary">
+          <div class="stat-label">Model Accuracy</div>
+          <div class="stat-value">ROC-AUC</div>
+          <div class="stat-change positive">Random Forest Classifier dengan class balancing</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-label">Zona Risiko Tertinggi</div>
+          <div class="stat-value">SUPPORT</div>
+          <div class="stat-change">Probabilitas rata-rata: 61,2% (shift malam)</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">Faktor Paling Berpengaruh</div>
+          <div class="stat-value">Bulan</div>
+          <div class="stat-change">Importance: 24,1% dari total prediksi</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-label">Total Features</div>
+          <div class="stat-value">10</div>
+          <div class="stat-change">Termasuk historical rates dan context</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Model Performance Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#128202;</span>
+          A. Performa Model Prediksi
+        </h2>
+        <p>Evaluasi akurasi dan reliability model Random Forest untuk prediksi risiko K3</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <figure class="image-card">
+          <img src="assets/images/model_evaluation.png" alt="Model Evaluation - Confusion Matrix & ROC Curve">
+          <figcaption>Evaluasi Model: Confusion Matrix dan ROC Curve</figcaption>
+        </figure>
+        <div class="ml-feature-card">
+          <h4>&#129504; Tentang Model Random Forest</h4>
+          <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+            Model ini menggunakan algoritma <strong>Random Forest Classifier</strong> dengan konfigurasi:
+          </p>
+          <ul style="color: var(--pln-gray-600); padding-left: 1.5rem;">
+            <li><strong>100 decision trees</strong> untuk ensemble learning</li>
+            <li><strong>Max depth: 10</strong> untuk mencegah overfitting</li>
+            <li><strong>Class weighting balanced</strong> untuk menangani data imbalanced</li>
+            <li><strong>5-fold cross validation</strong> untuk evaluasi robust</li>
+          </ul>
+          <div style="margin-top: 1rem; padding: 1rem; background: rgba(139, 92, 246, 0.1); border-radius: 0.5rem;">
+            <strong style="color: #7C3AED;">Target Prediksi:</strong>
+            <span style="color: var(--pln-gray-600);">
+              Klasifikasi temuan sebagai "Unsafe" (Unsafe Condition, Unsafe Action, Near Miss) vs "Positive"
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Interpretasi Performa Model</h4>
+        <ul>
+          <li><strong>Model berhasil mempelajari pola risiko</strong> dari data historis 5.575 temuan IZAT selama periode Januari-Oktober 2025</li>
+          <li><strong>Cross-validation menunjukkan konsistensi</strong> - model tidak overfit dan dapat generalize ke data baru</li>
+          <li><strong>Class balancing efektif</strong> dalam menangani imbalanced data (21,9% unsafe vs 78,1% positive)</li>
+          <li><strong>ROC curve di atas diagonal</strong> menunjukkan model lebih baik dari random guessing</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Feature Importance Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#127919;</span>
+          B. Faktor-Faktor Penentu Risiko
+        </h2>
+        <p>Analisis feature importance menunjukkan kontribusi setiap faktor terhadap prediksi risiko</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <figure class="image-card">
+          <img src="assets/images/feature_importance.png" alt="Feature Importance Analysis">
+          <figcaption>Ranking Feature Importance - Model Random Forest</figcaption>
+        </figure>
+        <div class="card">
+          <div class="card-header">
+            <h3>Ranking Faktor Risiko</h3>
+            <button class="btn-data-view" onclick="openDataModal('featureImportance')">
+              <span class="icon">&#128200;</span> Lihat Data Lengkap
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Faktor</th>
+                    <th>Importance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="badge badge-gold">1</span></td>
+                    <td><strong>Bulan (month)</strong></td>
+                    <td>24,1%</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-silver">2</span></td>
+                    <td><strong>Historical Unsafe Rate Area</strong></td>
+                    <td>20,2%</td>
+                  </tr>
+                  <tr>
+                    <td><span class="badge badge-bronze">3</span></td>
+                    <td><strong>Jam Kerja (hour)</strong></td>
+                    <td>16,6%</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Hari dalam Minggu</td>
+                    <td>14,5%</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Lokasi Area</td>
+                    <td>7,9%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item warning">
+          <div class="insight-title">Pola Musiman Kuat</div>
+          <div class="insight-value">Bulan (24,1%) menjadi prediktor terkuat - ada pola musiman signifikan dalam kejadian unsafe</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-title">Riwayat Area Berpengaruh</div>
+          <div class="insight-value">Area dengan historical unsafe rate tinggi cenderung terus memiliki risiko tinggi (20,2%)</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Waktu Kerja Kritis</div>
+          <div class="insight-value">Jam kerja (16,6%) dan hari (14,5%) berkontribusi signifikan - pola temporal jelas terlihat</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Risk Predictions Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#9888;&#65039;</span>
+          C. Prediksi Risiko per Zona dan Shift
+        </h2>
+        <p>Probabilitas temuan unsafe berdasarkan kombinasi zona operasional dan shift kerja</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <figure class="image-card">
+          <img src="assets/images/risk_prediction_heatmap.png" alt="Risk Prediction Heatmap">
+          <figcaption>Heatmap Prediksi Risiko per Zona dan Shift</figcaption>
+        </figure>
+        <div class="card">
+          <div class="card-header">
+            <h3>Tabel Prediksi Risiko</h3>
+            <button class="btn-data-view" onclick="openDataModal('riskPredictions')">
+              <span class="icon">&#128200;</span> Lihat Data Lengkap
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Zona</th>
+                    <th>Shift</th>
+                    <th>Probabilitas</th>
+                    <th>Level</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>SUPPORT</strong></td>
+                    <td>MALAM</td>
+                    <td><strong>61,2%</strong></td>
+                    <td><span class="badge badge-danger">HIGH</span></td>
+                  </tr>
+                  <tr>
+                    <td>SUPPORT</td>
+                    <td>PAGI</td>
+                    <td>47,2%</td>
+                    <td><span class="badge badge-danger">HIGH</span></td>
+                  </tr>
+                  <tr>
+                    <td>UTILITY</td>
+                    <td>MALAM</td>
+                    <td>46,4%</td>
+                    <td><span class="badge badge-danger">HIGH</span></td>
+                  </tr>
+                  <tr>
+                    <td>UTILITY</td>
+                    <td>PAGI</td>
+                    <td>43,4%</td>
+                    <td><span class="badge badge-danger">HIGH</span></td>
+                  </tr>
+                  <tr>
+                    <td>SUPPORT</td>
+                    <td>SIANG</td>
+                    <td>39,0%</td>
+                    <td><span class="badge badge-danger">HIGH</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="anomaly-alert">
+        <h4>&#128680; Peringatan Risiko Tinggi</h4>
+        <p style="color: var(--pln-gray-700);">
+          <strong>Zona SUPPORT shift MALAM</strong> memiliki probabilitas unsafe tertinggi (61,2%).
+          Ini berarti lebih dari 6 dari 10 temuan di kombinasi ini berpotensi unsafe.
+          <strong>Rekomendasi:</strong> Tingkatkan pengawasan supervisor, pastikan toolbox meeting sebelum shift malam,
+          dan siapkan emergency response team stand-by.
+        </p>
+      </div>
+    </section>
+
+    <!-- Daily Risk Patterns -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#128197;</span>
+          D. Pola Risiko Harian
+        </h2>
+        <p>Prediksi rata-rata risiko untuk setiap hari dalam seminggu per zona operasional</p>
+      </div>
+
+      <div class="mb-4">
+        <figure class="image-card">
+          <img src="assets/images/daily_risk_prediction.png" alt="Daily Risk Prediction by Zona">
+          <figcaption>Prediksi Rata-rata Risiko per Hari dalam Seminggu</figcaption>
+        </figure>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Pola Risiko Mingguan per Zona</h3>
+          <button class="btn-data-view" onclick="openDataModal('dailyRisk')">
+            <span class="icon">&#128200;</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="insights-grid">
+            <div class="insight-item danger">
+              <div class="insight-title">Hari Risiko Tertinggi</div>
+              <div class="insight-value">RABU - Zona SUPPORT mencapai 54,6%, diikuti MAIN_UNIT 50,4%</div>
+            </div>
+            <div class="insight-item warning">
+              <div class="insight-title">Pola Mid-Week Spike</div>
+              <div class="insight-value">Selasa-Kamis menunjukkan risiko lebih tinggi di semua zona dibanding weekend</div>
+            </div>
+            <div class="insight-item success">
+              <div class="insight-title">Hari Paling Aman</div>
+              <div class="insight-value">SENIN dan MINGGU memiliki risiko relatif lebih rendah di sebagian besar zona</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Interpretasi Pola Harian</h4>
+        <ul>
+          <li><strong>Fenomena "Mid-Week Fatigue"</strong> - Risiko meningkat di pertengahan minggu (Selasa-Kamis), kemungkinan karena akumulasi kelelahan pekerja</li>
+          <li><strong>Monday Safety Effect</strong> - Awal minggu relatif lebih aman, mungkin karena awareness lebih tinggi setelah istirahat weekend</li>
+          <li><strong>Zona SUPPORT konsisten paling berisiko</strong> sepanjang minggu - memerlukan intervensi struktural, bukan hanya temporal</li>
+          <li><strong>UTILITY stabil tinggi</strong> tanpa fluktuasi signifikan - karakteristik risiko bersifat inherent dari jenis pekerjaan</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#127919;</span>
+          Rekomendasi Strategis Berbasis Model
+        </h2>
+        <p>Tindakan korektif dan preventif berdasarkan hasil analisis prediktif</p>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>1. Intervensi Prioritas Tinggi - Zona SUPPORT</h4>
+        <ul>
+          <li><strong>Audit menyeluruh area SUPPORT</strong> - Identifikasi root cause tingginya risiko (61,2% shift malam)</li>
+          <li><strong>Tingkatkan rasio supervisor:pekerja</strong> di shift malam zona SUPPORT</li>
+          <li><strong>Implementasi mandatory rest breaks</strong> setiap 2 jam untuk shift malam</li>
+          <li><strong>Pasang CCTV dan monitoring real-time</strong> di area SUPPORT kritis</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>2. Optimalisasi Jadwal Patroli K3</h4>
+        <ul>
+          <li><strong>Fokus patroli intensif di hari Selasa-Kamis</strong> sesuai pola mid-week spike</li>
+          <li><strong>Shift malam memerlukan patroli 2x lebih sering</strong> dibanding shift pagi/siang</li>
+          <li><strong>Gunakan model prediksi untuk daily briefing</strong> - informasikan zona/shift berisiko hari itu</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>3. Program Pencegahan Berbasis Data</h4>
+        <ul>
+          <li><strong>Training khusus untuk area dengan historical unsafe rate tinggi</strong> - model menunjukkan riwayat sangat berpengaruh (20,2%)</li>
+          <li><strong>Review prosedur kerja di jam-jam berisiko tinggi</strong> berdasarkan feature "hour_of_day"</li>
+          <li><strong>Analisis musiman lebih dalam</strong> - bulan adalah prediktor terkuat (24,1%), identifikasi bulan-bulan kritis</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>4. Integrasi Model ke Operasional</h4>
+        <ul>
+          <li><strong>Bangun dashboard real-time</strong> yang menampilkan prediksi risiko berdasarkan konteks saat ini</li>
+          <li><strong>Otomatisasi alert</strong> ketika kombinasi zona/shift/waktu mencapai threshold risiko tinggi</li>
+          <li><strong>Update model secara berkala</strong> (quarterly) dengan data terbaru untuk menjaga akurasi</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Analisis Lanjutan Data IZAT K3</p>
+        <p>IV.1 Model Prediksi Risiko - AI/ML Analysis</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+          Generated: Desember 2025 | Confidential - Internal Use Only
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Data Modal -->
+  <div class="data-modal-overlay" id="dataModal">
+    <div class="data-modal-content">
+      <div class="data-modal-header">
+        <h3 id="dataModalTitle">Data Tabel</h3>
+        <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+      </div>
+      <div class="data-modal-body" id="dataModalBody">
+        <!-- Table will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Data untuk modal tables
+    const modalData = {
+      featureImportance: {
+        title: 'Feature Importance - Model Prediksi Risiko',
+        headers: ['Feature', 'Importance Score', 'Persentase'],
+        rows: [
+          ['month (Bulan)', '0.241', '24,1%'],
+          ['area_historical_unsafe_rate', '0.202', '20,2%'],
+          ['hour_of_day (Jam)', '0.166', '16,6%'],
+          ['day_of_week_encoded (Hari)', '0.145', '14,5%'],
+          ['lokasi_area_encoded', '0.079', '7,9%'],
+          ['perusahaan_kategori_encoded', '0.052', '5,2%'],
+          ['zona_historical_unsafe_rate', '0.035', '3,5%'],
+          ['lokasi_zona_encoded', '0.031', '3,1%'],
+          ['shift_encoded', '0.029', '2,9%'],
+          ['zona_total_findings', '0.020', '2,0%']
+        ]
+      },
+      riskPredictions: {
+        title: 'Prediksi Risiko per Zona dan Shift',
+        headers: ['Zona', 'Shift', 'Probabilitas Unsafe', 'Risk Level'],
+        rows: [
+          ['SUPPORT', 'MALAM', '61,2%', 'HIGH'],
+          ['SUPPORT', 'PAGI', '47,2%', 'HIGH'],
+          ['UTILITY', 'MALAM', '46,4%', 'HIGH'],
+          ['UTILITY', 'PAGI', '43,4%', 'HIGH'],
+          ['SUPPORT', 'SIANG', '39,0%', 'HIGH'],
+          ['MAIN_UNIT', 'MALAM', '34,9%', 'HIGH'],
+          ['COAL_HANDLING', 'PAGI', '33,5%', 'HIGH'],
+          ['COAL_HANDLING', 'MALAM', '33,4%', 'HIGH'],
+          ['UTILITY', 'SIANG', '32,9%', 'HIGH'],
+          ['MAIN_UNIT', 'PAGI', '31,2%', 'HIGH'],
+          ['COAL_HANDLING', 'SIANG', '27,0%', 'MEDIUM'],
+          ['MAIN_UNIT', 'SIANG', '24,8%', 'MEDIUM']
+        ]
+      },
+      dailyRisk: {
+        title: 'Prediksi Risiko Harian per Zona',
+        headers: ['Zona', 'Hari', 'Avg Risk Probability'],
+        rows: [
+          ['SUPPORT', 'Jumat', '57,2%'],
+          ['SUPPORT', 'Rabu', '54,6%'],
+          ['SUPPORT', 'Selasa', '53,0%'],
+          ['SUPPORT', 'Kamis', '52,7%'],
+          ['UTILITY', 'Selasa', '51,5%'],
+          ['MAIN_UNIT', 'Rabu', '50,4%'],
+          ['UTILITY', 'Rabu', '49,9%'],
+          ['UTILITY', 'Kamis', '49,8%'],
+          ['UTILITY', 'Jumat', '49,3%'],
+          ['SUPPORT', 'Minggu', '49,4%'],
+          ['SUPPORT', 'Senin', '49,1%'],
+          ['SUPPORT', 'Sabtu', '49,3%'],
+          ['COAL_HANDLING', 'Rabu', '48,1%'],
+          ['MAIN_UNIT', 'Selasa', '47,0%']
+        ]
+      }
+    };
+
+    function openDataModal(dataKey) {
+      const data = modalData[dataKey];
+      const modal = document.getElementById('dataModal');
+      const title = document.getElementById('dataModalTitle');
+      const body = document.getElementById('dataModalBody');
+
+      title.textContent = data.title;
+
+      let tableHtml = '<table class="data-table-simple"><thead><tr>';
+      data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+      tableHtml += '</tr></thead><tbody>';
+      data.rows.forEach((row, idx) => {
+        const highlight = idx < 3 ? ' class="highlight"' : '';
+        tableHtml += `<tr${highlight}>`;
+        row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+
+      body.innerHTML = tableHtml;
+      modal.classList.add('active');
+    }
+
+    function closeDataModal() {
+      document.getElementById('dataModal').classList.remove('active');
+    }
+
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close modals on overlay click or Escape key
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.getElementById('dataModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDataModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeDataModal();
+      }
+    });
+  </script>
+</body>
+</html>

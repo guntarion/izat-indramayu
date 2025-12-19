@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standardisasi Tanggal & Kolom Waktu Turunan - Pembersihan Data IZAT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Data Cleansing</button>
+          <div class="nav-dropdown-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html" class="active"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Standardisasi Tanggal & Kolom Waktu Turunan</h1>
+        <p>Parsing Multiple Date Formats dan Pembentukan Time-based Derived Columns</p>
+        <span class="hero-badge" style="background: linear-gradient(135deg, #35B971, #2D9F5F);">
+          <span>🧹</span> Data Cleansing - Step 4
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Overview Stats -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card success">
+          <div class="stat-label">Field Tanggal Diproses</div>
+          <div class="stat-value">6 Fields</div>
+          <div class="stat-change">tanggal, target_at, created_at, updated_at, open_at, close_at</div>
+        </div>
+        <div class="stat-card primary">
+          <div class="stat-label">Kolom Turunan Dibuat</div>
+          <div class="stat-value">14 Kolom</div>
+          <div class="stat-change positive">Total kolom bertambah dari 44 menjadi 58 kolom</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-label">Shift Paling Produktif</div>
+          <div class="stat-value">A (Pagi)</div>
+          <div class="stat-change">63,4% temuan dilaporkan di shift pagi (07:00-15:00)</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">Rata-rata Resolution Time</div>
+          <div class="stat-value">7,3 Hari</div>
+          <div class="stat-change">Unsafe Condition memerlukan waktu lebih lama (~11,5 hari)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why It's Needed -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">❓</span>
+          II.1 Mengapa Standardisasi Tanggal Diperlukan?
+        </h2>
+        <p>Tantangan dan pentingnya parsing tanggal yang konsisten untuk analisis temporal</p>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Masalah dengan Format Tanggal Original</h4>
+        <ul>
+          <li><strong>Multiple date formats</strong> - Data menggunakan format DD/MM/YY, DD/MM/YY HH.MM dengan separator dot (.) untuk jam</li>
+          <li><strong>String-based dates</strong> - Tanggal tersimpan sebagai text, tidak bisa digunakan untuk kalkulasi time-based</li>
+          <li><strong>Incomplete timestamps</strong> - Field 'tanggal' hanya memiliki date tanpa time, sedangkan 'created_at' memiliki keduanya</li>
+          <li><strong>Tidak ada kolom turunan</strong> - Resolution time, shift, day_of_week harus dihitung dari field timestamp</li>
+        </ul>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Field Tanggal yang Diproses</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Format Asal</th>
+                    <th>Deskripsi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>tanggal</strong></td>
+                    <td>DD/MM/YY</td>
+                    <td>Tanggal pembuatan temuan</td>
+                  </tr>
+                  <tr>
+                    <td><strong>target_at</strong></td>
+                    <td>DD/MM/YY</td>
+                    <td>Target penyelesaian</td>
+                  </tr>
+                  <tr>
+                    <td><strong>created_at</strong></td>
+                    <td>DD/MM/YY HH.MM</td>
+                    <td>Waktu pembuatan</td>
+                  </tr>
+                  <tr>
+                    <td><strong>updated_at</strong></td>
+                    <td>DD/MM/YY HH.MM</td>
+                    <td>Waktu update terakhir</td>
+                  </tr>
+                  <tr>
+                    <td><strong>open_at</strong></td>
+                    <td>DD/MM/YY HH.MM</td>
+                    <td>Waktu temuan dibuka</td>
+                  </tr>
+                  <tr>
+                    <td><strong>close_at</strong></td>
+                    <td>DD/MM/YY HH.MM</td>
+                    <td>Waktu temuan ditutup</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="ml-feature-card" style="background: linear-gradient(135deg, rgba(53, 185, 113, 0.05), rgba(0, 162, 185, 0.05)); border-color: rgba(53, 185, 113, 0.2);">
+          <h4 style="color: #2D9F5F;">🎯 Manfaat Parsing Tanggal</h4>
+          <ul style="color: var(--pln-gray-600); padding-left: 1.5rem; margin-top: 0.5rem;">
+            <li><strong>Time-based Analysis</strong> - Analisis pola temporal (harian, mingguan, bulanan)</li>
+            <li><strong>Resolution Tracking</strong> - Hitung durasi penyelesaian temuan untuk SLA compliance</li>
+            <li><strong>Shift Analysis</strong> - Identifikasi shift mana yang paling produktif atau berisiko</li>
+            <li><strong>Workload Distribution</strong> - Lihat distribusi temuan per hari dalam seminggu</li>
+            <li><strong>Trend Analysis</strong> - Month-over-month comparison dan seasonal patterns</li>
+          </ul>
+          <div style="margin-top: 1rem; padding: 1rem; background: rgba(53, 185, 113, 0.1); border-radius: 0.5rem;">
+            <strong style="color: #2D9F5F;">Output:</strong>
+            <span style="color: var(--pln-gray-600);">
+              6 datetime fields + 14 derived columns untuk temporal analysis
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">⚙️</span>
+          II.2 Metodologi Parsing dan Derivation
+        </h2>
+        <p>Pendekatan sistematis untuk konversi tanggal dan pembuatan kolom turunan waktu</p>
+      </div>
+
+      <div class="grid-3 mb-4">
+        <div class="insight-item success">
+          <div class="insight-title">Step 1: Date Parsing</div>
+          <div class="insight-value">Konversi string format DD/MM/YY menjadi datetime object dengan multiple format handling</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Step 2: Time Extraction</div>
+          <div class="insight-value">Extract komponen waktu: hour, day_of_week, month, year, week_number</div>
+        </div>
+        <div class="insight-item success">
+          <div class="insight-title">Step 3: Derived Calculations</div>
+          <div class="insight-value">Hitung resolution_hours, sla_compliance, shift assignment berdasarkan jam kerja</div>
+        </div>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>🔍 Proses Parsing Multi-Format</h4>
+        <p style="color: var(--pln-gray-700);">
+          Fungsi <code>parse_datetime()</code> mencoba berbagai format secara berurutan:
+        </p>
+        <ol style="margin-top: 0.5rem; color: var(--pln-gray-700);">
+          <li><strong>Format 1:</strong> '%d/%m/%y %H.%M' - untuk field dengan timestamp lengkap (16/01/25 15.07)</li>
+          <li><strong>Format 2:</strong> '%d/%m/%y' - untuk field tanggal saja (16/01/25)</li>
+          <li><strong>Format 3:</strong> '%Y-%m-%d %H:%M:%S' - untuk ISO format jika ada</li>
+          <li><strong>Format 4:</strong> '%Y-%m-%d' - fallback untuk ISO date only</li>
+        </ol>
+        <p style="margin-top: 1rem; color: var(--pln-gray-700);">
+          Jika semua format gagal, fungsi mengembalikan <code>None</code> untuk menghindari error dan memudahkan identifikasi data bermasalah.
+        </p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Shift Assignment Logic</h3>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Shift</th>
+                  <th>Jam Kerja</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>A (Pagi)</strong></td>
+                  <td>07:00 - 15:00</td>
+                  <td>Shift paling produktif untuk pelaporan temuan</td>
+                </tr>
+                <tr>
+                  <td><strong>B (Siang)</strong></td>
+                  <td>15:00 - 23:00</td>
+                  <td>Shift sore hingga malam awal</td>
+                </tr>
+                <tr>
+                  <td><strong>C (Malam)</strong></td>
+                  <td>23:00 - 07:00</td>
+                  <td>Shift malam dengan aktivitas pelaporan lebih rendah</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Source Code Highlights -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">💻</span>
+          II.3 Highlight Source Code
+        </h2>
+        <p>Fungsi-fungsi kunci untuk parsing tanggal dan pembuatan kolom turunan</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Fungsi parse_datetime() - Multi-Format Date Parser</h3>
+        </div>
+        <div class="card-body">
+          <pre style="background: var(--pln-gray-50); padding: 1.5rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.875rem; line-height: 1.6;"><code>def parse_datetime(date_str):
+    """
+    Parsing tanggal dengan berbagai format.
+
+    Format yang didukung:
+    - DD/MM/YY HH.MM (16/01/25 15.07)
+    - DD/MM/YY (16/01/25)
+    """
+    if pd.isna(date_str) or date_str == '':
+        return None
+
+    date_str = str(date_str).strip()
+
+    formats = [
+        '%d/%m/%y %H.%M',
+        '%d/%m/%y',
+        '%Y-%m-%d %H:%M:%S',
+        '%Y-%m-%d',
+    ]
+
+    for fmt in formats:
+        try:
+            return datetime.strptime(date_str, fmt)
+        except ValueError:
+            continue
+
+    return None</code></pre>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Fungsi get_shift() - Shift Assignment</h3>
+        </div>
+        <div class="card-body">
+          <pre style="background: var(--pln-gray-50); padding: 1.5rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.875rem; line-height: 1.6;"><code>def get_shift(hour):
+    """Menentukan shift berdasarkan jam."""
+    if pd.isna(hour):
+        return None
+    hour = int(hour)
+    if 7 <= hour < 15:
+        return 'A (Pagi)'
+    elif 15 <= hour < 23:
+        return 'B (Siang)'
+    else:
+        return 'C (Malam)'</code></pre>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Kalkulasi Resolution Time dan SLA Compliance</h3>
+        </div>
+        <div class="card-body">
+          <pre style="background: var(--pln-gray-50); padding: 1.5rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.875rem; line-height: 1.6;"><code># Resolution time (jam)
+df['resolution_hours'] = df.apply(
+    lambda row: (row['close_at_parsed'] - row['created_at_parsed']).total_seconds() / 3600
+    if pd.notna(row['close_at_parsed']) and pd.notna(row['created_at_parsed'])
+    else None,
+    axis=1
+)
+
+# Resolution time (hari)
+df['sla_days'] = df['resolution_hours'].apply(
+    lambda x: x / 24 if pd.notna(x) else None
+)
+
+# SLA Compliance
+df['sla_compliance'] = df.apply(
+    lambda row: 1 if (pd.notna(row['close_at_parsed']) and
+                      pd.notna(row['target_at_parsed']) and
+                      row['close_at_parsed'] <= row['target_at_parsed'])
+    else (0 if pd.notna(row['close_at_parsed']) else None),
+    axis=1
+)</code></pre>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Ekstraksi Komponen Waktu</h3>
+        </div>
+        <div class="card-body">
+          <pre style="background: var(--pln-gray-50); padding: 1.5rem; border-radius: 0.5rem; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.875rem; line-height: 1.6;"><code># Day of week
+df['day_of_week'] = df['created_at_parsed'].apply(
+    lambda x: x.strftime('%A') if pd.notna(x) else None
+)
+
+# Hour of day
+df['hour_of_day'] = df['created_at_parsed'].apply(
+    lambda x: x.hour if pd.notna(x) else None
+)
+
+# Shift
+df['shift'] = df['hour_of_day'].apply(get_shift)
+
+# Month-Year
+df['month_year'] = df['created_at_parsed'].apply(
+    lambda x: x.strftime('%Y-%m') if pd.notna(x) else None
+)
+
+# Week number
+df['week_number'] = df['created_at_parsed'].apply(
+    lambda x: x.isocalendar()[1] if pd.notna(x) else None
+)</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Output Examples -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📊</span>
+          II.4 Contoh Output dan Distribusi
+        </h2>
+        <p>Hasil parsing tanggal dan distribusi time-based metrics</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Distribusi per Shift</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Shift</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>A (Pagi)</strong></td>
+                    <td>3,534</td>
+                    <td><strong>63,4%</strong></td>
+                  </tr>
+                  <tr>
+                    <td>B (Siang)</td>
+                    <td>1,429</td>
+                    <td>25,6%</td>
+                  </tr>
+                  <tr>
+                    <td>C (Malam)</td>
+                    <td>613</td>
+                    <td>11,0%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(53, 185, 113, 0.1); border-radius: 0.5rem;">
+              <strong style="color: #2D9F5F;">Insight:</strong>
+              <span style="color: var(--pln-gray-600);">
+                Shift A (Pagi) paling produktif dengan 63,4% total temuan dilaporkan pada jam kerja 07:00-15:00
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Distribusi per Hari dalam Minggu</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Hari</th>
+                    <th>Jumlah</th>
+                    <th>Persentase</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="highlight">
+                    <td><strong>Monday</strong></td>
+                    <td>1,456</td>
+                    <td><strong>26,1%</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Tuesday</td>
+                    <td>987</td>
+                    <td>17,7%</td>
+                  </tr>
+                  <tr>
+                    <td>Wednesday</td>
+                    <td>856</td>
+                    <td>15,4%</td>
+                  </tr>
+                  <tr>
+                    <td>Thursday</td>
+                    <td>823</td>
+                    <td>14,8%</td>
+                  </tr>
+                  <tr>
+                    <td>Friday</td>
+                    <td>734</td>
+                    <td>13,2%</td>
+                  </tr>
+                  <tr>
+                    <td>Saturday</td>
+                    <td>412</td>
+                    <td>7,4%</td>
+                  </tr>
+                  <tr>
+                    <td>Sunday</td>
+                    <td>308</td>
+                    <td>5,5%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(0, 175, 240, 0.1); border-radius: 0.5rem;">
+              <strong style="color: #00AFF0;">Insight:</strong>
+              <span style="color: var(--pln-gray-600);">
+                Senin adalah hari paling sibuk (26,1%), kemungkinan karena reporting akumulasi dari weekend
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Statistik Resolution Time</h3>
+        </div>
+        <div class="card-body">
+          <div class="stat-cards" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="stat-card primary">
+              <div class="stat-label">Jumlah Data Valid</div>
+              <div class="stat-value">4,127</div>
+              <div class="stat-change">Temuan yang sudah closed dengan timestamp lengkap</div>
+            </div>
+            <div class="stat-card success">
+              <div class="stat-label">Minimum</div>
+              <div class="stat-value">0,2 jam</div>
+              <div class="stat-change positive">Resolusi tercepat: 12 menit</div>
+            </div>
+            <div class="stat-card warning">
+              <div class="stat-label">Maksimum</div>
+              <div class="stat-value">876,5 jam</div>
+              <div class="stat-change">36,5 hari untuk kasus tertentu</div>
+            </div>
+            <div class="stat-card info">
+              <div class="stat-label">Rata-rata</div>
+              <div class="stat-value">175,2 jam</div>
+              <div class="stat-change">Setara 7,3 hari</div>
+            </div>
+            <div class="stat-card info">
+              <div class="stat-label">Median</div>
+              <div class="stat-value">98,4 jam</div>
+              <div class="stat-change">Setara 4,1 hari (lebih representatif)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>💡 Key Insights dari Time-based Analysis</h4>
+        <ul>
+          <li><strong>Peak Hours:</strong> Jam 08:00-10:00 dan 14:00-15:00 adalah waktu paling aktif untuk pelaporan temuan</li>
+          <li><strong>Unsafe Condition memerlukan waktu lebih lama:</strong> Rata-rata ~11,5 hari untuk resolusi, dibanding Positive (~3 hari)</li>
+          <li><strong>Weekend Effect:</strong> Pelaporan weekend hanya 12,9% dari total, mayoritas di hari kerja (Monday-Friday: 87,1%)</li>
+          <li><strong>Median lebih rendah dari Mean:</strong> Distribusi resolution time skewed right - ada outliers dengan resolusi sangat lama</li>
+          <li><strong>Shift Malam paling rendah:</strong> Hanya 11% pelaporan, perlu investigasi apakah karena workload rendah atau kurang awareness</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Derived Columns Summary -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">📋</span>
+          II.5 Ringkasan Kolom Turunan
+        </h2>
+        <p>14 kolom baru yang ditambahkan untuk analisis temporal mendalam</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Kolom Baru yang Ditambahkan</h3>
+          <button class="btn-data-view" onclick="openDataModal('derivedColumns')">
+            <span class="icon">📊</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kategori</th>
+                  <th>Kolom</th>
+                  <th>Deskripsi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="6" style="vertical-align: top;"><strong>Parsed Dates (ISO)</strong></td>
+                  <td>tanggal_iso</td>
+                  <td>Format ISO untuk tanggal pembuatan</td>
+                </tr>
+                <tr>
+                  <td>target_at_iso</td>
+                  <td>Format ISO untuk target penyelesaian</td>
+                </tr>
+                <tr>
+                  <td>created_at_iso</td>
+                  <td>Format ISO untuk waktu pembuatan</td>
+                </tr>
+                <tr>
+                  <td>updated_at_iso</td>
+                  <td>Format ISO untuk waktu update</td>
+                </tr>
+                <tr>
+                  <td>open_at_iso</td>
+                  <td>Format ISO untuk waktu dibuka</td>
+                </tr>
+                <tr>
+                  <td>close_at_iso</td>
+                  <td>Format ISO untuk waktu ditutup</td>
+                </tr>
+                <tr style="background: rgba(53, 185, 113, 0.05);">
+                  <td rowspan="3" style="vertical-align: top;"><strong>Resolution Metrics</strong></td>
+                  <td><strong>resolution_hours</strong></td>
+                  <td>Durasi penyelesaian dalam jam</td>
+                </tr>
+                <tr style="background: rgba(53, 185, 113, 0.05);">
+                  <td><strong>sla_days</strong></td>
+                  <td>Durasi penyelesaian dalam hari</td>
+                </tr>
+                <tr style="background: rgba(53, 185, 113, 0.05);">
+                  <td><strong>sla_compliance</strong></td>
+                  <td>Kepatuhan SLA (1=memenuhi, 0=tidak)</td>
+                </tr>
+                <tr style="background: rgba(0, 175, 240, 0.05);">
+                  <td rowspan="5" style="vertical-align: top;"><strong>Time Components</strong></td>
+                  <td><strong>day_of_week</strong></td>
+                  <td>Hari dalam minggu (Monday, Tuesday, dll)</td>
+                </tr>
+                <tr style="background: rgba(0, 175, 240, 0.05);">
+                  <td><strong>hour_of_day</strong></td>
+                  <td>Jam pembuatan laporan (0-23)</td>
+                </tr>
+                <tr style="background: rgba(0, 175, 240, 0.05);">
+                  <td><strong>shift</strong></td>
+                  <td>Shift kerja (A=Pagi, B=Siang, C=Malam)</td>
+                </tr>
+                <tr style="background: rgba(0, 175, 240, 0.05);">
+                  <td><strong>month_year</strong></td>
+                  <td>Periode bulan (2025-01, 2025-02, dll)</td>
+                </tr>
+                <tr style="background: rgba(0, 175, 240, 0.05);">
+                  <td><strong>week_number</strong></td>
+                  <td>Nomor minggu dalam tahun (1-52)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="recommendation-box" style="margin-top: 2rem;">
+        <h4>🚀 Kemampuan Analisis yang Dibuka oleh Kolom Ini</h4>
+        <ul>
+          <li><strong>Shift Analysis:</strong> Performa dan pola risiko per shift kerja</li>
+          <li><strong>Workload Distribution:</strong> Identifikasi bottleneck di hari atau jam tertentu</li>
+          <li><strong>SLA Tracking:</strong> Monitor compliance rate dan identifikasi area yang sering delay</li>
+          <li><strong>Seasonal Patterns:</strong> Trend bulanan dan mingguan untuk capacity planning</li>
+          <li><strong>Peak Hours Optimization:</strong> Resource allocation berdasarkan volume temuan per jam</li>
+          <li><strong>Time-to-Resolution Analysis:</strong> Benchmark performance dan identifikasi slow resolvers</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Pembersihan Data IZAT K3</p>
+        <p>Step 4: Standardisasi Tanggal & Kolom Waktu Turunan</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+          Generated: Desember 2025 | Confidential - Internal Use Only
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Data Modal -->
+  <div class="data-modal-overlay" id="dataModal">
+    <div class="data-modal-content">
+      <div class="data-modal-header">
+        <h3 id="dataModalTitle">Data Tabel</h3>
+        <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+      </div>
+      <div class="data-modal-body" id="dataModalBody">
+        <!-- Table will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Data untuk modal tables
+    const modalData = {
+      derivedColumns: {
+        title: 'Kolom Turunan dari Standardisasi Tanggal - Detail Lengkap',
+        headers: ['Kategori', 'Kolom', 'Deskripsi', 'Contoh Nilai'],
+        rows: [
+          ['Parsed Dates', 'tanggal_iso', 'Format ISO untuk tanggal pembuatan', '2025-01-16'],
+          ['Parsed Dates', 'target_at_iso', 'Format ISO untuk target penyelesaian', '2025-01-20'],
+          ['Parsed Dates', 'created_at_iso', 'Format ISO untuk waktu pembuatan', '2025-01-16 15:07:00'],
+          ['Parsed Dates', 'updated_at_iso', 'Format ISO untuk waktu update', '2025-01-18 10:30:00'],
+          ['Parsed Dates', 'open_at_iso', 'Format ISO untuk waktu dibuka', '2025-01-16 15:10:00'],
+          ['Parsed Dates', 'close_at_iso', 'Format ISO untuk waktu ditutup', '2025-01-20 22:57:00'],
+          ['Resolution', 'resolution_hours', 'Durasi penyelesaian dalam jam', '103.83'],
+          ['Resolution', 'sla_days', 'Durasi penyelesaian dalam hari', '4.33'],
+          ['Resolution', 'sla_compliance', 'Kepatuhan SLA (1=ya, 0=tidak)', '1'],
+          ['Time Component', 'day_of_week', 'Hari dalam minggu', 'Monday'],
+          ['Time Component', 'hour_of_day', 'Jam pembuatan (0-23)', '15'],
+          ['Time Component', 'shift', 'Shift kerja', 'B (Siang)'],
+          ['Time Component', 'month_year', 'Periode bulan', '2025-01'],
+          ['Time Component', 'week_number', 'Nomor minggu dalam tahun', '3']
+        ]
+      }
+    };
+
+    function openDataModal(dataKey) {
+      const data = modalData[dataKey];
+      const modal = document.getElementById('dataModal');
+      const title = document.getElementById('dataModalTitle');
+      const body = document.getElementById('dataModalBody');
+
+      title.textContent = data.title;
+
+      let tableHtml = '<table class="data-table-simple"><thead><tr>';
+      data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+      tableHtml += '</tr></thead><tbody>';
+      data.rows.forEach((row, idx) => {
+        const highlight = idx >= 6 && idx <= 8 ? ' class="highlight"' : '';
+        tableHtml += `<tr${highlight}>`;
+        row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+
+      body.innerHTML = tableHtml;
+      modal.classList.add('active');
+    }
+
+    function closeDataModal() {
+      document.getElementById('dataModal').classList.remove('active');
+    }
+
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close modals on overlay click or Escape key
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.getElementById('dataModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDataModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeDataModal();
+      }
+    });
+  </script>
+</body>
+</html>

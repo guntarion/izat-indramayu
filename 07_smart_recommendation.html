@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IV.2 Smart Recommendation Engine - Analisis Lanjutan IZAT K3</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/images/PLN-Nusantara-Power-sm.png" alt="PLN Nusantara Power" class="logo-img">
+        <span class="logo-subtitle">Unit Pembangkitan Indramayu</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Data Cleansing</button>
+          <div class="nav-dropdown-menu cleansing-menu">
+            <a href="09_typo_correction.html"><span class="dropdown-icon">✏️</span> Koreksi Typo</a>
+            <a href="10_location_standardization.html"><span class="dropdown-icon">📍</span> Standardisasi Lokasi</a>
+            <a href="11_company_standardization.html"><span class="dropdown-icon">🏢</span> Standardisasi Perusahaan</a>
+            <a href="12_date_standardization.html"><span class="dropdown-icon">📅</span> Standardisasi Tanggal</a>
+            <a href="13_risk_severity.html"><span class="dropdown-icon">⚠️</span> Risk Severity</a>
+            <a href="14_quality_workload.html"><span class="dropdown-icon">📊</span> Quality & Workload</a>
+            <a href="15_trend_comparison.html"><span class="dropdown-icon">📈</span> Tren & Komparasi</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle">Basic Analysis</button>
+          <div class="nav-dropdown-menu">
+            <a href="01_area_risk.html"><span class="dropdown-icon">📍</span> Analisis Risiko Area</a>
+            <a href="02_team_performance.html"><span class="dropdown-icon">👥</span> Performa Tim</a>
+            <a href="03_resolution_workflow.html"><span class="dropdown-icon">⚙️</span> Alur Penyelesaian</a>
+            <a href="04_shift_analysis.html"><span class="dropdown-icon">🕐</span> Pola Shift & Hari</a>
+            <a href="05_asset_tracking.html"><span class="dropdown-icon">🔧</span> Tracking Aset</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle active">Advanced Analysis</button>
+          <div class="nav-dropdown-menu ai-menu">
+            <a href="06_risk_prediction.html"><span class="dropdown-icon">📊</span> Model Prediksi Risiko</a>
+            <a href="07_smart_recommendation.html" class="active"><span class="dropdown-icon">💡</span> Smart Recommendation</a>
+            <a href="08_anomaly_detection.html"><span class="dropdown-icon">🔍</span> Deteksi Anomali</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Smart Recommendation Engine</h1>
+        <p>Sistem Rekomendasi Cerdas Berbasis Knowledge Base untuk Resolusi Temuan K3</p>
+        <span class="ai-badge">
+          <span>&#129302;</span> AI/ML Analysis - TF-IDF Similarity Matching
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Overview Stats -->
+    <section class="section">
+      <div class="stat-cards">
+        <div class="stat-card primary">
+          <div class="stat-label">Kategori Terbanyak</div>
+          <div class="stat-value">PATROL</div>
+          <div class="stat-change">1.445 kasus (26% dari total)</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-label">Resolusi Tercepat</div>
+          <div class="stat-value">PPE/APD</div>
+          <div class="stat-change">Rata-rata 3,6 hari penyelesaian</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-label">Resolusi Terlama</div>
+          <div class="stat-value">ELECTRICAL</div>
+          <div class="stat-change">Rata-rata 12,5 hari penyelesaian</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">Total Issue Categories</div>
+          <div class="stat-value">9</div>
+          <div class="stat-change">Best practices per kategori</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Knowledge Base Overview -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#128218;</span>
+          A. Knowledge Base Resolusi
+        </h2>
+        <p>Database pengetahuan dari resolusi yang berhasil untuk setiap kategori masalah</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <figure class="image-card">
+          <img src="assets/images/IV.2_smart_recommendation_resolution_analysis.png" alt="Resolution Analysis by Category">
+          <figcaption>Analisis Resolusi per Kategori Masalah</figcaption>
+        </figure>
+        <div class="ml-feature-card">
+          <h4>&#129504; Tentang Smart Recommendation Engine</h4>
+          <p style="color: var(--pln-gray-600); margin-bottom: 1rem;">
+            Sistem rekomendasi ini menggunakan:
+          </p>
+          <ul style="color: var(--pln-gray-600); padding-left: 1.5rem;">
+            <li><strong>TF-IDF Vectorization</strong> untuk mengekstrak fitur dari teks temuan</li>
+            <li><strong>Cosine Similarity</strong> untuk menemukan temuan serupa dari history</li>
+            <li><strong>Knowledge Base</strong> berisi best practices per kategori masalah</li>
+            <li><strong>3-Level Recommendations:</strong> Immediate, Short-term, Preventive</li>
+          </ul>
+          <div style="margin-top: 1rem; padding: 1rem; background: rgba(139, 92, 246, 0.1); border-radius: 0.5rem;">
+            <strong style="color: #7C3AED;">Tujuan:</strong>
+            <span style="color: var(--pln-gray-600);">
+              Memberikan rekomendasi resolusi otomatis berdasarkan pengalaman sukses sebelumnya
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resolution Statistics -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#128202;</span>
+          B. Statistik Resolusi per Kategori
+        </h2>
+        <p>Performa penyelesaian temuan berdasarkan kategori masalah</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Tabel Statistik Resolusi</h3>
+          <button class="btn-data-view" onclick="openDataModal('resolutionStats')">
+            <span class="icon">&#128200;</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kategori</th>
+                  <th>Total Kasus</th>
+                  <th>Avg Jam</th>
+                  <th>Avg Hari</th>
+                  <th>Efisiensi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>PATROL_ROUTINE</strong></td>
+                  <td>1.445</td>
+                  <td>149,8</td>
+                  <td>6,2 hari</td>
+                  <td><span class="badge badge-success">BAIK</span></td>
+                </tr>
+                <tr>
+                  <td><strong>FIRE_SAFETY</strong></td>
+                  <td>1.103</td>
+                  <td>107,9</td>
+                  <td>4,5 hari</td>
+                  <td><span class="badge badge-success">SANGAT BAIK</span></td>
+                </tr>
+                <tr>
+                  <td><strong>OTHER</strong></td>
+                  <td>768</td>
+                  <td>226,4</td>
+                  <td>9,4 hari</td>
+                  <td><span class="badge badge-warning">PERLU PERBAIKAN</span></td>
+                </tr>
+                <tr>
+                  <td><strong>STRUCTURAL</strong></td>
+                  <td>659</td>
+                  <td>297,1</td>
+                  <td>12,4 hari</td>
+                  <td><span class="badge badge-warning">LAMBAT</span></td>
+                </tr>
+                <tr>
+                  <td><strong>HOUSEKEEPING</strong></td>
+                  <td>613</td>
+                  <td>126,6</td>
+                  <td>5,3 hari</td>
+                  <td><span class="badge badge-success">BAIK</span></td>
+                </tr>
+                <tr class="highlight">
+                  <td><strong>ELECTRICAL</strong></td>
+                  <td>417</td>
+                  <td>300,3</td>
+                  <td>12,5 hari</td>
+                  <td><span class="badge badge-danger">PERLU PERHATIAN</span></td>
+                </tr>
+                <tr>
+                  <td><strong>PPE_APD</strong></td>
+                  <td>187</td>
+                  <td>86,8</td>
+                  <td>3,6 hari</td>
+                  <td><span class="badge badge-success">SANGAT BAIK</span></td>
+                </tr>
+                <tr>
+                  <td><strong>MACHINE</strong></td>
+                  <td>112</td>
+                  <td>193,0</td>
+                  <td>8,0 hari</td>
+                  <td><span class="badge badge-info">MODERAT</span></td>
+                </tr>
+                <tr>
+                  <td><strong>FALL_PROTECTION</strong></td>
+                  <td>45</td>
+                  <td>271,0</td>
+                  <td>11,3 hari</td>
+                  <td><span class="badge badge-warning">LAMBAT</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-grid">
+        <div class="insight-item success">
+          <div class="insight-title">Resolusi Tercepat</div>
+          <div class="insight-value">PPE/APD (3,6 hari) dan FIRE_SAFETY (4,5 hari) - respons cepat karena ketersediaan solusi standar</div>
+        </div>
+        <div class="insight-item danger">
+          <div class="insight-title">Resolusi Terlama</div>
+          <div class="insight-value">ELECTRICAL (12,5 hari) dan STRUCTURAL (12,4 hari) - memerlukan tenaga ahli dan material khusus</div>
+        </div>
+        <div class="insight-item warning">
+          <div class="insight-title">Volume Tertinggi</div>
+          <div class="insight-value">PATROL_ROUTINE (1.445 kasus) - 26% dari total temuan, mayoritas dari aktivitas patroli rutin</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best Practices Knowledge Base -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#127775;</span>
+          C. Best Practices per Kategori
+        </h2>
+        <p>Rekomendasi standar berdasarkan knowledge base dari resolusi sukses</p>
+      </div>
+
+      <div class="grid-2 mb-4">
+        <!-- Fire Safety -->
+        <div class="ml-feature-card">
+          <h4>&#128293; FIRE_SAFETY</h4>
+          <p style="color: var(--pln-gray-500); font-size: 0.85rem; margin-bottom: 0.75rem;">1.103 kasus | Avg: 4,5 hari</p>
+          <div style="color: var(--pln-gray-600);">
+            <p><strong>Immediate:</strong> Periksa APAR terdekat, pastikan jalur evakuasi bebas</p>
+            <p><strong>Short-term:</strong> Lakukan pengecekan APAR dan hydrant</p>
+            <p><strong>Preventive:</strong> Jadwalkan inspeksi rutin APAR bulanan</p>
+          </div>
+        </div>
+
+        <!-- Electrical -->
+        <div class="ml-feature-card">
+          <h4>&#9889; ELECTRICAL</h4>
+          <p style="color: var(--pln-gray-500); font-size: 0.85rem; margin-bottom: 0.75rem;">417 kasus | Avg: 12,5 hari</p>
+          <div style="color: var(--pln-gray-600);">
+            <p><strong>Immediate:</strong> De-energize area jika berbahaya, pasang warning sign</p>
+            <p><strong>Short-term:</strong> Perbaikan oleh teknisi berlisensi</p>
+            <p><strong>Preventive:</strong> Thermography scan berkala, LOTO training</p>
+          </div>
+        </div>
+
+        <!-- Structural -->
+        <div class="ml-feature-card">
+          <h4>&#127959; STRUCTURAL</h4>
+          <p style="color: var(--pln-gray-500); font-size: 0.85rem; margin-bottom: 0.75rem;">659 kasus | Avg: 12,4 hari</p>
+          <div style="color: var(--pln-gray-600);">
+            <p><strong>Immediate:</strong> Pasang barrier/barricade, evakuasi jika perlu</p>
+            <p><strong>Short-term:</strong> Assessment oleh engineer, perbaikan struktural</p>
+            <p><strong>Preventive:</strong> Inspeksi struktur tahunan, maintenance plan</p>
+          </div>
+        </div>
+
+        <!-- Housekeeping -->
+        <div class="ml-feature-card">
+          <h4>&#128722; HOUSEKEEPING</h4>
+          <p style="color: var(--pln-gray-500); font-size: 0.85rem; margin-bottom: 0.75rem;">613 kasus | Avg: 5,3 hari</p>
+          <div style="color: var(--pln-gray-600);">
+            <p><strong>Immediate:</strong> Bersihkan area, pindahkan obstacle</p>
+            <p><strong>Short-term:</strong> Tetapkan penanggung jawab kebersihan area</p>
+            <p><strong>Preventive:</strong> Implementasi 5S, audit housekeeping mingguan</p>
+          </div>
+        </div>
+
+        <!-- PPE/APD -->
+        <div class="ml-feature-card">
+          <h4>&#129520; PPE / APD</h4>
+          <p style="color: var(--pln-gray-500); font-size: 0.85rem; margin-bottom: 0.75rem;">187 kasus | Avg: 3,6 hari</p>
+          <div style="color: var(--pln-gray-600);">
+            <p><strong>Immediate:</strong> Sediakan APD yang sesuai, pastikan pekerja menggunakan</p>
+            <p><strong>Short-term:</strong> Training penggunaan APD, review inventory</p>
+            <p><strong>Preventive:</strong> Stock monitoring, program awareness APD</p>
+          </div>
+        </div>
+
+        <!-- Fall Protection -->
+        <div class="ml-feature-card">
+          <h4>&#128737; FALL_PROTECTION</h4>
+          <p style="color: var(--pln-gray-500); font-size: 0.85rem; margin-bottom: 0.75rem;">45 kasus | Avg: 11,3 hari</p>
+          <div style="color: var(--pln-gray-600);">
+            <p><strong>Immediate:</strong> Pasang guardrail/barrier, stop pekerjaan di ketinggian</p>
+            <p><strong>Short-term:</strong> Inspeksi full body harness, perbaiki anchor point</p>
+            <p><strong>Preventive:</strong> Training working at height, inspeksi equipment rutin</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Resolutions -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#9989;</span>
+          D. Resolusi Paling Umum
+        </h2>
+        <p>Teks resolusi yang paling sering digunakan per kategori masalah</p>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Top Resolution per Kategori</h3>
+          <button class="btn-data-view" onclick="openDataModal('knowledgeBase')">
+            <span class="icon">&#128200;</span> Lihat Data Lengkap
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kategori</th>
+                  <th>Total Kasus</th>
+                  <th>Top Resolution Text</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>PATROL_ROUTINE</strong></td>
+                  <td>1.445</td>
+                  <td>"baik"</td>
+                </tr>
+                <tr>
+                  <td><strong>FIRE_SAFETY</strong></td>
+                  <td>1.103</td>
+                  <td>"baik"</td>
+                </tr>
+                <tr>
+                  <td><strong>OTHER</strong></td>
+                  <td>768</td>
+                  <td>"tetep di bersihkan"</td>
+                </tr>
+                <tr>
+                  <td><strong>STRUCTURAL</strong></td>
+                  <td>659</td>
+                  <td>"Selesai"</td>
+                </tr>
+                <tr>
+                  <td><strong>HOUSEKEEPING</strong></td>
+                  <td>613</td>
+                  <td>"rutin"</td>
+                </tr>
+                <tr>
+                  <td><strong>ELECTRICAL</strong></td>
+                  <td>417</td>
+                  <td>"Sudah"</td>
+                </tr>
+                <tr>
+                  <td><strong>PPE_APD</strong></td>
+                  <td>187</td>
+                  <td>"selalu safety dalam bekerja"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <strong>Catatan:</strong> Teks resolusi yang singkat seperti "baik" dan "Sudah" mengindikasikan perlunya standardisasi format resolusi yang lebih deskriptif
+        </div>
+      </div>
+
+      <div class="analysis-box">
+        <h4>Interpretasi Pola Resolusi</h4>
+        <ul>
+          <li><strong>Resolusi terlalu singkat</strong> - Mayoritas teks resolusi hanya 1-2 kata ("baik", "Sudah", "Selesai"), sulit dijadikan referensi untuk kasus serupa</li>
+          <li><strong>PPE_APD memiliki resolusi terbaik</strong> - "selalu safety dalam bekerja" menunjukkan pendekatan awareness, bukan hanya fix</li>
+          <li><strong>Perlu template resolusi</strong> - Standarisasi format resolusi akan memperkaya knowledge base untuk rekomendasi yang lebih akurat</li>
+          <li><strong>FIRE_SAFETY dan PATROL_ROUTINE</strong> perlu detail lebih - volume tinggi tapi resolusi generik</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section class="section">
+      <div class="section-header">
+        <h2>
+          <span class="icon">&#127919;</span>
+          Rekomendasi Pengembangan Sistem
+        </h2>
+        <p>Langkah-langkah untuk meningkatkan efektivitas Smart Recommendation Engine</p>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>1. Standardisasi Format Resolusi</h4>
+        <ul>
+          <li><strong>Buat template resolusi terstruktur</strong> dengan field: Root Cause, Immediate Action, Long-term Prevention</li>
+          <li><strong>Mandatory minimum 3 kalimat</strong> untuk setiap resolusi agar knowledge base lebih kaya</li>
+          <li><strong>Kategorisasi otomatis resolusi</strong> berdasarkan keyword untuk memudahkan pencarian</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>2. Percepatan Resolusi ELECTRICAL & STRUCTURAL</h4>
+        <ul>
+          <li><strong>Prioritaskan vendor kontrak untuk pekerjaan elektrikal</strong> - rata-rata 12,5 hari terlalu lama</li>
+          <li><strong>Siapkan material stock untuk repair struktural umum</strong> (handrail, flooring, dll)</li>
+          <li><strong>SLA maksimal 7 hari</strong> untuk kategori dengan safety impact tinggi</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>3. Integrasi Sistem Rekomendasi ke IZAT App</h4>
+        <ul>
+          <li><strong>Auto-suggest resolusi</strong> saat PIC membuka temuan berdasarkan similarity dengan kasus sebelumnya</li>
+          <li><strong>Rating sistem untuk resolusi</strong> - feedback dari PIC untuk meningkatkan akurasi rekomendasi</li>
+          <li><strong>Dashboard "Most Effective Resolutions"</strong> per kategori untuk referensi cepat</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-box">
+        <h4>4. Knowledge Base Enhancement</h4>
+        <ul>
+          <li><strong>Import external best practices</strong> dari standar K3 nasional/internasional</li>
+          <li><strong>Learning from other units</strong> - agregasi resolusi sukses dari unit PLN lainnya</li>
+          <li><strong>Periodic review</strong> - update best practices setiap quarter berdasarkan resolusi terbaru</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo-text">PT PLN Nusantara Power - UP Indramayu</div>
+        <p>Laporan Analisis Lanjutan Data IZAT K3</p>
+        <p>IV.2 Smart Recommendation Engine - AI/ML Analysis</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+          Generated: Desember 2025 | Confidential - Internal Use Only
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Data Modal -->
+  <div class="data-modal-overlay" id="dataModal">
+    <div class="data-modal-content">
+      <div class="data-modal-header">
+        <h3 id="dataModalTitle">Data Tabel</h3>
+        <button class="data-modal-close" onclick="closeDataModal()">&times;</button>
+      </div>
+      <div class="data-modal-body" id="dataModalBody">
+        <!-- Table will be injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img src="" alt="" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Data untuk modal tables
+    const modalData = {
+      resolutionStats: {
+        title: 'Statistik Resolusi per Kategori Masalah',
+        headers: ['Kategori', 'Total Kasus', 'Avg Hours', 'Median Hours', 'Std Hours', 'Avg Days'],
+        rows: [
+          ['PATROL_ROUTINE', '1.445', '149,75', '107,13', '140,35', '6,2'],
+          ['FIRE_SAFETY', '1.103', '107,92', '68,28', '111,25', '4,5'],
+          ['OTHER', '768', '226,36', '215,03', '146,37', '9,4'],
+          ['STRUCTURAL', '659', '297,13', '337,98', '154,31', '12,4'],
+          ['HOUSEKEEPING', '613', '126,63', '63,00', '134,90', '5,3'],
+          ['ELECTRICAL', '417', '300,27', '336,98', '173,34', '12,5'],
+          ['PPE_APD', '187', '86,83', '59,88', '92,95', '3,6'],
+          ['MACHINE', '112', '193,03', '146,41', '159,49', '8,0'],
+          ['FALL_PROTECTION', '45', '270,97', '316,80', '159,83', '11,3']
+        ]
+      },
+      knowledgeBase: {
+        title: 'Knowledge Base - Top Resolution per Kategori',
+        headers: ['Kategori', 'Total Kasus', 'Avg Resolution Days', 'Top Resolution'],
+        rows: [
+          ['PATROL_ROUTINE', '1.445', '6,24', 'baik'],
+          ['FIRE_SAFETY', '1.103', '4,50', 'baik'],
+          ['OTHER', '768', '9,43', 'tetep di bersihkan'],
+          ['STRUCTURAL', '659', '12,38', 'Selesai'],
+          ['HOUSEKEEPING', '613', '5,28', 'rutin'],
+          ['ELECTRICAL', '417', '12,51', 'Sudah'],
+          ['PPE_APD', '187', '3,62', 'selalu safety dalam bekerja'],
+          ['MACHINE', '112', '8,04', 'baik'],
+          ['FALL_PROTECTION', '45', '11,29', 'Selesai']
+        ]
+      }
+    };
+
+    function openDataModal(dataKey) {
+      const data = modalData[dataKey];
+      const modal = document.getElementById('dataModal');
+      const title = document.getElementById('dataModalTitle');
+      const body = document.getElementById('dataModalBody');
+
+      title.textContent = data.title;
+
+      let tableHtml = '<table class="data-table-simple"><thead><tr>';
+      data.headers.forEach(h => tableHtml += `<th>${h}</th>`);
+      tableHtml += '</tr></thead><tbody>';
+      data.rows.forEach((row, idx) => {
+        const highlight = idx < 3 ? ' class="highlight"' : '';
+        tableHtml += `<tr${highlight}>`;
+        row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+        tableHtml += '</tr>';
+      });
+      tableHtml += '</tbody></table>';
+
+      body.innerHTML = tableHtml;
+      modal.classList.add('active');
+    }
+
+    function closeDataModal() {
+      document.getElementById('dataModal').classList.remove('active');
+    }
+
+    // Lightbox functionality
+    document.querySelectorAll('.image-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        const caption = this.querySelector('figcaption');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = caption ? caption.textContent : '';
+        lightbox.classList.add('active');
+      });
+    });
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Close modals on overlay click or Escape key
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.getElementById('dataModal').addEventListener('click', function(e) {
+      if (e.target === this) closeDataModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeDataModal();
+      }
+    });
+  </script>
+</body>
+</html>
