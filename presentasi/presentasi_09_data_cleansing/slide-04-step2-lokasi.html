@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 2: Standardisasi Lokasi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.3rem; }
+    .step-badge { background: var(--pln-green); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.5rem; }
+    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.3s; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-title::before { content: ''; width: 4px; height: 20px; background: var(--pln-primary-blue); border-radius: 2px; }
+    .parsing-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+    .parsing-example { background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 0.75rem; margin-top: 0.75rem; }
+    .parsing-input { font-family: monospace; background: var(--pln-dark-blue); color: #fff; padding: 0.3rem 0.5rem; border-radius: 4px; font-size: 0.8rem; }
+    .parsing-output { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-top: 0.5rem; }
+    .output-item { font-size: 0.75rem; }
+    .output-item strong { color: var(--pln-primary-blue); }
+    .component-list { list-style: none; }
+    .component-list li { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb; font-size: 0.85rem; }
+    .component-list li:last-child { border-bottom: none; }
+    .unique-count { background: var(--pln-primary-blue); color: #fff; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.75rem; }
+    .zona-table { width: 100%; border-collapse: collapse; }
+    .zona-table th { background: var(--pln-dark-blue); color: #fff; padding: 0.6rem; text-align: left; font-size: 0.8rem; }
+    .zona-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #e5e7eb; font-size: 0.8rem; }
+    .zona-name { font-weight: 600; color: var(--pln-dark-blue); }
+    .zona-bar { height: 8px; border-radius: 4px; background: var(--pln-primary-blue); }
+    .insight-box { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); border-radius: 8px; padding: 0.75rem 1rem; margin-top: 1rem; grid-column: 1 / -1; opacity: 0; animation: fadeIn 0.6s ease-out 0.5s forwards; }
+    .insight-box p { color: #fff; font-size: 0.85rem; }
+    .insight-box strong { color: var(--pln-green); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <span class="step-badge">STEP 2</span>
+    </div>
+    <h1>Standardisasi Lokasi</h1>
+  </div>
+  <div class="content">
+    <div class="section">
+      <div class="section-title">Struktur Parsing</div>
+      <div class="parsing-card">
+        <p style="font-size: 0.85rem; color: #666; margin-bottom: 0.5rem;"><code>nama_lokasi</code> → 4 komponen terstruktur</p>
+        <ul class="component-list">
+          <li><span>lokasi_zona</span> <span class="unique-count">5 zona</span></li>
+          <li><span>lokasi_area</span> <span class="unique-count">46 area</span></li>
+          <li><span>lokasi_unit_number</span> <span class="unique-count">3 unit</span></li>
+          <li><span>lokasi_lantai</span> <span class="unique-count">7 lantai</span></li>
+        </ul>
+      </div>
+      <div class="parsing-example">
+        <div style="font-size: 0.75rem; color: #666; margin-bottom: 0.5rem;">Contoh:</div>
+        <div class="parsing-input">BOILER #1 LANTAI 3</div>
+        <div class="parsing-output">
+          <div class="output-item"><strong>Zona:</strong> MAIN_UNIT</div>
+          <div class="output-item"><strong>Area:</strong> BOILER</div>
+          <div class="output-item"><strong>Unit:</strong> #1</div>
+          <div class="output-item"><strong>Lantai:</strong> LANTAI 3</div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Distribusi Zona Operasional</div>
+      <table class="zona-table">
+        <thead>
+          <tr>
+            <th>Zona</th>
+            <th>Temuan</th>
+            <th>%</th>
+            <th style="width: 30%;">Distribusi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="zona-name">MAIN_UNIT</span></td>
+            <td>2.616</td>
+            <td>47%</td>
+            <td><div class="zona-bar" style="width: 100%;"></div></td>
+          </tr>
+          <tr>
+            <td><span class="zona-name">SUPPORT</span></td>
+            <td>1.708</td>
+            <td>31%</td>
+            <td><div class="zona-bar" style="width: 66%;"></div></td>
+          </tr>
+          <tr>
+            <td><span class="zona-name">UTILITY</span></td>
+            <td>602</td>
+            <td>11%</td>
+            <td><div class="zona-bar" style="width: 23%;"></div></td>
+          </tr>
+          <tr>
+            <td><span class="zona-name">COAL_HANDLING</span></td>
+            <td>580</td>
+            <td>10%</td>
+            <td><div class="zona-bar" style="width: 22%;"></div></td>
+          </tr>
+          <tr>
+            <td><span class="zona-name">UNKNOWN</span></td>
+            <td>69</td>
+            <td>1%</td>
+            <td><div class="zona-bar" style="width: 3%; background: #ef4444;"></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-box">
+      <p><strong>Insight:</strong> MAIN_UNIT mendominasi 47% temuan (Boiler, Turbine, Generator). UNKNOWN hanya 1% menunjukkan data quality baik.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 1: Koreksi Typo dengan Fuzzy Matching</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.3rem; }
+    .step-badge { background: var(--pln-green); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.3s; }
+    .section:nth-child(3) { animation-delay: 0.4s; grid-column: 1 / -1; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-title::before { content: ''; width: 4px; height: 20px; background: var(--pln-primary-blue); border-radius: 2px; }
+    .problem-card { background: #fef2f2; border-left: 4px solid #ef4444; padding: 1rem; border-radius: 0 8px 8px 0; }
+    .typo-examples { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+    .typo-tag { background: #fee2e2; color: #991b1b; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-family: monospace; }
+    .method-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; }
+    .method-item { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.85rem; }
+    .method-item strong { color: var(--pln-dark-blue); }
+    .arrow { color: var(--pln-green); font-weight: bold; }
+    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .result-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; text-align: center; }
+    .result-card.highlight { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); }
+    .result-card.highlight .result-label, .result-card.highlight .result-value { color: #fff; }
+    .result-value { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--pln-primary-blue); }
+    .result-label { font-size: 0.75rem; color: #666; margin-top: 0.25rem; }
+    .result-change { font-size: 0.7rem; color: var(--pln-green); font-weight: 600; margin-top: 0.25rem; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <span class="step-badge">STEP 1</span>
+    </div>
+    <h1>Koreksi Typo dengan Fuzzy Matching</h1>
+  </div>
+  <div class="content">
+    <div class="section">
+      <div class="section-title">Masalah Data Mentah</div>
+      <div class="problem-card">
+        <p style="font-size: 0.85rem; color: #991b1b; margin-bottom: 0.5rem;"><strong>Variasi typo menyebabkan analisis tidak akurat:</strong></p>
+        <div style="margin-bottom: 0.5rem;"><strong style="font-size: 0.8rem;">APAR:</strong></div>
+        <div class="typo-examples">
+          <span class="typo-tag">apar</span>
+          <span class="typo-tag">appar</span>
+          <span class="typo-tag">aper</span>
+          <span class="typo-tag">aphar</span>
+          <span class="typo-tag">ready</span>
+          <span class="typo-tag">redy</span>
+        </div>
+        <div style="margin: 0.5rem 0;"><strong style="font-size: 0.8rem;">Baik:</strong></div>
+        <div class="typo-examples">
+          <span class="typo-tag">baik</span>
+          <span class="typo-tag">baikk</span>
+          <span class="typo-tag">bik</span>
+          <span class="typo-tag">bagus</span>
+          <span class="typo-tag">okay</span>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Metode Fuzzy Matching</div>
+      <div class="method-card">
+        <div class="method-item"><strong>Algoritma:</strong> RapidFuzz + Levenshtein distance</div>
+        <div class="method-item"><strong>Threshold:</strong> Similarity score &gt; 80%</div>
+        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #ddd;">
+          <div class="method-item"><code>judul</code> <span class="arrow">→</span> <code>judul_clean</code></div>
+          <div class="method-item"><code>kondisi</code> <span class="arrow">→</span> <code>kondisi_clean</code></div>
+          <div class="method-item"><code>rekomendasi</code> <span class="arrow">→</span> <code>rekomendasi_clean</code></div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Hasil Koreksi</div>
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-value">-92%</div>
+          <div class="result-label">Variasi "APAR"</div>
+          <div class="result-change">12 → 1 standar</div>
+        </div>
+        <div class="result-card">
+          <div class="result-value">-88%</div>
+          <div class="result-label">Variasi "baik"</div>
+          <div class="result-change">8 → 1 standar</div>
+        </div>
+        <div class="result-card">
+          <div class="result-value">-42%</div>
+          <div class="result-label">Total unique words</div>
+          <div class="result-change">3.247 → 1.892</div>
+        </div>
+        <div class="result-card highlight">
+          <div class="result-value">+81%</div>
+          <div class="result-label">Data Quality Score</div>
+          <div class="result-change" style="color: rgba(255,255,255,0.8);">2,1 → 3,8</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

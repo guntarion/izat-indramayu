@@ -1,3 +1,9 @@
+## 2026-01-02 20:18:13
+
+feat: add presentation home page and navigation system
+
+---
+
 ## 2026-01-02 17:01:37
 
 feat: add 6 HTML presentations for IZAT K3 analysis highlights

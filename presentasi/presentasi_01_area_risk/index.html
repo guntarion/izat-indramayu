@@ -104,6 +104,28 @@
       box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
     }
 
+    .home-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
+
+    .home-btn:hover {
+      background: var(--pln-green);
+      transform: scale(1.05);
+    }
+
     .viewer {
       flex: 1;
       position: relative;
@@ -318,6 +340,7 @@
 <body>
   <div class="app">
     <header class="header">
+      <a href="../index.html" class="home-btn" title="Kembali ke Home">⌂</a>
       <div class="header-title">
         <span id="presentationTitle">Highlight Analisis: Risiko Area</span>
         <span class="header-badge" id="headerBadge">UP Indramayu</span>

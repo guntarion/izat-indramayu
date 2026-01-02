@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IZAT K3 Analytics - UP Indramayu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --pln-light-blue: #00AFF0;
+      --white: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --text-gray: #333333;
+      --text-light: #666666;
+      --gradient-primary: linear-gradient(135deg, #035B71 0%, #00A2B9 100%);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.15);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--light-gray); color: var(--text-gray); line-height: 1.6; min-height: 100vh; }
+
+    /* Hero Section */
+    .hero {
+      background: var(--gradient-primary);
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 80%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1.5rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--pln-green);
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 2.5rem;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--white);
+    }
+    .section-icon.preliminary { background: var(--pln-dark-blue); }
+    .section-icon.basic { background: var(--pln-primary-blue); }
+    .section-icon.advanced { background: var(--pln-green); }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--pln-dark-blue);
+    }
+    .section-desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-left: auto;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* Topic Card */
+    .topic-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border-top: 4px solid var(--pln-primary-blue);
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+    }
+    .topic-card:nth-child(2) { border-top-color: var(--pln-dark-blue); }
+    .topic-card:nth-child(3) { border-top-color: var(--pln-green); }
+    .topic-card:nth-child(4) { border-top-color: var(--pln-light-blue); }
+    .topic-card:nth-child(5) { border-top-color: var(--pln-primary-blue); }
+    .topic-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    .topic-number {
+      display: inline-block;
+      background: var(--light-gray);
+      color: var(--pln-dark-blue);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+    .topic-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+      margin-bottom: 0.5rem;
+    }
+    .topic-desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .topic-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+    .topic-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--pln-dark-blue);
+      color: var(--white);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+    .footer a {
+      color: var(--pln-green);
+      text-decoration: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate { opacity: 0; animation: fadeInUp 0.6s ease-out forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero-stats { gap: 1.5rem; }
+      .section-desc { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-content animate">
+      <span class="hero-badge">Jan - Okt 2025</span>
+      <h1>IZAT K3 Analytics</h1>
+      <p class="hero-subtitle">Insight Analitis dari Data Keselamatan Kerja - PT PLN Nusantara Power Unit Pembangkit Indramayu</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">5.575</div>
+          <div class="hero-stat-label">Total Temuan</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">9</div>
+          <div class="hero-stat-label">Topik Analisis</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">75</div>
+          <div class="hero-stat-label">Kolom Data</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+    <!-- Preliminary Processing -->
+    <section class="section animate delay-1">
+      <div class="section-header">
+        <div class="section-icon preliminary">⚙</div>
+        <h2 class="section-title">Preliminary Processing</h2>
+        <span class="section-desc">Persiapan & pembersihan data mentah</span>
+      </div>
+      <div class="cards-grid">
+        <a href="presentasi_09_data_cleansing/index.html" class="topic-card">
+          <span class="topic-number">STEP 0</span>
+          <h3 class="topic-title">Pipeline Data Cleansing</h3>
+          <p class="topic-desc">7 tahapan transformasi data mentah ke analisis berkualitas: fuzzy matching, standardisasi lokasi, perusahaan, tanggal, risk scoring, quality metrics, dan benchmarking.</p>
+          <div class="topic-meta">
+            <span>11 slides</span>
+            <span>31 → 75 kolom</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Basic Analysis -->
+    <section class="section animate delay-2">
+      <div class="section-header">
+        <div class="section-icon basic">📊</div>
+        <h2 class="section-title">Basic Analysis</h2>
+        <span class="section-desc">Analisis dasar dari data K3</span>
+      </div>
+      <div class="cards-grid">
+        <a href="presentasi_01_area_risk/index.html" class="topic-card">
+          <span class="topic-number">01</span>
+          <h3 class="topic-title">Risiko Area</h3>
+          <p class="topic-desc">Analisis distribusi temuan per zona dan area operasional. Identifikasi hotspot risiko di MAIN_UNIT, COAL_HANDLING, dan area kritikal lainnya.</p>
+          <div class="topic-meta">
+            <span>20 slides</span>
+            <span>5 zona, 46 area</span>
+          </div>
+        </a>
+        <a href="presentasi_02_team_performance/index.html" class="topic-card">
+          <span class="topic-number">02</span>
+          <h3 class="topic-title">Performa Tim</h3>
+          <p class="topic-desc">Evaluasi kinerja reporter dan PIC. Analisis workload distribution, resolution time, dan quality score per individu dan perusahaan.</p>
+          <div class="topic-meta">
+            <span>29 slides</span>
+            <span>823 reporter</span>
+          </div>
+        </a>
+        <a href="presentasi_03_resolution_workflow/index.html" class="topic-card">
+          <span class="topic-number">03</span>
+          <h3 class="topic-title">Resolution Workflow</h3>
+          <p class="topic-desc">Analisis alur penyelesaian temuan dari pelaporan hingga closure. SLA compliance, bottleneck identification, dan aging analysis.</p>
+          <div class="topic-meta">
+            <span>13 slides</span>
+            <span>Avg 220 hari</span>
+          </div>
+        </a>
+        <a href="presentasi_04_shift_patterns/index.html" class="topic-card">
+          <span class="topic-number">04</span>
+          <h3 class="topic-title">Pola Shift</h3>
+          <p class="topic-desc">Pola temuan berdasarkan waktu: shift pagi/siang/malam, hari kerja, dan tren bulanan. Identifikasi waktu optimal untuk inspeksi.</p>
+          <div class="topic-meta">
+            <span>16 slides</span>
+            <span>3 shift analysis</span>
+          </div>
+        </a>
+        <a href="presentasi_05_asset_tracking/index.html" class="topic-card">
+          <span class="topic-number">05</span>
+          <h3 class="topic-title">Tracking Aset</h3>
+          <p class="topic-desc">Monitoring kondisi aset kritikal: APAR, hydrant, APD, dan peralatan keselamatan. Identifikasi equipment yang perlu perhatian segera.</p>
+          <div class="topic-meta">
+            <span>10 slides</span>
+            <span>800+ APAR findings</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Advanced Analysis -->
+    <section class="section animate delay-3">
+      <div class="section-header">
+        <div class="section-icon advanced">🤖</div>
+        <h2 class="section-title">Advanced Analysis</h2>
+        <span class="section-desc">Analisis lanjutan dengan Machine Learning</span>
+      </div>
+      <div class="cards-grid">
+        <a href="presentasi_06_risk_prediction/index.html" class="topic-card">
+          <span class="topic-number">06</span>
+          <h3 class="topic-title">Model Prediksi Risiko</h3>
+          <p class="topic-desc">Machine learning model untuk memprediksi tingkat risiko temuan berdasarkan lokasi, kategori, dan konteks. Akurasi 75-80%.</p>
+          <div class="topic-meta">
+            <span>8 slides</span>
+            <span>ML Model</span>
+          </div>
+        </a>
+        <a href="presentasi_07_smart_recommendation/index.html" class="topic-card">
+          <span class="topic-number">07</span>
+          <h3 class="topic-title">Smart Recommendation</h3>
+          <p class="topic-desc">Sistem rekomendasi berbasis similarity untuk memberikan guidance instant berdasarkan knowledge base 5.575 temuan historical.</p>
+          <div class="topic-meta">
+            <span>5 slides</span>
+            <span>70-85% similarity</span>
+          </div>
+        </a>
+        <a href="presentasi_08_anomaly_detection/index.html" class="topic-card">
+          <span class="topic-number">08</span>
+          <h3 class="topic-title">Deteksi Anomali</h3>
+          <p class="topic-desc">Early warning system menggunakan Isolation Forest untuk mendeteksi pola tidak normal: volume spike/drop, quality drop, dan gaming behavior.</p>
+          <div class="topic-meta">
+            <span>5 slides</span>
+            <span>28 anomali</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Prepared by: <a href="#">PT JAPO TITIAN BAKAT</a> - Akhmad Guntar | Desember 2025</p>
+  </footer>
+</body>
+</html>

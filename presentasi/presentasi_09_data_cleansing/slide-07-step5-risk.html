@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 5: Risk Severity & Issue Category</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.3rem; }
+    .step-badge { background: var(--pln-green); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.5rem; }
+    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.3s; }
+    .section:nth-child(3) { animation-delay: 0.4s; grid-column: 1 / -1; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-title::before { content: ''; width: 4px; height: 20px; background: var(--pln-primary-blue); border-radius: 2px; }
+    .algorithm-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; }
+    .algo-section { margin-bottom: 0.75rem; }
+    .algo-section:last-child { margin-bottom: 0; }
+    .algo-title { font-size: 0.8rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.3rem; }
+    .algo-items { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .algo-item { font-size: 0.7rem; padding: 0.2rem 0.4rem; border-radius: 4px; }
+    .algo-high { background: #fee2e2; color: #991b1b; }
+    .algo-med { background: #fef3c7; color: #92400e; }
+    .algo-low { background: #ecfdf5; color: #065f46; }
+    .risk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+    .risk-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; text-align: center; border-top: 4px solid; }
+    .risk-card.critical { border-color: #dc2626; }
+    .risk-card.high { border-color: #f59e0b; }
+    .risk-card.medium { border-color: #3b82f6; }
+    .risk-card.low { border-color: var(--pln-green); }
+    .risk-level { font-weight: 700; font-size: 0.85rem; color: var(--pln-dark-blue); }
+    .risk-count { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--pln-primary-blue); }
+    .risk-pct { font-size: 0.75rem; color: #666; }
+    .risk-sla { font-size: 0.7rem; color: #999; margin-top: 0.25rem; }
+    .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+    .cat-card { background: var(--light-gray); padding: 0.75rem; border-radius: 8px; }
+    .cat-name { font-weight: 600; font-size: 0.8rem; color: var(--pln-dark-blue); margin-bottom: 0.25rem; }
+    .cat-pct { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--pln-primary-blue); }
+    .cat-keywords { font-size: 0.65rem; color: #666; margin-top: 0.25rem; }
+    .alert-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-top: 0.75rem; }
+    .alert-box p { font-size: 0.85rem; color: #991b1b; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <span class="step-badge">STEP 5</span>
+    </div>
+    <h1>Risk Severity & Issue Category</h1>
+  </div>
+  <div class="content">
+    <div class="section">
+      <div class="section-title">Algoritma Risk Score</div>
+      <div class="algorithm-card">
+        <div class="algo-section">
+          <div class="algo-title">1. Base score dari kategori:</div>
+          <div class="algo-items">
+            <span class="algo-item algo-high">Near Miss: +3</span>
+            <span class="algo-item algo-med">Unsafe Action: +2</span>
+            <span class="algo-item algo-low">Unsafe Condition: +1,5</span>
+          </div>
+        </div>
+        <div class="algo-section">
+          <div class="algo-title">2. +Keyword severity:</div>
+          <div class="algo-items">
+            <span class="algo-item algo-high">bocor, api, patah: +1</span>
+            <span class="algo-item algo-med">rusak, mati: +0,5</span>
+          </div>
+        </div>
+        <div class="algo-section">
+          <div class="algo-title">3. +Lokasi high-risk:</div>
+          <div class="algo-items">
+            <span class="algo-item algo-high">Boiler, Turbine: +1</span>
+            <span class="algo-item algo-med">UNKNOWN: +0,5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Distribusi Risk Severity</div>
+      <div class="risk-grid">
+        <div class="risk-card critical">
+          <div class="risk-level">CRITICAL</div>
+          <div class="risk-count">107</div>
+          <div class="risk-pct">1,9%</div>
+          <div class="risk-sla">SLA: 1 hari</div>
+        </div>
+        <div class="risk-card high">
+          <div class="risk-level">HIGH</div>
+          <div class="risk-count">255</div>
+          <div class="risk-pct">4,6%</div>
+          <div class="risk-sla">SLA: 2 hari</div>
+        </div>
+        <div class="risk-card medium">
+          <div class="risk-level">MEDIUM</div>
+          <div class="risk-count">1.215</div>
+          <div class="risk-pct">21,8%</div>
+          <div class="risk-sla">SLA: 5 hari</div>
+        </div>
+        <div class="risk-card low">
+          <div class="risk-level">LOW</div>
+          <div class="risk-count">3.998</div>
+          <div class="risk-pct">71,7%</div>
+          <div class="risk-sla">SLA: 14 hari</div>
+        </div>
+      </div>
+      <div class="alert-box">
+        <p><strong>Alert:</strong> 6,5% temuan (362 findings) HIGH/CRITICAL, tapi SLA compliance 0% - tidak ada yang on-time!</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Issue Category Classification (8 Kategori)</div>
+      <div class="category-grid">
+        <div class="cat-card">
+          <div class="cat-name">PATROL_ROUTINE</div>
+          <div class="cat-pct">24,3%</div>
+          <div class="cat-keywords">ready, aman, normal</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-name">FIRE_SAFETY</div>
+          <div class="cat-pct">22,4%</div>
+          <div class="cat-keywords">apar, hydrant, fire alarm</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-name">STRUCTURAL</div>
+          <div class="cat-pct">12,0%</div>
+          <div class="cat-keywords">retak, bocor, rusak</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-name">HOUSEKEEPING</div>
+          <div class="cat-pct">11,0%</div>
+          <div class="cat-keywords">kotor, berantakan, sampah</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-name">MECHANICAL</div>
+          <div class="cat-pct">8,5%</div>
+          <div class="cat-keywords">pump, motor, bearing</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-name">ELECTRICAL</div>
+          <div class="cat-pct">7,7%</div>
+          <div class="cat-keywords">kabel, panel, listrik</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-name">PPE_SAFETY</div>
+          <div class="cat-pct">6,2%</div>
+          <div class="cat-keywords">helm, safety shoes</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-name">OTHER</div>
+          <div class="cat-pct">7,9%</div>
+          <div class="cat-keywords">tidak terkategori</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
