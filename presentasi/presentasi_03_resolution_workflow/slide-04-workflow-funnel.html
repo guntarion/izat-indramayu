@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workflow Funnel Performance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
+    .image-container { opacity: 0; animation: fadeInLeft 0.6s ease-out 0.2s forwards; }
+    .image-container img { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    .image-caption { font-size: 0.85rem; color: #666; text-align: center; margin-top: 0.75rem; }
+    .text-content { opacity: 0; animation: fadeInRight 0.6s ease-out 0.4s forwards; }
+    .text-content h2 { font-size: 1.2rem; color: var(--pln-dark-blue); margin-bottom: 1rem; }
+    .funnel-stats { margin-bottom: 1.5rem; }
+    .funnel-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: var(--light-gray); border-radius: 8px; margin-bottom: 0.5rem; }
+    .funnel-value { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--pln-primary-blue); min-width: 80px; }
+    .funnel-label { font-size: 0.9rem; color: #555; }
+    .highlight { background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 10px; padding: 1rem; border-left: 4px solid var(--pln-green); }
+    .highlight p { font-size: 0.9rem; color: #555; }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>BAGIAN A: Workflow Funnel Performance</h1></div>
+  <div class="content">
+    <div class="image-container">
+      <img src="assets/images/II.3.1_workflow_funnel.png" alt="Workflow Funnel">
+      <p class="image-caption">Gambar: Workflow Funnel Performance</p>
+    </div>
+    <div class="text-content">
+      <h2>Funnel Analysis</h2>
+      <div class="funnel-stats">
+        <div class="funnel-item"><span class="funnel-value">5.575</span><span class="funnel-label">Temuan Dibuat (100%)</span></div>
+        <div class="funnel-item"><span class="funnel-value">5.532</span><span class="funnel-label">Assigned to PIC (99,2%)</span></div>
+        <div class="funnel-item"><span class="funnel-value">5.531</span><span class="funnel-label">Closed/Resolved (99,2%)</span></div>
+      </div>
+      <div class="highlight">
+        <p><strong>Insight:</strong> Funnel sangat smooth - tidak ada drop signifikan. Bottleneck bukan di assignment, tapi di <strong>speed of resolution</strong>. 99,2% completion rate menunjukkan <strong>commitment tinggi</strong>, bukan efficiency.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

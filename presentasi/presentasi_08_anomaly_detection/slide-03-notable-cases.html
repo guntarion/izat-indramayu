@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notable Anomaly Cases</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: flex; flex-direction: column; gap: 1rem; }
+    .case { background: var(--light-gray); border-radius: 12px; padding: 1.25rem; opacity: 0; animation: fadeIn 0.6s ease-out forwards; display: grid; grid-template-columns: 120px 1fr; gap: 1.5rem; }
+    .case:nth-child(1) { animation-delay: 0.2s; border-left: 4px solid #f59e0b; }
+    .case:nth-child(2) { animation-delay: 0.3s; border-left: 4px solid var(--pln-primary-blue); }
+    .case:nth-child(3) { animation-delay: 0.4s; border-left: 4px solid #ef4444; }
+    .case-meta { text-align: center; }
+    .case-label { font-size: 0.75rem; color: #666; text-transform: uppercase; }
+    .case-date { font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--pln-dark-blue); }
+    .case-content h3 { font-size: 1rem; color: var(--pln-dark-blue); margin-bottom: 0.3rem; }
+    .case-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 0.75rem; }
+    .detail { font-size: 0.8rem; }
+    .detail-label { color: #888; font-size: 0.7rem; text-transform: uppercase; }
+    .detail-value { color: #444; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Notable Anomaly Cases</h1></div>
+  <div class="content">
+    <div class="case">
+      <div class="case-meta"><div class="case-label">Case #1</div><div class="case-date">15 Mar 2025</div></div>
+      <div class="case-content">
+        <h3>System Downtime Detection</h3>
+        <div class="case-details">
+          <div class="detail"><div class="detail-label">Anomaly</div><div class="detail-value">Zero findings across all zones for 8 hours</div></div>
+          <div class="detail"><div class="detail-label">Investigation</div><div class="detail-value">IZAT server maintenance (planned but not communicated)</div></div>
+          <div class="detail"><div class="detail-label">Action</div><div class="detail-value">Improve communication protocol for system maintenance</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="case">
+      <div class="case-meta"><div class="case-label">Case #2</div><div class="case-date">22 Jun 2025</div></div>
+      <div class="case-content">
+        <h3>Quality Drop Investigation</h3>
+        <div class="case-details">
+          <div class="detail"><div class="detail-label">Anomaly</div><div class="detail-value">Quality score drop dari 2,8 ke 1,4 dalam 3 hari</div></div>
+          <div class="detail"><div class="detail-label">Investigation</div><div class="detail-value">Mass onboarding 50 vendor baru, belum trained</div></div>
+          <div class="detail"><div class="detail-label">Action</div><div class="detail-value">Mandatory IZAT training sebelum access granted</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="case">
+      <div class="case-meta"><div class="case-label">Case #3</div><div class="case-date">10 Aug 2025</div></div>
+      <div class="case-content">
+        <h3>Gaming Behavior Detection</h3>
+        <div class="case-details">
+          <div class="detail"><div class="detail-label">Anomaly</div><div class="detail-value">Reporter X submit 47 findings dalam 90 menit, all copy-paste</div></div>
+          <div class="detail"><div class="detail-label">Investigation</div><div class="detail-value">End-of-month KPI target chase</div></div>
+          <div class="detail"><div class="detail-label">Action</div><div class="detail-value">Counseling + revise KPI metric (quality over quantity)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

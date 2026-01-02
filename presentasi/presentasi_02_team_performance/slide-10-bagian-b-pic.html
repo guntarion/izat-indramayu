@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAGIAN B: Kinerja PIC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      color: var(--pln-dark-blue);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 0.1s forwards;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 0.2s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    th {
+      background: var(--pln-dark-blue);
+      color: #fff;
+      padding: 0.8rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td {
+      padding: 0.8rem;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.9rem;
+    }
+    tr:hover td { background: var(--light-gray); }
+    .name { font-weight: 600; color: var(--pln-dark-blue); }
+    .status {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .status-overloaded { background: #fee2e2; color: #dc2626; }
+    .status-high { background: #fef3c7; color: #d97706; }
+    .highlight-danger { color: #dc2626; font-weight: 700; }
+    .highlight-success { color: var(--pln-green); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="header-badge">BAGIAN B</span>
+    <h1>Kinerja PIC (Person In Charge)</h1>
+  </div>
+  <div class="content">
+    <h3 class="section-title">Top 4 PIC Berdasarkan Beban Kerja</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>PIC</th>
+          <th>Total Temuan</th>
+          <th>Close Rate</th>
+          <th>Avg Resolution</th>
+          <th>Workload Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="name">Andrian Denofan</span></td>
+          <td><span class="highlight-danger">2.613 (47%!)</span></td>
+          <td><span class="highlight-success">100%</span></td>
+          <td>110 hari</td>
+          <td><span class="status status-overloaded">OVERLOADED</span></td>
+        </tr>
+        <tr>
+          <td><span class="name">Taufiq Ismail</span></td>
+          <td>951</td>
+          <td><span class="highlight-success">100%</span></td>
+          <td>188 hari</td>
+          <td><span class="status status-high">HIGH</span></td>
+        </tr>
+        <tr>
+          <td><span class="name">Asep Setyawan</span></td>
+          <td>696</td>
+          <td><span class="highlight-success">100%</span></td>
+          <td><span class="highlight-danger">348 hari</span></td>
+          <td><span class="status status-high">HIGH</span></td>
+        </tr>
+        <tr>
+          <td><span class="name">Dovan Pahalatua</span></td>
+          <td>553</td>
+          <td><span class="highlight-success">100%</span></td>
+          <td>234 hari</td>
+          <td><span class="status status-high">HIGH</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

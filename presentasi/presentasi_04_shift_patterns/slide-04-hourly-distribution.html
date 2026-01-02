@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distribusi Laporan Per Jam</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
+    .image-container { opacity: 0; animation: fadeInLeft 0.6s ease-out 0.2s forwards; }
+    .image-container img { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    .text-content { opacity: 0; animation: fadeInRight 0.6s ease-out 0.4s forwards; }
+    .text-content h2 { font-size: 1.1rem; color: var(--pln-dark-blue); margin-bottom: 1rem; }
+    .peak-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem; background: var(--light-gray); border-radius: 8px; margin-bottom: 0.5rem; }
+    .peak-time { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700; color: var(--pln-primary-blue); min-width: 100px; }
+    .peak-label { font-size: 0.85rem; color: #555; }
+    .highlight { background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 10px; padding: 1rem; border-left: 4px solid var(--pln-green); margin-top: 1rem; }
+    .highlight p { font-size: 0.85rem; color: #555; }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Distribusi Laporan Per Jam</h1></div>
+  <div class="content">
+    <div class="image-container">
+      <img src="assets/images/II.4.1_hourly_distribution.png" alt="Hourly Distribution">
+    </div>
+    <div class="text-content">
+      <h2>Peak Hours</h2>
+      <div class="peak-item"><span class="peak-time">08:00-10:00</span><span class="peak-label">Peak Shift A (Pagi)</span></div>
+      <div class="peak-item"><span class="peak-time">14:00-16:00</span><span class="peak-label">Peak Shift B (Siang)</span></div>
+      <div class="peak-item"><span class="peak-time">22:00-24:00</span><span class="peak-label">Peak Shift C (Malam)</span></div>
+      <div class="peak-item"><span class="peak-time">03:00-05:00</span><span class="peak-label">Valley (aktivitas minimal)</span></div>
+      <div class="highlight">
+        <p>Reporting biasanya dilakukan di awal shift sebagai bagian dari shift handover atau inspection routine.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

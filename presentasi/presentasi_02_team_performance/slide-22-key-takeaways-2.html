@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KEY TAKEAWAYS (Lanjutan)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      align-content: start;
+    }
+    .takeaway-card {
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+    .takeaway-card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid #8b5cf6; }
+    .takeaway-card:nth-child(2) { animation-delay: 0.15s; border-left: 5px solid #f59e0b; }
+    .takeaway-card:nth-child(3) { animation-delay: 0.2s; border-left: 5px solid var(--pln-primary-blue); grid-column: span 2; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .takeaway-number {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      background: var(--pln-dark-blue);
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .takeaway-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+      margin-bottom: 0.5rem;
+    }
+    .takeaway-desc {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>KEY TAKEAWAYS (Lanjutan)</h1>
+  </div>
+  <div class="content">
+    <div class="takeaway-card">
+      <span class="takeaway-number">5</span>
+      <h3 class="takeaway-title">Quality > Quantity</h3>
+      <p class="takeaway-desc">PLN internal (165 laporan) mengalahkan vendor besar (1.000+ laporan) dalam kualitas. Benchmark ini harus menjadi standard minimum untuk semua vendor.</p>
+    </div>
+    <div class="takeaway-card">
+      <span class="takeaway-number">6</span>
+      <h3 class="takeaway-title">Top Performers Deserve Recognition</h3>
+      <p class="takeaway-desc">Suparman, Muhammad Safei, Ade Rosikin - konsisten dan berkualitas. Recognition program akan boost morale dan inspire others.</p>
+    </div>
+    <div class="takeaway-card">
+      <span class="takeaway-number">7</span>
+      <h3 class="takeaway-title">Efficiency Gap Harus Ditutup</h3>
+      <p class="takeaway-desc">Resolution time 110-348 hari (3x variance) mengindikasikan lack of standardization. Perlu SLA yang jelas dan training untuk PIC yang slow.</p>
+    </div>
+  </div>
+</body>
+</html>

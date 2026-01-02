@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highlight Analisis: Smart Recommendation - UP Indramayu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --pln-light-blue: #00AFF0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: 'Inter', sans-serif; background: #1a1a2e; overflow: hidden; }
+    .app { display: flex; flex-direction: column; height: 100vh; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 0.75rem 2rem; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 100; }
+    .header-title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: #fff; }
+    .header-badge { font-size: 0.75rem; background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 20px; margin-left: 0.75rem; }
+    .header-info { display: flex; align-items: center; gap: 1.5rem; }
+    .slide-counter { font-size: 0.9rem; opacity: 0.9; font-weight: 500; color: #fff; }
+    .progress-container { width: 200px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; }
+    .progress-bar { height: 100%; background: linear-gradient(90deg, var(--pln-green), var(--pln-light-blue)); transition: width 0.3s ease; }
+    .ctrl-btn { background: rgba(255,255,255,0.1); border: none; color: #fff; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s ease; }
+    .ctrl-btn:hover { background: var(--pln-primary-blue); }
+    .laser-btn.active { background: #ef4444; }
+    .viewer { flex: 1; position: relative; background: #0d0d1a; }
+    .slide-frame { width: 100%; height: 100%; border: none; }
+    .nav-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; pointer-events: none; }
+    .nav-zone { flex: 1; display: flex; align-items: center; justify-content: center; pointer-events: auto; cursor: pointer; transition: all 0.3s ease; }
+    .nav-zone:hover { background: rgba(255,255,255,0.05); }
+    .nav-zone:hover .nav-btn { opacity: 1; transform: scale(1); }
+    .nav-zone.left { justify-content: flex-start; padding-left: 2rem; }
+    .nav-zone.right { justify-content: flex-end; padding-right: 2rem; }
+    .nav-zone.center { cursor: default; pointer-events: none; }
+    .nav-btn { width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3); color: #fff; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8); transition: all 0.3s ease; }
+    .footer { background: rgba(0,0,0,0.6); padding: 0.75rem 2rem; display: flex; align-items: center; gap: 1rem; overflow-x: auto; }
+    .thumb { min-width: 100px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; text-align: center; padding: 0.5rem; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; opacity: 0.6; color: #fff; }
+    .thumb:hover { background: rgba(255,255,255,0.2); opacity: 1; }
+    .thumb.active { border-color: var(--pln-primary-blue); background: rgba(0,162,185,0.3); opacity: 1; }
+    .laser-pointer { position: fixed; width: 12px; height: 12px; background: radial-gradient(circle, #ff0000 0%, #ff0000 40%, rgba(255,0,0,0.6) 60%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 9999; display: none; transform: translate(-50%, -50%); box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.8); }
+    .laser-pointer.visible { display: block; }
+    .laser-capture { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 100; cursor: none; display: none; background: transparent; }
+    .viewer.laser-active .laser-capture { display: block; }
+    .viewer.laser-active .nav-overlay { pointer-events: none; z-index: 1; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-title"><span>Highlight Analisis: Smart Recommendation</span><span class="header-badge">UP Indramayu</span></div>
+      <div class="header-info">
+        <div class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">1</span></div>
+        <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+        <button class="ctrl-btn laser-btn" id="laserBtn" onclick="toggleLaser()">Laser</button>
+        <button class="ctrl-btn" onclick="toggleFullscreen()">Fullscreen</button>
+      </div>
+    </header>
+    <div class="viewer" id="viewer">
+      <iframe class="slide-frame" id="slideFrame" src=""></iframe>
+      <div class="laser-capture" id="laserCapture"></div>
+      <div class="nav-overlay">
+        <div class="nav-zone left" onclick="prevSlide()"><div class="nav-btn">←</div></div>
+        <div class="nav-zone center"></div>
+        <div class="nav-zone right" onclick="nextSlide()"><div class="nav-btn">→</div></div>
+      </div>
+    </div>
+    <footer class="footer" id="thumbnails"></footer>
+  </div>
+  <div class="laser-pointer" id="laserPointer"></div>
+  <script>
+    const slides = [
+      { file: 'slide-01-judul.html', title: 'Judul' },
+      { file: 'slide-02-engine-capability.html', title: 'Engine Capability' },
+      { file: 'slide-03-example-success.html', title: 'Example Case' },
+      { file: 'slide-04-key-takeaways.html', title: 'Key Takeaways' },
+      { file: 'slide-05-penutup.html', title: 'Penutup' }
+    ];
+    let currentIndex = 0;
+    const frame = document.getElementById('slideFrame'), currentSlideEl = document.getElementById('currentSlide'), totalSlidesEl = document.getElementById('totalSlides'), progressBar = document.getElementById('progressBar'), thumbnailsEl = document.getElementById('thumbnails');
+    totalSlidesEl.textContent = slides.length;
+    slides.forEach((slide, i) => { const t = document.createElement('div'); t.className = 'thumb' + (i === 0 ? ' active' : ''); t.textContent = slide.title; t.onclick = () => goToSlide(i); thumbnailsEl.appendChild(t); });
+    function updateUI() { currentSlideEl.textContent = currentIndex + 1; progressBar.style.width = ((currentIndex + 1) / slides.length * 100) + '%'; document.querySelectorAll('.thumb').forEach((t, i) => { t.classList.toggle('active', i === currentIndex); if (i === currentIndex) t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }); }
+    function goToSlide(i) { if (i >= 0 && i < slides.length) { currentIndex = i; frame.src = slides[i].file; updateUI(); } }
+    function nextSlide() { if (currentIndex < slides.length - 1) goToSlide(currentIndex + 1); }
+    function prevSlide() { if (currentIndex > 0) goToSlide(currentIndex - 1); }
+    function toggleFullscreen() { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
+    document.addEventListener('keydown', (e) => { switch(e.key) { case 'ArrowRight': case ' ': e.preventDefault(); nextSlide(); break; case 'ArrowLeft': e.preventDefault(); prevSlide(); break; case 'Home': e.preventDefault(); goToSlide(0); break; case 'End': e.preventDefault(); goToSlide(slides.length - 1); break; case 'f': case 'F': e.preventDefault(); toggleFullscreen(); break; case 'l': case 'L': e.preventDefault(); toggleLaser(); break; } });
+    let laserEnabled = false;
+    const laserBtn = document.getElementById('laserBtn'), laserPointer = document.getElementById('laserPointer'), laserCapture = document.getElementById('laserCapture'), viewer = document.getElementById('viewer');
+    function toggleLaser() { laserEnabled = !laserEnabled; laserBtn.classList.toggle('active', laserEnabled); viewer.classList.toggle('laser-active', laserEnabled); if (!laserEnabled) laserPointer.classList.remove('visible'); }
+    laserCapture.addEventListener('mousemove', (e) => { if (laserEnabled) { laserPointer.style.left = e.clientX + 'px'; laserPointer.style.top = e.clientY + 'px'; laserPointer.classList.add('visible'); } });
+    laserCapture.addEventListener('mouseleave', () => { laserPointer.classList.remove('visible'); });
+    goToSlide(0);
+  </script>
+</body>
+</html>

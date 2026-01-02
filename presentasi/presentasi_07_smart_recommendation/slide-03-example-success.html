@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example Success Case</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 2rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .input-section { opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
+    .input-box { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+    .input-label { font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .input-value { font-size: 1.1rem; color: var(--pln-dark-blue); font-weight: 600; font-style: italic; }
+    .based-on { background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 10px; padding: 1rem; border-left: 4px solid var(--pln-green); }
+    .based-on p { font-size: 0.9rem; color: #555; }
+    .output-section { opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
+    .recommendation { margin-bottom: 1rem; }
+    .rec-tier { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .tier-immediate { background: #fee2e2; color: #dc2626; }
+    .tier-short { background: #fef3c7; color: #92400e; }
+    .tier-preventive { background: #dcfce7; color: #16a34a; }
+    .rec-text { font-size: 0.9rem; color: #444; background: var(--light-gray); padding: 0.75rem; border-radius: 8px; }
+    .outcome { background: var(--pln-green); color: #fff; padding: 1rem; border-radius: 10px; margin-top: 1rem; }
+    .outcome-label { font-size: 0.75rem; opacity: 0.9; }
+    .outcome-text { font-size: 0.95rem; font-weight: 600; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Example Success Case</h1></div>
+  <div class="content">
+    <div class="input-section">
+      <div class="input-box">
+        <div class="input-label">Input Finding</div>
+        <div class="input-value">"Panel listrik overheating, smoke detected"</div>
+      </div>
+      <div class="based-on">
+        <p><strong>Based on:</strong> 23 similar panel overheating cases<br><strong>Success rate:</strong> 91%</p>
+      </div>
+    </div>
+    <div class="output-section">
+      <div class="recommendation">
+        <span class="rec-tier tier-immediate">IMMEDIATE</span>
+        <div class="rec-text">De-energize panel, evacuate area 10m radius, call emergency response</div>
+      </div>
+      <div class="recommendation">
+        <span class="rec-tier tier-short">SHORT-TERM</span>
+        <div class="rec-text">Thermal inspection, component replacement, load balancing check</div>
+      </div>
+      <div class="recommendation">
+        <span class="rec-tier tier-preventive">PREVENTIVE</span>
+        <div class="rec-text">Quarterly thermography survey, capacity upgrade evaluation</div>
+      </div>
+      <div class="outcome">
+        <div class="outcome-label">Outcome</div>
+        <div class="outcome-text">Prevent potential fire incident, systematic root cause fix</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

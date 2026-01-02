@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAGIAN B: SLA Compliance Crisis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
+    .image-container { opacity: 0; animation: fadeInLeft 0.6s ease-out 0.2s forwards; }
+    .image-container img { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    .text-content { opacity: 0; animation: fadeInRight 0.6s ease-out 0.4s forwards; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    th { background: #dc2626; color: #fff; padding: 0.6rem; text-align: left; }
+    td { padding: 0.6rem; border-bottom: 1px solid #e5e7eb; }
+    .gap-extreme { color: #dc2626; font-weight: 700; }
+    .compliance-zero { background: #fee2e2; color: #dc2626; font-weight: 700; text-align: center; }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>BAGIAN B: SLA Compliance Crisis</h1></div>
+  <div class="content">
+    <div class="image-container">
+      <img src="assets/images/II.3.2_sla_analysis.png" alt="SLA Analysis">
+    </div>
+    <div class="text-content">
+      <table>
+        <thead><tr><th>Risk</th><th>Target</th><th>Actual</th><th>Gap</th><th>Compliance</th></tr></thead>
+        <tbody>
+          <tr><td>LOW</td><td>14 hari</td><td class="gap-extreme">141 hari</td><td class="gap-extreme">10x</td><td>12,9%</td></tr>
+          <tr><td>MEDIUM</td><td>5 hari</td><td class="gap-extreme">262 hari</td><td class="gap-extreme">52x</td><td class="compliance-zero">0,3%</td></tr>
+          <tr><td>HIGH</td><td>2 hari</td><td class="gap-extreme">268 hari</td><td class="gap-extreme">134x</td><td class="compliance-zero">0%</td></tr>
+          <tr><td>CRITICAL</td><td>1 hari</td><td class="gap-extreme">269 hari</td><td class="gap-extreme">269x</td><td class="compliance-zero">0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

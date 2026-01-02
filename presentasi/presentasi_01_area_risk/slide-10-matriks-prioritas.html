@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matriks Prioritas Area (Risk vs Volume)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+      --text-gray: #333333;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .image-container {
+      opacity: 0;
+      animation: fadeInLeft 0.6s ease-out 0.2s forwards;
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .image-caption {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+      font-style: italic;
+    }
+    .text-content {
+      opacity: 0;
+      animation: fadeInRight 0.6s ease-out 0.3s forwards;
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .text-content h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--pln-primary-blue);
+    }
+    .quadrant-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .quadrant {
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+    }
+    .q-kritis { background: #fee2e2; border-left: 4px solid #dc2626; }
+    .q-bahaya { background: #fef3c7; border-left: 4px solid #f59e0b; }
+    .q-monitor { background: #dbeafe; border-left: 4px solid #2563eb; }
+    .q-aman { background: #dcfce7; border-left: 4px solid #16a34a; }
+    .quadrant h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+    .q-kritis h4 { color: #dc2626; }
+    .q-bahaya h4 { color: #d97706; }
+    .q-monitor h4 { color: #2563eb; }
+    .q-aman h4 { color: #16a34a; }
+    .quadrant p {
+      color: var(--text-gray);
+      font-size: 0.85rem;
+    }
+    .highlight {
+      background: linear-gradient(120deg, rgba(0,162,185,0.1) 0%, rgba(53,185,113,0.1) 100%);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+      border-left: 4px solid var(--pln-green);
+    }
+    .highlight p {
+      font-size: 0.9rem;
+      color: var(--pln-dark-blue);
+      font-weight: 500;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Matriks Prioritas Area (Risk vs Volume)</h1>
+  </div>
+  <div class="content">
+    <div class="image-container">
+      <img src="assets/images/II.1.2_priority_matrix_area.png" alt="Matriks Prioritas Area">
+      <p class="image-caption">Gambar 6: Matriks prioritas berdasarkan Risk Score dan Volume temuan</p>
+    </div>
+    <div class="text-content">
+      <h2>Kuadran Matriks</h2>
+      <div class="quadrant-grid">
+        <div class="quadrant q-kritis">
+          <h4>Kritis</h4>
+          <p>High Risk + High Volume:<br><strong>BOILER, POS</strong></p>
+        </div>
+        <div class="quadrant q-bahaya">
+          <h4>Bahaya</h4>
+          <p>High Risk + Low Volume:<br><strong>WORKSHOP, MUSHOLA, SUB, POWER</strong></p>
+        </div>
+        <div class="quadrant q-monitor">
+          <h4>Monitor</h4>
+          <p>Low Risk + High Volume:<br><strong>ADMIN, TURBINE</strong></p>
+        </div>
+        <div class="quadrant q-aman">
+          <h4>Aman</h4>
+          <p>Low Risk + Low Volume:<br><strong>Mayoritas area pendukung</strong></p>
+        </div>
+      </div>
+      <div class="highlight">
+        <p>"Prioritas tertinggi adalah kuadran KRITIS yang kombinasi risiko dan volume tinggi. Kuadran BAHAYA memerlukan root cause analysis karena 100% temuan bersifat unsafe."</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Metrics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 0.2s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    th {
+      background: var(--pln-dark-blue);
+      color: #fff;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.95rem;
+    }
+    tr:hover td { background: var(--light-gray); }
+    .metric-name {
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+    }
+    .metric-value {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--pln-primary-blue);
+      font-size: 1.1rem;
+    }
+    .metric-insight {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .highlight-red {
+      color: #dc2626;
+    }
+    .highlight-green {
+      color: var(--pln-green);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Key Metrics</h1>
+  </div>
+  <div class="content">
+    <table>
+      <thead>
+        <tr>
+          <th>Metrik</th>
+          <th>Nilai</th>
+          <th>Insight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="metric-name">Total Pelapor Aktif</span></td>
+          <td><span class="metric-value">652 reporter</span></td>
+          <td><span class="metric-insight">Dari 15 perusahaan (PLN + vendor)</span></td>
+        </tr>
+        <tr>
+          <td><span class="metric-name">Top Reporter</span></td>
+          <td><span class="metric-value">Suparman</span></td>
+          <td><span class="metric-insight">34 laporan, Detection Rate 70,6%</span></td>
+        </tr>
+        <tr>
+          <td><span class="metric-name">Reporter Kualitas Tertinggi</span></td>
+          <td><span class="metric-value">Muhammad Safei</span></td>
+          <td><span class="metric-insight">Skor 4,4 (88% detection rate)</span></td>
+        </tr>
+        <tr>
+          <td><span class="metric-name">PIC Overloaded</span></td>
+          <td><span class="metric-value highlight-red">Andrian Denofan</span></td>
+          <td><span class="metric-insight highlight-red">2.613 temuan (47% dari total!)</span></td>
+        </tr>
+        <tr>
+          <td><span class="metric-name">Close Rate PIC</span></td>
+          <td><span class="metric-value highlight-green">100%</span></td>
+          <td><span class="metric-insight highlight-green">Semua PIC - tidak ada backlog</span></td>
+        </tr>
+        <tr>
+          <td><span class="metric-name">Vendor Tier Gold</span></td>
+          <td><span class="metric-value">2 vendor</span></td>
+          <td><span class="metric-insight">PLN NP Services & Garda Bangsa</span></td>
+        </tr>
+        <tr>
+          <td><span class="metric-name">Avg Resolution Time</span></td>
+          <td><span class="metric-value highlight-red">220 hari</span></td>
+          <td><span class="metric-insight">Target: &lt; 90 hari</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

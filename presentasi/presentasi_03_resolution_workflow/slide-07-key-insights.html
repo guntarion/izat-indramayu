@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Insights dari SLA Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 2rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 2rem 3rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .insight-card { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; opacity: 0; animation: fadeInUp 0.5s ease-out forwards; }
+    .insight-card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid #dc2626; }
+    .insight-card:nth-child(2) { animation-delay: 0.2s; border-left: 5px solid var(--pln-primary-blue); }
+    .insight-card:nth-child(3) { animation-delay: 0.3s; border-left: 5px solid #f59e0b; }
+    .insight-card:nth-child(4) { animation-delay: 0.4s; border-left: 5px solid #8b5cf6; }
+    .insight-number { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .insight-title { font-size: 1.1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.5rem; }
+    .insight-desc { font-size: 0.9rem; color: #555; line-height: 1.5; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Key Insights dari SLA Analysis</h1></div>
+  <div class="content">
+    <div class="insight-card">
+      <p class="insight-number">Insight #1</p>
+      <h3 class="insight-title">Inverted Priority System</h3>
+      <p class="insight-desc">Semakin critical finding, semakin lama diselesaikan. CRITICAL: 269 hari, LOW: 141 hari. Tidak ada prioritization mechanism - semua finding di-treat sama.</p>
+    </div>
+    <div class="insight-card">
+      <p class="insight-number">Insight #2</p>
+      <h3 class="insight-title">Systemic Failure, Not Individual</h3>
+      <p class="insight-desc">100% PIC punya close rate perfect. All areas mengalami delay yang sama. Ini bukan masalah orang malas - ini <strong>process/system issue</strong>.</p>
+    </div>
+    <div class="insight-card">
+      <p class="insight-number">Insight #3</p>
+      <h3 class="insight-title">Compliance & Safety Risk</h3>
+      <p class="insight-desc">107 CRITICAL findings rata-rata 269 hari = <strong>9 bulan exposed to high risk</strong>. Auditor eksternal akan flag 0% SLA untuk CRITICAL.</p>
+    </div>
+    <div class="insight-card">
+      <p class="insight-number">Insight #4</p>
+      <h3 class="insight-title">Reporter Demotivation Risk</h3>
+      <p class="insight-desc">Reporter melaporkan hazard → baru diperbaiki 9 bulan kemudian → "Untuk apa lapor?" → <strong>Participation drop</strong> di masa depan.</p>
+    </div>
+  </div>
+</body>
+</html>

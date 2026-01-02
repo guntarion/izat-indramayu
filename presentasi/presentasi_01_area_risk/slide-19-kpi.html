@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success Metrics (KPI)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 0.2s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    th {
+      background: var(--pln-dark-blue);
+      color: #fff;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.95rem;
+    }
+    tr:hover td { background: var(--light-gray); }
+    .kpi-name {
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+    }
+    .baseline {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: #dc2626;
+    }
+    .target-3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: #f59e0b;
+    }
+    .target-6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--pln-green);
+    }
+    .monitoring-note {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1));
+      border-radius: 12px;
+      border-left: 5px solid var(--pln-primary-blue);
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 0.4s forwards;
+    }
+    .monitoring-note h3 {
+      font-size: 1rem;
+      color: var(--pln-dark-blue);
+      margin-bottom: 0.5rem;
+    }
+    .monitoring-note p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Success Metrics (KPI)</h1>
+  </div>
+  <div class="content">
+    <table>
+      <thead>
+        <tr>
+          <th>KPI</th>
+          <th>Baseline (Current)</th>
+          <th>Target 3 Bulan</th>
+          <th>Target 6 Bulan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="kpi-name">Unsafe Rate di SUPPORT zone</span></td>
+          <td><span class="baseline">32,5%</span></td>
+          <td><span class="target-3">&lt; 25%</span></td>
+          <td><span class="target-6">&lt; 20%</span></td>
+        </tr>
+        <tr>
+          <td><span class="kpi-name">Area dengan 100% Unsafe Rate</span></td>
+          <td><span class="baseline">4 area</span></td>
+          <td><span class="target-3">2 area</span></td>
+          <td><span class="target-6">0 area</span></td>
+        </tr>
+        <tr>
+          <td><span class="kpi-name">UNKNOWN zone temuan</span></td>
+          <td><span class="baseline">69 (1,2%)</span></td>
+          <td><span class="target-3">&lt; 30</span></td>
+          <td><span class="target-6">&lt; 10</span></td>
+        </tr>
+        <tr>
+          <td><span class="kpi-name">Average Risk Score (overall)</span></td>
+          <td><span class="baseline">1,30</span></td>
+          <td><span class="target-3">&lt; 1,20</span></td>
+          <td><span class="target-6">&lt; 1,10</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="monitoring-note">
+      <h3>Monitoring</h3>
+      <p>Review monthly trend untuk evaluasi progress. Dashboard IZAT dapat digunakan untuk tracking real-time.</p>
+    </div>
+  </div>
+</body>
+</html>

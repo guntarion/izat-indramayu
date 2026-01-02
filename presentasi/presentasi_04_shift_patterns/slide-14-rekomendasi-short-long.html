@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekomendasi Short & Long Term</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.4s; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--pln-primary-blue); }
+    .action-item { background: var(--light-gray); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
+    .action-priority { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .priority-high { background: #fef3c7; color: #92400e; }
+    .priority-medium { background: #dcfce7; color: #16a34a; }
+    .priority-low { background: #dbeafe; color: #1e40af; }
+    .action-item h4 { font-size: 0.9rem; color: var(--pln-dark-blue); margin-bottom: 0.3rem; }
+    .action-item p { font-size: 0.8rem; color: #666; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Rekomendasi Short & Long Term</h1></div>
+  <div class="content">
+    <div class="section">
+      <div class="section-title">Short-term (1-3 Bulan)</div>
+      <div class="action-item"><span class="action-priority priority-high">HIGH</span><h4>Optimasi Penjadwalan Inspeksi Rabu-Kamis</h4><p>Maksimalkan produktivitas peak period untuk scheduled inspection dan audit critical</p></div>
+      <div class="action-item"><span class="action-priority priority-high">HIGH</span><h4>Evaluasi Coverage Patrol Weekend</h4><p>Tingkatkan detection rate weekend dari 16,1% ke 20%</p></div>
+      <div class="action-item"><span class="action-priority priority-medium">MEDIUM</span><h4>Implementasi Incentive Weekend Patrol</h4><p>Motivasi tim, replikasi Saturday success ke Minggu</p></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Long-term (3-6 Bulan)</div>
+      <div class="action-item"><span class="action-priority priority-medium">MEDIUM</span><h4>Dynamic Scheduling System</h4><p>Alokasi resource optimal per shift/hari berdasarkan historical pattern</p></div>
+      <div class="action-item"><span class="action-priority priority-medium">MEDIUM</span><h4>Shift-specific Training Program</h4><p>Standardisasi kualitas inspeksi dengan training sesuai karakteristik shift</p></div>
+      <div class="action-item"><span class="action-priority priority-low">LOW</span><h4>Real-time Dashboard Monitoring</h4><p>Tracking performance dan early warning system per shift/hari</p></div>
+    </div>
+  </div>
+</body>
+</html>

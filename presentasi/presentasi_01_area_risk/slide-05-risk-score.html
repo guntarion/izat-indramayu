@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perbandingan Risk Score per Zona</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+      --text-gray: #333333;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      opacity: 0;
+      animation: fadeInDown 0.6s ease-out forwards;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .image-container {
+      opacity: 0;
+      animation: fadeInLeft 0.6s ease-out 0.2s forwards;
+    }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .image-caption {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+      font-style: italic;
+    }
+    .text-content {
+      opacity: 0;
+      animation: fadeInRight 0.6s ease-out 0.3s forwards;
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .text-content h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid var(--pln-primary-blue);
+    }
+    .text-content ul { list-style: none; }
+    .text-content li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--text-gray);
+      border-bottom: 1px solid #eee;
+    }
+    .text-content li:last-child { border-bottom: none; }
+    .text-content li::before {
+      content: '▸';
+      color: var(--pln-primary-blue);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .highlight {
+      background: linear-gradient(120deg, rgba(0,162,185,0.1) 0%, rgba(53,185,113,0.1) 100%);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      border-left: 4px solid var(--pln-green);
+    }
+    .highlight p {
+      font-size: 0.95rem;
+      color: var(--pln-dark-blue);
+      font-weight: 500;
+      font-style: italic;
+    }
+    strong { color: var(--pln-dark-blue); }
+    .risk-badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .risk-high { background: #fee2e2; color: #dc2626; }
+    .risk-low { background: #dcfce7; color: #16a34a; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Perbandingan Risk Score per Zona</h1>
+  </div>
+  <div class="content">
+    <div class="image-container">
+      <img src="assets/images/II.1.1_risk_score_by_zona.png" alt="Risk Score per Zona">
+      <p class="image-caption">Gambar 2: Perbandingan Risk Score rata-rata per zona operasi</p>
+    </div>
+    <div class="text-content">
+      <h2>Temuan Utama</h2>
+      <ul>
+        <li><span><strong>UNKNOWN</strong> memiliki Risk Score tertinggi <span class="risk-badge risk-high">1,75</span></span></li>
+        <li><span><strong>COAL_HANDLING</strong> di posisi kedua dengan score 1,48</span></li>
+        <li><span><strong>UTILITY</strong> memiliki Risk Score terendah <span class="risk-badge risk-low">0,92</span> - performa terbaik</span></li>
+        <li><span>Selisih signifikan antara zona tertinggi dan terendah (<strong>90% gap</strong>)</span></li>
+      </ul>
+      <div class="highlight">
+        <p>"Zona UNKNOWN dengan Risk Score 1,75 menunjukkan urgensi kategorisasi yang lebih baik. Sementara UTILITY zone menjadi benchmark best practice dengan Risk Score terendah."</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

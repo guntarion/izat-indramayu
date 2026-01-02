@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Metrics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 2rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 2rem 3rem; }
+    table { width: 100%; border-collapse: collapse; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    th { background: var(--pln-dark-blue); color: #fff; padding: 0.8rem; text-align: left; font-weight: 600; font-size: 0.85rem; }
+    th:first-child { border-radius: 8px 0 0 0; } th:last-child { border-radius: 0 8px 0 0; }
+    td { padding: 0.8rem; border-bottom: 1px solid #e5e7eb; font-size: 0.9rem; }
+    tr:hover td { background: var(--light-gray); }
+    .metric-name { font-weight: 600; color: var(--pln-dark-blue); }
+    .excellent { color: var(--pln-green); font-weight: 700; }
+    .poor { color: #dc2626; font-weight: 700; }
+    .critical { color: #dc2626; font-weight: 700; background: #fee2e2; padding: 0.2rem 0.5rem; border-radius: 4px; }
+    .status-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .status-excellent { background: #dcfce7; color: #16a34a; }
+    .status-poor { background: #fee2e2; color: #dc2626; }
+    .status-critical { background: #dc2626; color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Key Metrics - Resolution Workflow</h1></div>
+  <div class="content">
+    <table>
+      <thead><tr><th>Metrik</th><th>Nilai</th><th>Status</th><th>Interpretasi</th></tr></thead>
+      <tbody>
+        <tr><td><span class="metric-name">Total Temuan</span></td><td>5.575</td><td><span class="status-badge">Baseline</span></td><td>Periode Jan-Okt 2025</td></tr>
+        <tr><td><span class="metric-name">Close Rate</span></td><td><span class="excellent">99,2%</span></td><td><span class="status-badge status-excellent">EXCELLENT</span></td><td>5.531 temuan selesai</td></tr>
+        <tr><td><span class="metric-name">Temuan Open</span></td><td>44 (0,8%)</td><td><span class="status-badge">Minor</span></td><td>43 dari Oktober 2025</td></tr>
+        <tr><td><span class="metric-name">SLA Compliance - LOW</span></td><td><span class="poor">12,9%</span></td><td><span class="status-badge status-poor">POOR</span></td><td>Target 14 hari, actual 141 hari (10x)</td></tr>
+        <tr><td><span class="metric-name">SLA Compliance - MEDIUM</span></td><td><span class="critical">0,3%</span></td><td><span class="status-badge status-critical">CRITICAL</span></td><td>Target 5 hari, actual 262 hari (52x)</td></tr>
+        <tr><td><span class="metric-name">SLA Compliance - HIGH</span></td><td><span class="critical">0%</span></td><td><span class="status-badge status-critical">CRITICAL</span></td><td>Target 2 hari, actual 268 hari (134x)</td></tr>
+        <tr><td><span class="metric-name">SLA Compliance - CRITICAL</span></td><td><span class="critical">0%</span></td><td><span class="status-badge status-critical">UNACCEPTABLE</span></td><td>Target 1 hari, actual 269 hari (269x!)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

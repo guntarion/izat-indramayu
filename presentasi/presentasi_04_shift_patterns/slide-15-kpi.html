@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success Metrics (KPI)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; }
+    table { width: 100%; border-collapse: collapse; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; font-size: 0.85rem; }
+    th { background: var(--pln-dark-blue); color: #fff; padding: 0.7rem; text-align: left; font-weight: 600; }
+    td { padding: 0.7rem; border-bottom: 1px solid #e5e7eb; }
+    tr:hover td { background: var(--light-gray); }
+    .baseline { color: #666; }
+    .target { font-weight: 600; color: var(--pln-green); }
+    .note { margin-top: 1rem; padding: 1rem; background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 10px; border-left: 4px solid var(--pln-green); font-size: 0.85rem; color: #555; opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Success Metrics (KPI)</h1></div>
+  <div class="content">
+    <table>
+      <thead><tr><th>KPI</th><th>Baseline (Current)</th><th>Target 3 Bulan</th><th>Target 6 Bulan</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Detection Rate Shift B</strong></td><td class="baseline">17,1%</td><td class="target">> 22%</td><td class="target">> 25%</td></tr>
+        <tr><td><strong>Detection Rate Senin</strong></td><td class="baseline">13,5%</td><td class="target">> 20%</td><td class="target">> 23%</td></tr>
+        <tr><td><strong>Detection Rate Minggu</strong></td><td class="baseline">9,3%</td><td class="target">> 15%</td><td class="target">> 18%</td></tr>
+        <tr><td><strong>Detection Rate Weekend</strong></td><td class="baseline">16,1%</td><td class="target">> 20%</td><td class="target">> 23%</td></tr>
+        <tr><td><strong>Gap Antar Shift</strong></td><td class="baseline">8,6% (25,7 - 17,1)</td><td class="target">< 6%</td><td class="target">< 4%</td></tr>
+        <tr><td><strong>Overall Detection Rate</strong></td><td class="baseline">23,6% (weekday)</td><td class="target">> 25%</td><td class="target">> 28%</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Monitoring:</strong> Weekly review per shift/hari untuk early warning, monthly review untuk evaluasi progress.</div>
+  </div>
+</body>
+</html>

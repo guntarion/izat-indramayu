@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insight Per Shift</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
+    .card { background: var(--light-gray); border-radius: 12px; padding: 1.25rem; border-top: 4px solid var(--pln-primary-blue); }
+    .card.best { border-top-color: var(--pln-green); }
+    .card.urgent { border-top-color: #ef4444; }
+    .card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .card-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700; color: var(--pln-dark-blue); }
+    .card-badge { font-size: 0.65rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600; }
+    .badge-maintain { background: #dbeafe; color: #1e40af; }
+    .badge-urgent { background: #fee2e2; color: #dc2626; }
+    .badge-best { background: #dcfce7; color: #16a34a; }
+    .card-row { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #e5e7eb; font-size: 0.8rem; }
+    .card-row:last-child { border-bottom: none; }
+    .row-label { color: #666; }
+    .row-value { font-weight: 600; color: var(--pln-dark-blue); }
+    .action { margin-top: 1rem; padding: 0.75rem; background: rgba(0,162,185,0.1); border-radius: 8px; font-size: 0.8rem; color: #555; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Insight Per Shift - Takeaways</h1></div>
+  <div class="content">
+    <div class="cards">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Shift A (Pagi)</span>
+          <span class="card-badge badge-maintain">MAINTAIN</span>
+        </div>
+        <div class="card-row"><span class="row-label">Karakteristik</span><span class="row-value">Volume tinggi, quality moderat</span></div>
+        <div class="card-row"><span class="row-label">Kekuatan</span><span class="row-value">Inspeksi preventif aktif, coverage luas</span></div>
+        <div class="card-row"><span class="row-label">Kelemahan</span><span class="row-value">Quality bisa lebih baik</span></div>
+        <div class="action"><strong>Prioritas:</strong> Pertahankan volume, tingkatkan quality</div>
+      </div>
+      <div class="card urgent">
+        <div class="card-header">
+          <span class="card-title">Shift B (Siang)</span>
+          <span class="card-badge badge-urgent">URGENT</span>
+        </div>
+        <div class="card-row"><span class="row-label">Karakteristik</span><span class="row-value">Volume moderat, quality rendah</span></div>
+        <div class="card-row"><span class="row-label">Kekuatan</span><span class="row-value">Waktu resolusi tercepat (156 hari)</span></div>
+        <div class="card-row"><span class="row-label">Kelemahan</span><span class="row-value">Detection rate terendah (17,1%)</span></div>
+        <div class="action"><strong>Prioritas:</strong> Training awareness K3</div>
+      </div>
+      <div class="card best">
+        <div class="card-header">
+          <span class="card-title">Shift C (Malam)</span>
+          <span class="card-badge badge-best">BEST PRACTICE</span>
+        </div>
+        <div class="card-row"><span class="row-label">Karakteristik</span><span class="row-value">Volume rendah, quality tinggi</span></div>
+        <div class="card-row"><span class="row-label">Kekuatan</span><span class="row-value">Detection rate 25,7%, quality 2,43</span></div>
+        <div class="card-row"><span class="row-label">Kelemahan</span><span class="row-value">Volume rendah, resolusi lambat</span></div>
+        <div class="action"><strong>Prioritas:</strong> Replikasi ke shift lain</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

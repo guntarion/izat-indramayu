@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penutup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); position: relative; overflow: hidden; }
+    .circle { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.05); }
+    .circle:nth-child(1) { width: 500px; height: 500px; top: -150px; right: -150px; animation: pulse 4s ease-in-out infinite; }
+    .circle:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: -100px; animation: pulse 4s ease-in-out infinite 1s; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.05; } 50% { transform: scale(1.1); opacity: 0.1; } }
+    .content { text-align: center; z-index: 10; padding: 2rem; max-width: 800px; }
+    .icon { font-size: 4rem; margin-bottom: 1.5rem; opacity: 0; animation: fadeInUp 0.8s ease-out 0.1s forwards; }
+    h1 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 1rem; opacity: 0; animation: fadeInUp 0.8s ease-out 0.2s forwards; }
+    .message { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; opacity: 0; animation: fadeInUp 0.8s ease-out 0.4s forwards; line-height: 1.6; }
+    .stats { display: flex; gap: 2rem; margin-top: 1.5rem; opacity: 0; animation: fadeInUp 0.8s ease-out 0.5s forwards; justify-content: center; }
+    .stat-item { text-align: center; background: rgba(255,255,255,0.1); padding: 1rem 1.5rem; border-radius: 12px; }
+    .stat-value { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+    .org { font-size: 1rem; color: rgba(255,255,255,0.8); font-weight: 500; opacity: 0; animation: fadeInUp 0.8s ease-out 0.6s forwards; margin-top: 2rem; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .accent-bar { position: absolute; bottom: 0; left: 0; width: 100%; height: 8px; background: linear-gradient(90deg, var(--pln-primary-blue) 0%, var(--pln-green) 50%, var(--pln-primary-blue) 100%); }
+  </style>
+</head>
+<body>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="content">
+    <div class="icon">🔍</div>
+    <h1>Terima Kasih</h1>
+    <p class="message">Anomaly detection adalah early warning system yang dapat detect unusual pattern invisible to human eye - seperti gradual quality drop atau gaming behavior.</p>
+    <div class="stats">
+      <div class="stat-item"><div class="stat-value">28</div><div class="stat-label">Anomali Terdeteksi</div></div>
+      <div class="stat-item"><div class="stat-value">2-5 hari</div><div class="stat-label">Earlier Detection</div></div>
+      <div class="stat-item"><div class="stat-value">3</div><div class="stat-label">Gaming Prevented</div></div>
+    </div>
+    <p class="org">Early Warning System for Operational Excellence</p>
+  </div>
+  <div class="accent-bar"></div>
+</body>
+</html>

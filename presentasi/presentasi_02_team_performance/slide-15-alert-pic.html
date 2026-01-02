@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alert Kritis PIC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .alert-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      gap: 1.5rem;
+      align-items: center;
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 1.5rem;
+      opacity: 0;
+      animation: fadeInLeft 0.5s ease-out forwards;
+    }
+    .alert-card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid #dc2626; }
+    .alert-card:nth-child(2) { animation-delay: 0.2s; border-left: 5px solid #f59e0b; }
+    .alert-card:nth-child(3) { animation-delay: 0.3s; border-left: 5px solid var(--pln-green); }
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .alert-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .icon-critical { background: #fee2e2; }
+    .icon-high { background: #fef3c7; }
+    .icon-maintain { background: #dcfce7; }
+    .alert-content h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+      margin-bottom: 0.25rem;
+    }
+    .alert-content p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .alert-impact {
+      text-align: center;
+    }
+    .impact-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: #999;
+    }
+    .impact-value {
+      font-size: 0.85rem;
+      color: #555;
+      font-weight: 500;
+    }
+    .priority-badge {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .priority-critical { background: #dc2626; color: #fff; }
+    .priority-high { background: #f59e0b; color: #fff; }
+    .priority-maintain { background: var(--pln-green); color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Alert Kritis PIC</h1>
+  </div>
+  <div class="content">
+    <div class="alert-card">
+      <div class="alert-icon icon-critical">!</div>
+      <div class="alert-content">
+        <h3>Burnout Risk</h3>
+        <p>Andrian 2,7x beban rata-rata</p>
+      </div>
+      <div class="alert-impact">
+        <p class="impact-label">Impact</p>
+        <p class="impact-value">Quality degradation, turnover risk</p>
+      </div>
+      <span class="priority-badge priority-critical">CRITICAL</span>
+    </div>
+    <div class="alert-card">
+      <div class="alert-icon icon-high">!</div>
+      <div class="alert-content">
+        <h3>Slow Resolution</h3>
+        <p>Avg 220 hari vs target 90 hari</p>
+      </div>
+      <div class="alert-impact">
+        <p class="impact-label">Impact</p>
+        <p class="impact-value">SLA breach, compliance issue</p>
+      </div>
+      <span class="priority-badge priority-high">HIGH</span>
+    </div>
+    <div class="alert-card">
+      <div class="alert-icon icon-maintain">+</div>
+      <div class="alert-content">
+        <h3>Perfect Closure</h3>
+        <p>100% close rate all PIC</p>
+      </div>
+      <div class="alert-impact">
+        <p class="impact-label">Impact</p>
+        <p class="impact-value">No findings abandoned</p>
+      </div>
+      <span class="priority-badge priority-maintain">MAINTAIN</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perbandingan Weekday vs Weekend</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
+    .image-container { opacity: 0; animation: fadeInLeft 0.6s ease-out 0.2s forwards; }
+    .image-container img { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    .text-content { opacity: 0; animation: fadeInRight 0.6s ease-out 0.4s forwards; }
+    .text-content h2 { font-size: 1.1rem; color: var(--pln-dark-blue); margin-bottom: 1rem; }
+    .gap-card { background: var(--light-gray); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .gap-label { font-size: 0.85rem; color: #555; }
+    .gap-value { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700; color: var(--pln-primary-blue); }
+    .gap-value.up { color: var(--pln-green); }
+    .gap-value.down { color: #dc2626; }
+    .highlight { background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 10px; padding: 1rem; border-left: 4px solid var(--pln-green); margin-top: 1rem; }
+    .highlight p { font-size: 0.85rem; color: #555; }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Perbandingan Weekday vs Weekend</h1></div>
+  <div class="content">
+    <div class="image-container">
+      <img src="assets/images/II.4.2_weekday_vs_weekend.png" alt="Weekday vs Weekend">
+    </div>
+    <div class="text-content">
+      <h2>Gap Analysis</h2>
+      <div class="gap-card"><span class="gap-label">Volume gap (per hari)</span><span class="gap-value up">+77%</span></div>
+      <div class="gap-card"><span class="gap-label">Quality gap</span><span class="gap-value up">+9%</span></div>
+      <div class="gap-card"><span class="gap-label">Detection rate gap</span><span class="gap-value up">+46%</span></div>
+      <div class="gap-card"><span class="gap-label">Resolusi gap</span><span class="gap-value down">-13%</span></div>
+      <div class="highlight">
+        <p><strong>Paradox:</strong> Weekend memiliki waktu resolusi lebih cepat (157 vs 180 hari), kemungkinan karena kasus-kasus yang dilaporkan lebih sederhana.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

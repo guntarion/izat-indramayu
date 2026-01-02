@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekomendasi Immediate (0-1 Bulan)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #fff; margin-bottom: 0.3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; }
+    .actions { display: flex; flex-direction: column; gap: 1rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
+    .action-card { background: var(--light-gray); border-radius: 12px; padding: 1.25rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; }
+    .priority { padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; min-width: 70px; text-align: center; }
+    .priority-critical { background: #fee2e2; color: #dc2626; }
+    .priority-high { background: #fef3c7; color: #92400e; }
+    .action-content h3 { font-size: 0.95rem; color: var(--pln-dark-blue); margin-bottom: 0.3rem; }
+    .action-content p { font-size: 0.8rem; color: #666; }
+    .expected-impact { background: rgba(53,185,113,0.1); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem; color: var(--pln-green); font-weight: 600; text-align: center; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="header-badge">Immediate Actions</span>
+    <h1>Rekomendasi 0-1 Bulan</h1>
+  </div>
+  <div class="content">
+    <div class="actions">
+      <div class="action-card">
+        <span class="priority priority-critical">CRITICAL</span>
+        <div class="action-content">
+          <h3>Training Awareness K3 untuk Shift B</h3>
+          <p>Target: Shift B | Fokus pada identifikasi unsafe conditions dan penggunaan checklist yang benar</p>
+        </div>
+        <div class="expected-impact">Detection rate: 17,1% → 22%</div>
+      </div>
+      <div class="action-card">
+        <span class="priority priority-critical">CRITICAL</span>
+        <div class="action-content">
+          <h3>Safety Toolbox Meeting Setiap Senin Pagi</h3>
+          <p>Target: Semua shift | Atasi Monday Effect, tingkatkan active inspection di awal minggu</p>
+        </div>
+        <div class="expected-impact">Tingkatkan inspeksi aktif</div>
+      </div>
+      <div class="action-card">
+        <span class="priority priority-high">HIGH</span>
+        <div class="action-content">
+          <h3>Knowledge Transfer dari Shift C</h3>
+          <p>Target: Shift A & B | Cross-training dan shadowing program untuk replikasi best practice</p>
+        </div>
+        <div class="expected-impact">Replikasi quality & detection</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

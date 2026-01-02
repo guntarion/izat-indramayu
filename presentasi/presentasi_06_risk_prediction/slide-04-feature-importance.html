@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature Importance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 2rem 3rem; display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; }
+    .features-chart { opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
+    .features-chart h2 { font-size: 1.1rem; color: var(--pln-dark-blue); margin-bottom: 1.5rem; }
+    .feature-bar { margin-bottom: 1rem; }
+    .feature-header { display: flex; justify-content: space-between; margin-bottom: 0.3rem; }
+    .feature-name { font-weight: 600; color: var(--pln-dark-blue); font-size: 0.9rem; }
+    .feature-value { font-weight: 700; color: var(--pln-primary-blue); }
+    .bar-bg { height: 24px; background: var(--light-gray); border-radius: 12px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green)); border-radius: 12px; }
+    .insight-box { background: var(--light-gray); border-radius: 16px; padding: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
+    .insight-box h3 { font-size: 1rem; color: var(--pln-dark-blue); margin-bottom: 1rem; }
+    .insight-item { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; align-items: flex-start; }
+    .insight-icon { font-size: 1.2rem; }
+    .insight-text { font-size: 0.85rem; color: #555; line-height: 1.5; }
+    .highlight { background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); padding: 1rem; border-radius: 10px; border-left: 4px solid var(--pln-green); margin-top: 1rem; }
+    .highlight p { font-size: 0.85rem; color: #555; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Feature Importance (Top 5)</h1></div>
+  <div class="content">
+    <div class="features-chart">
+      <h2>Kontribusi Variabel terhadap Prediksi</h2>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">1. Zona</span><span class="feature-value">30%</span></div><div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div></div>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">2. Area</span><span class="feature-value">25%</span></div><div class="bar-bg"><div class="bar-fill" style="width:83%"></div></div></div>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">3. Historical Unsafe Rate</span><span class="feature-value">20%</span></div><div class="bar-bg"><div class="bar-fill" style="width:67%"></div></div></div>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">4. Shift</span><span class="feature-value">10%</span></div><div class="bar-bg"><div class="bar-fill" style="width:33%"></div></div></div>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">5. Hari</span><span class="feature-value">8%</span></div><div class="bar-bg"><div class="bar-fill" style="width:27%"></div></div></div>
+    </div>
+    <div class="insight-box">
+      <h3>Key Insight</h3>
+      <div class="insight-item"><span class="insight-icon">📍</span><span class="insight-text"><strong>Geographic factors</strong> (Zona + Area) = 55% contribution</span></div>
+      <div class="insight-item"><span class="insight-icon">⏰</span><span class="insight-text"><strong>Temporal factors</strong> (Shift + Hari) = 18% contribution</span></div>
+      <div class="insight-item"><span class="insight-icon">📊</span><span class="insight-text"><strong>Historical pattern</strong> = 20% contribution</span></div>
+      <div class="highlight">
+        <p><strong>WHERE matters more than WHEN.</strong> Geographic factors 2x lebih penting dari temporal factors dalam menentukan risk level.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

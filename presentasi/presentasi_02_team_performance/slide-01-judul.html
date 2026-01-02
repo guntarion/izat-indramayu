@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highlight Analisis: Performa Tim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    .circle:nth-child(1) { width: 500px; height: 500px; top: -150px; right: -150px; animation: pulse 4s ease-in-out infinite; }
+    .circle:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: -100px; animation: pulse 4s ease-in-out infinite 1s; }
+    .circle:nth-child(3) { width: 200px; height: 200px; top: 30%; right: 10%; animation: pulse 4s ease-in-out infinite 2s; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.05; }
+      50% { transform: scale(1.1); opacity: 0.1; }
+    }
+    .content {
+      text-align: center;
+      z-index: 10;
+      padding: 2rem;
+    }
+    .tagline {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.1s forwards;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    }
+    .subtitle {
+      font-size: 1.5rem;
+      color: var(--pln-green);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.4s forwards;
+      font-weight: 600;
+    }
+    .org {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.6s forwards;
+      margin-bottom: 0.5rem;
+    }
+    .author {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.7s forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .accent-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, var(--pln-primary-blue) 0%, var(--pln-green) 50%, var(--pln-primary-blue) 100%);
+    }
+    .stats-preview {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.8s forwards;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+    }
+  </style>
+</head>
+<body>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="content">
+    <p class="tagline">Data-Driven People Excellence</p>
+    <h1>Highlight Analisis</h1>
+    <p class="subtitle">Performa Tim IZAT K3</p>
+    <div class="stats-preview">
+      <div class="stat-item">
+        <div class="stat-value">652</div>
+        <div class="stat-label">Reporter Aktif</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">16</div>
+        <div class="stat-label">PIC</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">9</div>
+        <div class="stat-label">Vendor</div>
+      </div>
+    </div>
+    <p class="org" style="margin-top: 2rem;">PT PLN Nusantara Power - Unit Pembangkit Indramayu</p>
+    <p class="author">PT JAPO TITIAN BAKAT - Akhmad Guntar | Desember 2025</p>
+  </div>
+  <div class="accent-bar"></div>
+</body>
+</html>
