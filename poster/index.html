@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IZAT K3 Analytics - UP Indramayu | Poster Infografis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --pln-light-blue: #00AFF0;
+      --pln-yellow: #FFFF00;
+      --bg-light: #f8fafc;
+      --bg-section: #ffffff;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --border-light: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+    .poster {
+      width: 1200px;
+      margin: 0 auto;
+      background: #fff;
+      box-shadow: 0 0 40px rgba(0,0,0,0.15);
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 50%, var(--pln-green) 100%);
+      padding: 32px 40px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: rgba(255,255,255,0.05);
+      transform: rotate(15deg);
+    }
+    .header-content {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-left h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .header-left .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+    .header-left .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-top: 8px;
+    }
+    .header-stats {
+      display: flex;
+      gap: 24px;
+    }
+    .stat-box {
+      text-align: center;
+      background: rgba(255,255,255,0.15);
+      padding: 16px 24px;
+      border-radius: 12px;
+      backdrop-filter: blur(4px);
+    }
+    .stat-box .number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    .stat-box .label {
+      font-size: 0.75rem;
+      opacity: 0.9;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========== SECTIONS ========== */
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--pln-dark-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 16px 40px;
+      background: linear-gradient(90deg, rgba(0,162,185,0.1), transparent);
+      border-left: 4px solid var(--pln-primary-blue);
+    }
+    .section-content {
+      padding: 24px 40px;
+    }
+
+    /* ========== DATA CLEANSING (Section 0) ========== */
+    .pipeline-section {
+      background: linear-gradient(135deg, #f0fdfa 0%, #f0f9ff 100%);
+    }
+    .pipeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .pipeline-title h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--pln-dark-blue);
+    }
+    .pipeline-title p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    .pipeline-impact {
+      background: linear-gradient(135deg, var(--pln-green), var(--pln-primary-blue));
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .pipeline-impact .value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+    .pipeline-impact .label {
+      font-size: 0.75rem;
+      opacity: 0.9;
+    }
+    .pipeline-steps {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+    .pipeline-step {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid var(--border-light);
+      position: relative;
+    }
+    .pipeline-step::after {
+      content: '→';
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--pln-primary-blue);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .pipeline-step:last-child::after { display: none; }
+    .pipeline-step .step-num {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--pln-primary-blue), var(--pln-dark-blue));
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin: 0 auto 8px;
+    }
+    .pipeline-step .step-title {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+      margin-bottom: 4px;
+    }
+    .pipeline-step .step-output {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+    .pipeline-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .summary-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+    .summary-card .value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--pln-dark-blue);
+    }
+    .summary-card .label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== ANALYSIS GRID ========== */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .analysis-grid.two-col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .analysis-card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .card-header {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .card-icon.risk { background: linear-gradient(135deg, #fee2e2, #fecaca); }
+    .card-icon.team { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+    .card-icon.workflow { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
+    .card-icon.shift { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+    .card-icon.asset { background: linear-gradient(135deg, #e0e7ff, #c7d2fe); }
+    .card-icon.ml { background: linear-gradient(135deg, #fce7f3, #fbcfe8); }
+    .card-icon.ai { background: linear-gradient(135deg, #cffafe, #a5f3fc); }
+    .card-icon.anomaly { background: linear-gradient(135deg, #ffe4e6, #fecdd3); }
+    .card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--pln-dark-blue);
+    }
+    .card-body {
+      padding: 12px 16px;
+    }
+    .card-image {
+      width: 100%;
+      height: 120px;
+      object-fit: contain;
+      background: #f8fafc;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .key-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .metric {
+      background: #f8fafc;
+      padding: 8px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .metric .value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--pln-dark-blue);
+    }
+    .metric .label {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .metric.alert .value { color: #dc2626; }
+    .metric.success .value { color: var(--pln-green); }
+    .insights-list {
+      list-style: none;
+    }
+    .insights-list li {
+      font-size: 0.72rem;
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+      color: var(--text-dark);
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .insights-list li:last-child { border-bottom: none; }
+    .insights-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--pln-primary-blue);
+      font-weight: bold;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-badge.critical { background: #fee2e2; color: #dc2626; }
+    .status-badge.warning { background: #fef3c7; color: #d97706; }
+    .status-badge.success { background: #dcfce7; color: #16a34a; }
+    .status-badge.info { background: #dbeafe; color: #2563eb; }
+
+    /* ========== ADVANCED ANALYSIS ========== */
+    .advanced-section {
+      background: linear-gradient(135deg, #fdf4ff 0%, #f0f9ff 100%);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--pln-dark-blue);
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-logo {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+    .footer-info h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .footer-info p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+    .footer-right {
+      text-align: right;
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    /* ========== PRINT STYLES ========== */
+    @media print {
+      body { background: #fff; }
+      .poster { box-shadow: none; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="poster">
+    <!-- ==================== HEADER ==================== -->
+    <header class="header">
+      <div class="header-content">
+        <div class="header-left">
+          <h1>IZAT K3 Analytics</h1>
+          <p class="subtitle">Zero Accident Assistant - Analisis Data Keselamatan Kerja</p>
+          <span class="badge">UP Indramayu | Januari - Oktober 2025</span>
+        </div>
+        <div class="header-stats">
+          <div class="stat-box">
+            <div class="number">5.575</div>
+            <div class="label">Total Temuan</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">75</div>
+            <div class="label">Kolom Analitis</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">9</div>
+            <div class="label">Modul Analisis</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">652</div>
+            <div class="label">Reporter Aktif</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================== SECTION 0: DATA CLEANSING ==================== -->
+    <div class="section-title">Preliminary Processing: Data Cleansing Pipeline</div>
+    <section class="section-content pipeline-section">
+      <div class="pipeline-header">
+        <div class="pipeline-title">
+          <h3>7 Tahapan Transformasi Data</h3>
+          <p>Dari data mentah ke analytics-ready dengan kualitas tinggi</p>
+        </div>
+        <div class="pipeline-impact">
+          <div class="value">+141%</div>
+          <div class="label">Struktur Data</div>
+        </div>
+      </div>
+
+      <div class="pipeline-steps">
+        <div class="pipeline-step">
+          <div class="step-num">1</div>
+          <div class="step-title">Fuzzy Matching</div>
+          <div class="step-output">Koreksi Typo</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">2</div>
+          <div class="step-title">Lokasi</div>
+          <div class="step-output">5 Zona, 46 Area</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">3</div>
+          <div class="step-title">Perusahaan</div>
+          <div class="step-output">15 Vendor</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">4</div>
+          <div class="step-title">Tanggal</div>
+          <div class="step-output">14 Kolom Waktu</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">5</div>
+          <div class="step-title">Risk Severity</div>
+          <div class="step-output">4 Level Risiko</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">6</div>
+          <div class="step-title">Quality Metrics</div>
+          <div class="step-output">Skor 0-5</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="step-num">7</div>
+          <div class="step-title">Trend Analysis</div>
+          <div class="step-output">9 Benchmark</div>
+        </div>
+      </div>
+
+      <div class="pipeline-summary">
+        <div class="summary-card">
+          <div class="value">31 → 75</div>
+          <div class="label">Kolom Data</div>
+        </div>
+        <div class="summary-card">
+          <div class="value">+81%</div>
+          <div class="label">Data Quality Score</div>
+        </div>
+        <div class="summary-card">
+          <div class="value">-42%</div>
+          <div class="label">Unique Variants</div>
+        </div>
+        <div class="summary-card">
+          <div class="value">10x</div>
+          <div class="label">Analysis Speed</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== BASIC ANALYSIS ==================== -->
+    <div class="section-title">Basic Analysis: 5 Modul Deskriptif</div>
+    <section class="section-content">
+      <div class="analysis-grid">
+
+        <!-- Card 01: Area Risk -->
+        <div class="analysis-card">
+          <div class="card-header">
+            <div class="card-icon risk">🎯</div>
+            <div class="card-title">01. Analisis Risiko Area</div>
+          </div>
+          <div class="card-body">
+            <img src="../assets/images/II.1.1_zona_distribution.png" alt="Zona Distribution" class="card-image">
+            <div class="key-metrics">
+              <div class="metric">
+                <div class="value">5</div>
+                <div class="label">Zona Operasi</div>
+              </div>
+              <div class="metric alert">
+                <div class="value">46.4%</div>
+                <div class="label">Unsafe UNKNOWN</div>
+              </div>
+              <div class="metric">
+                <div class="value">47%</div>
+                <div class="label">MAIN_UNIT</div>
+              </div>
+              <div class="metric success">
+                <div class="value">0.92</div>
+                <div class="label">Risk UTILITY</div>
+              </div>
+            </div>
+            <ul class="insights-list">
+              <li>UNKNOWN zone: Risk tertinggi (1.75)</li>
+              <li>4 area dengan 100% unsafe rate</li>
+              <li>UTILITY: Best practice model</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 02: Team Performance -->
+        <div class="analysis-card">
+          <div class="card-header">
+            <div class="card-icon team">👥</div>
+            <div class="card-title">02. Performa Tim</div>
+          </div>
+          <div class="card-body">
+            <img src="../assets/images/II.2.2_pic_workload_overview.png" alt="PIC Workload" class="card-image">
+            <div class="key-metrics">
+              <div class="metric">
+                <div class="value">652</div>
+                <div class="label">Reporter Aktif</div>
+              </div>
+              <div class="metric alert">
+                <div class="value">47%</div>
+                <div class="label">Andrian Workload</div>
+              </div>
+              <div class="metric success">
+                <div class="value">100%</div>
+                <div class="label">Close Rate PIC</div>
+              </div>
+              <div class="metric">
+                <div class="value">38.7%</div>
+                <div class="label">Garda Detection</div>
+              </div>
+            </div>
+            <ul class="insights-list">
+              <li><span class="status-badge critical">URGENT</span> PIC Andrian overloaded</li>
+              <li>Top: Suparman (34 laporan)</li>
+              <li>PT RBU: 9.8% detection rate</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 03: Resolution Workflow -->
+        <div class="analysis-card">
+          <div class="card-header">
+            <div class="card-icon workflow">⚡</div>
+            <div class="card-title">03. Alur Penyelesaian</div>
+          </div>
+          <div class="card-body">
+            <img src="../assets/images/II.3.1_workflow_funnel.png" alt="Workflow Funnel" class="card-image">
+            <div class="key-metrics">
+              <div class="metric success">
+                <div class="value">99.2%</div>
+                <div class="label">Close Rate</div>
+              </div>
+              <div class="metric alert">
+                <div class="value">0%</div>
+                <div class="label">SLA CRITICAL</div>
+              </div>
+              <div class="metric alert">
+                <div class="value">269</div>
+                <div class="label">Hari Avg CRIT</div>
+              </div>
+              <div class="metric">
+                <div class="value">220</div>
+                <div class="label">Hari Overall</div>
+              </div>
+            </div>
+            <ul class="insights-list">
+              <li><span class="status-badge critical">PARADOX</span> Complete tapi selalu late</li>
+              <li>Target 1 hari, actual 269 hari (269x!)</li>
+              <li>Systemic issue, bukan people</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 04: Shift Patterns -->
+        <div class="analysis-card">
+          <div class="card-header">
+            <div class="card-icon shift">🕐</div>
+            <div class="card-title">04. Pola Shift & Hari</div>
+          </div>
+          <div class="card-body">
+            <img src="../assets/images/II.4.1_shift_performance_overview.png" alt="Shift Performance" class="card-image">
+            <div class="key-metrics">
+              <div class="metric">
+                <div class="value">63%</div>
+                <div class="label">Shift Pagi</div>
+              </div>
+              <div class="metric success">
+                <div class="value">25.7%</div>
+                <div class="label">Detection Malam</div>
+              </div>
+              <div class="metric alert">
+                <div class="value">17.1%</div>
+                <div class="label">Detection Siang</div>
+              </div>
+              <div class="metric">
+                <div class="value">30.6%</div>
+                <div class="label">Peak: Rabu</div>
+              </div>
+            </div>
+            <ul class="insights-list">
+              <li>Shift C (Malam) = Best practice</li>
+              <li>Monday Effect: Volume tinggi, quality rendah</li>
+              <li>Rabu-Kamis: Optimal inspection</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 05: Asset Tracking -->
+        <div class="analysis-card">
+          <div class="card-header">
+            <div class="card-icon asset">🔧</div>
+            <div class="card-title">05. Tracking Aset</div>
+          </div>
+          <div class="card-body">
+            <img src="../assets/images/II.5_asset_category_distribution.png" alt="Asset Distribution" class="card-image">
+            <div class="key-metrics">
+              <div class="metric alert">
+                <div class="value">~800</div>
+                <div class="label">APAR Findings</div>
+              </div>
+              <div class="metric">
+                <div class="value">~300</div>
+                <div class="label">Pump Issues</div>
+              </div>
+              <div class="metric">
+                <div class="value">~250</div>
+                <div class="label">Panel Listrik</div>
+              </div>
+              <div class="metric">
+                <div class="value">~200</div>
+                <div class="label">Tangga/Railing</div>
+              </div>
+            </div>
+            <ul class="insights-list">
+              <li><span class="status-badge critical">CRITICAL</span> APAR crisis: 800+ findings</li>
+              <li>Predictive maintenance opportunity</li>
+              <li>Asset-specific intervention enabled</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Summary Card (instead of 6th) -->
+        <div class="analysis-card" style="background: linear-gradient(135deg, #f0fdfa, #f0f9ff);">
+          <div class="card-header">
+            <div class="card-icon" style="background: linear-gradient(135deg, var(--pln-primary-blue), var(--pln-green));">📊</div>
+            <div class="card-title">Key Insights Summary</div>
+          </div>
+          <div class="card-body">
+            <ul class="insights-list" style="font-size: 0.78rem;">
+              <li><strong>Risk:</strong> UNKNOWN zone paling berbahaya (46.4% unsafe)</li>
+              <li><strong>Team:</strong> 1 PIC handle 47% workload - unsustainable</li>
+              <li><strong>SLA:</strong> 0% compliance untuk CRITICAL findings</li>
+              <li><strong>Pattern:</strong> Shift Malam quality terbaik (25.7%)</li>
+              <li><strong>Asset:</strong> APAR crisis memerlukan immediate action</li>
+              <li><strong>Best Practice:</strong> UTILITY zone & Garda Bangsa</li>
+            </ul>
+            <div style="margin-top: 12px; padding: 10px; background: rgba(0,162,185,0.1); border-radius: 8px; font-size: 0.72rem; text-align: center;">
+              <strong>Rekomendasi Prioritas:</strong> Redistribusi PIC, Fast-track CRITICAL, Training Shift B
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== ADVANCED ANALYSIS ==================== -->
+    <div class="section-title">Advanced Analysis: Machine Learning & AI</div>
+    <section class="section-content advanced-section">
+      <div class="analysis-grid">
+
+        <!-- Card 06: Risk Prediction -->
+        <div class="analysis-card">
+          <div class="card-header">
+            <div class="card-icon ml">🤖</div>
+            <div class="card-title">06. Model Prediksi Risiko</div>
+          </div>
+          <div class="card-body">
+            <img src="../assets/images/feature_importance.png" alt="Feature Importance" class="card-image">
+            <div class="key-metrics">
+              <div class="metric success">
+                <div class="value">75-80%</div>
+                <div class="label">Accuracy</div>
+              </div>
+              <div class="metric">
+                <div class="value">30%</div>
+                <div class="label">Zona Weight</div>
+              </div>
+              <div class="metric">
+                <div class="value">25%</div>
+                <div class="label">Area Weight</div>
+              </div>
+              <div class="metric alert">
+                <div class="value">78%</div>
+                <div class="label">High Risk Pred</div>
+              </div>
+            </div>
+            <ul class="insights-list">
+              <li>Random Forest classifier</li>
+              <li>Top scenario: COAL + Malam + Weekend</li>
+              <li>Location > Time untuk prediksi</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 07: Smart Recommendation -->
+        <div class="analysis-card">
+          <div class="card-header">
+            <div class="card-icon ai">💡</div>
+            <div class="card-title">07. Smart Recommendation</div>
+          </div>
+          <div class="card-body">
+            <img src="../assets/images/IV.2_smart_recommendation_resolution_analysis.png" alt="Smart Recommendation" class="card-image">
+            <div class="key-metrics">
+              <div class="metric">
+                <div class="value">5.575</div>
+                <div class="label">Knowledge Base</div>
+              </div>
+              <div class="metric success">
+                <div class="value">70-85%</div>
+                <div class="label">Similarity Match</div>
+              </div>
+              <div class="metric">
+                <div class="value">3</div>
+                <div class="label">Tier Actions</div>
+              </div>
+              <div class="metric">
+                <div class="value">TF-IDF</div>
+                <div class="label">Algorithm</div>
+              </div>
+            </div>
+            <ul class="insights-list">
+              <li>Instant guidance dari historical success</li>
+              <li>3-tier: Immediate, Short, Preventive</li>
+              <li>Knowledge tidak hilang saat resign</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 08: Anomaly Detection -->
+        <div class="analysis-card">
+          <div class="card-header">
+            <div class="card-icon anomaly">🔍</div>
+            <div class="card-title">08. Deteksi Anomali</div>
+          </div>
+          <div class="card-body">
+            <img src="../assets/images/IV.3_anomaly_detection_reporter_analysis.png" alt="Anomaly Detection" class="card-image">
+            <div class="key-metrics">
+              <div class="metric">
+                <div class="value">12</div>
+                <div class="label">Volume Spikes</div>
+              </div>
+              <div class="metric alert">
+                <div class="value">3</div>
+                <div class="label">Gaming Cases</div>
+              </div>
+              <div class="metric success">
+                <div class="value">2-5</div>
+                <div class="label">Hari Lebih Cepat</div>
+              </div>
+              <div class="metric">
+                <div class="value">IF</div>
+                <div class="label">Isolation Forest</div>
+              </div>
+            </div>
+            <ul class="insights-list">
+              <li>Early warning system otomatis</li>
+              <li>Gaming prevention: 47 findings/90 menit</li>
+              <li>System downtime detection</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <div class="footer-left">
+        <div class="footer-logo">PLN<br>NP</div>
+        <div class="footer-info">
+          <h4>UP Indramayu - PLN Nusantara Power</h4>
+          <p>IZAT K3 Analytics Dashboard | Data-Driven Safety Excellence</p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <p><strong>Prepared by:</strong> PT JAPO TITIAN BAKAT</p>
+        <p>Akhmad Guntar - Data Science Consultant</p>
+        <p>Desember 2025 | Version 1.0</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
