@@ -42,16 +42,10 @@
       border-radius: 16px;
       padding: 1.5rem;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      opacity: 0;
-      animation: fadeInUp 0.5s ease-out forwards;
     }
-    .card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid #f59e0b; }
-    .card:nth-child(2) { animation-delay: 0.2s; border-left: 5px solid #2563eb; }
-    .card:nth-child(3) { animation-delay: 0.3s; border-left: 5px solid var(--pln-green); }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .card:nth-child(1) { border-left: 5px solid #f59e0b; }
+    .card:nth-child(2) { border-left: 5px solid #2563eb; }
+    .card:nth-child(3) { border-left: 5px solid var(--pln-green); }
     .card-number {
       font-family: 'Poppins', sans-serif;
       font-size: 2rem;
@@ -98,6 +92,7 @@
       color: var(--pln-dark-blue);
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 </head>
 <body>
   <div class="header">
@@ -135,5 +130,106 @@
       <div class="action-text">Bukti bahwa monitoring efektif</div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initial states using gsap.set()
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('.card', { y: 40, opacity: 0, scale: 0.95 });
+      gsap.set('.card-number', { x: -20, opacity: 0 });
+      gsap.set('.card h3', { y: 15, opacity: 0 });
+      gsap.set('.card p', { y: 15, opacity: 0 });
+      gsap.set('.stat-badge', { scale: 0, opacity: 0 });
+      gsap.set('.action-text', { y: 10, opacity: 0 });
+
+      // Master timeline
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // Header animation
+      masterTL.to('.header h1', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.2);
+
+      // Cards stagger animation
+      masterTL.to('.card', {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: 'back.out(1.3)'
+      }, 0.4);
+
+      // Card numbers animation
+      masterTL.to('.card-number', {
+        x: 0,
+        opacity: 0.2,
+        duration: 0.5,
+        stagger: 0.15,
+        ease: 'power2.out'
+      }, 0.6);
+
+      // Card titles animation
+      masterTL.to('.card h3', {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.15,
+        ease: 'power2.out'
+      }, 0.7);
+
+      // Card paragraphs animation
+      masterTL.to('.card p', {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.15,
+        ease: 'power2.out'
+      }, 0.85);
+
+      // Stat badges pop animation
+      masterTL.to('.stat-badge', {
+        scale: 1,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.08,
+        ease: 'back.out(2)'
+      }, 1.0);
+
+      // Action text slide in
+      masterTL.to('.action-text', {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.15,
+        ease: 'power2.out'
+      }, 1.2);
+
+      // Add subtle hover effects to cards
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            y: -5,
+            scale: 1.02,
+            boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            y: 0,
+            scale: 1,
+            boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BAGIAN B: Kinerja PIC</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     :root {
       --pln-dark-blue: #035B71;
@@ -32,6 +33,11 @@
       font-size: 0.8rem;
       color: #fff;
       margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+    .header-badge:hover {
+      background: rgba(255,255,255,0.3);
     }
     .header h1 {
       font-family: 'Poppins', sans-serif;
@@ -47,18 +53,10 @@
       font-size: 1.2rem;
       color: var(--pln-dark-blue);
       margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeIn 0.5s ease-out 0.1s forwards;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      opacity: 0;
-      animation: fadeIn 0.6s ease-out 0.2s forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
     th {
       background: var(--pln-dark-blue);
@@ -75,7 +73,11 @@
       border-bottom: 1px solid #e5e7eb;
       font-size: 0.9rem;
     }
-    tr:hover td { background: var(--light-gray); }
+    tr {
+      transition: background 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+    tbody tr:hover td { background: var(--light-gray); }
     .name { font-weight: 600; color: var(--pln-dark-blue); }
     .status {
       display: inline-block;
@@ -83,6 +85,7 @@
       border-radius: 12px;
       font-size: 0.75rem;
       font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .status-overloaded { background: #fee2e2; color: #dc2626; }
     .status-high { background: #fef3c7; color: #d97706; }
@@ -139,5 +142,124 @@
       </tbody>
     </table>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial hidden states
+      gsap.set('.header-badge', { x: -20, opacity: 0 });
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('.section-title', { x: -30, opacity: 0 });
+      gsap.set('table', { y: 30, opacity: 0 });
+      gsap.set('thead th', { y: -20, opacity: 0 });
+      gsap.set('tbody tr', { x: -40, opacity: 0 });
+      gsap.set('.status', { scale: 0.8, opacity: 0 });
+
+      // Create master timeline
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // Animate header
+      masterTL.to('.header-badge', {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.2);
+
+      masterTL.to('.header h1', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.3);
+
+      // Animate section title
+      masterTL.to('.section-title', {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.5);
+
+      // Animate table
+      masterTL.to('table', {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.6);
+
+      // Animate table headers
+      masterTL.to('thead th', {
+        y: 0,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.05,
+        ease: 'power2.out'
+      }, 0.7);
+
+      // Animate table rows
+      masterTL.to('tbody tr', {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'back.out(1.2)'
+      }, 0.9);
+
+      // Animate status badges
+      masterTL.to('.status', {
+        scale: 1,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.1,
+        ease: 'back.out(1.5)'
+      }, 1.2);
+
+      // Hover effects for table rows
+      document.querySelectorAll('tbody tr').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          gsap.to(el, {
+            x: 5,
+            scale: 1.01,
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+          const status = el.querySelector('.status');
+          if (status) {
+            gsap.to(status, {
+              scale: 1.1,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              duration: 0.25
+            });
+          }
+        });
+        el.addEventListener('mouseleave', () => {
+          gsap.to(el, {
+            x: 0,
+            scale: 1,
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+          const status = el.querySelector('.status');
+          if (status) {
+            gsap.to(status, {
+              scale: 1,
+              boxShadow: 'none',
+              duration: 0.25
+            });
+          }
+        });
+      });
+
+      // Hover effect for header badge
+      const badge = document.querySelector('.header-badge');
+      badge.addEventListener('mouseenter', () => {
+        gsap.to(badge, { scale: 1.05, duration: 0.25, ease: 'power2.out' });
+      });
+      badge.addEventListener('mouseleave', () => {
+        gsap.to(badge, { scale: 1, duration: 0.25, ease: 'power2.out' });
+      });
+    });
+  </script>
 </body>
 </html>

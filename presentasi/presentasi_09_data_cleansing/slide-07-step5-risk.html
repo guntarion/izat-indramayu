@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Step 5: Risk Severity & Issue Category</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,23 +15,24 @@
     .step-badge { background: var(--pln-green); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.5rem; }
-    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
-    .section:nth-child(1) { animation-delay: 0.2s; }
-    .section:nth-child(2) { animation-delay: 0.3s; }
-    .section:nth-child(3) { animation-delay: 0.4s; grid-column: 1 / -1; }
+    .section { }
+    .section:nth-child(3) { grid-column: 1 / -1; }
     .section-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
     .section-title::before { content: ''; width: 4px; height: 20px; background: var(--pln-primary-blue); border-radius: 2px; }
-    .algorithm-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; }
+    .algorithm-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .algorithm-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
     .algo-section { margin-bottom: 0.75rem; }
     .algo-section:last-child { margin-bottom: 0; }
     .algo-title { font-size: 0.8rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.3rem; }
     .algo-items { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-    .algo-item { font-size: 0.7rem; padding: 0.2rem 0.4rem; border-radius: 4px; }
+    .algo-item { font-size: 0.7rem; padding: 0.2rem 0.4rem; border-radius: 4px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .algo-item:hover { transform: scale(1.1); box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
     .algo-high { background: #fee2e2; color: #991b1b; }
     .algo-med { background: #fef3c7; color: #92400e; }
     .algo-low { background: #ecfdf5; color: #065f46; }
     .risk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
-    .risk-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; text-align: center; border-top: 4px solid; }
+    .risk-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; text-align: center; border-top: 4px solid; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .risk-card:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); }
     .risk-card.critical { border-color: #dc2626; }
     .risk-card.high { border-color: #f59e0b; }
     .risk-card.medium { border-color: #3b82f6; }
@@ -40,13 +42,14 @@
     .risk-pct { font-size: 0.75rem; color: #666; }
     .risk-sla { font-size: 0.7rem; color: #999; margin-top: 0.25rem; }
     .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
-    .cat-card { background: var(--light-gray); padding: 0.75rem; border-radius: 8px; }
+    .cat-card { background: var(--light-gray); padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .cat-card:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
     .cat-name { font-weight: 600; font-size: 0.8rem; color: var(--pln-dark-blue); margin-bottom: 0.25rem; }
     .cat-pct { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--pln-primary-blue); }
     .cat-keywords { font-size: 0.65rem; color: #666; margin-top: 0.25rem; }
-    .alert-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-top: 0.75rem; }
+    .alert-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-top: 0.75rem; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .alert-box:hover { transform: translateX(5px); box-shadow: 5px 5px 20px rgba(239, 68, 68, 0.2); }
     .alert-box p { font-size: 0.85rem; color: #991b1b; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -162,5 +165,261 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. SET INITIAL STATES (hidden)
+      gsap.set('.step-badge', { opacity: 0, scale: 0.5, rotation: -10 });
+      gsap.set('.header h1', { opacity: 0, x: -50 });
+      gsap.set('.section', { opacity: 0, y: 40 });
+      gsap.set('.section-title', { opacity: 0, x: -30 });
+      gsap.set('.algorithm-card', { opacity: 0, x: -40, scale: 0.95 });
+      gsap.set('.algo-section', { opacity: 0, y: 20 });
+      gsap.set('.algo-item', { opacity: 0, scale: 0.5, y: 10 });
+      gsap.set('.risk-card', { opacity: 0, y: 50, scale: 0.85 });
+      gsap.set('.risk-count', { opacity: 0, scale: 0.5 });
+      gsap.set('.alert-box', { opacity: 0, x: -50, scaleX: 0.8 });
+      gsap.set('.cat-card', { opacity: 0, y: 30, scale: 0.9, rotation: -2 });
+
+      // 2. CREATE MASTER TIMELINE
+      const masterTL = gsap.timeline({
+        delay: 0.1,
+        defaults: { ease: 'power3.out' }
+      });
+
+      // 3. ANIMATE TO VISIBLE STATES
+      // Header animations
+      masterTL.to('.step-badge', {
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        duration: 0.6,
+        ease: 'back.out(1.7)'
+      }, 0);
+
+      masterTL.to('.header h1', {
+        opacity: 1,
+        x: 0,
+        duration: 0.7,
+        ease: 'power3.out'
+      }, 0.15);
+
+      // Sections fade in
+      masterTL.to('.section', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.15
+      }, 0.3);
+
+      // Section titles slide in
+      masterTL.to('.section-title', {
+        opacity: 1,
+        x: 0,
+        duration: 0.5,
+        stagger: 0.1
+      }, 0.4);
+
+      // Algorithm card animation
+      masterTL.to('.algorithm-card', {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        duration: 0.6
+      }, 0.5);
+
+      // Algorithm sections stagger
+      masterTL.to('.algo-section', {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        stagger: 0.1
+      }, 0.6);
+
+      // Algorithm items pop in
+      masterTL.to('.algo-item', {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.35,
+        stagger: 0.04,
+        ease: 'back.out(1.5)'
+      }, 0.7);
+
+      // Risk cards with dramatic entrance
+      masterTL.to('.risk-card', {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.5,
+        stagger: 0.12,
+        ease: 'back.out(1.3)'
+      }, 0.6);
+
+      // Risk counts number pop
+      masterTL.to('.risk-count', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        stagger: 0.1,
+        ease: 'elastic.out(1, 0.5)'
+      }, 0.9);
+
+      // Alert box slide in with attention
+      masterTL.to('.alert-box', {
+        opacity: 1,
+        x: 0,
+        scaleX: 1,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 1.1);
+
+      // Category cards cascade in
+      masterTL.to('.cat-card', {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotation: 0,
+        duration: 0.4,
+        stagger: 0.06,
+        ease: 'back.out(1.2)'
+      }, 0.9);
+
+      // Pulse animation for alert box after entrance
+      masterTL.to('.alert-box', {
+        boxShadow: '8px 8px 25px rgba(239, 68, 68, 0.3)',
+        duration: 0.5,
+        yoyo: true,
+        repeat: 1,
+        ease: 'power2.inOut'
+      }, 1.5);
+
+      // HOVER EFFECTS - Risk cards
+      document.querySelectorAll('.risk-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            scale: 1.08,
+            y: -12,
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(card.querySelector('.risk-count'), {
+            scale: 1.2,
+            color: '#035B71',
+            duration: 0.3
+          });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            scale: 1,
+            y: 0,
+            boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(card.querySelector('.risk-count'), {
+            scale: 1,
+            color: '#00A2B9',
+            duration: 0.3
+          });
+        });
+      });
+
+      // HOVER EFFECTS - Category cards
+      document.querySelectorAll('.cat-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            scale: 1.1,
+            y: -10,
+            boxShadow: '0 15px 35px rgba(0, 162, 185, 0.25)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(card.querySelector('.cat-pct'), {
+            color: '#35B971',
+            scale: 1.15,
+            duration: 0.3
+          });
+          gsap.to(card.querySelector('.cat-name'), {
+            color: '#00A2B9',
+            duration: 0.3
+          });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            scale: 1,
+            y: 0,
+            boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(card.querySelector('.cat-pct'), {
+            color: '#00A2B9',
+            scale: 1,
+            duration: 0.3
+          });
+          gsap.to(card.querySelector('.cat-name'), {
+            color: '#035B71',
+            duration: 0.3
+          });
+        });
+      });
+
+      // HOVER EFFECTS - Algorithm items
+      document.querySelectorAll('.algo-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          gsap.to(item, {
+            scale: 1.2,
+            y: -5,
+            boxShadow: '0 8px 20px rgba(0, 0, 0, 0.25)',
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+        });
+        item.addEventListener('mouseleave', () => {
+          gsap.to(item, {
+            scale: 1,
+            y: 0,
+            boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // HOVER EFFECTS - Algorithm card
+      document.querySelector('.algorithm-card').addEventListener('mouseenter', function() {
+        gsap.to(this, {
+          scale: 1.02,
+          boxShadow: '0 15px 35px rgba(3, 91, 113, 0.15)',
+          duration: 0.3
+        });
+      });
+      document.querySelector('.algorithm-card').addEventListener('mouseleave', function() {
+        gsap.to(this, {
+          scale: 1,
+          boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
+          duration: 0.3
+        });
+      });
+
+      // HOVER EFFECTS - Alert box
+      document.querySelector('.alert-box').addEventListener('mouseenter', function() {
+        gsap.to(this, {
+          x: 8,
+          boxShadow: '8px 8px 25px rgba(239, 68, 68, 0.3)',
+          duration: 0.3
+        });
+      });
+      document.querySelector('.alert-box').addEventListener('mouseleave', function() {
+        gsap.to(this, {
+          x: 0,
+          boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
+          duration: 0.3
+        });
+      });
+    });
+  </script>
 </body>
 </html>

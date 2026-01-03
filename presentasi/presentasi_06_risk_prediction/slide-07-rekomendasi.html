@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rekomendasi</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,14 +13,11 @@
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
-    .section:nth-child(1) { animation-delay: 0.2s; }
-    .section:nth-child(2) { animation-delay: 0.4s; }
+    .section { }
     .section-title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--pln-primary-blue); }
-    .action-item { background: var(--light-gray); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
+    .action-item { background: var(--light-gray); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; cursor: pointer; }
     .action-item h4 { font-size: 0.9rem; color: var(--pln-dark-blue); margin-bottom: 0.3rem; }
     .action-item p { font-size: 0.8rem; color: #666; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -37,5 +35,67 @@
       <div class="action-item"><h4>5. Performance Monitoring</h4><p>Track actual vs predicted. Jika accuracy drop < 70% → investigate & retrain</p></div>
     </div>
   </div>
+
+  <script>
+    // GSAP Animations using set() + to() pattern
+    const header = document.querySelector('.header');
+    const headerTitle = document.querySelector('.header h1');
+    const sections = document.querySelectorAll('.section');
+    const sectionTitles = document.querySelectorAll('.section-title');
+    const actionItems = document.querySelectorAll('.action-item');
+
+    // Set initial states
+    gsap.set(header, { y: -100, opacity: 0 });
+    gsap.set(headerTitle, { x: -50, opacity: 0 });
+    gsap.set(sections, { opacity: 0 });
+    gsap.set(sectionTitles, { opacity: 0, x: -30, scaleX: 0, transformOrigin: 'left center' });
+    gsap.set(actionItems, { opacity: 0, y: 30, scale: 0.95 });
+
+    // Create timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.to(header, { y: 0, opacity: 1, duration: 0.6 }, 0)
+      .to(headerTitle, { x: 0, opacity: 1, duration: 0.6 }, 0.2);
+
+    // Animate sections
+    sections.forEach((section, sectionIndex) => {
+      const title = section.querySelector('.section-title');
+      const items = section.querySelectorAll('.action-item');
+      const sectionDelay = 0.4 + (sectionIndex * 0.3);
+
+      tl.to(section, { opacity: 1, duration: 0.3 }, sectionDelay)
+        .to(title, { opacity: 1, x: 0, scaleX: 1, duration: 0.5, ease: 'power2.out' }, sectionDelay + 0.1);
+
+      items.forEach((item, itemIndex) => {
+        tl.to(item, { opacity: 1, y: 0, scale: 1, duration: 0.4 }, sectionDelay + 0.3 + (itemIndex * 0.12));
+      });
+    });
+
+    // Hover effects for action items
+    actionItems.forEach(item => {
+      const title = item.querySelector('h4');
+
+      item.addEventListener('mouseenter', () => {
+        gsap.to(item, { scale: 1.03, x: 8, boxShadow: '0 10px 25px rgba(0,162,185,0.12)', duration: 0.3, ease: 'power2.out' });
+        gsap.to(title, { color: '#00A2B9', x: 3, duration: 0.3 });
+      });
+      item.addEventListener('mouseleave', () => {
+        gsap.to(item, { scale: 1, x: 0, boxShadow: 'none', duration: 0.3, ease: 'power2.out' });
+        gsap.to(title, { color: '#035B71', x: 0, duration: 0.3 });
+      });
+    });
+
+    // Hover effect for section titles
+    sectionTitles.forEach(title => {
+      title.style.cursor = 'pointer';
+
+      title.addEventListener('mouseenter', () => {
+        gsap.to(title, { scale: 1.02, x: 5, duration: 0.3, ease: 'power2.out' });
+      });
+      title.addEventListener('mouseleave', () => {
+        gsap.to(title, { scale: 1, x: 0, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+  </script>
 </body>
 </html>

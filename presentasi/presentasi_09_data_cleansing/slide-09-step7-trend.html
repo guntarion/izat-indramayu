@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Step 7: Tren & Komparasi</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,15 +15,15 @@
     .step-badge { background: var(--pln-green); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem; }
-    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
-    .section:nth-child(1) { animation-delay: 0.2s; }
-    .section:nth-child(2) { animation-delay: 0.3s; }
-    .section:nth-child(3) { animation-delay: 0.4s; grid-column: 1 / -1; }
+    .section { }
+    .section:nth-child(3) { grid-column: 1 / -1; }
     .section-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
     .section-title::before { content: ''; width: 4px; height: 20px; background: var(--pln-primary-blue); border-radius: 2px; }
     .trend-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
     .trend-table th { background: var(--pln-dark-blue); color: #fff; padding: 0.5rem; text-align: left; }
     .trend-table td { padding: 0.35rem 0.5rem; border-bottom: 1px solid #e5e7eb; }
+    .trend-table tbody tr { cursor: pointer; transition: background 0.3s ease, transform 0.3s ease; }
+    .trend-table tbody tr:hover { background: var(--light-gray); }
     .month-name { font-weight: 600; color: var(--pln-dark-blue); }
     .trend-up { color: #dc2626; }
     .trend-down { color: var(--pln-green); }
@@ -34,21 +35,24 @@
     .benchmark-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
     .benchmark-table th { background: var(--pln-dark-blue); color: #fff; padding: 0.5rem; text-align: left; font-size: 0.75rem; }
     .benchmark-table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid #e5e7eb; }
+    .benchmark-table tbody tr { cursor: pointer; transition: background 0.3s ease, transform 0.3s ease; }
+    .benchmark-table tbody tr:hover { background: var(--light-gray); }
     .zona-name { font-weight: 600; color: var(--pln-dark-blue); }
     .best-practice { background: #ecfdf5; }
     .best-badge { background: var(--pln-green); color: #fff; padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.6rem; font-weight: 600; }
     .correlation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    .corr-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; }
+    .corr-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .corr-card:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
     .corr-pair { font-weight: 600; color: var(--pln-dark-blue); font-size: 0.85rem; margin-bottom: 0.3rem; }
     .corr-value { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; }
     .corr-positive { color: var(--pln-green); }
     .corr-negative { color: #f59e0b; }
     .corr-weak { color: #6b7280; }
     .corr-insight { font-size: 0.7rem; color: #666; margin-top: 0.25rem; }
-    .insight-box { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); border-radius: 8px; padding: 0.75rem 1rem; margin-top: 0.75rem; }
+    .insight-box { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); border-radius: 8px; padding: 0.75rem 1rem; margin-top: 0.75rem; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .insight-box:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(3, 91, 113, 0.3); }
     .insight-box p { color: #fff; font-size: 0.8rem; }
     .insight-box strong { color: var(--pln-green); }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -214,5 +218,214 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. SET INITIAL STATES (hidden)
+      gsap.set('.step-badge', { opacity: 0, scale: 0.5, rotation: -10 });
+      gsap.set('.header h1', { opacity: 0, x: -40 });
+      gsap.set('.section', { opacity: 0, y: 40 });
+      gsap.set('.section-title', { opacity: 0, x: -25 });
+      gsap.set('.trend-table thead', { opacity: 0, y: -15 });
+      gsap.set('.trend-table tbody tr', { opacity: 0, x: -30 });
+      gsap.set('.mom-badge', { opacity: 0, scale: 0.5 });
+      gsap.set('.insight-box', { opacity: 0, y: 25, scale: 0.95 });
+      gsap.set('.benchmark-table thead', { opacity: 0, y: -15 });
+      gsap.set('.benchmark-table tbody tr', { opacity: 0, x: 30 });
+      gsap.set('.best-badge', { opacity: 0, scale: 0 });
+      gsap.set('.corr-card', { opacity: 0, y: 40, scale: 0.85 });
+      gsap.set('.corr-value', { opacity: 0, scale: 0.5 });
+
+      // 2. CREATE MASTER TIMELINE
+      const masterTL = gsap.timeline({ delay: 0.1, defaults: { ease: 'power3.out' } });
+
+      // 3. ANIMATE TO VISIBLE STATES
+      // Header animations
+      masterTL.to('.step-badge', {
+        opacity: 1, scale: 1, rotation: 0,
+        duration: 0.6,
+        ease: 'back.out(1.7)'
+      }, 0);
+
+      masterTL.to('.header h1', {
+        opacity: 1, x: 0,
+        duration: 0.7,
+        ease: 'power3.out'
+      }, 0.15);
+
+      // Sections fade in
+      masterTL.to('.section', {
+        opacity: 1, y: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: 'power2.out'
+      }, 0.25);
+
+      // Section titles slide in
+      masterTL.to('.section-title', {
+        opacity: 1, x: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'power2.out'
+      }, 0.35);
+
+      // Trend table animations
+      masterTL.to('.trend-table thead', {
+        opacity: 1, y: 0,
+        duration: 0.5
+      }, 0.45);
+
+      masterTL.to('.trend-table tbody tr', {
+        opacity: 1, x: 0,
+        duration: 0.35,
+        stagger: 0.06,
+        ease: 'power2.out'
+      }, 0.55);
+
+      masterTL.to('.mom-badge', {
+        opacity: 1, scale: 1,
+        duration: 0.4,
+        stagger: 0.05,
+        ease: 'back.out(1.5)'
+      }, 0.8);
+
+      // Benchmark table animations
+      masterTL.to('.benchmark-table thead', {
+        opacity: 1, y: 0,
+        duration: 0.5
+      }, 0.5);
+
+      masterTL.to('.benchmark-table tbody tr', {
+        opacity: 1, x: 0,
+        duration: 0.4,
+        stagger: 0.08,
+        ease: 'power2.out'
+      }, 0.6);
+
+      masterTL.to('.best-badge', {
+        opacity: 1, scale: 1,
+        duration: 0.5,
+        ease: 'elastic.out(1, 0.5)'
+      }, 1.0);
+
+      // Insight box animation
+      masterTL.to('.insight-box', {
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.6,
+        ease: 'back.out(1.2)'
+      }, 1.1);
+
+      // Correlation cards with staggered pop effect
+      masterTL.to('.corr-card', {
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.5,
+        stagger: 0.12,
+        ease: 'back.out(1.4)'
+      }, 0.9);
+
+      masterTL.to('.corr-value', {
+        opacity: 1, scale: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'elastic.out(1, 0.6)'
+      }, 1.1);
+
+      // HOVER EFFECTS for trend table rows
+      document.querySelectorAll('.trend-table tbody tr').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+          gsap.to(row, {
+            scale: 1.02, x: 8,
+            backgroundColor: 'rgba(0, 162, 185, 0.08)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          const badge = row.querySelector('.mom-badge');
+          if (badge) gsap.to(badge, { scale: 1.25, duration: 0.3, ease: 'back.out(1.5)' });
+        });
+        row.addEventListener('mouseleave', () => {
+          gsap.to(row, {
+            scale: 1, x: 0,
+            backgroundColor: 'transparent',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          const badge = row.querySelector('.mom-badge');
+          if (badge) gsap.to(badge, { scale: 1, duration: 0.3 });
+        });
+      });
+
+      // HOVER EFFECTS for benchmark table rows
+      document.querySelectorAll('.benchmark-table tbody tr').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+          gsap.to(row, {
+            scale: 1.03, x: 8,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          const badge = row.querySelector('.best-badge');
+          if (badge) gsap.to(badge, { scale: 1.2, duration: 0.3 });
+        });
+        row.addEventListener('mouseleave', () => {
+          gsap.to(row, {
+            scale: 1, x: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          const badge = row.querySelector('.best-badge');
+          if (badge) gsap.to(badge, { scale: 1, duration: 0.3 });
+        });
+      });
+
+      // HOVER EFFECTS for correlation cards
+      document.querySelectorAll('.corr-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            scale: 1.08, y: -10,
+            boxShadow: '0 15px 35px rgba(3, 91, 113, 0.25)',
+            duration: 0.35,
+            ease: 'power2.out'
+          });
+          gsap.to(card.querySelector('.corr-value'), {
+            scale: 1.2,
+            duration: 0.35,
+            ease: 'back.out(1.5)'
+          });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            scale: 1, y: 0,
+            boxShadow: '0 0 0 rgba(0,0,0,0)',
+            duration: 0.35,
+            ease: 'power2.out'
+          });
+          gsap.to(card.querySelector('.corr-value'), {
+            scale: 1,
+            duration: 0.35
+          });
+        });
+      });
+
+      // HOVER EFFECT for insight box
+      const insightBox = document.querySelector('.insight-box');
+      if (insightBox) {
+        insightBox.addEventListener('mouseenter', () => {
+          gsap.to(insightBox, {
+            scale: 1.02, y: -5,
+            boxShadow: '0 15px 40px rgba(3, 91, 113, 0.4)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+        insightBox.addEventListener('mouseleave', () => {
+          gsap.to(insightBox, {
+            scale: 1, y: 0,
+            boxShadow: '0 0 0 rgba(0,0,0,0)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

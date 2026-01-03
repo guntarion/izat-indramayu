@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Example Success Case</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,23 +13,22 @@
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 2rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .input-section { opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
-    .input-box { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+    .input-section { }
+    .input-box { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer; }
     .input-label { font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 0.5rem; }
     .input-value { font-size: 1.1rem; color: var(--pln-dark-blue); font-weight: 600; font-style: italic; }
-    .based-on { background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 10px; padding: 1rem; border-left: 4px solid var(--pln-green); }
+    .based-on { background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 10px; padding: 1rem; border-left: 4px solid var(--pln-green); cursor: pointer; }
     .based-on p { font-size: 0.9rem; color: #555; }
-    .output-section { opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
-    .recommendation { margin-bottom: 1rem; }
+    .output-section { }
+    .recommendation { margin-bottom: 1rem; cursor: pointer; }
     .rec-tier { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.5rem; }
     .tier-immediate { background: #fee2e2; color: #dc2626; }
     .tier-short { background: #fef3c7; color: #92400e; }
     .tier-preventive { background: #dcfce7; color: #16a34a; }
     .rec-text { font-size: 0.9rem; color: #444; background: var(--light-gray); padding: 0.75rem; border-radius: 8px; }
-    .outcome { background: var(--pln-green); color: #fff; padding: 1rem; border-radius: 10px; margin-top: 1rem; }
+    .outcome { background: var(--pln-green); color: #fff; padding: 1rem; border-radius: 10px; margin-top: 1rem; cursor: pointer; }
     .outcome-label { font-size: 0.75rem; opacity: 0.9; }
     .outcome-text { font-size: 0.95rem; font-weight: 600; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
   </style>
 </head>
 <body>
@@ -62,5 +62,129 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Set initial states
+    gsap.set('.header', { opacity: 0, y: -50 });
+    gsap.set('.header h1', { opacity: 0, x: -30 });
+    gsap.set('.input-section', { opacity: 0, x: -50 });
+    gsap.set('.input-box', { opacity: 0, x: -30, scale: 0.95 });
+    gsap.set('.based-on', { opacity: 0, x: -30 });
+    gsap.set('.output-section', { opacity: 0, x: 50 });
+    gsap.set('.recommendation', { opacity: 0, x: 30 });
+    gsap.set('.rec-tier', { opacity: 0, scale: 0 });
+    gsap.set('.outcome', { opacity: 0, y: 30, scale: 0.9 });
+
+    // Main timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' }});
+
+    tl.to('.header', { opacity: 1, y: 0, duration: 0.6 }, 0)
+      .to('.header h1', { opacity: 1, x: 0, duration: 0.6 }, 0.2)
+      .to('.input-section', { opacity: 1, x: 0, duration: 0.6 }, 0.3)
+      .to('.input-box', { opacity: 1, x: 0, scale: 1, duration: 0.5 }, 0.4)
+      .to('.based-on', { opacity: 1, x: 0, duration: 0.5 }, 0.5)
+      .to('.output-section', { opacity: 1, x: 0, duration: 0.6 }, 0.4)
+      .to('.recommendation', { opacity: 1, x: 0, duration: 0.5, stagger: 0.15 }, 0.5)
+      .to('.rec-tier', { opacity: 1, scale: 1, duration: 0.4, stagger: 0.15, ease: 'back.out(1.7)' }, 0.7)
+      .to('.outcome', { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'back.out(1.2)' }, 1);
+
+    // Hover effects for input box
+    document.querySelector('.input-box').addEventListener('mouseenter', function() {
+      gsap.to(this, {
+        scale: 1.02,
+        boxShadow: '0 8px 25px rgba(0,0,0,0.12)',
+        duration: 0.3
+      });
+      gsap.to(this.querySelector('.input-value'), {
+        color: '#00A2B9',
+        duration: 0.3
+      });
+    });
+    document.querySelector('.input-box').addEventListener('mouseleave', function() {
+      gsap.to(this, {
+        scale: 1,
+        boxShadow: 'none',
+        duration: 0.3
+      });
+      gsap.to(this.querySelector('.input-value'), {
+        color: '#035B71',
+        duration: 0.3
+      });
+    });
+
+    // Hover effects for based-on
+    document.querySelector('.based-on').addEventListener('mouseenter', function() {
+      gsap.to(this, {
+        scale: 1.02,
+        borderLeftWidth: '6px',
+        boxShadow: '0 8px 25px rgba(53,185,113,0.2)',
+        duration: 0.3
+      });
+    });
+    document.querySelector('.based-on').addEventListener('mouseleave', function() {
+      gsap.to(this, {
+        scale: 1,
+        borderLeftWidth: '4px',
+        boxShadow: 'none',
+        duration: 0.3
+      });
+    });
+
+    // Hover effects for recommendations
+    const tierColors = {
+      'tier-immediate': '#dc2626',
+      'tier-short': '#92400e',
+      'tier-preventive': '#16a34a'
+    };
+
+    document.querySelectorAll('.recommendation').forEach(rec => {
+      rec.addEventListener('mouseenter', function() {
+        gsap.to(this, {
+          x: 10,
+          duration: 0.3
+        });
+        gsap.to(this.querySelector('.rec-tier'), {
+          scale: 1.1,
+          duration: 0.3
+        });
+        gsap.to(this.querySelector('.rec-text'), {
+          boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+          backgroundColor: '#fff',
+          duration: 0.3
+        });
+      });
+      rec.addEventListener('mouseleave', function() {
+        gsap.to(this, {
+          x: 0,
+          duration: 0.3
+        });
+        gsap.to(this.querySelector('.rec-tier'), {
+          scale: 1,
+          duration: 0.3
+        });
+        gsap.to(this.querySelector('.rec-text'), {
+          boxShadow: 'none',
+          backgroundColor: '#F8F9FA',
+          duration: 0.3
+        });
+      });
+    });
+
+    // Hover effect for outcome
+    document.querySelector('.outcome').addEventListener('mouseenter', function() {
+      gsap.to(this, {
+        scale: 1.03,
+        boxShadow: '0 10px 30px rgba(53,185,113,0.4)',
+        duration: 0.3
+      });
+    });
+    document.querySelector('.outcome').addEventListener('mouseleave', function() {
+      gsap.to(this, {
+        scale: 1,
+        boxShadow: 'none',
+        duration: 0.3
+      });
+    });
+  </script>
 </body>
 </html>

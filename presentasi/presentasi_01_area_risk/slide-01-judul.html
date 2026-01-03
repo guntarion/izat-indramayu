@@ -5,14 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Highlight Analisis: Risiko Area</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/slide-enhancements.css">
   <style>
     :root {
       --pln-dark-blue: #035B71;
       --pln-primary-blue: #00A2B9;
       --pln-green: #35B971;
-      --gradient-hero: linear-gradient(135deg, #035B71 0%, #00A2B9 50%, #35B971 100%);
+      --pln-light-blue: #00AFF0;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
@@ -20,121 +23,569 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: var(--gradient-hero);
+      background: linear-gradient(135deg, #035B71 0%, #00A2B9 50%, #35B971 100%);
       position: relative;
       overflow: hidden;
     }
+
+    /* Animated Background Mesh */
+    .bg-mesh-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 175, 240, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 60% at 80% 20%, rgba(53, 185, 113, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 80% at 60% 80%, rgba(0, 162, 185, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Floating Circles with enhanced effects */
     .bg-circle {
       position: absolute;
       border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-      animation: float 20s infinite ease-in-out;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255,255,255,0.1);
     }
-    .bg-circle:nth-child(1) { width: 400px; height: 400px; top: -100px; right: -100px; animation-delay: 0s; }
-    .bg-circle:nth-child(2) { width: 300px; height: 300px; bottom: -50px; left: -50px; animation-delay: -5s; }
-    .bg-circle:nth-child(3) { width: 200px; height: 200px; top: 50%; left: 20%; animation-delay: -10s; }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-30px) rotate(180deg); }
+
+    .bg-circle:nth-child(1) {
+      width: 500px;
+      height: 500px;
+      top: -150px;
+      right: -150px;
     }
+
+    .bg-circle:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .bg-circle:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      top: 40%;
+      left: 15%;
+    }
+
+    .bg-circle:nth-child(4) {
+      width: 180px;
+      height: 180px;
+      top: 20%;
+      right: 20%;
+    }
+
+    .bg-circle:nth-child(5) {
+      width: 120px;
+      height: 120px;
+      bottom: 25%;
+      right: 10%;
+    }
+
+    /* Particle Container */
+    .particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Main Content */
     .content {
       text-align: center;
       z-index: 10;
       padding: 2rem;
+      max-width: 1000px;
     }
+
+    /* Badge */
     .badge {
-      display: inline-block;
-      padding: 0.5rem 1.5rem;
-      background: rgba(255,255,255,0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.5rem;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.25);
       border-radius: 30px;
       color: #fff;
       font-size: 0.9rem;
       font-weight: 500;
       margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.1s forwards;
+      visibility: hidden;
     }
+
+    .badge-icon {
+      width: 8px;
+      height: 8px;
+      background: var(--pln-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--pln-green);
+    }
+
+    /* Title */
     h1 {
       font-family: 'Poppins', sans-serif;
-      font-size: 3.5rem;
+      font-size: 4rem;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.2s forwards;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      visibility: hidden;
     }
+
+    h1 .word {
+      display: inline-block;
+      margin-right: 0.2em;
+    }
+
+    h1 .char {
+      display: inline-block;
+    }
+
+    h1 .highlight {
+      position: relative;
+      display: inline-block;
+    }
+
+    h1 .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, var(--pln-light-blue), var(--pln-green));
+      border-radius: 4px;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    /* Subtitle */
     .subtitle {
-      font-size: 1.5rem;
-      color: rgba(255,255,255,0.9);
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.4s forwards;
+      font-size: 1.6rem;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      visibility: hidden;
     }
+
+    /* Organization */
     .org {
       font-size: 1.1rem;
       color: rgba(255,255,255,0.8);
       font-weight: 500;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.6s forwards;
+      margin-bottom: 3rem;
+      visibility: hidden;
     }
+
+    .org-divider {
+      display: inline-block;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      margin: 0 1rem;
+      vertical-align: middle;
+    }
+
+    /* Stats Row */
     .stats-row {
       display: flex;
-      gap: 3rem;
-      margin-top: 3rem;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.8s forwards;
+      justify-content: center;
+      gap: 4rem;
+      padding: 2rem 3rem;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 24px;
+      visibility: hidden;
     }
+
     .stat-item {
       text-align: center;
+      position: relative;
     }
+
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 60%;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3), transparent);
+    }
+
     .stat-number {
       font-family: 'Poppins', sans-serif;
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: 800;
       color: #fff;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 30px rgba(255,255,255,0.3);
     }
+
     .stat-label {
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.85);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+
+    /* Accent Bar */
     .accent-bar {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
       height: 6px;
-      background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green));
+      background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green), var(--pln-light-blue), var(--pln-primary-blue));
+      background-size: 300% 100%;
+    }
+
+    /* Decorative corner elements */
+    .corner-decoration {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border: 2px solid rgba(255,255,255,0.1);
+      pointer-events: none;
+    }
+
+    .corner-decoration.top-left {
+      top: 30px;
+      left: 30px;
+      border-right: none;
+      border-bottom: none;
+      border-radius: 20px 0 0 0;
+    }
+
+    .corner-decoration.bottom-right {
+      bottom: 30px;
+      right: 30px;
+      border-left: none;
+      border-top: none;
+      border-radius: 0 0 20px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .subtitle { font-size: 1.2rem; }
+      .stats-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem 2rem;
+      }
+      .stat-item::after { display: none; }
+      .stat-number { font-size: 2.5rem; }
     }
   </style>
 </head>
 <body>
+  <!-- Background Effects -->
+  <div class="bg-mesh-overlay"></div>
   <div class="bg-circle"></div>
   <div class="bg-circle"></div>
   <div class="bg-circle"></div>
+  <div class="bg-circle"></div>
+  <div class="bg-circle"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- Corner Decorations -->
+  <div class="corner-decoration top-left"></div>
+  <div class="corner-decoration bottom-right"></div>
+
+  <!-- Main Content -->
   <div class="content">
-    <span class="badge">Analisis Data IZAT</span>
-    <h1>Highlight Analisis:<br>Risiko Area</h1>
+    <span class="badge">
+      <span class="badge-icon"></span>
+      Analisis Data IZAT
+    </span>
+
+    <h1 id="mainTitle">
+      <span class="line-1">Highlight Analisis:</span><br>
+      <span class="line-2 highlight">Risiko Area</span>
+    </h1>
+
     <p class="subtitle">Presentasi Ringkasan Eksekutif UP Indramayu</p>
-    <p class="org">PT PLN Nusantara Power - Unit Pembangkit Indramayu</p>
+
+    <p class="org">
+      PT PLN Nusantara Power
+      <span class="org-divider"></span>
+      Unit Pembangkit Indramayu
+    </p>
+
     <div class="stats-row">
       <div class="stat-item">
-        <div class="stat-number">5.575</div>
+        <div class="stat-number" data-value="5575">0</div>
         <div class="stat-label">Total Temuan</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">5</div>
+        <div class="stat-number" data-value="5">0</div>
         <div class="stat-label">Zona Operasi</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">46</div>
+        <div class="stat-number" data-value="46">0</div>
         <div class="stat-label">Area Dianalisis</div>
       </div>
     </div>
   </div>
+
+  <!-- Accent Bar -->
   <div class="accent-bar"></div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="assets/js/slide-animations.js"></script>
+
+  <script>
+    // Wait for DOM and fonts to load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Create floating particles
+      createParticles();
+
+      // Master timeline for entrance animations
+      const masterTL = gsap.timeline({ delay: 0.2 });
+
+      // 1. Animate floating circles
+      masterTL.from('.bg-circle', {
+        scale: 0,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: 'back.out(1.2)'
+      }, 0);
+
+      // 2. Animate corner decorations
+      masterTL.from('.corner-decoration', {
+        opacity: 0,
+        scale: 0.5,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: 'power2.out'
+      }, 0.3);
+
+      // 3. Badge entrance
+      masterTL.to('.badge', {
+        visibility: 'visible',
+        duration: 0
+      }, 0.4)
+      .from('.badge', {
+        y: -30,
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.4)
+      .from('.badge-icon', {
+        scale: 0,
+        duration: 0.3,
+        ease: 'back.out(2)'
+      }, 0.8);
+
+      // 4. Title animation with split text effect
+      masterTL.to('h1', {
+        visibility: 'visible',
+        duration: 0
+      }, 0.6);
+
+      // Split and animate first line
+      const line1 = document.querySelector('.line-1');
+      splitText(line1);
+      masterTL.from('.line-1 .char', {
+        y: 60,
+        opacity: 0,
+        rotationX: -90,
+        duration: 0.5,
+        stagger: 0.02,
+        ease: 'back.out(1.5)'
+      }, 0.7);
+
+      // Split and animate second line (highlight)
+      const line2 = document.querySelector('.line-2');
+      splitText(line2);
+      masterTL.from('.line-2 .char', {
+        y: 80,
+        opacity: 0,
+        rotationX: -90,
+        duration: 0.6,
+        stagger: 0.03,
+        ease: 'back.out(1.7)'
+      }, 1.0);
+
+      // Animate highlight underline
+      masterTL.to('.highlight::after', {
+        scaleX: 1,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 1.5);
+
+      // 5. Subtitle entrance
+      masterTL.to('.subtitle', {
+        visibility: 'visible',
+        duration: 0
+      }, 1.3)
+      .from('.subtitle', {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 1.3);
+
+      // 6. Organization text
+      masterTL.to('.org', {
+        visibility: 'visible',
+        duration: 0
+      }, 1.5)
+      .from('.org', {
+        y: 20,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 1.5);
+
+      // Animate divider
+      masterTL.from('.org-divider', {
+        scaleX: 0,
+        duration: 0.4,
+        ease: 'power2.out'
+      }, 1.7);
+
+      // 7. Stats row entrance
+      masterTL.to('.stats-row', {
+        visibility: 'visible',
+        duration: 0
+      }, 1.8)
+      .from('.stats-row', {
+        y: 40,
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.7,
+        ease: 'back.out(1.3)'
+      }, 1.8);
+
+      // 8. Animate stat items with stagger
+      masterTL.from('.stat-item', {
+        y: 20,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.15,
+        ease: 'power2.out'
+      }, 2.0);
+
+      // 9. Count up numbers
+      const statNumbers = document.querySelectorAll('.stat-number');
+      statNumbers.forEach((el, index) => {
+        const target = parseInt(el.dataset.value);
+        const counter = { value: 0 };
+
+        gsap.to(counter, {
+          value: target,
+          duration: 1.8,
+          delay: 2.2 + (index * 0.15),
+          ease: 'power1.out',
+          onUpdate: function() {
+            el.textContent = Math.round(counter.value).toLocaleString('id-ID');
+          }
+        });
+      });
+
+      // 10. Accent bar animation
+      masterTL.to('.accent-bar', {
+        backgroundPosition: '-100% 0',
+        duration: 3,
+        ease: 'none',
+        repeat: -1
+      }, 2.5);
+
+      // Continuous floating animation for circles
+      gsap.to('.bg-circle', {
+        y: 'random(-30, 30)',
+        x: 'random(-20, 20)',
+        rotation: 'random(-10, 10)',
+        duration: 'random(4, 8)',
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+        stagger: {
+          each: 0.5,
+          from: 'random'
+        }
+      });
+    });
+
+    // Helper function to split text into characters
+    function splitText(element) {
+      const text = element.textContent;
+      element.innerHTML = '';
+
+      const words = text.split(' ');
+      words.forEach((word, wordIndex) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'word';
+
+        word.split('').forEach(char => {
+          const charSpan = document.createElement('span');
+          charSpan.className = 'char';
+          charSpan.textContent = char;
+          wordSpan.appendChild(charSpan);
+        });
+
+        element.appendChild(wordSpan);
+
+        // Add space between words
+        if (wordIndex < words.length - 1) {
+          const space = document.createElement('span');
+          space.className = 'char';
+          space.innerHTML = '&nbsp;';
+          element.appendChild(space);
+        }
+      });
+    }
+
+    // Create floating particles
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 30;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.width = (Math.random() * 4 + 2) + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.opacity = Math.random() * 0.5 + 0.3;
+        container.appendChild(particle);
+
+        // Animate particle
+        gsap.to(particle, {
+          x: 'random(-150, 150)',
+          y: 'random(-150, 150)',
+          opacity: 'random(0.2, 0.8)',
+          duration: 'random(5, 10)',
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+          delay: Math.random() * 3
+        });
+      }
+    }
+  </script>
 </body>
 </html>

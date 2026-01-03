@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Model Performance</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,15 +13,14 @@
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 2rem 3rem; }
-    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
-    .metric { background: var(--light-gray); border-radius: 16px; padding: 1.5rem; text-align: center; }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .metric { background: var(--light-gray); border-radius: 16px; padding: 1.5rem; text-align: center; cursor: pointer; }
     .metric-value { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--pln-primary-blue); margin-bottom: 0.5rem; }
     .metric-name { font-weight: 600; color: var(--pln-dark-blue); font-size: 1rem; margin-bottom: 0.5rem; }
     .metric-desc { font-size: 0.8rem; color: #666; }
-    .interpretation { margin-top: 2rem; background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--pln-green); opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
+    .interpretation { margin-top: 2rem; background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--pln-green); cursor: pointer; }
     .interpretation h3 { font-size: 1rem; color: var(--pln-dark-blue); margin-bottom: 0.75rem; }
     .interpretation p { font-size: 0.9rem; color: #555; line-height: 1.6; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -37,5 +37,61 @@
       <p><strong>3 dari 4 prediksi akurat.</strong> Model ini memberikan predictive power yang sufficient untuk operational decision-making. Precision 70-75% berarti ketika model memprediksi high-risk, kemungkinan besar memang benar-benar high-risk. Ini enable proactive resource allocation bukan reactive response.</p>
     </div>
   </div>
+
+  <script>
+    // GSAP Animations using set() + to() pattern
+    const header = document.querySelector('.header');
+    const headerTitle = document.querySelector('.header h1');
+    const metricsContainer = document.querySelector('.metrics');
+    const metrics = document.querySelectorAll('.metric');
+    const metricValues = document.querySelectorAll('.metric-value');
+    const interpretation = document.querySelector('.interpretation');
+    const interpretationTitle = document.querySelector('.interpretation h3');
+    const interpretationText = document.querySelector('.interpretation p');
+
+    // Set initial states
+    gsap.set(header, { y: -100, opacity: 0 });
+    gsap.set(headerTitle, { x: -50, opacity: 0 });
+    gsap.set(metricsContainer, { opacity: 0 });
+    gsap.set(metrics, { opacity: 0, y: 40, scale: 0.8 });
+    gsap.set(metricValues, { scale: 0.5, opacity: 0 });
+    gsap.set(interpretation, { opacity: 0, y: 30 });
+    gsap.set(interpretationTitle, { opacity: 0, x: -20 });
+    gsap.set(interpretationText, { opacity: 0 });
+
+    // Create timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.to(header, { y: 0, opacity: 1, duration: 0.6 }, 0)
+      .to(headerTitle, { x: 0, opacity: 1, duration: 0.6 }, 0.2)
+      .to(metricsContainer, { opacity: 1, duration: 0.3 }, 0.4)
+      .to(metrics, { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.12 }, 0.5)
+      .to(metricValues, { scale: 1, opacity: 1, duration: 0.5, stagger: 0.12, ease: 'back.out(1.7)' }, 0.7)
+      .to(interpretation, { opacity: 1, y: 0, duration: 0.6 }, 1)
+      .to(interpretationTitle, { opacity: 1, x: 0, duration: 0.4 }, 1.2)
+      .to(interpretationText, { opacity: 1, duration: 0.4 }, 1.4);
+
+    // Hover effects for metric cards
+    metrics.forEach((metric, index) => {
+      const value = metric.querySelector('.metric-value');
+
+      metric.addEventListener('mouseenter', () => {
+        gsap.to(metric, { scale: 1.08, y: -8, boxShadow: '0 15px 35px rgba(0,0,0,0.12)', duration: 0.3, ease: 'power2.out' });
+        gsap.to(value, { scale: 1.15, color: '#035B71', duration: 0.3, ease: 'power2.out' });
+      });
+      metric.addEventListener('mouseleave', () => {
+        gsap.to(metric, { scale: 1, y: 0, boxShadow: 'none', duration: 0.3, ease: 'power2.out' });
+        gsap.to(value, { scale: 1, color: '#00A2B9', duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    // Hover effect for interpretation box
+    interpretation.addEventListener('mouseenter', () => {
+      gsap.to(interpretation, { scale: 1.02, boxShadow: '0 10px 30px rgba(53,185,113,0.15)', duration: 0.3, ease: 'power2.out' });
+    });
+    interpretation.addEventListener('mouseleave', () => {
+      gsap.to(interpretation, { scale: 1, boxShadow: 'none', duration: 0.3, ease: 'power2.out' });
+    });
+  </script>
 </body>
 </html>

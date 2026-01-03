@@ -40,12 +40,7 @@
       align-items: start;
     }
     .image-container {
-      opacity: 0;
-      animation: fadeInLeft 0.6s ease-out 0.2s forwards;
-    }
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
+      /* GSAP will handle animations */
     }
     .image-container img {
       width: 100%;
@@ -61,12 +56,7 @@
       font-style: italic;
     }
     .text-content {
-      opacity: 0;
-      animation: fadeInRight 0.6s ease-out 0.3s forwards;
-    }
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(30px); }
-      to { opacity: 1; transform: translateX(0); }
+      /* GSAP will handle animations */
     }
     .text-content h2 {
       font-family: 'Poppins', sans-serif;
@@ -140,5 +130,98 @@
       </div>
     </div>
   </div>
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial states
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('.image-container', { x: -50, opacity: 0 });
+      gsap.set('.image-container img', { scale: 0.95 });
+      gsap.set('.image-caption', { y: 10, opacity: 0 });
+      gsap.set('.text-content h2', { x: 30, opacity: 0 });
+      gsap.set('.text-content li', { x: 30, opacity: 0 });
+      gsap.set('.warning-box', { y: 20, opacity: 0, scale: 0.95 });
+      gsap.set('.danger-badge', { scale: 0, opacity: 0 });
+
+      // Create master timeline
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // Header animation
+      masterTL.to('.header h1', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.2);
+
+      // Image container animation
+      masterTL.to('.image-container', {
+        x: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: 'power2.out'
+      }, 0.4);
+
+      // Image scale animation
+      masterTL.to('.image-container img', {
+        scale: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.6);
+
+      // Image caption animation
+      masterTL.to('.image-caption', {
+        y: 0,
+        opacity: 1,
+        duration: 0.4,
+        ease: 'power2.out'
+      }, 0.9);
+
+      // Text content heading animation
+      masterTL.to('.text-content h2', {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.5);
+
+      // List items staggered animation
+      masterTL.to('.text-content li', {
+        x: 0,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.12,
+        ease: 'power2.out'
+      }, 0.7);
+
+      // Warning box animation
+      masterTL.to('.warning-box', {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        ease: 'back.out(1.2)'
+      }, 1.1);
+
+      // Danger badge pop animation
+      masterTL.to('.danger-badge', {
+        scale: 1,
+        opacity: 1,
+        duration: 0.4,
+        ease: 'elastic.out(1, 0.5)'
+      }, 1.3);
+
+      // Add subtle pulse to danger badge after initial animation
+      masterTL.to('.danger-badge', {
+        scale: 1.05,
+        duration: 0.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      }, 1.7);
+    });
+  </script>
 </body>
 </html>

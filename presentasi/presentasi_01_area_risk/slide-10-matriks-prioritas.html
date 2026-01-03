@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Matriks Prioritas Area (Risk vs Volume)</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     :root {
       --pln-dark-blue: #035B71;
@@ -39,14 +40,6 @@
       gap: 2rem;
       align-items: start;
     }
-    .image-container {
-      opacity: 0;
-      animation: fadeInLeft 0.6s ease-out 0.2s forwards;
-    }
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
     .image-container img {
       width: 100%;
       height: auto;
@@ -59,14 +52,6 @@
       color: #666;
       text-align: center;
       font-style: italic;
-    }
-    .text-content {
-      opacity: 0;
-      animation: fadeInRight 0.6s ease-out 0.3s forwards;
-    }
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(30px); }
-      to { opacity: 1; transform: translateX(0); }
     }
     .text-content h2 {
       font-family: 'Poppins', sans-serif;
@@ -155,5 +140,69 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial states
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('.image-container', { x: -50, opacity: 0 });
+      gsap.set('.image-caption', { y: 20, opacity: 0 });
+      gsap.set('.text-content h2', { x: 30, opacity: 0 });
+      gsap.set('.quadrant', { scale: 0.8, opacity: 0 });
+      gsap.set('.highlight', { y: 30, opacity: 0 });
+
+      // Create master timeline
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // Header animation
+      masterTL.to('.header h1', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.2);
+
+      // Image container slides in from left
+      masterTL.to('.image-container', {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, 0.4);
+
+      // Image caption fades in
+      masterTL.to('.image-caption', {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.9);
+
+      // Text content title slides in from right
+      masterTL.to('.text-content h2', {
+        x: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 0.5);
+
+      // Quadrants animate in with stagger
+      masterTL.to('.quadrant', {
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'back.out(1.7)',
+        stagger: 0.15
+      }, 0.7);
+
+      // Highlight box slides up
+      masterTL.to('.highlight', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 1.4);
+    });
+  </script>
 </body>
 </html>

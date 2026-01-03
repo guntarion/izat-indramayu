@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Step 4: Standardisasi Tanggal & Waktu</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -14,21 +15,24 @@
     .step-badge { background: var(--pln-green); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
-    .section:nth-child(1) { animation-delay: 0.2s; }
-    .section:nth-child(2) { animation-delay: 0.3s; }
-    .section:nth-child(3) { animation-delay: 0.4s; grid-column: 1 / -1; }
+    .section { }
+    .section:nth-child(3) { grid-column: 1 / -1; }
     .section-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
     .section-title::before { content: ''; width: 4px; height: 20px; background: var(--pln-primary-blue); border-radius: 2px; }
-    .parsing-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; }
+    .parsing-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .parsing-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
     .input-formats { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
-    .format-tag { background: #fee2e2; color: #991b1b; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-family: monospace; }
+    .format-tag { background: #fee2e2; color: #991b1b; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-family: monospace; cursor: pointer; transition: transform 0.2s ease, background 0.2s ease; }
+    .format-tag:hover { transform: scale(1.1); background: #fecaca; }
     .output-cols { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .output-col { background: var(--pln-primary-blue); color: #fff; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; }
+    .output-col { background: var(--pln-primary-blue); color: #fff; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; cursor: pointer; transition: transform 0.2s ease, background 0.2s ease; }
+    .output-col:hover { transform: scale(1.1); background: var(--pln-dark-blue); }
     .derived-list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.3rem; margin-top: 0.75rem; }
-    .derived-list li { font-size: 0.75rem; color: #666; padding: 0.3rem 0.5rem; background: #fff; border-radius: 4px; }
+    .derived-list li { font-size: 0.75rem; color: #666; padding: 0.3rem 0.5rem; background: #fff; border-radius: 4px; cursor: pointer; transition: background 0.2s ease, transform 0.2s ease; }
+    .derived-list li:hover { background: var(--pln-primary-blue); color: #fff; transform: scale(1.05); }
     .shift-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
-    .shift-card { background: var(--light-gray); padding: 0.75rem; border-radius: 8px; text-align: center; }
+    .shift-card { background: var(--light-gray); padding: 0.75rem; border-radius: 8px; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .shift-card:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
     .shift-name { font-weight: 600; color: var(--pln-dark-blue); font-size: 0.9rem; }
     .shift-time { font-size: 0.7rem; color: #666; margin: 0.25rem 0; }
     .shift-count { font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--pln-primary-blue); }
@@ -36,11 +40,13 @@
     .resolution-table { width: 100%; border-collapse: collapse; }
     .resolution-table th { background: var(--pln-dark-blue); color: #fff; padding: 0.5rem; text-align: left; font-size: 0.8rem; }
     .resolution-table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid #e5e7eb; font-size: 0.8rem; }
+    .resolution-table tbody tr { cursor: pointer; transition: background 0.3s ease, transform 0.3s ease; }
+    .resolution-table tbody tr:hover { background: var(--light-gray); }
     .time-category { font-weight: 600; color: var(--pln-dark-blue); }
-    .pct-bar { height: 6px; border-radius: 3px; background: var(--pln-primary-blue); }
-    .alert-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-top: 1rem; }
+    .pct-bar { height: 6px; border-radius: 3px; background: var(--pln-primary-blue); transition: transform 0.3s ease; }
+    .alert-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-top: 1rem; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .alert-box:hover { transform: translateX(5px); box-shadow: 5px 5px 20px rgba(239, 68, 68, 0.2); }
     .alert-box p { font-size: 0.85rem; color: #991b1b; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -157,5 +163,65 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Initial states
+    gsap.set('.step-badge', { opacity: 0, scale: 0.5 });
+    gsap.set('.header h1', { opacity: 0, x: -30 });
+    gsap.set('.section', { opacity: 0, y: 30 });
+    gsap.set('.section-title', { opacity: 0, x: -20 });
+    gsap.set('.parsing-card', { opacity: 0, x: -30 });
+    gsap.set('.format-tag', { opacity: 0, scale: 0.5 });
+    gsap.set('.output-col', { opacity: 0, scale: 0.5 });
+    gsap.set('.derived-list li', { opacity: 0, y: 10 });
+    gsap.set('.shift-card', { opacity: 0, y: 30, scale: 0.9 });
+    gsap.set('.resolution-table', { opacity: 0, y: 20 });
+    gsap.set('.resolution-table tbody tr', { opacity: 0, x: 30 });
+    gsap.set('.pct-bar', { scaleX: 0, transformOrigin: 'left center' });
+    gsap.set('.alert-box', { opacity: 0, x: -30 });
+
+    // Animation timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.to('.step-badge', { opacity: 1, scale: 1, duration: 0.5 }, 0)
+      .to('.header h1', { opacity: 1, x: 0, duration: 0.6 }, 0.1)
+      .to('.section', { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, 0.2)
+      .to('.section-title', { opacity: 1, x: 0, duration: 0.4, stagger: 0.1 }, 0.3)
+      .to('.parsing-card', { opacity: 1, x: 0, duration: 0.5 }, 0.4)
+      .to('.format-tag', { opacity: 1, scale: 1, duration: 0.3, stagger: 0.05 }, 0.5)
+      .to('.output-col', { opacity: 1, scale: 1, duration: 0.3, stagger: 0.05 }, 0.6)
+      .to('.derived-list li', { opacity: 1, y: 0, duration: 0.2, stagger: 0.03 }, 0.7)
+      .to('.shift-card', { opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.1 }, 0.5)
+      .to('.resolution-table', { opacity: 1, y: 0, duration: 0.5 }, 0.6)
+      .to('.resolution-table tbody tr', { opacity: 1, x: 0, duration: 0.3, stagger: 0.08 }, 0.7)
+      .to('.pct-bar', { scaleX: 1, duration: 0.6, stagger: 0.1, ease: 'power2.out' }, 0.9)
+      .to('.alert-box', { opacity: 1, x: 0, duration: 0.5 }, 1.1);
+
+    // Hover effects for shift cards
+    document.querySelectorAll('.shift-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, { scale: 1.08, y: -8, duration: 0.3, ease: 'power2.out' });
+        gsap.to(card.querySelector('.shift-count'), { scale: 1.1, color: '#35B971', duration: 0.3 });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { scale: 1, y: 0, duration: 0.3, ease: 'power2.out' });
+        gsap.to(card.querySelector('.shift-count'), { scale: 1, color: '#00A2B9', duration: 0.3 });
+      });
+    });
+
+    // Hover effects for table rows
+    document.querySelectorAll('.resolution-table tbody tr').forEach(row => {
+      row.addEventListener('mouseenter', () => {
+        gsap.to(row, { scale: 1.02, x: 5, duration: 0.3, ease: 'power2.out' });
+        const bar = row.querySelector('.pct-bar');
+        if (bar) gsap.to(bar, { scaleY: 2, duration: 0.3 });
+      });
+      row.addEventListener('mouseleave', () => {
+        gsap.to(row, { scale: 1, x: 0, duration: 0.3, ease: 'power2.out' });
+        const bar = row.querySelector('.pct-bar');
+        if (bar) gsap.to(bar, { scaleY: 1, duration: 0.3 });
+      });
+    });
+  </script>
 </body>
 </html>

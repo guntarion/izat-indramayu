@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Key Takeaways</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,14 +13,13 @@
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 2rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
-    .takeaway { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out forwards; display: grid; grid-template-columns: 80px 1fr; gap: 1.5rem; align-items: center; }
-    .takeaway:nth-child(1) { animation-delay: 0.2s; border-left: 4px solid var(--pln-primary-blue); }
-    .takeaway:nth-child(2) { animation-delay: 0.3s; border-left: 4px solid var(--pln-green); }
-    .takeaway:nth-child(3) { animation-delay: 0.4s; border-left: 4px solid #f59e0b; }
+    .takeaway { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; display: grid; grid-template-columns: 80px 1fr; gap: 1.5rem; align-items: center; cursor: pointer; }
+    .takeaway:nth-child(1) { border-left: 4px solid var(--pln-primary-blue); }
+    .takeaway:nth-child(2) { border-left: 4px solid var(--pln-green); }
+    .takeaway:nth-child(3) { border-left: 4px solid #f59e0b; }
     .takeaway-num { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--pln-primary-blue); text-align: center; }
     .takeaway h3 { font-size: 1.1rem; color: var(--pln-dark-blue); margin-bottom: 0.5rem; }
     .takeaway p { font-size: 0.9rem; color: #555; line-height: 1.6; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -38,5 +38,84 @@
       <div><h3>Consistency & Quality</h3><p>Standardize response quality - APAR expired di Boiler akan dapat <strong>rekomendasi yang sama bagusnya</strong> dengan APAR expired di Turbine. Knowledge management at scale.</p></div>
     </div>
   </div>
+
+  <script>
+    // Set initial states
+    gsap.set('.header', { opacity: 0, y: -50 });
+    gsap.set('.header h1', { opacity: 0, x: -30 });
+    gsap.set('.takeaway', { opacity: 0, x: -50, scale: 0.95 });
+    gsap.set('.takeaway-num', { opacity: 0, scale: 0, rotation: -90 });
+    gsap.set('.takeaway h3', { opacity: 0, y: 20 });
+    gsap.set('.takeaway p', { opacity: 0, y: 20 });
+
+    // Main timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' }});
+
+    tl.to('.header', { opacity: 1, y: 0, duration: 0.6 }, 0)
+      .to('.header h1', { opacity: 1, x: 0, duration: 0.6 }, 0.2)
+      .to('.takeaway', { opacity: 1, x: 0, scale: 1, duration: 0.6, stagger: 0.15 }, 0.3)
+      .to('.takeaway-num', { opacity: 1, scale: 1, rotation: 0, duration: 0.5, stagger: 0.15, ease: 'back.out(1.7)' }, 0.5)
+      .to('.takeaway h3', { opacity: 1, y: 0, duration: 0.4, stagger: 0.15 }, 0.6)
+      .to('.takeaway p', { opacity: 1, y: 0, duration: 0.4, stagger: 0.15 }, 0.7);
+
+    // Hover effects for takeaways
+    const takeawayColors = ['#00A2B9', '#35B971', '#f59e0b'];
+
+    document.querySelectorAll('.takeaway').forEach((takeaway, index) => {
+      const color = takeawayColors[index];
+
+      takeaway.addEventListener('mouseenter', function() {
+        gsap.to(this, {
+          x: 15,
+          scale: 1.02,
+          boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+          borderLeftWidth: '6px',
+          duration: 0.3
+        });
+        gsap.to(this.querySelector('.takeaway-num'), {
+          scale: 1.15,
+          color: color,
+          duration: 0.3
+        });
+        gsap.to(this.querySelector('h3'), {
+          color: color,
+          x: 5,
+          duration: 0.3
+        });
+      });
+
+      takeaway.addEventListener('mouseleave', function() {
+        gsap.to(this, {
+          x: 0,
+          scale: 1,
+          boxShadow: 'none',
+          borderLeftWidth: '4px',
+          duration: 0.3
+        });
+        gsap.to(this.querySelector('.takeaway-num'), {
+          scale: 1,
+          color: '#00A2B9',
+          duration: 0.3
+        });
+        gsap.to(this.querySelector('h3'), {
+          color: '#035B71',
+          x: 0,
+          duration: 0.3
+        });
+      });
+    });
+
+    // Continuous subtle animation for numbers
+    document.querySelectorAll('.takeaway-num').forEach((num, index) => {
+      gsap.to(num, {
+        y: -3,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1.inOut',
+        delay: index * 0.3
+      });
+    });
+  </script>
 </body>
 </html>

@@ -10,18 +10,21 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
-    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #fff; margin-bottom: 0.3rem; }
+    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #fff; margin-bottom: 0.3rem; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; }
+    .header-badge:hover { transform: scale(1.05); background: rgba(255,255,255,0.3); }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 1.5rem 3rem; }
-    .actions { display: flex; flex-direction: column; gap: 1rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
-    .action-card { background: var(--light-gray); border-radius: 12px; padding: 1.25rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; }
-    .priority { padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; min-width: 70px; text-align: center; }
+    .actions { display: flex; flex-direction: column; gap: 1rem; }
+    .action-card { background: var(--light-gray); border-radius: 12px; padding: 1.25rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .action-card:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+    .priority { padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; min-width: 70px; text-align: center; cursor: pointer; transition: transform 0.3s ease; }
+    .priority:hover { transform: scale(1.1); }
     .priority-critical { background: #fee2e2; color: #dc2626; }
     .priority-high { background: #fef3c7; color: #92400e; }
     .action-content h3 { font-size: 0.95rem; color: var(--pln-dark-blue); margin-bottom: 0.3rem; }
     .action-content p { font-size: 0.8rem; color: #666; }
-    .expected-impact { background: rgba(53,185,113,0.1); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem; color: var(--pln-green); font-weight: 600; text-align: center; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .expected-impact { background: rgba(53,185,113,0.1); padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem; color: var(--pln-green); font-weight: 600; text-align: center; cursor: pointer; transition: transform 0.3s ease, background 0.3s ease; }
+    .expected-impact:hover { transform: scale(1.05); background: rgba(53,185,113,0.2); }
   </style>
 </head>
 <body>
@@ -37,7 +40,7 @@
           <h3>Training Awareness K3 untuk Shift B</h3>
           <p>Target: Shift B | Fokus pada identifikasi unsafe conditions dan penggunaan checklist yang benar</p>
         </div>
-        <div class="expected-impact">Detection rate: 17,1% → 22%</div>
+        <div class="expected-impact">Detection rate: 17,1% -> 22%</div>
       </div>
       <div class="action-card">
         <span class="priority priority-critical">CRITICAL</span>
@@ -57,5 +60,85 @@
       </div>
     </div>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    // Set initial states
+    gsap.set('.header-badge', { opacity: 0, y: -10 });
+    gsap.set('.header h1', { opacity: 0, y: -20 });
+    gsap.set('.action-card', { opacity: 0, y: 30, scale: 0.95 });
+    gsap.set('.priority', { scale: 0 });
+    gsap.set('.expected-impact', { opacity: 0, x: 30 });
+
+    // Animate header
+    gsap.to('.header-badge', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.1 });
+    gsap.to('.header h1', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.2 });
+
+    // Animate action cards
+    gsap.to('.action-card', {
+      opacity: 1, y: 0, scale: 1,
+      duration: 0.6,
+      ease: 'back.out(1.7)',
+      stagger: 0.15,
+      delay: 0.3
+    });
+
+    // Animate priority badges
+    gsap.to('.priority', {
+      scale: 1,
+      duration: 0.4,
+      ease: 'back.out(1.7)',
+      stagger: 0.1,
+      delay: 0.6
+    });
+
+    // Animate expected impact badges
+    gsap.to('.expected-impact', {
+      opacity: 1, x: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+      stagger: 0.1,
+      delay: 0.8
+    });
+
+    // Hover effects for action cards (lift + scale)
+    document.querySelectorAll('.action-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, { y: -8, scale: 1.02, duration: 0.3, ease: 'power2.out' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { y: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    // Hover effects for priority badges (pop)
+    document.querySelectorAll('.priority').forEach(badge => {
+      badge.addEventListener('mouseenter', () => {
+        gsap.to(badge, { scale: 1.15, duration: 0.3, ease: 'back.out(1.7)' });
+      });
+      badge.addEventListener('mouseleave', () => {
+        gsap.to(badge, { scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    // Hover effects for impact badges
+    document.querySelectorAll('.expected-impact').forEach(badge => {
+      badge.addEventListener('mouseenter', () => {
+        gsap.to(badge, { scale: 1.08, duration: 0.3, ease: 'back.out(1.7)' });
+      });
+      badge.addEventListener('mouseleave', () => {
+        gsap.to(badge, { scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    // Hover effect for header badge
+    const headerBadge = document.querySelector('.header-badge');
+    headerBadge.addEventListener('mouseenter', () => {
+      gsap.to(headerBadge, { scale: 1.1, duration: 0.3, ease: 'back.out(1.7)' });
+    });
+    headerBadge.addEventListener('mouseleave', () => {
+      gsap.to(headerBadge, { scale: 1, duration: 0.3, ease: 'power2.out' });
+    });
+  </script>
 </body>
 </html>

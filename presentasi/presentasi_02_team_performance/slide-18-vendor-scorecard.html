@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scorecard Vendor (Kualitas vs Detection Rate)</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root {
       --pln-dark-blue: #035B71;
@@ -38,24 +39,21 @@
       gap: 2rem;
       align-items: start;
     }
-    .image-container {
-      opacity: 0;
-      animation: fadeInLeft 0.6s ease-out 0.2s forwards;
-    }
     .image-container img {
       width: 100%;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .image-container img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
     }
     .image-caption {
       font-size: 0.85rem;
       color: #666;
       text-align: center;
       margin-top: 0.75rem;
-    }
-    .text-content {
-      opacity: 0;
-      animation: fadeInRight 0.6s ease-out 0.4s forwards;
     }
     .text-content h2 {
       font-size: 1.2rem;
@@ -73,6 +71,13 @@
       font-size: 0.95rem;
       color: #444;
       border-bottom: 1px solid #eee;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .text-content li:hover {
+      padding-left: 2rem;
+      background: var(--light-gray);
+      border-radius: 8px;
     }
     .text-content li::before {
       content: '';
@@ -84,25 +89,26 @@
       height: 8px;
       background: var(--pln-green);
       border-radius: 50%;
+      transition: transform 0.3s ease;
+    }
+    .text-content li:hover::before {
+      transform: translateY(-50%) scale(1.3);
     }
     .highlight {
       background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1));
       border-radius: 10px;
       padding: 1rem;
       border-left: 4px solid var(--pln-green);
+      transition: all 0.3s ease;
+    }
+    .highlight:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(53,185,113,0.2);
     }
     .highlight p {
       font-size: 0.9rem;
       color: #555;
       font-style: italic;
-    }
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(20px); }
-      to { opacity: 1; transform: translateX(0); }
     }
   </style>
 </head>
@@ -128,5 +134,71 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // GSAP Animations using gsap.set() + gsap.to() pattern
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initial states
+      gsap.set('.header h1', { opacity: 0, y: -30 });
+      gsap.set('.image-container', { opacity: 0, x: -50 });
+      gsap.set('.image-caption', { opacity: 0 });
+      gsap.set('.text-content h2', { opacity: 0, y: 20 });
+      gsap.set('.text-content li', { opacity: 0, x: 30 });
+      gsap.set('.highlight', { opacity: 0, y: 30 });
+
+      // Animation timeline
+      const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+      tl.to('.header h1', { opacity: 1, y: 0, duration: 0.6 })
+        .to('.image-container', { opacity: 1, x: 0, duration: 0.7 }, '-=0.3')
+        .to('.image-caption', { opacity: 1, duration: 0.4 }, '-=0.2')
+        .to('.text-content h2', { opacity: 1, y: 0, duration: 0.5 }, '-=0.4')
+        .to('.text-content li', {
+          opacity: 1,
+          x: 0,
+          duration: 0.4,
+          stagger: 0.1
+        }, '-=0.3')
+        .to('.highlight', { opacity: 1, y: 0, duration: 0.5 }, '-=0.2');
+
+      // Hover effects for list items
+      const listItems = document.querySelectorAll('.text-content li');
+      listItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          gsap.to(this, {
+            scale: 1.02,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+        item.addEventListener('mouseleave', function() {
+          gsap.to(this, {
+            scale: 1,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // Hover effect for image
+      const img = document.querySelector('.image-container img');
+      img.addEventListener('mouseenter', function() {
+        gsap.to(this, {
+          scale: 1.03,
+          rotation: 1,
+          duration: 0.4,
+          ease: 'power2.out'
+        });
+      });
+      img.addEventListener('mouseleave', function() {
+        gsap.to(this, {
+          scale: 1,
+          rotation: 0,
+          duration: 0.4,
+          ease: 'power2.out'
+        });
+      });
+    });
+  </script>
 </body>
 </html>

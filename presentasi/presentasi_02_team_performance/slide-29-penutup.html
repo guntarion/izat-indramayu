@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Terima Kasih</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root {
       --pln-dark-blue: #035B71;
@@ -28,13 +29,9 @@
       border-radius: 50%;
       background: rgba(255,255,255,0.05);
     }
-    .circle:nth-child(1) { width: 500px; height: 500px; top: -150px; right: -150px; animation: pulse 4s ease-in-out infinite; }
-    .circle:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: -100px; animation: pulse 4s ease-in-out infinite 1s; }
-    .circle:nth-child(3) { width: 200px; height: 200px; top: 30%; right: 10%; animation: pulse 4s ease-in-out infinite 2s; }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.05; }
-      50% { transform: scale(1.1); opacity: 0.1; }
-    }
+    .circle:nth-child(1) { width: 500px; height: 500px; top: -150px; right: -150px; }
+    .circle:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: -100px; }
+    .circle:nth-child(3) { width: 200px; height: 200px; top: 30%; right: 10%; }
     .content {
       text-align: center;
       z-index: 10;
@@ -44,8 +41,6 @@
       font-size: 1rem;
       color: rgba(255,255,255,0.8);
       margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.1s forwards;
       text-transform: uppercase;
       letter-spacing: 2px;
     }
@@ -55,15 +50,11 @@
       font-weight: 800;
       color: #fff;
       margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.2s forwards;
     }
     .subtitle {
       font-size: 1.3rem;
       color: rgba(255,255,255,0.9);
       margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.4s forwards;
     }
     .message-box {
       background: rgba(255,255,255,0.1);
@@ -72,8 +63,8 @@
       border-radius: 12px;
       margin-bottom: 2rem;
       border: 1px solid rgba(255,255,255,0.2);
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.5s forwards;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
     .message-box p {
       color: #fff;
@@ -84,8 +75,6 @@
       display: flex;
       gap: 1.5rem;
       margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.55s forwards;
     }
     .key-point {
       background: rgba(255,255,255,0.1);
@@ -93,24 +82,18 @@
       border-radius: 8px;
       color: #fff;
       font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
     }
     .org {
       font-size: 1.1rem;
       color: rgba(255,255,255,0.8);
       font-weight: 500;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.6s forwards;
       margin-bottom: 0.5rem;
     }
     .author {
       font-size: 0.9rem;
       color: rgba(255,255,255,0.6);
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out 0.7s forwards;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
     }
     .accent-bar {
       position: absolute;
@@ -141,5 +124,124 @@
     <p class="org">PT PLN Nusantara Power - Unit Pembangkit Indramayu</p>
   </div>
   <div class="accent-bar"></div>
+
+  <script>
+    // GSAP Animations using gsap.set() + gsap.to() pattern
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set initial states
+      gsap.set('.circle', { opacity: 0, scale: 0.5 });
+      gsap.set('.tagline', { opacity: 0, y: 30 });
+      gsap.set('h1', { opacity: 0, y: 30, scale: 0.9 });
+      gsap.set('.subtitle', { opacity: 0, y: 30 });
+      gsap.set('.key-point', { opacity: 0, y: 40, scale: 0.8 });
+      gsap.set('.message-box', { opacity: 0, y: 30 });
+      gsap.set('.org', { opacity: 0, y: 20 });
+      gsap.set('.accent-bar', { scaleX: 0, transformOrigin: 'left center' });
+
+      // Create timeline
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      // Animate circles with pulsing effect
+      tl.to('.circle', {
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: 'elastic.out(1, 0.5)'
+      });
+
+      // Animate content
+      tl.to('.tagline', { opacity: 1, y: 0, duration: 0.6 }, '-=0.8')
+        .to('h1', { opacity: 1, y: 0, scale: 1, duration: 0.8 }, '-=0.4')
+        .to('.subtitle', { opacity: 1, y: 0, duration: 0.6 }, '-=0.5')
+        .to('.key-point', {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'back.out(1.7)'
+        }, '-=0.3')
+        .to('.message-box', { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
+        .to('.org', { opacity: 1, y: 0, duration: 0.5 }, '-=0.3')
+        .to('.accent-bar', { scaleX: 1, duration: 0.8, ease: 'power2.inOut' }, '-=0.3');
+
+      // Continuous pulsing animation for circles
+      gsap.to('.circle:nth-child(1)', {
+        scale: 1.1,
+        opacity: 0.1,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+      gsap.to('.circle:nth-child(2)', {
+        scale: 1.1,
+        opacity: 0.1,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: 1
+      });
+      gsap.to('.circle:nth-child(3)', {
+        scale: 1.1,
+        opacity: 0.1,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: 2
+      });
+
+      // Hover effects for key points
+      const keyPoints = document.querySelectorAll('.key-point');
+      keyPoints.forEach(point => {
+        point.addEventListener('mouseenter', () => {
+          gsap.to(point, {
+            scale: 1.1,
+            background: 'rgba(255,255,255,0.2)',
+            duration: 0.3
+          });
+        });
+
+        point.addEventListener('mouseleave', () => {
+          gsap.to(point, {
+            scale: 1,
+            background: 'rgba(255,255,255,0.1)',
+            duration: 0.3
+          });
+        });
+      });
+
+      // Hover effect for message box
+      const messageBox = document.querySelector('.message-box');
+      messageBox.addEventListener('mouseenter', () => {
+        gsap.to(messageBox, {
+          scale: 1.02,
+          background: 'rgba(255,255,255,0.15)',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
+          duration: 0.3
+        });
+      });
+      messageBox.addEventListener('mouseleave', () => {
+        gsap.to(messageBox, {
+          scale: 1,
+          background: 'rgba(255,255,255,0.1)',
+          boxShadow: '0 0 0 rgba(0,0,0,0)',
+          duration: 0.3
+        });
+      });
+
+      // Hover effect for main title
+      const title = document.querySelector('h1');
+      title.addEventListener('mouseenter', () => {
+        gsap.to(title, { scale: 1.05, duration: 0.3 });
+      });
+      title.addEventListener('mouseleave', () => {
+        gsap.to(title, { scale: 1, duration: 0.3 });
+      });
+    });
+  </script>
 </body>
 </html>

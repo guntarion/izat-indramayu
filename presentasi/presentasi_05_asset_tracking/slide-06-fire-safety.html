@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fire Safety Analysis - APAR Crisis</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,19 +14,20 @@
     .header-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #fff; margin-bottom: 0.3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
-    .image-container { opacity: 0; animation: fadeInLeft 0.6s ease-out 0.2s forwards; }
-    .image-container img { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-    .text-content { opacity: 0; animation: fadeInRight 0.6s ease-out 0.4s forwards; }
+    .image-container { cursor: pointer; }
+    .image-container img { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); transition: box-shadow 0.3s ease; }
+    .image-container:hover img { box-shadow: 0 8px 40px rgba(220,38,38,0.3); }
     .text-content h2 { font-size: 1.1rem; color: #dc2626; margin-bottom: 1rem; }
-    .crisis-stat { background: #fee2e2; border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; border-left: 4px solid #dc2626; }
+    .crisis-stat { background: #fee2e2; border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; border-left: 4px solid #dc2626; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .crisis-stat:hover { transform: translateX(8px); box-shadow: 0 4px 15px rgba(220,38,38,0.2); }
     .crisis-stat .value { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #dc2626; }
     .crisis-stat .label { font-size: 0.85rem; color: #7f1d1d; }
     .issues { margin-top: 1rem; }
-    .issue-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #fee2e2; }
-    .issue-icon { width: 24px; height: 24px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+    .issue-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; border-bottom: 1px solid #fee2e2; cursor: pointer; transition: background 0.3s ease, padding-left 0.3s ease; }
+    .issue-item:hover { background: rgba(254,226,226,0.5); padding-left: 0.5rem; }
+    .issue-icon { width: 24px; height: 24px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: transform 0.3s ease; }
+    .issue-item:hover .issue-icon { transform: scale(1.2); }
     .issue-text { font-size: 0.85rem; color: #444; }
-    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes fadeInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
   </style>
 </head>
 <body>
@@ -44,12 +46,72 @@
         <div class="label">Total APAR Findings - Compliance Risk Serius</div>
       </div>
       <div class="issues">
-        <div class="issue-item"><span class="issue-icon">⚠️</span><span class="issue-text"><strong>Expired:</strong> Mayoritas APAR melewati tanggal kadaluarsa</span></div>
-        <div class="issue-item"><span class="issue-icon">🔧</span><span class="issue-text"><strong>Rusak:</strong> Nozzle, hose, pressure gauge tidak berfungsi</span></div>
-        <div class="issue-item"><span class="issue-icon">❌</span><span class="issue-text"><strong>Missing:</strong> APAR hilang atau tidak di lokasi</span></div>
-        <div class="issue-item"><span class="issue-icon">📋</span><span class="issue-text"><strong>Label:</strong> Instruksi & inspeksi tag tidak lengkap</span></div>
+        <div class="issue-item"><span class="issue-icon">!</span><span class="issue-text"><strong>Expired:</strong> Mayoritas APAR melewati tanggal kadaluarsa</span></div>
+        <div class="issue-item"><span class="issue-icon">*</span><span class="issue-text"><strong>Rusak:</strong> Nozzle, hose, pressure gauge tidak berfungsi</span></div>
+        <div class="issue-item"><span class="issue-icon">X</span><span class="issue-text"><strong>Missing:</strong> APAR hilang atau tidak di lokasi</span></div>
+        <div class="issue-item"><span class="issue-icon">#</span><span class="issue-text"><strong>Label:</strong> Instruksi & inspeksi tag tidak lengkap</span></div>
       </div>
     </div>
   </div>
+
+  <script>
+    // Initial states using gsap.set()
+    gsap.set('.header', { opacity: 0, y: -50 });
+    gsap.set('.header-badge', { opacity: 0, scale: 0 });
+    gsap.set('.header h1', { opacity: 0, x: -30 });
+    gsap.set('.image-container', { opacity: 0, x: -50 });
+    gsap.set('.image-container img', { scale: 0.9 });
+    gsap.set('.text-content', { opacity: 0, x: 50 });
+    gsap.set('.text-content h2', { opacity: 0, y: 20 });
+    gsap.set('.crisis-stat', { opacity: 0, x: 40, scale: 0.9 });
+    gsap.set('.crisis-stat .value', { opacity: 0, scale: 0.5 });
+    gsap.set('.issue-item', { opacity: 0, x: 30 });
+    gsap.set('.issue-icon', { opacity: 0, scale: 0, rotation: -180 });
+
+    // Main timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.to('.header', { opacity: 1, y: 0, duration: 0.6 })
+      .to('.header-badge', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 0.2)
+      .to('.header h1', { opacity: 1, x: 0, duration: 0.5 }, 0.3)
+      .to('.image-container', { opacity: 1, x: 0, duration: 0.7 }, 0.4)
+      .to('.image-container img', { scale: 1, duration: 0.6 }, 0.5)
+      .to('.text-content', { opacity: 1, x: 0, duration: 0.7 }, 0.4)
+      .to('.text-content h2', { opacity: 1, y: 0, duration: 0.5 }, 0.5)
+      .to('.crisis-stat', { opacity: 1, x: 0, scale: 1, duration: 0.6 }, 0.6)
+      .to('.crisis-stat .value', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 0.8)
+      .to('.issue-item', { opacity: 1, x: 0, duration: 0.5, stagger: 0.1 }, 0.9)
+      .to('.issue-icon', { opacity: 1, scale: 1, rotation: 0, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' }, 1);
+
+    // Hover effects for image
+    const imageContainer = document.querySelector('.image-container');
+    imageContainer.addEventListener('mouseenter', () => {
+      gsap.to('.image-container img', { scale: 1.03, duration: 0.4, ease: 'power2.out' });
+    });
+    imageContainer.addEventListener('mouseleave', () => {
+      gsap.to('.image-container img', { scale: 1, duration: 0.4, ease: 'power2.out' });
+    });
+
+    // Hover effects for crisis stat
+    const crisisStat = document.querySelector('.crisis-stat');
+    crisisStat.addEventListener('mouseenter', () => {
+      gsap.to('.crisis-stat .value', { scale: 1.1, duration: 0.3 });
+    });
+    crisisStat.addEventListener('mouseleave', () => {
+      gsap.to('.crisis-stat .value', { scale: 1, duration: 0.3 });
+    });
+
+    // Hover effects for issue items
+    document.querySelectorAll('.issue-item').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        gsap.to(item.querySelector('.issue-text'), { color: '#dc2626', duration: 0.3 });
+      });
+      item.addEventListener('mouseleave', () => {
+        gsap.to(item.querySelector('.issue-text'), { color: '#444', duration: 0.3 });
+      });
+    });
+
+    // Pulse animation for badge
+    gsap.to('.header-badge', { scale: 1.05, duration: 0.5, repeat: -1, yoyo: true, ease: 'power1.inOut', delay: 1.5 });
+  </script>
 </body>
 </html>

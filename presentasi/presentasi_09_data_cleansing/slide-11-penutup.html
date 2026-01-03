@@ -5,25 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Penutup - Pipeline Data Cleansing</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); position: relative; overflow: hidden; }
     .circle { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.05); }
-    .circle:nth-child(1) { width: 500px; height: 500px; top: -150px; left: -150px; animation: pulse 4s ease-in-out infinite; }
-    .circle:nth-child(2) { width: 400px; height: 400px; bottom: -100px; right: -100px; animation: pulse 4s ease-in-out infinite 1s; }
-    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.05; } 50% { transform: scale(1.1); opacity: 0.1; } }
+    .circle:nth-child(1) { width: 500px; height: 500px; top: -150px; left: -150px; }
+    .circle:nth-child(2) { width: 400px; height: 400px; bottom: -100px; right: -100px; }
     .content { text-align: center; z-index: 10; padding: 2rem; }
-    h1 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem; opacity: 0; animation: fadeInUp 0.8s ease-out 0.2s forwards; }
-    .completion-stats { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; opacity: 0; animation: fadeInUp 0.8s ease-out 0.4s forwards; }
-    .stat-item { text-align: center; background: rgba(255,255,255,0.1); padding: 1rem 1.5rem; border-radius: 12px; }
+    h1 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem; }
+    .completion-stats { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; }
+    .stat-item { text-align: center; background: rgba(255,255,255,0.1); padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .stat-item:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
     .stat-value { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--pln-green); }
     .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.8); }
-    .meta-info { opacity: 0; animation: fadeInUp 0.8s ease-out 0.5s forwards; margin-bottom: 2rem; }
+    .meta-info { margin-bottom: 2rem; }
     .meta-info p { color: rgba(255,255,255,0.7); font-size: 0.85rem; margin: 0.25rem 0; }
-    .org { font-size: 1.2rem; color: #fff; font-weight: 600; opacity: 0; animation: fadeInUp 0.8s ease-out 0.6s forwards; margin-bottom: 0.5rem; }
-    .author { font-size: 0.9rem; color: rgba(255,255,255,0.7); opacity: 0; animation: fadeInUp 0.8s ease-out 0.7s forwards; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .org { font-size: 1.2rem; color: #fff; font-weight: 600; margin-bottom: 0.5rem; }
+    .author { font-size: 0.9rem; color: rgba(255,255,255,0.7); }
     .accent-bar { position: absolute; bottom: 0; left: 0; width: 100%; height: 8px; background: linear-gradient(90deg, var(--pln-primary-blue) 0%, var(--pln-green) 50%, var(--pln-primary-blue) 100%); }
   </style>
 </head>
@@ -54,5 +54,161 @@
     <p class="author">Prepared by: PT JAPO TITIAN BAKAT - Akhmad Guntar | Desember 2025</p>
   </div>
   <div class="accent-bar"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. SET INITIAL STATES (hidden)
+      gsap.set('.circle:nth-child(1)', { scale: 0.8, opacity: 0 });
+      gsap.set('.circle:nth-child(2)', { scale: 0.8, opacity: 0 });
+      gsap.set('h1', { opacity: 0, y: -40, scale: 0.9 });
+      gsap.set('.completion-stats', { opacity: 0, y: 30 });
+      gsap.set('.stat-item', { opacity: 0, scale: 0.8, y: 20 });
+      gsap.set('.meta-info', { opacity: 0, y: 20 });
+      gsap.set('.meta-info p', { opacity: 0, x: -30 });
+      gsap.set('.org', { opacity: 0, y: 20 });
+      gsap.set('.author', { opacity: 0, y: 20 });
+      gsap.set('.accent-bar', { scaleX: 0, transformOrigin: 'left center' });
+
+      // 2. CREATE MASTER TIMELINE
+      const masterTL = gsap.timeline({
+        delay: 0.1,
+        defaults: { ease: 'power3.out' }
+      });
+
+      // 3. ANIMATE TO VISIBLE STATES
+      // Background circles fade in
+      masterTL.to('.circle:nth-child(1)', { scale: 1, opacity: 0.05, duration: 1.2 }, 0);
+      masterTL.to('.circle:nth-child(2)', { scale: 1, opacity: 0.05, duration: 1.2 }, 0.2);
+
+      // Title drops in with scale effect
+      masterTL.to('h1', {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: 'back.out(1.4)'
+      }, 0.3);
+
+      // Stats container fades in
+      masterTL.to('.completion-stats', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6
+      }, 0.5);
+
+      // Stat items animate with stagger and bounce
+      masterTL.to('.stat-item', {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.12,
+        ease: 'back.out(1.3)'
+      }, 0.6);
+
+      // Meta info section
+      masterTL.to('.meta-info', {
+        opacity: 1,
+        y: 0,
+        duration: 0.5
+      }, 0.9);
+
+      // Meta info paragraphs slide in from left
+      masterTL.to('.meta-info p', {
+        opacity: 1,
+        x: 0,
+        duration: 0.4,
+        stagger: 0.1,
+        ease: 'power2.out'
+      }, 1.0);
+
+      // Organization name
+      masterTL.to('.org', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 1.1);
+
+      // Author credit
+      masterTL.to('.author', {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 1.2);
+
+      // Accent bar sweeps across
+      masterTL.to('.accent-bar', {
+        scaleX: 1,
+        duration: 1.2,
+        ease: 'power2.inOut'
+      }, 1.0);
+
+      // 4. CONTINUOUS ANIMATIONS (start after initial animations)
+      masterTL.add(() => {
+        // Floating circle animations
+        gsap.to('.circle:nth-child(1)', {
+          scale: 1.1,
+          opacity: 0.08,
+          duration: 4,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+
+        gsap.to('.circle:nth-child(2)', {
+          scale: 1.1,
+          opacity: 0.08,
+          duration: 4,
+          delay: 1,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+
+        // Pulsing glow effect for title
+        gsap.to('h1', {
+          textShadow: '0 0 40px rgba(53, 185, 113, 0.6)',
+          duration: 2.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }, '+=0.2');
+
+      // 5. HOVER EFFECTS for stat items
+      document.querySelectorAll('.stat-item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          gsap.to(item, {
+            scale: 1.1,
+            y: -5,
+            boxShadow: '0 15px 40px rgba(0,0,0,0.35)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(item.querySelector('.stat-value'), {
+            color: '#fff',
+            scale: 1.05,
+            duration: 0.3
+          });
+        });
+        item.addEventListener('mouseleave', () => {
+          gsap.to(item, {
+            scale: 1,
+            y: 0,
+            boxShadow: 'none',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(item.querySelector('.stat-value'), {
+            color: '#35B971',
+            scale: 1,
+            duration: 0.3
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>

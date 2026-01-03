@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Top 3 High-Risk Scenarios</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,10 +14,7 @@
     .header-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #fff; margin-bottom: 0.3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 2rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
-    .scenario { display: grid; grid-template-columns: 80px 1fr auto; gap: 1.5rem; align-items: center; background: var(--light-gray); border-radius: 16px; padding: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
-    .scenario:nth-child(1) { animation-delay: 0.2s; }
-    .scenario:nth-child(2) { animation-delay: 0.3s; }
-    .scenario:nth-child(3) { animation-delay: 0.4s; }
+    .scenario { display: grid; grid-template-columns: 80px 1fr auto; gap: 1.5rem; align-items: center; background: var(--light-gray); border-radius: 16px; padding: 1.5rem; cursor: pointer; }
     .scenario-rank { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 800; color: #dc2626; text-align: center; }
     .scenario-details h3 { font-size: 1.1rem; color: var(--pln-dark-blue); margin-bottom: 0.5rem; }
     .scenario-factors { display: flex; gap: 0.5rem; flex-wrap: wrap; }
@@ -27,7 +25,6 @@
     .probability { text-align: center; }
     .prob-value { font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #dc2626; }
     .prob-label { font-size: 0.75rem; color: #666; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
   </style>
 </head>
 <body>
@@ -73,5 +70,77 @@
       <div class="probability"><div class="prob-value">68%</div><div class="prob-label">High-risk probability</div></div>
     </div>
   </div>
+
+  <script>
+    // GSAP Animations using set() + to() pattern
+    const header = document.querySelector('.header');
+    const headerBadge = document.querySelector('.header-badge');
+    const headerTitle = document.querySelector('.header h1');
+    const scenarios = document.querySelectorAll('.scenario');
+    const ranks = document.querySelectorAll('.scenario-rank');
+    const probValues = document.querySelectorAll('.prob-value');
+    const factors = document.querySelectorAll('.factor');
+
+    // Set initial states
+    gsap.set(header, { y: -100, opacity: 0 });
+    gsap.set(headerBadge, { opacity: 0, scale: 0.8 });
+    gsap.set(headerTitle, { x: -50, opacity: 0 });
+    gsap.set(scenarios, { opacity: 0, x: -40 });
+    gsap.set(ranks, { scale: 0, rotation: -180 });
+    gsap.set(probValues, { opacity: 0, scale: 0.5 });
+    gsap.set(factors, { opacity: 0, y: 10 });
+
+    // Create timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.to(header, { y: 0, opacity: 1, duration: 0.6 }, 0)
+      .to(headerBadge, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, 0.2)
+      .to(headerTitle, { x: 0, opacity: 1, duration: 0.6 }, 0.3);
+
+    // Animate scenarios with stagger
+    scenarios.forEach((scenario, index) => {
+      const delay = 0.5 + (index * 0.2);
+      const rank = scenario.querySelector('.scenario-rank');
+      const probValue = scenario.querySelector('.prob-value');
+      const scenarioFactors = scenario.querySelectorAll('.factor');
+
+      tl.to(scenario, { opacity: 1, x: 0, duration: 0.5 }, delay)
+        .to(rank, { scale: 1, rotation: 0, duration: 0.6, ease: 'back.out(2)' }, delay + 0.1)
+        .to(probValue, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' }, delay + 0.2)
+        .to(scenarioFactors, { opacity: 1, y: 0, duration: 0.3, stagger: 0.05 }, delay + 0.3);
+    });
+
+    // Hover effects for scenarios
+    scenarios.forEach(scenario => {
+      const rank = scenario.querySelector('.scenario-rank');
+      const probValue = scenario.querySelector('.prob-value');
+      const scenarioFactors = scenario.querySelectorAll('.factor');
+
+      scenario.addEventListener('mouseenter', () => {
+        gsap.to(scenario, { scale: 1.02, x: 10, boxShadow: '0 15px 40px rgba(220,38,38,0.15)', duration: 0.3, ease: 'power2.out' });
+        gsap.to(rank, { scale: 1.2, color: '#b91c1c', duration: 0.3, ease: 'back.out(1.7)' });
+        gsap.to(probValue, { scale: 1.15, duration: 0.3, ease: 'power2.out' });
+        gsap.to(scenarioFactors, { y: -3, scale: 1.05, duration: 0.2, stagger: 0.03 });
+      });
+      scenario.addEventListener('mouseleave', () => {
+        gsap.to(scenario, { scale: 1, x: 0, boxShadow: 'none', duration: 0.3, ease: 'power2.out' });
+        gsap.to(rank, { scale: 1, color: '#dc2626', duration: 0.3 });
+        gsap.to(probValue, { scale: 1, duration: 0.3 });
+        gsap.to(scenarioFactors, { y: 0, scale: 1, duration: 0.2, stagger: 0.03 });
+      });
+    });
+
+    // Pulse animation for probability values
+    probValues.forEach((value, index) => {
+      gsap.to(value, {
+        scale: 1.05,
+        duration: 1,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: index * 0.3
+      });
+    });
+  </script>
 </body>
 </html>

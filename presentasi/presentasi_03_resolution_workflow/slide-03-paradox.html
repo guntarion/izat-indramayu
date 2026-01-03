@@ -12,18 +12,22 @@
     .header { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); padding: 2rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: #78350f; }
     .content { flex: 1; padding: 2rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .side-box { border-radius: 12px; padding: 1.5rem; opacity: 0; animation: fadeInUp 0.5s ease-out forwards; }
-    .positive { background: #dcfce7; border-left: 5px solid var(--pln-green); animation-delay: 0.1s; }
-    .negative { background: #fee2e2; border-left: 5px solid #dc2626; animation-delay: 0.2s; }
+    .side-box { border-radius: 12px; padding: 1.5rem; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .side-box:hover { transform: translateY(-8px) scale(1.02); }
+    .positive { background: #dcfce7; border-left: 5px solid var(--pln-green); }
+    .positive:hover { box-shadow: 0 15px 40px rgba(53,185,113,0.3); }
+    .negative { background: #fee2e2; border-left: 5px solid #dc2626; }
+    .negative:hover { box-shadow: 0 15px 40px rgba(220,38,38,0.3); }
     .side-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
     .positive .side-title { color: #16a34a; }
     .negative .side-title { color: #dc2626; }
     .side-box ul { list-style: none; }
-    .side-box li { padding: 0.5rem 0; font-size: 0.95rem; color: #333; border-bottom: 1px solid rgba(0,0,0,0.1); }
-    .conclusion { grid-column: span 2; background: linear-gradient(135deg, var(--pln-dark-blue), var(--pln-primary-blue)); border-radius: 12px; padding: 2rem; text-align: center; opacity: 0; animation: fadeInUp 0.5s ease-out 0.3s forwards; }
+    .side-box li { padding: 0.5rem 0; font-size: 0.95rem; color: #333; border-bottom: 1px solid rgba(0,0,0,0.1); transition: transform 0.3s ease, padding-left 0.3s ease; }
+    .side-box li:hover { transform: translateX(5px); padding-left: 10px; }
+    .conclusion { grid-column: span 2; background: linear-gradient(135deg, var(--pln-dark-blue), var(--pln-primary-blue)); border-radius: 12px; padding: 2rem; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .conclusion:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 50px rgba(3,91,113,0.4); }
     .conclusion h3 { color: #fff; font-size: 1.5rem; margin-bottom: 1rem; font-family: 'Poppins', sans-serif; }
     .conclusion p { color: rgba(255,255,255,0.9); font-size: 1rem; font-style: italic; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -50,5 +54,23 @@
       <p>Seperti restaurant yang 99% order completed tapi 90% datang 2 jam terlambat.</p>
     </div>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    // Initial states
+    gsap.set('.header', { opacity: 0, y: -30 });
+    gsap.set('.positive', { opacity: 0, x: -50 });
+    gsap.set('.negative', { opacity: 0, x: 50 });
+    gsap.set('.conclusion', { opacity: 0, y: 40, scale: 0.95 });
+    gsap.set('.side-box li', { opacity: 0, x: -20 });
+
+    // Animations
+    gsap.to('.header', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+    gsap.to('.positive', { opacity: 1, x: 0, duration: 0.6, delay: 0.2, ease: 'power2.out' });
+    gsap.to('.negative', { opacity: 1, x: 0, duration: 0.6, delay: 0.3, ease: 'power2.out' });
+    gsap.to('.positive li', { opacity: 1, x: 0, duration: 0.4, stagger: 0.1, delay: 0.4, ease: 'power2.out' });
+    gsap.to('.negative li', { opacity: 1, x: 0, duration: 0.4, stagger: 0.1, delay: 0.5, ease: 'power2.out' });
+    gsap.to('.conclusion', { opacity: 1, y: 0, scale: 1, duration: 0.8, delay: 0.7, ease: 'back.out(1.7)' });
+  </script>
 </body>
 </html>

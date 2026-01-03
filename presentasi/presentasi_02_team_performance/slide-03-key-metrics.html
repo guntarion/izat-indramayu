@@ -37,12 +37,6 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      opacity: 0;
-      animation: fadeIn 0.6s ease-out 0.2s forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
     th {
       background: var(--pln-dark-blue);
@@ -59,6 +53,7 @@
       border-bottom: 1px solid #e5e7eb;
       font-size: 0.95rem;
     }
+    tr { cursor: default; }
     tr:hover td { background: var(--light-gray); }
     .metric-name {
       font-weight: 600;
@@ -134,5 +129,67 @@
       </tbody>
     </table>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial states
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('table', { opacity: 0 });
+      gsap.set('thead tr', { y: -20, opacity: 0 });
+      gsap.set('tbody tr', { x: -30, opacity: 0 });
+
+      // Create master timeline
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // Animate header
+      masterTL.to('.header h1', { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 0.1);
+
+      // Animate table
+      masterTL.to('table', { opacity: 1, duration: 0.3 }, 0.2);
+
+      // Animate table header
+      masterTL.to('thead tr', { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.3);
+
+      // Animate table rows with stagger
+      masterTL.to('tbody tr', {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: 'power2.out'
+      }, 0.4);
+
+      // Hover effects for table rows
+      document.querySelectorAll('tbody tr').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+          gsap.to(row, {
+            x: 10,
+            backgroundColor: 'rgba(0,162,185,0.08)',
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+          gsap.to(row.querySelector('.metric-value'), {
+            scale: 1.05,
+            duration: 0.25,
+            ease: 'back.out(2)'
+          });
+        });
+        row.addEventListener('mouseleave', () => {
+          gsap.to(row, {
+            x: 0,
+            backgroundColor: 'transparent',
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+          gsap.to(row.querySelector('.metric-value'), {
+            scale: 1,
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>

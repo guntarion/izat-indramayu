@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rekomendasi Strategis - Immediate Actions</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root {
       --pln-dark-blue: #035B71;
@@ -34,6 +35,11 @@
       font-size: 0.85rem;
       color: #fff;
       font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .header-badge:hover {
+      background: rgba(255,255,255,0.5);
+      transform: scale(1.05);
     }
     .header h1 {
       font-family: 'Poppins', sans-serif;
@@ -56,15 +62,15 @@
       background: var(--light-gray);
       border-radius: 12px;
       padding: 1.5rem;
-      opacity: 0;
-      animation: fadeInLeft 0.5s ease-out forwards;
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
-    .action-card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid #dc2626; }
-    .action-card:nth-child(2) { animation-delay: 0.2s; border-left: 5px solid #dc2626; }
-    .action-card:nth-child(3) { animation-delay: 0.3s; border-left: 5px solid #f59e0b; }
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
+    .action-card:nth-child(1) { border-left: 5px solid #dc2626; }
+    .action-card:nth-child(2) { border-left: 5px solid #dc2626; }
+    .action-card:nth-child(3) { border-left: 5px solid #f59e0b; }
+    .action-card:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
     .priority-badge {
       padding: 0.5rem 1rem;
@@ -72,9 +78,13 @@
       font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
+      transition: all 0.3s ease;
     }
     .priority-critical { background: #fee2e2; color: #dc2626; }
     .priority-high { background: #fef3c7; color: #d97706; }
+    .action-card:hover .priority-badge {
+      transform: scale(1.1);
+    }
     .action-content h3 {
       font-size: 1.1rem;
       font-weight: 600;
@@ -87,6 +97,10 @@
     }
     .expected-impact {
       text-align: right;
+      transition: all 0.3s ease;
+    }
+    .action-card:hover .expected-impact {
+      transform: translateX(-5px);
     }
     .impact-label {
       font-size: 0.7rem;
@@ -110,7 +124,7 @@
       <span class="priority-badge priority-critical">CRITICAL</span>
       <div class="action-content">
         <h3>Redistribusi beban Andrian Denofan</h3>
-        <p>Target: Dari 47% → max 25%</p>
+        <p>Target: Dari 47% -> max 25%</p>
       </div>
       <div class="expected-impact">
         <p class="impact-label">Expected Impact</p>
@@ -121,7 +135,7 @@
       <span class="priority-badge priority-critical">CRITICAL</span>
       <div class="action-content">
         <h3>Training intensif PT RBU</h3>
-        <p>Detection rate dari 9,8% → min 20%</p>
+        <p>Detection rate dari 9,8% -> min 20%</p>
       </div>
       <div class="expected-impact">
         <p class="impact-label">Expected Impact</p>
@@ -140,5 +154,92 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // GSAP Animations using gsap.set() + gsap.to() pattern
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initial states
+      gsap.set('.header-badge', { opacity: 0, x: -30 });
+      gsap.set('.header h1', { opacity: 0, y: -30 });
+      gsap.set('.action-card', { opacity: 0, x: -50 });
+      gsap.set('.priority-badge', { opacity: 0, scale: 0 });
+
+      // Animation timeline
+      const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+      tl.to('.header-badge', { opacity: 1, x: 0, duration: 0.5 })
+        .to('.header h1', { opacity: 1, y: 0, duration: 0.6 }, '-=0.3')
+        .to('.action-card', {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: 0.15
+        }, '-=0.3')
+        .to('.priority-badge', {
+          opacity: 1,
+          scale: 1,
+          duration: 0.3,
+          stagger: 0.1,
+          ease: 'back.out(1.7)'
+        }, '-=0.4');
+
+      // Hover effects for action cards
+      const cards = document.querySelectorAll('.action-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          gsap.to(this, {
+            scale: 1.02,
+            x: 15,
+            boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(this.querySelector('.priority-badge'), {
+            scale: 1.15,
+            rotation: 5,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(this.querySelector('.expected-impact'), {
+            x: -10,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+        card.addEventListener('mouseleave', function() {
+          gsap.to(this, {
+            scale: 1,
+            x: 0,
+            boxShadow: 'none',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(this.querySelector('.priority-badge'), {
+            scale: 1,
+            rotation: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(this.querySelector('.expected-impact'), {
+            x: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // Pulse animation for CRITICAL badges
+      const criticalBadges = document.querySelectorAll('.priority-critical');
+      criticalBadges.forEach(badge => {
+        gsap.to(badge, {
+          boxShadow: '0 0 20px rgba(220,38,38,0.5)',
+          duration: 0.8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      });
+    });
+  </script>
 </body>
 </html>

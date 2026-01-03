@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alert Kritis PIC</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <style>
     :root {
       --pln-dark-blue: #035B71;
@@ -45,16 +46,13 @@
       background: var(--light-gray);
       border-radius: 12px;
       padding: 1.5rem;
-      opacity: 0;
-      animation: fadeInLeft 0.5s ease-out forwards;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: box-shadow 0.25s ease;
+      cursor: pointer;
     }
-    .alert-card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid #dc2626; }
-    .alert-card:nth-child(2) { animation-delay: 0.2s; border-left: 5px solid #f59e0b; }
-    .alert-card:nth-child(3) { animation-delay: 0.3s; border-left: 5px solid var(--pln-green); }
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
+    .alert-card:nth-child(1) { border-left: 5px solid #dc2626; }
+    .alert-card:nth-child(2) { border-left: 5px solid #f59e0b; }
+    .alert-card:nth-child(3) { border-left: 5px solid var(--pln-green); }
     .alert-icon {
       width: 50px;
       height: 50px;
@@ -63,6 +61,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.5rem;
+      transition: transform 0.25s ease;
     }
     .icon-critical { background: #fee2e2; }
     .icon-high { background: #fef3c7; }
@@ -96,6 +95,7 @@
       font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .priority-critical { background: #dc2626; color: #fff; }
     .priority-high { background: #f59e0b; color: #fff; }
@@ -144,5 +144,132 @@
       <span class="priority-badge priority-maintain">MAINTAIN</span>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial hidden states
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('.alert-card', { x: -50, opacity: 0 });
+      gsap.set('.alert-icon', { scale: 0, rotation: -180 });
+      gsap.set('.alert-content', { x: 20, opacity: 0 });
+      gsap.set('.alert-impact', { y: 20, opacity: 0 });
+      gsap.set('.priority-badge', { scale: 0.5, opacity: 0 });
+
+      // Create master timeline
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // Animate header
+      masterTL.to('.header h1', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.2);
+
+      // Animate alert cards with stagger
+      masterTL.to('.alert-card', {
+        x: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'back.out(1.2)'
+      }, 0.4);
+
+      // Animate icons
+      masterTL.to('.alert-icon', {
+        scale: 1,
+        rotation: 0,
+        duration: 0.5,
+        stagger: 0.15,
+        ease: 'back.out(1.5)'
+      }, 0.6);
+
+      // Animate content
+      masterTL.to('.alert-content', {
+        x: 0,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.15,
+        ease: 'power2.out'
+      }, 0.8);
+
+      // Animate impact
+      masterTL.to('.alert-impact', {
+        y: 0,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.15,
+        ease: 'power2.out'
+      }, 0.9);
+
+      // Animate priority badges
+      masterTL.to('.priority-badge', {
+        scale: 1,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.15,
+        ease: 'back.out(1.8)'
+      }, 1.0);
+
+      // Hover effects for alert cards
+      document.querySelectorAll('.alert-card').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          gsap.to(el, {
+            x: 10,
+            scale: 1.02,
+            boxShadow: '0 15px 35px rgba(0,0,0,0.12)',
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+          gsap.to(el.querySelector('.alert-icon'), {
+            scale: 1.15,
+            rotation: 10,
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+          gsap.to(el.querySelector('.priority-badge'), {
+            scale: 1.1,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+        });
+        el.addEventListener('mouseleave', () => {
+          gsap.to(el, {
+            x: 0,
+            scale: 1,
+            boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+          gsap.to(el.querySelector('.alert-icon'), {
+            scale: 1,
+            rotation: 0,
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+          gsap.to(el.querySelector('.priority-badge'), {
+            scale: 1,
+            boxShadow: 'none',
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // Pulse animation for critical badge
+      const criticalBadge = document.querySelector('.priority-critical');
+      if (criticalBadge) {
+        gsap.to(criticalBadge, {
+          scale: 1.05,
+          duration: 0.8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          delay: 1.5
+        });
+      }
+    });
+  </script>
 </body>
 </html>

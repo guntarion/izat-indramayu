@@ -12,14 +12,15 @@
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 1.5rem 3rem; }
-    table { width: 100%; border-collapse: collapse; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; font-size: 0.85rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     th { background: var(--pln-dark-blue); color: #fff; padding: 0.7rem; text-align: left; font-weight: 600; }
-    td { padding: 0.7rem; border-bottom: 1px solid #e5e7eb; }
+    td { padding: 0.7rem; border-bottom: 1px solid #e5e7eb; transition: background 0.3s ease; }
+    tr { cursor: pointer; }
     tr:hover td { background: var(--light-gray); }
     .baseline { color: #666; }
     .target { font-weight: 600; color: var(--pln-green); }
-    .note { margin-top: 1rem; padding: 1rem; background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 10px; border-left: 4px solid var(--pln-green); font-size: 0.85rem; color: #555; opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .note { margin-top: 1rem; padding: 1rem; background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 10px; border-left: 4px solid var(--pln-green); font-size: 0.85rem; color: #555; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .note:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
   </style>
 </head>
 <body>
@@ -38,5 +39,73 @@
     </table>
     <div class="note"><strong>Monitoring:</strong> Weekly review per shift/hari untuk early warning, monthly review untuk evaluasi progress.</div>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    // Set initial states
+    gsap.set('.header h1', { opacity: 0, y: -20 });
+    gsap.set('table', { opacity: 0 });
+    gsap.set('thead tr', { opacity: 0, y: -10 });
+    gsap.set('tbody tr', { opacity: 0, x: -30 });
+    gsap.set('.target', { opacity: 0, scale: 0.5 });
+    gsap.set('.note', { opacity: 0, y: 20 });
+
+    // Animate header
+    gsap.to('.header h1', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+
+    // Animate table
+    gsap.to('table', { opacity: 1, duration: 0.4, delay: 0.2 });
+    gsap.to('thead tr', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.3 });
+    gsap.to('tbody tr', {
+      opacity: 1, x: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+      stagger: 0.08,
+      delay: 0.4
+    });
+
+    // Animate target values
+    gsap.to('.target', {
+      opacity: 1, scale: 1,
+      duration: 0.4,
+      ease: 'back.out(1.7)',
+      stagger: 0.05,
+      delay: 0.8
+    });
+
+    // Animate note
+    gsap.to('.note', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 1.2 });
+
+    // Hover effects for table rows
+    document.querySelectorAll('tbody tr').forEach(row => {
+      row.addEventListener('mouseenter', () => {
+        gsap.to(row, { x: 10, duration: 0.3, ease: 'power2.out' });
+        gsap.to(row.querySelectorAll('td'), { backgroundColor: '#F8F9FA', duration: 0.3 });
+      });
+      row.addEventListener('mouseleave', () => {
+        gsap.to(row, { x: 0, duration: 0.3, ease: 'power2.out' });
+        gsap.to(row.querySelectorAll('td'), { backgroundColor: 'transparent', duration: 0.3 });
+      });
+    });
+
+    // Hover effects for target values
+    document.querySelectorAll('.target').forEach(target => {
+      target.addEventListener('mouseenter', () => {
+        gsap.to(target, { scale: 1.15, duration: 0.3, ease: 'back.out(1.7)' });
+      });
+      target.addEventListener('mouseleave', () => {
+        gsap.to(target, { scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    // Hover effect for note card
+    const note = document.querySelector('.note');
+    note.addEventListener('mouseenter', () => {
+      gsap.to(note, { y: -5, scale: 1.02, duration: 0.3, ease: 'power2.out' });
+    });
+    note.addEventListener('mouseleave', () => {
+      gsap.to(note, { y: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+    });
+  </script>
 </body>
 </html>

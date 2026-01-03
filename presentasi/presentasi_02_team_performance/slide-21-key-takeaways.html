@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KEY TAKEAWAYS</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root {
       --pln-dark-blue: #035B71;
@@ -41,16 +42,16 @@
       background: var(--light-gray);
       border-radius: 12px;
       padding: 1.5rem;
-      opacity: 0;
-      animation: fadeInUp 0.5s ease-out forwards;
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
-    .takeaway-card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid var(--pln-green); }
-    .takeaway-card:nth-child(2) { animation-delay: 0.15s; border-left: 5px solid #dc2626; }
-    .takeaway-card:nth-child(3) { animation-delay: 0.2s; border-left: 5px solid var(--pln-green); }
-    .takeaway-card:nth-child(4) { animation-delay: 0.25s; border-left: 5px solid #f59e0b; }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .takeaway-card:nth-child(1) { border-left: 5px solid var(--pln-green); }
+    .takeaway-card:nth-child(2) { border-left: 5px solid #dc2626; }
+    .takeaway-card:nth-child(3) { border-left: 5px solid var(--pln-green); }
+    .takeaway-card:nth-child(4) { border-left: 5px solid #f59e0b; }
+    .takeaway-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     }
     .takeaway-number {
       display: inline-block;
@@ -64,6 +65,11 @@
       font-size: 0.85rem;
       font-weight: 700;
       margin-bottom: 0.75rem;
+      transition: all 0.3s ease;
+    }
+    .takeaway-card:hover .takeaway-number {
+      transform: scale(1.2);
+      background: var(--pln-primary-blue);
     }
     .takeaway-title {
       font-size: 1rem;
@@ -104,5 +110,80 @@
       <p class="takeaway-desc">Detection rate 9,8% berarti 90% laporan tidak actionable. Dengan 1.000 laporan, ini waste resource signifikan. Perlu mandatory training.</p>
     </div>
   </div>
+
+  <script>
+    // GSAP Animations using gsap.set() + gsap.to() pattern
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initial states
+      gsap.set('.header h1', { opacity: 0, y: -30 });
+      gsap.set('.takeaway-card', { opacity: 0, y: 40, scale: 0.95 });
+      gsap.set('.takeaway-number', { opacity: 0, scale: 0 });
+
+      // Animation timeline
+      const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+      tl.to('.header h1', { opacity: 1, y: 0, duration: 0.6 })
+        .to('.takeaway-card', {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          stagger: 0.12
+        }, '-=0.3')
+        .to('.takeaway-number', {
+          opacity: 1,
+          scale: 1,
+          duration: 0.3,
+          stagger: 0.1,
+          ease: 'back.out(1.7)'
+        }, '-=0.4');
+
+      // Hover effects for cards
+      const cards = document.querySelectorAll('.takeaway-card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          gsap.to(this, {
+            scale: 1.03,
+            y: -8,
+            boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(this.querySelector('.takeaway-number'), {
+            scale: 1.3,
+            rotation: 360,
+            duration: 0.4,
+            ease: 'power2.out'
+          });
+        });
+        card.addEventListener('mouseleave', function() {
+          gsap.to(this, {
+            scale: 1,
+            y: 0,
+            boxShadow: 'none',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(this.querySelector('.takeaway-number'), {
+            scale: 1,
+            rotation: 0,
+            duration: 0.4,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // Hover effect for titles
+      const titles = document.querySelectorAll('.takeaway-title');
+      titles.forEach(title => {
+        title.addEventListener('mouseenter', function() {
+          gsap.to(this, { color: '#00A2B9', x: 5, duration: 0.3 });
+        });
+        title.addEventListener('mouseleave', function() {
+          gsap.to(this, { color: '#035B71', x: 0, duration: 0.3 });
+        });
+      });
+    });
+  </script>
 </body>
 </html>

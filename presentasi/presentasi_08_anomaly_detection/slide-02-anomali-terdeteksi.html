@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anomali Terdeteksi</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,10 +14,11 @@
     .header-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #fff; margin-bottom: 0.3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 2rem 3rem; }
-    .overview { background: var(--light-gray); border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 2rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
+    .overview { background: var(--light-gray); border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 2rem; }
     .overview p { font-size: 0.95rem; color: #555; }
-    .anomaly-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
-    .anomaly-card { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; text-align: center; }
+    .anomaly-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .anomaly-card { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .anomaly-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
     .anomaly-card.high { border-top: 4px solid #ef4444; }
     .anomaly-card.moderate { border-top: 4px solid #f59e0b; }
     .anomaly-type { font-weight: 600; color: var(--pln-dark-blue); font-size: 0.95rem; margin-bottom: 0.5rem; }
@@ -25,7 +27,6 @@
     .severity-high { background: #fee2e2; color: #dc2626; }
     .severity-moderate { background: #fef3c7; color: #92400e; }
     .anomaly-action { font-size: 0.8rem; color: #666; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -64,5 +65,109 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Initial states using gsap.set()
+    gsap.set('.header', { opacity: 0, y: -50 });
+    gsap.set('.header-badge', { opacity: 0, scale: 0.8 });
+    gsap.set('.header h1', { opacity: 0, x: -30 });
+    gsap.set('.overview', { opacity: 0, y: 20 });
+    gsap.set('.anomaly-card', { opacity: 0, y: 40, scale: 0.9 });
+    gsap.set('.anomaly-count', { opacity: 0 });
+
+    // Create timeline for entrance animations
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    // Animate header
+    tl.to('.header', { opacity: 1, y: 0, duration: 0.6 }, 0)
+      .to('.header-badge', { opacity: 1, scale: 1, duration: 0.5 }, 0.2)
+      .to('.header h1', { opacity: 1, x: 0, duration: 0.6 }, 0.3);
+
+    // Animate overview
+    tl.to('.overview', { opacity: 1, y: 0, duration: 0.6 }, 0.4);
+
+    // Animate anomaly cards with stagger
+    tl.to('.anomaly-card', {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.6,
+      stagger: 0.15
+    }, 0.6);
+
+    // Animate counts with counter effect
+    document.querySelectorAll('.anomaly-count').forEach((count, index) => {
+      const target = parseInt(count.textContent);
+      gsap.set(count, { opacity: 1 });
+      gsap.to(count, {
+        innerHTML: target,
+        duration: 1.5,
+        delay: 0.8 + (index * 0.15),
+        snap: { innerHTML: 1 },
+        ease: 'power2.out'
+      });
+      count.textContent = '0';
+    });
+
+    // Hover effects for anomaly cards
+    document.querySelectorAll('.anomaly-card').forEach(card => {
+      const count = card.querySelector('.anomaly-count');
+      const severity = card.querySelector('.anomaly-severity');
+
+      card.addEventListener('mouseenter', () => {
+        gsap.to(count, {
+          scale: 1.15,
+          duration: 0.3,
+          ease: 'back.out(1.7)'
+        });
+        gsap.to(severity, {
+          scale: 1.1,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+        gsap.to(card, {
+          backgroundColor: '#fff',
+          duration: 0.3
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(count, {
+          scale: 1,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+        gsap.to(severity, {
+          scale: 1,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+        gsap.to(card, {
+          backgroundColor: '#F8F9FA',
+          duration: 0.3
+        });
+      });
+    });
+
+    // Hover effect for overview
+    const overview = document.querySelector('.overview');
+    overview.style.cursor = 'pointer';
+    overview.addEventListener('mouseenter', () => {
+      gsap.to(overview, {
+        scale: 1.02,
+        boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    });
+    overview.addEventListener('mouseleave', () => {
+      gsap.to(overview, {
+        scale: 1,
+        boxShadow: 'none',
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    });
+  </script>
 </body>
 </html>

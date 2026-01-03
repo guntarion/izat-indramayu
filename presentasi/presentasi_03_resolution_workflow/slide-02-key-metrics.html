@@ -12,17 +12,20 @@
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 2rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 2rem 3rem; }
-    table { width: 100%; border-collapse: collapse; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    table { width: 100%; border-collapse: collapse; }
     th { background: var(--pln-dark-blue); color: #fff; padding: 0.8rem; text-align: left; font-weight: 600; font-size: 0.85rem; }
     th:first-child { border-radius: 8px 0 0 0; } th:last-child { border-radius: 0 8px 0 0; }
     td { padding: 0.8rem; border-bottom: 1px solid #e5e7eb; font-size: 0.9rem; }
+    tr { transition: all 0.3s ease; }
     tr:hover td { background: var(--light-gray); }
+    tbody tr { cursor: pointer; }
+    tbody tr:hover { transform: translateX(5px); box-shadow: -5px 0 15px rgba(0,162,185,0.2); }
     .metric-name { font-weight: 600; color: var(--pln-dark-blue); }
     .excellent { color: var(--pln-green); font-weight: 700; }
     .poor { color: #dc2626; font-weight: 700; }
     .critical { color: #dc2626; font-weight: 700; background: #fee2e2; padding: 0.2rem 0.5rem; border-radius: 4px; }
-    .status-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .status-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+    .status-badge:hover { transform: scale(1.15); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .status-excellent { background: #dcfce7; color: #16a34a; }
     .status-poor { background: #fee2e2; color: #dc2626; }
     .status-critical { background: #dc2626; color: #fff; }
@@ -44,5 +47,30 @@
       </tbody>
     </table>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    // Initial states
+    gsap.set('.header', { opacity: 0, y: -30 });
+    gsap.set('table', { opacity: 0 });
+    gsap.set('thead tr', { opacity: 0, y: -20 });
+    gsap.set('tbody tr', { opacity: 0, x: -30 });
+
+    // Animate header
+    gsap.to('.header', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+    gsap.to('table', { opacity: 1, duration: 0.4, delay: 0.2 });
+    gsap.to('thead tr', { opacity: 1, y: 0, duration: 0.5, delay: 0.3, ease: 'power2.out' });
+    gsap.to('tbody tr', { opacity: 1, x: 0, duration: 0.5, stagger: 0.08, delay: 0.4, ease: 'power2.out' });
+
+    // Badge pop animations on hover
+    document.querySelectorAll('.status-badge').forEach(badge => {
+      badge.addEventListener('mouseenter', () => {
+        gsap.to(badge, { scale: 1.15, duration: 0.2, ease: 'back.out(2)' });
+      });
+      badge.addEventListener('mouseleave', () => {
+        gsap.to(badge, { scale: 1, duration: 0.2, ease: 'power2.out' });
+      });
+    });
+  </script>
 </body>
 </html>

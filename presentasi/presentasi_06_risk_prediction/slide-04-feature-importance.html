@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feature Importance</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,22 +13,22 @@
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 2rem 3rem; display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; }
-    .features-chart { opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
+    .features-chart { }
     .features-chart h2 { font-size: 1.1rem; color: var(--pln-dark-blue); margin-bottom: 1.5rem; }
-    .feature-bar { margin-bottom: 1rem; }
+    .feature-bar { margin-bottom: 1rem; cursor: pointer; }
     .feature-header { display: flex; justify-content: space-between; margin-bottom: 0.3rem; }
     .feature-name { font-weight: 600; color: var(--pln-dark-blue); font-size: 0.9rem; }
     .feature-value { font-weight: 700; color: var(--pln-primary-blue); }
     .bar-bg { height: 24px; background: var(--light-gray); border-radius: 12px; overflow: hidden; }
     .bar-fill { height: 100%; background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green)); border-radius: 12px; }
-    .insight-box { background: var(--light-gray); border-radius: 16px; padding: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
+    .insight-box { background: var(--light-gray); border-radius: 16px; padding: 1.5rem; }
     .insight-box h3 { font-size: 1rem; color: var(--pln-dark-blue); margin-bottom: 1rem; }
-    .insight-item { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; align-items: flex-start; }
+    .insight-item { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; align-items: flex-start; cursor: pointer; padding: 0.5rem; border-radius: 8px; transition: background 0.3s; }
+    .insight-item:hover { background: rgba(0,162,185,0.1); }
     .insight-icon { font-size: 1.2rem; }
     .insight-text { font-size: 0.85rem; color: #555; line-height: 1.5; }
-    .highlight { background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); padding: 1rem; border-radius: 10px; border-left: 4px solid var(--pln-green); margin-top: 1rem; }
+    .highlight { background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); padding: 1rem; border-radius: 10px; border-left: 4px solid var(--pln-green); margin-top: 1rem; cursor: pointer; }
     .highlight p { font-size: 0.85rem; color: #555; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
   </style>
 </head>
 <body>
@@ -35,11 +36,11 @@
   <div class="content">
     <div class="features-chart">
       <h2>Kontribusi Variabel terhadap Prediksi</h2>
-      <div class="feature-bar"><div class="feature-header"><span class="feature-name">1. Zona</span><span class="feature-value">30%</span></div><div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div></div>
-      <div class="feature-bar"><div class="feature-header"><span class="feature-name">2. Area</span><span class="feature-value">25%</span></div><div class="bar-bg"><div class="bar-fill" style="width:83%"></div></div></div>
-      <div class="feature-bar"><div class="feature-header"><span class="feature-name">3. Historical Unsafe Rate</span><span class="feature-value">20%</span></div><div class="bar-bg"><div class="bar-fill" style="width:67%"></div></div></div>
-      <div class="feature-bar"><div class="feature-header"><span class="feature-name">4. Shift</span><span class="feature-value">10%</span></div><div class="bar-bg"><div class="bar-fill" style="width:33%"></div></div></div>
-      <div class="feature-bar"><div class="feature-header"><span class="feature-name">5. Hari</span><span class="feature-value">8%</span></div><div class="bar-bg"><div class="bar-fill" style="width:27%"></div></div></div>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">1. Zona</span><span class="feature-value">30%</span></div><div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div></div>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">2. Area</span><span class="feature-value">25%</span></div><div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div></div>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">3. Historical Unsafe Rate</span><span class="feature-value">20%</span></div><div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div></div>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">4. Shift</span><span class="feature-value">10%</span></div><div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div></div>
+      <div class="feature-bar"><div class="feature-header"><span class="feature-name">5. Hari</span><span class="feature-value">8%</span></div><div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div></div>
     </div>
     <div class="insight-box">
       <h3>Key Insight</h3>
@@ -51,5 +52,92 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // GSAP Animations using set() + to() pattern
+    const header = document.querySelector('.header');
+    const headerTitle = document.querySelector('.header h1');
+    const featuresChart = document.querySelector('.features-chart');
+    const chartTitle = document.querySelector('.features-chart h2');
+    const featureBars = document.querySelectorAll('.feature-bar');
+    const barFills = document.querySelectorAll('.bar-fill');
+    const insightBox = document.querySelector('.insight-box');
+    const insightTitle = document.querySelector('.insight-box h3');
+    const insightItems = document.querySelectorAll('.insight-item');
+    const highlight = document.querySelector('.highlight');
+
+    // Target widths for bars
+    const targetWidths = ['100%', '83%', '67%', '33%', '27%'];
+
+    // Set initial states
+    gsap.set(header, { y: -100, opacity: 0 });
+    gsap.set(headerTitle, { x: -50, opacity: 0 });
+    gsap.set(featuresChart, { opacity: 0, x: -30 });
+    gsap.set(chartTitle, { opacity: 0 });
+    gsap.set(featureBars, { opacity: 0, x: -20 });
+    gsap.set(barFills, { width: '0%' });
+    gsap.set(insightBox, { opacity: 0, x: 30 });
+    gsap.set(insightTitle, { opacity: 0 });
+    gsap.set(insightItems, { opacity: 0, x: 20 });
+    gsap.set(highlight, { opacity: 0, y: 20 });
+
+    // Create timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.to(header, { y: 0, opacity: 1, duration: 0.6 }, 0)
+      .to(headerTitle, { x: 0, opacity: 1, duration: 0.6 }, 0.2)
+      .to(featuresChart, { opacity: 1, x: 0, duration: 0.5 }, 0.3)
+      .to(chartTitle, { opacity: 1, duration: 0.4 }, 0.5)
+      .to(featureBars, { opacity: 1, x: 0, duration: 0.4, stagger: 0.1 }, 0.6);
+
+    // Animate bars with stagger
+    barFills.forEach((bar, index) => {
+      tl.to(bar, { width: targetWidths[index], duration: 0.8, ease: 'power2.out' }, 0.8 + (index * 0.15));
+    });
+
+    tl.to(insightBox, { opacity: 1, x: 0, duration: 0.5 }, 1)
+      .to(insightTitle, { opacity: 1, duration: 0.4 }, 1.2)
+      .to(insightItems, { opacity: 1, x: 0, duration: 0.4, stagger: 0.1 }, 1.3)
+      .to(highlight, { opacity: 1, y: 0, duration: 0.5 }, 1.6);
+
+    // Hover effects for feature bars
+    featureBars.forEach((bar, index) => {
+      const fill = bar.querySelector('.bar-fill');
+      const value = bar.querySelector('.feature-value');
+
+      bar.addEventListener('mouseenter', () => {
+        gsap.to(bar, { scale: 1.02, x: 5, duration: 0.3, ease: 'power2.out' });
+        gsap.to(fill, { filter: 'brightness(1.2)', duration: 0.3 });
+        gsap.to(value, { scale: 1.2, duration: 0.3, ease: 'back.out(1.7)' });
+      });
+      bar.addEventListener('mouseleave', () => {
+        gsap.to(bar, { scale: 1, x: 0, duration: 0.3, ease: 'power2.out' });
+        gsap.to(fill, { filter: 'brightness(1)', duration: 0.3 });
+        gsap.to(value, { scale: 1, duration: 0.3 });
+      });
+    });
+
+    // Hover effects for insight items
+    insightItems.forEach(item => {
+      const icon = item.querySelector('.insight-icon');
+
+      item.addEventListener('mouseenter', () => {
+        gsap.to(item, { x: 5, duration: 0.3, ease: 'power2.out' });
+        gsap.to(icon, { scale: 1.3, rotation: 15, duration: 0.3, ease: 'back.out(1.7)' });
+      });
+      item.addEventListener('mouseleave', () => {
+        gsap.to(item, { x: 0, duration: 0.3, ease: 'power2.out' });
+        gsap.to(icon, { scale: 1, rotation: 0, duration: 0.3 });
+      });
+    });
+
+    // Hover effect for highlight box
+    highlight.addEventListener('mouseenter', () => {
+      gsap.to(highlight, { scale: 1.03, boxShadow: '0 10px 25px rgba(53,185,113,0.2)', duration: 0.3, ease: 'power2.out' });
+    });
+    highlight.addEventListener('mouseleave', () => {
+      gsap.to(highlight, { scale: 1, boxShadow: 'none', duration: 0.3, ease: 'power2.out' });
+    });
+  </script>
 </body>
 </html>

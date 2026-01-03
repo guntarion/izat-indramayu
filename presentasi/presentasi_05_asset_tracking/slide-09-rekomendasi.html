@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rekomendasi Strategis</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,17 +13,16 @@
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
-    .section:nth-child(1) { animation-delay: 0.2s; }
-    .section:nth-child(2) { animation-delay: 0.4s; }
+    .section { }
     .section-title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--pln-primary-blue); }
-    .action-item { background: var(--light-gray); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
-    .action-priority { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .action-item { background: var(--light-gray); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .action-item:hover { transform: translateY(-5px) translateX(5px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+    .action-priority { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; margin-bottom: 0.5rem; transition: transform 0.3s ease; }
+    .action-item:hover .action-priority { transform: scale(1.1); }
     .priority-critical { background: #fee2e2; color: #dc2626; }
     .priority-high { background: #fef3c7; color: #92400e; }
     .action-item h4 { font-size: 0.9rem; color: var(--pln-dark-blue); margin-bottom: 0.3rem; }
     .action-item p { font-size: 0.8rem; color: #666; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -55,5 +55,52 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Initial states using gsap.set()
+    gsap.set('.header', { opacity: 0, y: -50 });
+    gsap.set('.header h1', { opacity: 0, x: -30 });
+    gsap.set('.section', { opacity: 0 });
+    gsap.set('.section:first-child', { x: -50 });
+    gsap.set('.section:last-child', { x: 50 });
+    gsap.set('.section-title', { opacity: 0, y: 20 });
+    gsap.set('.action-item', { opacity: 0, y: 30, scale: 0.95 });
+    gsap.set('.action-priority', { opacity: 0, scale: 0 });
+
+    // Main timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.to('.header', { opacity: 1, y: 0, duration: 0.6 })
+      .to('.header h1', { opacity: 1, x: 0, duration: 0.5 }, 0.2)
+      .to('.section', { opacity: 1, x: 0, duration: 0.7, stagger: 0.15 }, 0.3)
+      .to('.section-title', { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 }, 0.5)
+      .to('.action-item', { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.12 }, 0.6)
+      .to('.action-priority', { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' }, 0.9);
+
+    // Hover effects for action items
+    document.querySelectorAll('.action-item').forEach(item => {
+      const priority = item.querySelector('.action-priority');
+      const isCritical = priority.classList.contains('priority-critical');
+      const hoverColor = isCritical ? '#dc2626' : '#92400e';
+
+      item.addEventListener('mouseenter', () => {
+        gsap.to(item.querySelector('h4'), { color: hoverColor, duration: 0.3 });
+        gsap.to(item.querySelector('p'), { color: '#333', duration: 0.3 });
+      });
+      item.addEventListener('mouseleave', () => {
+        gsap.to(item.querySelector('h4'), { color: '#035B71', duration: 0.3 });
+        gsap.to(item.querySelector('p'), { color: '#666', duration: 0.3 });
+      });
+    });
+
+    // Pulse animation for critical priorities
+    gsap.to('.priority-critical', {
+      scale: 1.05,
+      duration: 0.5,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut',
+      delay: 1.5
+    });
+  </script>
 </body>
 </html>

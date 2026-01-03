@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Key Metrics - Asset Tracking</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -12,8 +13,9 @@
     .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 2rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 2rem 3rem; }
-    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
-    .card { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; text-align: center; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .card { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; text-align: center; cursor: pointer; transition: box-shadow 0.3s ease; }
+    .card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
     .card.critical { border-top: 4px solid #ef4444; }
     .card.monitor { border-top: 4px solid #f59e0b; }
     .card-category { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--pln-dark-blue); margin-bottom: 0.5rem; }
@@ -22,7 +24,6 @@
     .card-status { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
     .status-critical { background: #fee2e2; color: #dc2626; }
     .status-monitor { background: #fef3c7; color: #92400e; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -55,5 +56,36 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Initial states using gsap.set()
+    gsap.set('.header', { opacity: 0, y: -50 });
+    gsap.set('.header h1', { opacity: 0, x: -30 });
+    gsap.set('.card', { opacity: 0, y: 40, scale: 0.9 });
+    gsap.set('.card-value', { opacity: 0, scale: 0.5 });
+    gsap.set('.card-status', { opacity: 0, scale: 0 });
+
+    // Main timeline
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.to('.header', { opacity: 1, y: 0, duration: 0.6 })
+      .to('.header h1', { opacity: 1, x: 0, duration: 0.5 }, 0.2)
+      .to('.card', { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.15 }, 0.4)
+      .to('.card-value', { opacity: 1, scale: 1, duration: 0.5, stagger: 0.1 }, 0.7)
+      .to('.card-status', { opacity: 1, scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(1.7)' }, 0.9);
+
+    // Hover effects for cards
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, { y: -10, scale: 1.03, duration: 0.3, ease: 'power2.out' });
+        gsap.to(card.querySelector('.card-value'), { scale: 1.15, color: '#035B71', duration: 0.3 });
+        gsap.to(card.querySelector('.card-status'), { scale: 1.1, duration: 0.3 });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { y: 0, scale: 1, duration: 0.3, ease: 'power2.out' });
+        gsap.to(card.querySelector('.card-value'), { scale: 1, color: '#00A2B9', duration: 0.3 });
+        gsap.to(card.querySelector('.card-status'), { scale: 1, duration: 0.3 });
+      });
+    });
+  </script>
 </body>
 </html>

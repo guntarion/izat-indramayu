@@ -5,148 +5,540 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perbandingan Risk Score per Zona</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/slide-enhancements.css">
   <style>
     :root {
       --pln-dark-blue: #035B71;
       --pln-primary-blue: #00A2B9;
       --pln-green: #35B971;
+      --pln-light-blue: #00AFF0;
       --light-gray: #F8F9FA;
       --text-gray: #333333;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background: #fff;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      position: relative;
+      overflow: hidden;
     }
+
+    /* Subtle background pattern */
+    .bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(0, 162, 185, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(53, 185, 113, 0.04) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    /* Decorative elements */
+    .deco-line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, rgba(0, 162, 185, 0.1), transparent);
+      height: 1px;
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .deco-line:nth-child(1) { top: 25%; }
+    .deco-line:nth-child(2) { top: 75%; }
+
+    /* Header */
     .header {
       background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
       padding: 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 10;
     }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100%;
+      background: radial-gradient(circle at 100% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
     .header h1 {
       font-family: 'Poppins', sans-serif;
       font-size: 1.8rem;
       font-weight: 700;
       color: #fff;
-      opacity: 0;
-      animation: fadeInDown 0.6s ease-out forwards;
     }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+
+    /* Content */
     .content {
       flex: 1;
-      padding: 2rem 3rem;
+      padding: 2.5rem 3rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 3rem;
       align-items: start;
+      position: relative;
+      z-index: 10;
     }
+
+    /* Image Container */
     .image-container {
-      opacity: 0;
-      animation: fadeInLeft 0.6s ease-out 0.2s forwards;
+      position: relative;
     }
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
+
+    .image-wrapper {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     }
-    .image-container img {
+
+    .image-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 162, 185, 0.05), transparent);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .image-wrapper img {
       width: 100%;
       height: auto;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      display: block;
+      transition: transform 0.5s ease;
     }
+
+    .image-wrapper:hover img {
+      transform: scale(1.03);
+    }
+
     .image-caption {
-      margin-top: 0.75rem;
+      margin-top: 1rem;
       font-size: 0.85rem;
-      color: #666;
+      color: #64748b;
       text-align: center;
       font-style: italic;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
-    .text-content {
-      opacity: 0;
-      animation: fadeInRight 0.6s ease-out 0.3s forwards;
+
+    .caption-icon {
+      width: 16px;
+      height: 16px;
+      background: linear-gradient(135deg, var(--pln-primary-blue), var(--pln-green));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: white;
     }
-    @keyframes fadeInRight {
-      from { opacity: 0; transform: translateX(30px); }
-      to { opacity: 1; transform: translateX(0); }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 3px solid var(--pln-primary-blue);
     }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, rgba(0, 162, 185, 0.15), rgba(53, 185, 113, 0.1));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
     .text-content h2 {
       font-family: 'Poppins', sans-serif;
       font-size: 1.3rem;
       font-weight: 600;
       color: var(--pln-dark-blue);
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 3px solid var(--pln-primary-blue);
     }
-    .text-content ul { list-style: none; }
-    .text-content li {
+
+    /* List Items */
+    .findings-list {
+      list-style: none;
+    }
+
+    .findings-list li {
       display: flex;
       align-items: flex-start;
-      gap: 0.75rem;
-      padding: 0.75rem 0;
-      font-size: 1rem;
-      line-height: 1.5;
-      color: var(--text-gray);
-      border-bottom: 1px solid #eee;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
     }
-    .text-content li:last-child { border-bottom: none; }
-    .text-content li::before {
-      content: '▸';
-      color: var(--pln-primary-blue);
-      font-weight: bold;
+
+    .findings-list li:hover {
+      padding-left: 0.5rem;
+      background: linear-gradient(90deg, rgba(0, 162, 185, 0.03), transparent);
+    }
+
+    .findings-list li:last-child {
+      border-bottom: none;
+    }
+
+    .list-marker {
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(135deg, var(--pln-primary-blue), var(--pln-dark-blue));
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
+      margin-top: 2px;
     }
+
+    .list-marker svg {
+      width: 12px;
+      height: 12px;
+      fill: white;
+    }
+
+    .list-content {
+      flex: 1;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-gray);
+    }
+
+    .list-content strong {
+      color: var(--pln-dark-blue);
+      font-weight: 600;
+    }
+
+    /* Risk Badges */
+    .risk-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.25rem;
+    }
+
+    .risk-high {
+      background: linear-gradient(135deg, #fee2e2, #fecaca);
+      color: #dc2626;
+      border: 1px solid #fca5a5;
+    }
+
+    .risk-low {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      color: #16a34a;
+      border: 1px solid #86efac;
+    }
+
+    /* Highlight Box */
     .highlight {
-      background: linear-gradient(120deg, rgba(0,162,185,0.1) 0%, rgba(53,185,113,0.1) 100%);
-      padding: 1rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      border-left: 4px solid var(--pln-green);
+      background: linear-gradient(135deg, rgba(0, 162, 185, 0.08), rgba(53, 185, 113, 0.08));
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      margin-top: 1.5rem;
+      position: relative;
+      overflow: hidden;
     }
+
+    .highlight::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--pln-primary-blue), var(--pln-green));
+    }
+
+    .highlight-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      opacity: 0.1;
+    }
+
     .highlight p {
       font-size: 0.95rem;
       color: var(--pln-dark-blue);
       font-weight: 500;
       font-style: italic;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
     }
-    strong { color: var(--pln-dark-blue); }
-    .risk-badge {
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-weight: 600;
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
     }
-    .risk-high { background: #fee2e2; color: #dc2626; }
-    .risk-low { background: #dcfce7; color: #16a34a; }
   </style>
 </head>
 <body>
+  <!-- Background -->
+  <div class="bg-pattern"></div>
+  <div class="deco-line"></div>
+  <div class="deco-line"></div>
+
+  <!-- Header -->
   <div class="header">
     <h1>Perbandingan Risk Score per Zona</h1>
   </div>
+
+  <!-- Content -->
   <div class="content">
     <div class="image-container">
-      <img src="assets/images/II.1.1_risk_score_by_zona.png" alt="Risk Score per Zona">
-      <p class="image-caption">Gambar 2: Perbandingan Risk Score rata-rata per zona operasi</p>
+      <div class="image-wrapper">
+        <img src="assets/images/II.1.1_risk_score_by_zona.png" alt="Risk Score per Zona">
+      </div>
+      <p class="image-caption">
+        <span class="caption-icon">2</span>
+        Gambar 2: Perbandingan Risk Score rata-rata per zona operasi
+      </p>
     </div>
+
     <div class="text-content">
-      <h2>Temuan Utama</h2>
-      <ul>
-        <li><span><strong>UNKNOWN</strong> memiliki Risk Score tertinggi <span class="risk-badge risk-high">1,75</span></span></li>
-        <li><span><strong>COAL_HANDLING</strong> di posisi kedua dengan score 1,48</span></li>
-        <li><span><strong>UTILITY</strong> memiliki Risk Score terendah <span class="risk-badge risk-low">0,92</span> - performa terbaik</span></li>
-        <li><span>Selisih signifikan antara zona tertinggi dan terendah (<strong>90% gap</strong>)</span></li>
+      <div class="section-header">
+        <div class="section-icon">!</div>
+        <h2>Temuan Utama</h2>
+      </div>
+
+      <ul class="findings-list">
+        <li>
+          <span class="list-marker">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </span>
+          <span class="list-content">
+            <strong>UNKNOWN</strong> memiliki Risk Score tertinggi
+            <span class="risk-badge risk-high">1,75</span>
+          </span>
+        </li>
+        <li>
+          <span class="list-marker">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </span>
+          <span class="list-content">
+            <strong>COAL_HANDLING</strong> di posisi kedua dengan score 1,48
+          </span>
+        </li>
+        <li>
+          <span class="list-marker">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </span>
+          <span class="list-content">
+            <strong>UTILITY</strong> memiliki Risk Score terendah
+            <span class="risk-badge risk-low">0,92</span>
+            - performa terbaik
+          </span>
+        </li>
+        <li>
+          <span class="list-marker">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </span>
+          <span class="list-content">
+            Selisih signifikan antara zona tertinggi dan terendah (<strong>90% gap</strong>)
+          </span>
+        </li>
       </ul>
+
       <div class="highlight">
-        <p>"Zona UNKNOWN dengan Risk Score 1,75 menunjukkan urgensi kategorisasi yang lebih baik. Sementara UTILITY zone menjadi benchmark best practice dengan Risk Score terendah."</p>
+        <span class="highlight-icon">"</span>
+        <p>Zona UNKNOWN dengan Risk Score 1,75 menunjukkan urgensi kategorisasi yang lebih baik. Sementara UTILITY zone menjadi benchmark best practice dengan Risk Score terendah.</p>
       </div>
     </div>
   </div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="assets/js/slide-animations.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial states explicitly
+      gsap.set('.deco-line', { scaleX: 0 });
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('.image-container', { x: -50, opacity: 0 });
+      gsap.set('.image-wrapper', { scale: 0.95 });
+      gsap.set('.image-caption', { y: 15, opacity: 0 });
+      gsap.set('.caption-icon', { scale: 0, rotation: -180 });
+      gsap.set('.text-content', { x: 50, opacity: 0 });
+      gsap.set('.section-icon', { scale: 0, rotation: -90 });
+      gsap.set('.section-header h2', { x: -20, opacity: 0 });
+      gsap.set('.findings-list li', { x: 30, opacity: 0 });
+      gsap.set('.list-marker', { scale: 0 });
+      gsap.set('.risk-badge', { scale: 0 });
+      gsap.set('.highlight', { y: 20, opacity: 0, scale: 0.98 });
+      gsap.set('.text-content .highlight-icon', { scale: 0.5, opacity: 0 });
+
+      // Master timeline
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // 1. Decorative lines entrance
+      masterTL.to('.deco-line', {
+        scaleX: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power2.out'
+      }, 0);
+
+      // 2. Header entrance
+      masterTL.to('.header h1', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.2);
+
+      // 3. Image container entrance
+      masterTL.to('.image-container', {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, 0.4);
+
+      // 4. Image wrapper scale effect
+      masterTL.to('.image-wrapper', {
+        scale: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.6);
+
+      // 5. Caption entrance
+      masterTL.to('.image-caption', {
+        y: 0,
+        opacity: 1,
+        duration: 0.4,
+        ease: 'power2.out'
+      }, 0.9);
+
+      masterTL.to('.caption-icon', {
+        scale: 1,
+        rotation: 0,
+        duration: 0.4,
+        ease: 'back.out(2)'
+      }, 1.0);
+
+      // 6. Text content entrance
+      masterTL.to('.text-content', {
+        x: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: 'power2.out'
+      }, 0.5);
+
+      // 7. Section header elements
+      masterTL.to('.section-icon', {
+        scale: 1,
+        rotation: 0,
+        duration: 0.5,
+        ease: 'back.out(2)'
+      }, 0.8);
+
+      masterTL.to('.section-header h2', {
+        x: 0,
+        opacity: 1,
+        duration: 0.4,
+        ease: 'power2.out'
+      }, 0.9);
+
+      // 8. List items staggered entrance
+      masterTL.to('.findings-list li', {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.12,
+        ease: 'power2.out'
+      }, 1.0);
+
+      // 9. List markers pop
+      masterTL.to('.list-marker', {
+        scale: 1,
+        duration: 0.3,
+        stagger: 0.1,
+        ease: 'back.out(2)'
+      }, 1.1);
+
+      // 10. Risk badges pop
+      masterTL.to('.risk-badge', {
+        scale: 1,
+        duration: 0.3,
+        stagger: 0.15,
+        ease: 'back.out(3)'
+      }, 1.4);
+
+      // 11. Highlight box entrance
+      masterTL.to('.highlight', {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        ease: 'back.out(1.5)'
+      }, 1.6);
+
+      // 12. Highlight icon subtle animation
+      masterTL.to('.text-content .highlight-icon', {
+        scale: 1,
+        opacity: 0.1,
+        duration: 0.4,
+        ease: 'power2.out'
+      }, 1.8);
+
+      // Hover effect for list items
+      document.querySelectorAll('.findings-list li').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          gsap.to(item.querySelector('.list-marker'), {
+            scale: 1.15,
+            rotation: 10,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+
+        item.addEventListener('mouseleave', () => {
+          gsap.to(item.querySelector('.list-marker'), {
+            scale: 1,
+            rotation: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // Subtle floating for decorative lines (after entrance)
+      masterTL.call(() => {
+        gsap.to('.deco-line', {
+          opacity: 0.5,
+          duration: 2,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut',
+          stagger: 0.5
+        });
+      }, null, 2);
+    });
+  </script>
 </body>
 </html>

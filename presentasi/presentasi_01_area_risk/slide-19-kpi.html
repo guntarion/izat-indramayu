@@ -37,12 +37,6 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      opacity: 0;
-      animation: fadeIn 0.6s ease-out 0.2s forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
     th {
       background: var(--pln-dark-blue);
@@ -85,8 +79,6 @@
       background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1));
       border-radius: 12px;
       border-left: 5px solid var(--pln-primary-blue);
-      opacity: 0;
-      animation: fadeIn 0.6s ease-out 0.4s forwards;
     }
     .monitoring-note h3 {
       font-size: 1rem;
@@ -145,5 +137,62 @@
       <p>Review monthly trend untuk evaluasi progress. Dashboard IZAT dapat digunakan untuk tracking real-time.</p>
     </div>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial states
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('table', { y: 20, opacity: 0 });
+      gsap.set('thead tr', { y: -20, opacity: 0 });
+      gsap.set('tbody tr', { x: -30, opacity: 0 });
+      gsap.set('.monitoring-note', { y: 30, opacity: 0, scale: 0.95 });
+
+      // Create master timeline
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // Animate header
+      masterTL.to('.header h1', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.2);
+
+      // Animate table container
+      masterTL.to('table', {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.4);
+
+      // Animate table header
+      masterTL.to('thead tr', {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.5);
+
+      // Animate table rows with stagger
+      masterTL.to('tbody tr', {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'power2.out'
+      }, 0.6);
+
+      // Animate monitoring note
+      masterTL.to('.monitoring-note', {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: 'back.out(1.3)'
+      }, 1.0);
+    });
+  </script>
 </body>
 </html>

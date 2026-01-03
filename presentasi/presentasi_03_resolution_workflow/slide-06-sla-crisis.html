@@ -12,16 +12,18 @@
     .header { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); padding: 1.5rem 3rem; }
     .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
     .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: start; }
-    .image-container { opacity: 0; animation: fadeInLeft 0.6s ease-out 0.2s forwards; }
-    .image-container img { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-    .text-content { opacity: 0; animation: fadeInRight 0.6s ease-out 0.4s forwards; }
+    .image-container { }
+    .image-container img { width: 100%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+    .image-container img:hover { transform: scale(1.02); box-shadow: 0 10px 40px rgba(0,0,0,0.25); }
+    .text-content { }
     table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
     th { background: #dc2626; color: #fff; padding: 0.6rem; text-align: left; }
     td { padding: 0.6rem; border-bottom: 1px solid #e5e7eb; }
+    tbody tr { cursor: pointer; transition: all 0.3s ease; }
+    tbody tr:hover { transform: translateX(5px); background: #fef2f2; }
     .gap-extreme { color: #dc2626; font-weight: 700; }
-    .compliance-zero { background: #fee2e2; color: #dc2626; font-weight: 700; text-align: center; }
-    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes fadeInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    .compliance-zero { background: #fee2e2; color: #dc2626; font-weight: 700; text-align: center; transition: transform 0.3s ease; }
+    tbody tr:hover .compliance-zero { transform: scale(1.1); }
   </style>
 </head>
 <body>
@@ -42,5 +44,22 @@
       </table>
     </div>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    // Initial states
+    gsap.set('.header', { opacity: 0, y: -30 });
+    gsap.set('.image-container', { opacity: 0, x: -40 });
+    gsap.set('table', { opacity: 0 });
+    gsap.set('thead tr', { opacity: 0, y: -20 });
+    gsap.set('tbody tr', { opacity: 0, x: 40 });
+
+    // Animations
+    gsap.to('.header', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+    gsap.to('.image-container', { opacity: 1, x: 0, duration: 0.7, delay: 0.2, ease: 'power2.out' });
+    gsap.to('table', { opacity: 1, duration: 0.3, delay: 0.4 });
+    gsap.to('thead tr', { opacity: 1, y: 0, duration: 0.5, delay: 0.5, ease: 'power2.out' });
+    gsap.to('tbody tr', { opacity: 1, x: 0, duration: 0.4, stagger: 0.1, delay: 0.6, ease: 'power2.out' });
+  </script>
 </body>
 </html>

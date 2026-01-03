@@ -1,0 +1,29 @@
+/* Slide Enhancements CSS - PLN Nusantara Power */
+:root {
+  --pln-dark-blue: #035B71;
+  --pln-primary-blue: #00A2B9;
+  --pln-green: #35B971;
+  --pln-light-blue: #00AFF0;
+  --gradient-primary: linear-gradient(135deg, var(--pln-dark-blue), var(--pln-primary-blue));
+  --gradient-accent: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green));
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+::selection { background: var(--pln-primary-blue); color: white; }
+.glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+.glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 16px; box-shadow: var(--shadow-medium); }
+.card-elevated { background: white; border-radius: 16px; box-shadow: var(--shadow-soft); transition: var(--transition-medium); }
+.card-elevated:hover { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18); transform: translateY(-4px); }
+.text-gradient { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.bg-animated-gradient { background: linear-gradient(-45deg, var(--pln-dark-blue), var(--pln-primary-blue), var(--pln-green), var(--pln-light-blue)); background-size: 400% 400%; animation: gradientShift 15s ease infinite; }
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.floating { animation: float 6s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+.highlight-box { background: linear-gradient(135deg, rgba(0, 162, 185, 0.08), rgba(53, 185, 113, 0.08)); border-left: 4px solid var(--pln-green); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; }
+.stat-card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow-soft); transition: var(--transition-medium); }
+.stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-medium); }
+.accent-bar { position: absolute; bottom: 0; left: 0; width: 100%; height: 6px; background: var(--gradient-accent); }
+.divider-gradient { height: 2px; background: linear-gradient(90deg, transparent, var(--pln-primary-blue), var(--pln-green), transparent); border: none; margin: 2rem 0; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }

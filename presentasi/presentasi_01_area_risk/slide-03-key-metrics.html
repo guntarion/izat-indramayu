@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Key Metrics Analisis</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/slide-enhancements.css">
   <style>
     :root {
       --pln-dark-blue: #035B71;
@@ -13,147 +14,541 @@
       --pln-light-blue: #00AFF0;
       --light-gray: #F8F9FA;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background: #fff;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      position: relative;
+      overflow: hidden;
     }
+
+    /* Subtle background pattern */
+    .bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(0, 162, 185, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(53, 185, 113, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 60% 80%, rgba(0, 175, 240, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Decorative shapes */
+    .deco-shape {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0, 162, 185, 0.08), rgba(53, 185, 113, 0.05));
+      pointer-events: none;
+    }
+
+    .deco-shape:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      right: -100px;
+    }
+
+    .deco-shape:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      bottom: -50px;
+      left: -50px;
+    }
+
+    /* Header */
     .header {
       background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
-      padding: 2.5rem 3rem;
+      padding: 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 10;
     }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(53,185,113,0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
     .header h1 {
       font-family: 'Poppins', sans-serif;
       font-size: 2rem;
       font-weight: 700;
       color: #fff;
     }
+
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--pln-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--pln-green);
+    }
+
+    /* Content */
     .content {
       flex: 1;
-      padding: 2rem 3rem;
+      padding: 2.5rem 3rem;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      align-content: center;
+      align-content: start;
+      position: relative;
+      z-index: 10;
     }
+
+    /* Stat Cards */
     .stat-card {
-      background: var(--light-gray);
-      border-radius: 16px;
-      padding: 1.5rem;
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.75rem;
       text-align: center;
-      border-bottom: 5px solid var(--pln-primary-blue);
-      opacity: 0;
-      transform: translateY(30px);
-      animation: popIn 0.5s ease-out forwards;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--card-accent, var(--pln-primary-blue));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
     .stat-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
     }
-    .stat-card:nth-child(1) { animation-delay: 0.1s; }
-    .stat-card:nth-child(2) { animation-delay: 0.15s; border-color: var(--pln-dark-blue); }
-    .stat-card:nth-child(3) { animation-delay: 0.2s; border-color: var(--pln-green); }
-    .stat-card:nth-child(4) { animation-delay: 0.25s; border-color: var(--pln-light-blue); }
-    .stat-card:nth-child(5) { animation-delay: 0.3s; border-color: #ef4444; }
-    @keyframes popIn {
-      from { opacity: 0; transform: translateY(30px) scale(0.9); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+
+    .stat-card:hover::before {
+      transform: scaleX(1);
     }
+
+    .stat-card:nth-child(1) { --card-accent: var(--pln-primary-blue); }
+    .stat-card:nth-child(2) { --card-accent: var(--pln-dark-blue); }
+    .stat-card:nth-child(3) { --card-accent: var(--pln-green); }
+    .stat-card:nth-child(4) { --card-accent: var(--pln-light-blue); }
+
+    /* Card Icon */
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(0, 162, 185, 0.1), rgba(53, 185, 113, 0.1));
+      border-radius: 16px;
+      font-size: 1.5rem;
+    }
+
+    .stat-card:nth-child(1) .card-icon { background: linear-gradient(135deg, rgba(0, 162, 185, 0.15), rgba(0, 162, 185, 0.05)); }
+    .stat-card:nth-child(2) .card-icon { background: linear-gradient(135deg, rgba(3, 91, 113, 0.15), rgba(3, 91, 113, 0.05)); }
+    .stat-card:nth-child(3) .card-icon { background: linear-gradient(135deg, rgba(53, 185, 113, 0.15), rgba(53, 185, 113, 0.05)); }
+    .stat-card:nth-child(4) .card-icon { background: linear-gradient(135deg, rgba(0, 175, 240, 0.15), rgba(0, 175, 240, 0.05)); }
+
     .stat-label {
-      font-size: 0.85rem;
-      color: #666;
-      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-bottom: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
+      font-weight: 600;
     }
+
     .stat-number {
       font-family: 'Poppins', sans-serif;
-      font-size: 2.5rem;
+      font-size: 2.25rem;
       font-weight: 800;
-      color: var(--pln-dark-blue);
+      background: linear-gradient(135deg, var(--pln-dark-blue), var(--pln-primary-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       line-height: 1;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
+
     .stat-desc {
       font-size: 0.85rem;
-      color: #888;
-      line-height: 1.4;
+      color: #94a3b8;
+      line-height: 1.5;
     }
+
+    /* Highlight Card */
     .highlight-card {
       grid-column: span 3;
       background: linear-gradient(135deg, #ef4444, #dc2626);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 1.5rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: #fff;
-      opacity: 0;
-      animation: popIn 0.5s ease-out 0.35s forwards;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(239, 68, 68, 0.25);
     }
-    .highlight-card .left {
+
+    .highlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 100% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 0% 50%, rgba(0,0,0,0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .highlight-left {
       display: flex;
       align-items: center;
       gap: 1.5rem;
+      position: relative;
+      z-index: 1;
     }
-    .highlight-card .icon {
-      font-size: 2.5rem;
+
+    .highlight-icon {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(5px);
+      border-radius: 16px;
+      font-size: 1.75rem;
+      font-weight: 700;
     }
-    .highlight-card h3 {
-      font-size: 1.1rem;
+
+    .highlight-text h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
       font-weight: 600;
       margin-bottom: 0.25rem;
     }
-    .highlight-card p {
+
+    .highlight-text p {
       font-size: 0.9rem;
       opacity: 0.9;
     }
-    .highlight-card .value {
+
+    .highlight-value {
       font-family: 'Poppins', sans-serif;
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: 800;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Pulse ring animation for highlight */
+    .pulse-ring {
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100px;
+      height: 100px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .highlight-card {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+      .highlight-card {
+        grid-column: span 1;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+      .highlight-left {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Background Elements -->
+  <div class="bg-pattern"></div>
+  <div class="deco-shape"></div>
+  <div class="deco-shape"></div>
+
+  <!-- Header -->
   <div class="header">
-    <h1>Key Metrics Analisis</h1>
+    <div class="header-content">
+      <h1>Key Metrics Analisis</h1>
+      <div class="header-badge">
+        <span class="badge-dot"></span>
+        <span>Data Overview</span>
+      </div>
+    </div>
   </div>
+
+  <!-- Content -->
   <div class="content">
     <div class="stat-card">
+      <div class="card-icon">5</div>
       <div class="stat-label">Total Zona Operasi</div>
-      <div class="stat-number">5</div>
+      <div class="stat-number" data-value="5">0</div>
       <div class="stat-desc">UNKNOWN, COAL_HANDLING, MAIN_UNIT, SUPPORT, UTILITY</div>
     </div>
+
     <div class="stat-card">
+      <div class="card-icon">!</div>
       <div class="stat-label">Zona Risiko Tertinggi</div>
-      <div class="stat-number">UNKNOWN</div>
-      <div class="stat-desc">Risk Score: 1,75 | Unsafe Rate: 46,4%</div>
+      <div class="stat-number stat-text">UNKNOWN</div>
+      <div class="stat-desc">Risk Score: <strong>1,75</strong> | Unsafe Rate: <strong>46,4%</strong></div>
     </div>
+
     <div class="stat-card">
+      <div class="card-icon">%</div>
       <div class="stat-label">Zona Volume Terbesar</div>
-      <div class="stat-number">MAIN_UNIT</div>
-      <div class="stat-desc">2.616 temuan (47% dari total)</div>
+      <div class="stat-number stat-text">MAIN_UNIT</div>
+      <div class="stat-desc"><strong data-value="2616">0</strong> temuan (47% dari total)</div>
     </div>
+
     <div class="stat-card">
+      <div class="card-icon">#</div>
       <div class="stat-label">Total Area Dianalisis</div>
-      <div class="stat-number">46</div>
+      <div class="stat-number" data-value="46">0</div>
       <div class="stat-desc">Seluruh area operasional UP Indramayu</div>
     </div>
+
     <div class="highlight-card">
-      <div class="left">
-        <span class="icon">!</span>
-        <div>
+      <div class="highlight-left">
+        <div class="highlight-icon">!</div>
+        <div class="highlight-text">
           <h3>Area Prioritas Kritis</h3>
           <p>Memerlukan tindakan segera berdasarkan Risk Score dan Unsafe Rate</p>
         </div>
       </div>
-      <div class="value">7 Area</div>
+      <div class="highlight-value"><span data-value="7">0</span> Area</div>
+      <div class="pulse-ring"></div>
     </div>
   </div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="assets/js/slide-animations.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set initial states explicitly
+      gsap.set('.deco-shape', { scale: 0, opacity: 0 });
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('.header-badge', { x: 30, opacity: 0 });
+      gsap.set('.badge-dot', { scale: 0 });
+      gsap.set('.stat-card', { y: 50, opacity: 0, scale: 0.9 });
+      gsap.set('.card-icon', { scale: 0, rotation: -180 });
+      gsap.set('.highlight-card', { y: 40, opacity: 0, scale: 0.95 });
+      gsap.set('.highlight-icon', { scale: 0, rotation: -20 });
+      gsap.set('.highlight-text h3, .highlight-text p', { x: -20, opacity: 0 });
+      gsap.set('.highlight-value', { scale: 0.5, opacity: 0 });
+
+      // Master timeline
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // 1. Decorative shapes entrance
+      masterTL.to('.deco-shape', {
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'back.out(1.2)'
+      }, 0);
+
+      // 2. Header animations
+      masterTL.to('.header h1', {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.2);
+
+      masterTL.to('.header-badge', {
+        x: 0,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.3);
+
+      masterTL.to('.badge-dot', {
+        scale: 1,
+        duration: 0.3,
+        ease: 'back.out(2)'
+      }, 0.6);
+
+      // 3. Stat cards staggered entrance
+      masterTL.to('.stat-card', {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'back.out(1.3)'
+      }, 0.4);
+
+      // 4. Card icons animation
+      masterTL.to('.card-icon', {
+        scale: 1,
+        rotation: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'back.out(2)'
+      }, 0.7);
+
+      // 5. Count up animations for numbers
+      const numberElements = document.querySelectorAll('[data-value]');
+      numberElements.forEach((el, index) => {
+        const target = parseInt(el.dataset.value);
+        const counter = { value: 0 };
+
+        gsap.to(counter, {
+          value: target,
+          duration: 1.5,
+          delay: 1.0 + (index * 0.1),
+          ease: 'power1.out',
+          onUpdate: function() {
+            el.textContent = Math.round(counter.value).toLocaleString('id-ID');
+          }
+        });
+      });
+
+      // 6. Highlight card entrance
+      masterTL.to('.highlight-card', {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
+        ease: 'back.out(1.4)'
+      }, 1.2);
+
+      // 7. Highlight icon bounce
+      masterTL.to('.highlight-icon', {
+        scale: 1,
+        rotation: 0,
+        duration: 0.5,
+        ease: 'back.out(2)'
+      }, 1.5);
+
+      // 8. Highlight text stagger
+      masterTL.to('.highlight-text h3, .highlight-text p', {
+        x: 0,
+        opacity: 1,
+        duration: 0.4,
+        stagger: 0.1,
+        ease: 'power2.out'
+      }, 1.6);
+
+      // 9. Highlight value entrance
+      masterTL.to('.highlight-value', {
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'back.out(2)'
+      }, 1.8);
+
+      // 10. Pulse ring animation (continuous)
+      gsap.to('.pulse-ring', {
+        scale: 1.5,
+        opacity: 0.6,
+        duration: 1.5,
+        ease: 'power1.out',
+        repeat: -1,
+        delay: 2.5
+      });
+
+      // 11. Continuous subtle floating for deco shapes (after entrance completes)
+      masterTL.call(() => {
+        gsap.to('.deco-shape', {
+          y: '+=20',
+          duration: 4,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+          stagger: 1
+        });
+      }, null, 2);
+
+      // Setup hover effects for stat cards
+      document.querySelectorAll('.stat-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card.querySelector('.card-icon'), {
+            scale: 1.1,
+            rotation: 10,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card.querySelector('.card-icon'), {
+            scale: 1,
+            rotation: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>

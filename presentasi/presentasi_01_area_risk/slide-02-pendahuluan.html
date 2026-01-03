@@ -41,12 +41,6 @@
       color: #fff;
       position: relative;
       z-index: 1;
-      opacity: 0;
-      animation: fadeInDown 0.6s ease-out forwards;
-    }
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
     .content {
       flex: 1;
@@ -61,12 +55,6 @@
       padding: 2.5rem;
       margin-bottom: 2rem;
       border-left: 5px solid var(--pln-primary-blue);
-      opacity: 0;
-      animation: fadeInUp 0.6s ease-out 0.2s forwards;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
     .intro-box h2 {
       font-family: 'Poppins', sans-serif;
@@ -87,8 +75,6 @@
       border-radius: 16px;
       padding: 2rem 2.5rem;
       color: #fff;
-      opacity: 0;
-      animation: fadeInUp 0.6s ease-out 0.4s forwards;
     }
     .goal-box h3 {
       font-size: 1rem;
@@ -129,5 +115,33 @@
       <p>Memprioritaskan intervensi K3 berdasarkan data untuk mencegah kecelakaan kerja dan meningkatkan safety culture di seluruh unit operasional.</p>
     </div>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. SET INITIAL STATES (hidden)
+      gsap.set('.header h1', { y: -30, opacity: 0 });
+      gsap.set('.intro-box', { y: 30, opacity: 0 });
+      gsap.set('.intro-box h2', { x: -20, opacity: 0 });
+      gsap.set('.intro-box p', { y: 20, opacity: 0 });
+      gsap.set('.period-badge', { scale: 0, opacity: 0 });
+      gsap.set('.goal-box', { y: 30, opacity: 0 });
+      gsap.set('.goal-box h3', { x: -20, opacity: 0 });
+      gsap.set('.goal-box p', { y: 20, opacity: 0 });
+
+      // 2. CREATE TIMELINE
+      const masterTL = gsap.timeline({ delay: 0.1 });
+
+      // 3. ANIMATE TO VISIBLE STATES
+      masterTL.to('.header h1', { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 0.2);
+      masterTL.to('.intro-box', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.4);
+      masterTL.to('.intro-box h2', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.6);
+      masterTL.to('.intro-box p', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.8);
+      masterTL.to('.period-badge', { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.7)' }, 1.0);
+      masterTL.to('.goal-box', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.1);
+      masterTL.to('.goal-box h3', { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.3);
+      masterTL.to('.goal-box p', { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 1.5);
+    });
+  </script>
 </body>
 </html>

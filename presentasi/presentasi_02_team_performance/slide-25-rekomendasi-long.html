@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rekomendasi Long-term (3-6 Bulan)</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     :root {
       --pln-dark-blue: #035B71;
@@ -56,22 +57,19 @@
       background: var(--light-gray);
       border-radius: 12px;
       padding: 1.5rem;
-      opacity: 0;
-      animation: fadeInLeft 0.5s ease-out forwards;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
     }
-    .action-card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid var(--pln-green); }
-    .action-card:nth-child(2) { animation-delay: 0.2s; border-left: 5px solid var(--pln-green); }
-    .action-card:nth-child(3) { animation-delay: 0.3s; border-left: 5px solid var(--pln-primary-blue); }
-    @keyframes fadeInLeft {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
+    .action-card:nth-child(1) { border-left: 5px solid var(--pln-green); }
+    .action-card:nth-child(2) { border-left: 5px solid var(--pln-green); }
+    .action-card:nth-child(3) { border-left: 5px solid var(--pln-primary-blue); }
     .priority-badge {
       padding: 0.5rem 1rem;
       border-radius: 8px;
       font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
+      transition: transform 0.3s ease;
     }
     .priority-medium { background: #dcfce7; color: #16a34a; }
     .priority-low { background: #dbeafe; color: #2563eb; }
@@ -140,5 +138,84 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // GSAP Animations using gsap.set() + gsap.to() pattern
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set initial states
+      gsap.set('.header-badge', { opacity: 0, scale: 0.8 });
+      gsap.set('.header h1', { opacity: 0, x: -30 });
+      gsap.set('.action-card', { opacity: 0, x: -40 });
+      gsap.set('.priority-badge', { opacity: 0, scale: 0.5 });
+      gsap.set('.action-content', { opacity: 0, y: 20 });
+      gsap.set('.expected-impact', { opacity: 0, x: 20 });
+
+      // Create timeline
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      // Animate header
+      tl.to('.header-badge', { opacity: 1, scale: 1, duration: 0.5 })
+        .to('.header h1', { opacity: 1, x: 0, duration: 0.6 }, '-=0.3');
+
+      // Animate action cards with stagger
+      tl.to('.action-card', {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        stagger: 0.15
+      }, '-=0.2')
+      .to('.priority-badge', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        stagger: 0.15
+      }, '-=0.5')
+      .to('.action-content', {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.15
+      }, '-=0.6')
+      .to('.expected-impact', {
+        opacity: 1,
+        x: 0,
+        duration: 0.5,
+        stagger: 0.15
+      }, '-=0.6');
+
+      // Hover effects for action cards
+      const actionCards = document.querySelectorAll('.action-card');
+      actionCards.forEach(card => {
+        const badge = card.querySelector('.priority-badge');
+
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            scale: 1.02,
+            boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+            duration: 0.3
+          });
+          gsap.to(badge, { scale: 1.1, duration: 0.3 });
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            scale: 1,
+            boxShadow: '0 0 0 rgba(0,0,0,0)',
+            duration: 0.3
+          });
+          gsap.to(badge, { scale: 1, duration: 0.3 });
+        });
+      });
+
+      // Hover effect for header badge
+      const headerBadge = document.querySelector('.header-badge');
+      headerBadge.addEventListener('mouseenter', () => {
+        gsap.to(headerBadge, { scale: 1.1, duration: 0.3 });
+      });
+      headerBadge.addEventListener('mouseleave', () => {
+        gsap.to(headerBadge, { scale: 1, duration: 0.3 });
+      });
+    });
+  </script>
 </body>
 </html>
