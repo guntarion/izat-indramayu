@@ -1,1 +1,19 @@
-/.DS_Store
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Archives
+*.zip
+
+# Backups
+*-backup/
+presentasi-backup/
+
+# Playwright test screenshots
+.playwright-mcp/
+
+# Claude Code local files
+.claude/skills/
+
+# Plan files
+poster/plan/
