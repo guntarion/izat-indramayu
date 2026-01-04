@@ -26,7 +26,7 @@ Memprioritaskan intervensi K3 berdasarkan data untuk mencegah kecelakaan kerja d
 
 ### Distribusi Volume Temuan per Zona
 
-**Referensi:** Gambar 1 - `assets/images/II.1.1_zona_distribution.png`
+![Gambar 1 - Distribusi Volume Temuan per Zona](assets/images/II.1.1_zona_distribution.png)
 
 **Temuan Utama:**
 - **MAIN_UNIT mendominasi** dengan 2.616 temuan (47%)
@@ -40,7 +40,7 @@ Memprioritaskan intervensi K3 berdasarkan data untuk mencegah kecelakaan kerja d
 
 ### Perbandingan Risk Score per Zona
 
-**Referensi:** Gambar 2 - `assets/images/II.1.1_risk_score_by_zona.png`
+![Gambar 2 - Perbandingan Risk Score per Zona](assets/images/II.1.1_risk_score_by_zona.png)
 
 **Temuan Utama:**
 - **UNKNOWN** memiliki Risk Score tertinggi (1,75)
@@ -54,7 +54,7 @@ Memprioritaskan intervensi K3 berdasarkan data untuk mencegah kecelakaan kerja d
 
 ### Heatmap Risiko K3 Berdasarkan Zona
 
-**Referensi:** Gambar 3 - `assets/images/II.1.1_risk_heatmap_zona.png`
+![Gambar 3 - Heatmap Risiko K3 Berdasarkan Zona](assets/images/II.1.1_risk_heatmap_zona.png)
 
 **Temuan Utama:**
 - **Red zones (HIGH risk):** UNKNOWN dan sebagian COAL_HANDLING
@@ -67,7 +67,7 @@ Memprioritaskan intervensi K3 berdasarkan data untuk mencegah kecelakaan kerja d
 
 ### Heatmap Kategori Temuan per Zona
 
-**Referensi:** Gambar 4 - `assets/images/II.1.1_issue_category_heatmap.png`
+![Gambar 4 - Heatmap Kategori Temuan per Zona](assets/images/II.1.1_issue_category_heatmap.png)
 
 **Temuan Utama:**
 - **FIRE_SAFETY issues** dominan di MAIN_UNIT dan COAL_HANDLING
@@ -93,7 +93,7 @@ Memprioritaskan intervensi K3 berdasarkan data untuk mencegah kecelakaan kerja d
 
 ### Distribusi Temuan Area Prioritas Tinggi
 
-**Referensi:** Gambar 5 - `assets/images/II.1.2_top_areas_distribution.png`
+![Gambar 5 - Distribusi Temuan Area Prioritas Tinggi](assets/images/II.1.2_top_areas_distribution.png)
 
 **Temuan Utama:**
 - **BOILER** mendominasi dengan 1.725 temuan
@@ -106,7 +106,7 @@ Memprioritaskan intervensi K3 berdasarkan data untuk mencegah kecelakaan kerja d
 
 ### Matriks Prioritas Area (Risk vs Volume)
 
-**Referensi:** Gambar 6 - `assets/images/II.1.2_priority_matrix_area.png`
+![Gambar 6 - Matriks Prioritas Area](assets/images/II.1.2_priority_matrix_area.png)
 
 **Kuadran Matriks:**
 - **Kuadran KRITIS (High Risk + High Volume):** BOILER, POS
@@ -120,7 +120,7 @@ Memprioritaskan intervensi K3 berdasarkan data untuk mencegah kecelakaan kerja d
 
 ### Tren Bulanan Area Prioritas
 
-**Referensi:** Gambar 7 - `assets/images/II.1.2_monthly_trend_top_areas.png`
+![Gambar 7 - Tren Bulanan Area Prioritas](assets/images/II.1.2_monthly_trend_top_areas.png)
 
 **Temuan Utama:**
 - **BOILER** menunjukkan trend stabil dengan spike di bulan tertentu

@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IZAT K3 Analytics - UP Indramayu | Poster Infografis</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pln-dark-blue: #035b71;
+        --pln-primary-blue: #00a2b9;
+        --pln-green: #35b971;
+        --pln-light-blue: #00aff0;
+        --pln-yellow: #ffff00;
+        --pln-cyan: #0ff;
+        --bg-light: #f8fafc;
+        --bg-section: #ffffff;
+        --text-dark: #1e293b;
+        --text-muted: #64748b;
+        --border-light: #e2e8f0;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
+        --glow-blue: 0 0 20px rgba(0, 162, 185, 0.4);
+        --glow-green: 0 0 20px rgba(53, 185, 113, 0.4);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, sans-serif;
+        background: linear-gradient(135deg, #0a1628 0%, #1a2744 100%);
+        color: var(--text-dark);
+        line-height: 1.5;
+        min-height: 100vh;
+        padding: 40px;
+      }
+
+      .poster {
+        width: 1200px;
+        margin: 0 auto;
+        background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 50%, #f0fdfa 100%);
+        box-shadow: 0 0 80px rgba(0, 162, 185, 0.3), 0 0 120px rgba(53, 185, 113, 0.2);
+        border-radius: 24px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* ========== DECORATIVE ELEMENTS ========== */
+      .poster::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 15L45 15L37 23L40 33L30 27L20 33L23 23L15 15L25 15Z' fill='none' stroke='%2300a2b9' stroke-opacity='0.03' stroke-width='1'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* ========== HEADER ========== */
+      .header {
+        background: linear-gradient(135deg, var(--pln-dark-blue) 0%, #047a8c 30%, var(--pln-primary-blue) 60%, var(--pln-green) 100%);
+        padding: 40px 48px;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: '';
+        position: absolute;
+        top: -100%;
+        right: -30%;
+        width: 80%;
+        height: 300%;
+        background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        transform: rotate(15deg);
+      }
+
+      .header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(
+          90deg,
+          var(--pln-yellow) 0%,
+          var(--pln-light-blue) 25%,
+          var(--pln-green) 50%,
+          var(--pln-primary-blue) 75%,
+          var(--pln-yellow) 100%
+        );
+      }
+
+      /* Hexagon pattern overlay */
+      .header-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='50,5 90,25 90,75 50,95 10,75 10,25' fill='none' stroke='white' stroke-opacity='0.05' stroke-width='1'/%3E%3C/svg%3E");
+        opacity: 0.5;
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .header-branding {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .header-logo {
+        width: 290px; /* WIDTH: adjust this value */
+        height: 90px; /* HEIGHT: adjust this value */
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.75)); /* OPACITY: 0.85/0.75 = transparency */
+        backdrop-filter: blur(10px);
+        border-radius: 24px; /* CORNER RADIUS: adjust this value */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25), inset 0 2px 0 rgba(255, 255, 255, 0.5);
+        padding: 12px 24px; /* PADDING: top/bottom left/right */
+      }
+
+      .header-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .header-title {
+        text-align: center;
+      }
+
+      .header-title h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 3.2rem;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        margin-bottom: 8px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 2px 0 rgba(0, 0, 0, 0.1);
+        background: linear-gradient(180deg, #fff 0%, #e0f7fa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .header-title .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+        padding: 8px 20px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(4px);
+      }
+
+      .header-title .badge::before {
+        content: '⚡';
+      }
+
+      .header-stats {
+        display: flex;
+        gap: 16px;
+      }
+
+      .stat-box {
+        text-align: center;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+        padding: 20px 28px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        min-width: 110px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stat-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      }
+
+      .stat-box .number {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 800;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .stat-box .number.shift-left {
+        margin-left: -8px;
+        letter-spacing: -0.02em;
+      }
+
+      .stat-box .label {
+        font-size: 0.7rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 4px;
+      }
+
+      /* ========== SECTION TITLES ========== */
+      .section-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        padding: 14px 48px;
+        background: linear-gradient(90deg, var(--pln-dark-blue), var(--pln-primary-blue));
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .section-title::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        background: var(--pln-yellow);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--pln-yellow);
+      }
+
+      .section-title::after {
+        content: '';
+        position: absolute;
+        right: 48px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--pln-yellow), transparent);
+      }
+
+      .section-title.advanced {
+        background: linear-gradient(90deg, #4c1d95, #7c3aed, #a855f7);
+      }
+
+      .section-title.advanced::before {
+        background: #fbbf24;
+        box-shadow: 0 0 10px #fbbf24;
+      }
+
+      .section-title.advanced::after {
+        background: linear-gradient(90deg, #fbbf24, transparent);
+      }
+
+      .section-content {
+        padding: 32px 48px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ========== DATA CLEANSING SECTION ========== */
+      .pipeline-section {
+        background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #f0f9ff 100%);
+        position: relative;
+      }
+
+      .pipeline-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='2' fill='%2300a2b9' fill-opacity='0.05'/%3E%3C/svg%3E");
+      }
+
+      .pipeline-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .pipeline-title h3 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--pln-dark-blue);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .pipeline-title h3::before {
+        content: '⚙️';
+        font-size: 1.3rem;
+      }
+
+      .pipeline-title p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-top: 6px;
+        padding-left: 35px;
+      }
+
+      .pipeline-impact {
+        background: linear-gradient(135deg, var(--pln-green), #059669, var(--pln-primary-blue));
+        color: #fff;
+        padding: 16px 28px;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(53, 185, 113, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .pipeline-impact::before {
+        content: '📈';
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        font-size: 1.2rem;
+        opacity: 0.5;
+      }
+
+      .pipeline-impact .value {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2rem;
+        font-weight: 900;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .pipeline-impact .label {
+        font-size: 0.75rem;
+        opacity: 0.95;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+      }
+
+      /* Pipeline Steps - Flow Design */
+      .pipeline-flow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 24px;
+        position: relative;
+        z-index: 1;
+        padding: 10px 0;
+      }
+
+      .pipeline-step {
+        background: linear-gradient(180deg, #fff, #f8fafc);
+        border-radius: 16px;
+        padding: 16px 14px;
+        text-align: center;
+        border: 2px solid rgba(0, 162, 185, 0.2);
+        position: relative;
+        flex: 1;
+        max-width: 140px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .pipeline-step::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green));
+        border-radius: 16px 16px 0 0;
+      }
+
+      .pipeline-connector {
+        width: 30px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green));
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .pipeline-connector::after {
+        content: '';
+        position: absolute;
+        right: -4px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid var(--pln-green);
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+      }
+
+      .pipeline-step .step-num {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, var(--pln-primary-blue), var(--pln-dark-blue));
+        color: #fff;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin: 0 auto 10px;
+        box-shadow: 0 4px 15px rgba(0, 162, 185, 0.4);
+      }
+
+      .pipeline-step .step-title {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--pln-dark-blue);
+        margin-bottom: 4px;
+      }
+
+      .pipeline-step .step-output {
+        font-size: 0.65rem;
+        color: var(--pln-green);
+        font-weight: 600;
+        background: rgba(53, 185, 113, 0.1);
+        padding: 2px 8px;
+        border-radius: 10px;
+        display: inline-block;
+      }
+
+      /* Pipeline Summary Cards */
+      .pipeline-summary {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .summary-card {
+        background: linear-gradient(180deg, #fff, #f8fafc);
+        border-radius: 14px;
+        padding: 18px 16px;
+        text-align: center;
+        border: 2px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .summary-card::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(135deg, var(--pln-primary-blue), var(--pln-green));
+        border-radius: 16px;
+        z-index: -1;
+        opacity: 0.3;
+      }
+
+      .summary-card .value {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--pln-dark-blue), var(--pln-primary-blue));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .summary-card .label {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-top: 4px;
+      }
+
+      .summary-card .icon {
+        font-size: 1.4rem;
+        margin-bottom: 6px;
+      }
+
+      /* ========== ANALYSIS GRID ========== */
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .analysis-grid.two-col {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Analysis Cards */
+      .analysis-card {
+        background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        position: relative;
+      }
+
+      .analysis-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green));
+      }
+
+      .analysis-card.risk::before {
+        background: linear-gradient(90deg, #ef4444, #f97316);
+      }
+
+      .analysis-card.team::before {
+        background: linear-gradient(90deg, #3b82f6, #6366f1);
+      }
+
+      .analysis-card.workflow::before {
+        background: linear-gradient(90deg, #10b981, #14b8a6);
+      }
+
+      .analysis-card.shift::before {
+        background: linear-gradient(90deg, #f59e0b, #eab308);
+      }
+
+      .analysis-card.asset::before {
+        background: linear-gradient(90deg, #8b5cf6, #a855f7);
+      }
+
+      .analysis-card.summary::before {
+        background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green), var(--pln-light-blue));
+      }
+
+      .analysis-card.ml::before {
+        background: linear-gradient(90deg, #ec4899, #f43f5e);
+      }
+
+      .analysis-card.ai::before {
+        background: linear-gradient(90deg, #06b6d4, #0891b2);
+      }
+
+      .analysis-card.anomaly::before {
+        background: linear-gradient(90deg, #f43f5e, #e11d48);
+      }
+
+      .card-header {
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+      }
+
+      .card-number {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 900;
+        line-height: 1;
+        opacity: 0.15;
+        position: absolute;
+        right: 16px;
+        top: 12px;
+      }
+
+      .card-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-icon.risk {
+        background: linear-gradient(135deg, #fef2f2, #fee2e2);
+        border: 1px solid #fecaca;
+      }
+
+      .card-icon.team {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        border: 1px solid #bfdbfe;
+      }
+
+      .card-icon.workflow {
+        background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        border: 1px solid #bbf7d0;
+      }
+
+      .card-icon.shift {
+        background: linear-gradient(135deg, #fffbeb, #fef3c7);
+        border: 1px solid #fde68a;
+      }
+
+      .card-icon.asset {
+        background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+        border: 1px solid #e9d5ff;
+      }
+
+      .card-icon.ml {
+        background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+        border: 1px solid #fbcfe8;
+      }
+
+      .card-icon.ai {
+        background: linear-gradient(135deg, #ecfeff, #cffafe);
+        border: 1px solid #a5f3fc;
+      }
+
+      .card-icon.anomaly {
+        background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+        border: 1px solid #fecdd3;
+      }
+
+      .card-icon.summary {
+        background: linear-gradient(135deg, var(--pln-primary-blue), var(--pln-green));
+        border: none;
+        color: white;
+      }
+
+      .card-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--pln-dark-blue);
+      }
+
+      .card-body {
+        padding: 14px 18px 18px;
+      }
+
+      .card-image {
+        width: 100%;
+        height: 110px;
+        object-fit: contain;
+        background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+        border-radius: 12px;
+        margin-bottom: 14px;
+        border: 1px solid #e2e8f0;
+      }
+
+      /* Key Metrics Grid */
+      .key-metrics {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .metric {
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        border: 1px solid #e2e8f0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .metric::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        background: var(--pln-primary-blue);
+      }
+
+      .metric .value {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--pln-dark-blue);
+      }
+
+      .metric .label {
+        font-size: 0.6rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+
+      .metric.alert::before {
+        background: #dc2626;
+      }
+
+      .metric.alert .value {
+        color: #dc2626;
+      }
+
+      .metric.success::before {
+        background: var(--pln-green);
+      }
+
+      .metric.success .value {
+        color: #059669;
+      }
+
+      /* Insights List */
+      .insights-list {
+        list-style: none;
+      }
+
+      .insights-list li {
+        font-size: 0.75rem;
+        padding: 6px 0;
+        padding-left: 20px;
+        position: relative;
+        color: var(--text-dark);
+        border-bottom: 1px solid #f1f5f9;
+        line-height: 1.4;
+      }
+
+      .insights-list li:last-child {
+        border-bottom: none;
+      }
+
+      .insights-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 11px;
+        width: 8px;
+        height: 8px;
+        background: linear-gradient(135deg, var(--pln-primary-blue), var(--pln-green));
+        border-radius: 50%;
+      }
+
+      /* Status Badges */
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 0.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .status-badge.critical {
+        background: linear-gradient(135deg, #fef2f2, #fee2e2);
+        color: #dc2626;
+        border: 1px solid #fecaca;
+      }
+
+      .status-badge.critical::before {
+        content: '⚠️';
+        font-size: 0.7rem;
+      }
+
+      .status-badge.warning {
+        background: linear-gradient(135deg, #fffbeb, #fef3c7);
+        color: #d97706;
+        border: 1px solid #fde68a;
+      }
+
+      .status-badge.success {
+        background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        color: #16a34a;
+        border: 1px solid #bbf7d0;
+      }
+
+      .status-badge.info {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        color: #2563eb;
+        border: 1px solid #bfdbfe;
+      }
+
+      /* Summary Card Special */
+      .analysis-card.summary-card-special {
+        background: linear-gradient(135deg, #ecfeff 0%, #f0fdfa 50%, #f0f9ff 100%);
+      }
+
+      .summary-highlight {
+        margin-top: 14px;
+        padding: 12px 14px;
+        background: linear-gradient(135deg, rgba(0, 162, 185, 0.1), rgba(53, 185, 113, 0.1));
+        border-radius: 12px;
+        border: 1px solid rgba(0, 162, 185, 0.2);
+        font-size: 0.75rem;
+        text-align: center;
+        position: relative;
+      }
+
+      .summary-highlight::before {
+        content: '💡';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        padding: 0 8px;
+        font-size: 1rem;
+      }
+
+      /* ========== ADVANCED SECTION ========== */
+      .advanced-section {
+        background: linear-gradient(135deg, #faf5ff 0%, #fdf4ff 30%, #fce7f3 60%, #fff1f2 100%);
+        position: relative;
+      }
+
+      .advanced-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%239333ea' stroke-opacity='0.03' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%239333ea' stroke-opacity='0.03' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%239333ea' stroke-opacity='0.03' stroke-width='1'/%3E%3C/svg%3E");
+      }
+
+      /* AI Badge for Advanced Cards */
+      .ai-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: linear-gradient(135deg, #7c3aed, #a855f7);
+        color: white;
+        font-size: 0.55rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        box-shadow: 0 2px 10px rgba(124, 58, 237, 0.3);
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        background: linear-gradient(135deg, var(--pln-dark-blue) 0%, #024959 50%, #023d4a 100%);
+        color: #fff;
+        padding: 28px 48px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--pln-yellow) 0%,
+          var(--pln-light-blue) 25%,
+          var(--pln-green) 50%,
+          var(--pln-primary-blue) 75%,
+          var(--pln-yellow) 100%
+        );
+      }
+
+      .footer::after {
+        content: '';
+        position: absolute;
+        bottom: -50%;
+        right: -10%;
+        width: 40%;
+        height: 200%;
+        background: radial-gradient(ellipse at center, rgba(0, 162, 185, 0.1), transparent);
+      }
+
+      .footer-left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-logo {
+        width: 180px; /* WIDTH: adjust this value */
+        height: 60px; /* HEIGHT: adjust this value */
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.75)); /* OPACITY: 0.85/0.75 = transparency */
+        border-radius: 16px; /* CORNER RADIUS: adjust this value */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        padding: 8px 16px; /* PADDING: top/bottom left/right */
+      }
+
+      .footer-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .footer-info h4 {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .footer-info p {
+        font-size: 0.8rem;
+        opacity: 0.85;
+      }
+
+      .footer-right {
+        text-align: right;
+        font-size: 0.8rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-right p {
+        opacity: 0.9;
+        margin-bottom: 2px;
+      }
+
+      .footer-right .version {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 0.7rem;
+        margin-top: 6px;
+      }
+
+      .footer-right .version::before {
+        content: '✨';
+      }
+
+      /* ========== PRINT STYLES ========== */
+      @media print {
+        body {
+          background: #fff;
+          padding: 0;
+        }
+
+        .poster {
+          box-shadow: none;
+          width: 100%;
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="poster">
+      <!-- ==================== HEADER ==================== -->
+      <header class="header">
+        <div class="header-pattern"></div>
+        <div class="header-content">
+          <div class="header-branding">
+            <div class="header-logo">
+              <img src="../assets/images/PLN-Nusantara-Power.png" alt="PLN Nusantara Power" />
+            </div>
+            <div class="header-title">
+              <h1>IZAT K3 Analytics</h1>
+              <span class="badge">UP Indramayu | Januari - Oktober 2025</span>
+            </div>
+          </div>
+          <div class="header-stats">
+            <div class="stat-box">
+              <div class="number shift-left">5.575</div>
+              <div class="label">Total Temuan</div>
+            </div>
+            <div class="stat-box">
+              <div class="number">75</div>
+              <div class="label">Kolom Analitis</div>
+            </div>
+            <div class="stat-box">
+              <div class="number">9</div>
+              <div class="label">Modul Analisis</div>
+            </div>
+            <div class="stat-box">
+              <div class="number">652</div>
+              <div class="label">Reporter Aktif</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ==================== SECTION 0: DATA CLEANSING ==================== -->
+      <div class="section-title">Preliminary Processing: Data Cleansing Pipeline</div>
+      <section class="section-content pipeline-section">
+        <div class="pipeline-header">
+          <div class="pipeline-title">
+            <h3>7 Tahapan Transformasi Data</h3>
+            <p>Dari data mentah ke analytics-ready dengan kualitas tinggi</p>
+          </div>
+          <div class="pipeline-impact">
+            <div class="value">+141%</div>
+            <div class="label">Peningkatan Struktur</div>
+          </div>
+        </div>
+
+        <div class="pipeline-flow">
+          <div class="pipeline-step">
+            <div class="step-num">1</div>
+            <div class="step-title">Fuzzy Matching</div>
+            <div class="step-output">Koreksi Typo</div>
+          </div>
+          <div class="pipeline-connector"></div>
+          <div class="pipeline-step">
+            <div class="step-num">2</div>
+            <div class="step-title">Lokasi</div>
+            <div class="step-output">5 Zona, 46 Area</div>
+          </div>
+          <div class="pipeline-connector"></div>
+          <div class="pipeline-step">
+            <div class="step-num">3</div>
+            <div class="step-title">Perusahaan</div>
+            <div class="step-output">15 Vendor</div>
+          </div>
+          <div class="pipeline-connector"></div>
+          <div class="pipeline-step">
+            <div class="step-num">4</div>
+            <div class="step-title">Tanggal</div>
+            <div class="step-output">14 Kolom Waktu</div>
+          </div>
+          <div class="pipeline-connector"></div>
+          <div class="pipeline-step">
+            <div class="step-num">5</div>
+            <div class="step-title">Risk Severity</div>
+            <div class="step-output">4 Level Risiko</div>
+          </div>
+          <div class="pipeline-connector"></div>
+          <div class="pipeline-step">
+            <div class="step-num">6</div>
+            <div class="step-title">Quality Metrics</div>
+            <div class="step-output">Skor 0-5</div>
+          </div>
+          <div class="pipeline-connector"></div>
+          <div class="pipeline-step">
+            <div class="step-num">7</div>
+            <div class="step-title">Trend Analysis</div>
+            <div class="step-output">9 Benchmark</div>
+          </div>
+        </div>
+
+        <div class="pipeline-summary">
+          <div class="summary-card">
+            <div class="icon">📊</div>
+            <div class="value">31 → 75</div>
+            <div class="label">Kolom Data</div>
+          </div>
+          <div class="summary-card">
+            <div class="icon">✅</div>
+            <div class="value">+81%</div>
+            <div class="label">Data Quality Score</div>
+          </div>
+          <div class="summary-card">
+            <div class="icon">🔄</div>
+            <div class="value">-42%</div>
+            <div class="label">Unique Variants</div>
+          </div>
+          <div class="summary-card">
+            <div class="icon">⚡</div>
+            <div class="value">10x</div>
+            <div class="label">Analysis Speed</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== BASIC ANALYSIS ==================== -->
+      <div class="section-title">Basic Analysis: 5 Modul Deskriptif</div>
+      <section class="section-content">
+        <div class="analysis-grid">
+          <!-- Card 01: Area Risk -->
+          <div class="analysis-card risk">
+            <div class="card-header">
+              <div class="card-icon risk">🎯</div>
+              <div class="card-title">Analisis Risiko Area</div>
+              <span class="card-number">01</span>
+            </div>
+            <div class="card-body">
+              <img src="../assets/images/II.1.1_zona_distribution.png" alt="Zona Distribution" class="card-image" />
+              <div class="key-metrics">
+                <div class="metric">
+                  <div class="value">5</div>
+                  <div class="label">Zona Operasi</div>
+                </div>
+                <div class="metric alert">
+                  <div class="value">46.4%</div>
+                  <div class="label">Unsafe UNKNOWN</div>
+                </div>
+                <div class="metric">
+                  <div class="value">47%</div>
+                  <div class="label">MAIN_UNIT</div>
+                </div>
+                <div class="metric success">
+                  <div class="value">0.92</div>
+                  <div class="label">Risk UTILITY</div>
+                </div>
+              </div>
+              <ul class="insights-list">
+                <li>UNKNOWN zone: Risk tertinggi (1.75)</li>
+                <li>4 area dengan 100% unsafe rate</li>
+                <li>UTILITY: Best practice model</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 02: Team Performance -->
+          <div class="analysis-card team">
+            <div class="card-header">
+              <div class="card-icon team">👥</div>
+              <div class="card-title">Performa Tim</div>
+              <span class="card-number">02</span>
+            </div>
+            <div class="card-body">
+              <img src="../assets/images/II.2.2_pic_workload_overview.png" alt="PIC Workload" class="card-image" />
+              <div class="key-metrics">
+                <div class="metric">
+                  <div class="value">652</div>
+                  <div class="label">Reporter Aktif</div>
+                </div>
+                <div class="metric alert">
+                  <div class="value">47%</div>
+                  <div class="label">Andrian Workload</div>
+                </div>
+                <div class="metric success">
+                  <div class="value">100%</div>
+                  <div class="label">Close Rate PIC</div>
+                </div>
+                <div class="metric">
+                  <div class="value">38.7%</div>
+                  <div class="label">Garda Detection</div>
+                </div>
+              </div>
+              <ul class="insights-list">
+                <li><span class="status-badge critical">URGENT</span> PIC Andrian overloaded</li>
+                <li>Top: Suparman (34 laporan)</li>
+                <li>PT RBU: 9.8% detection rate</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 03: Resolution Workflow -->
+          <div class="analysis-card workflow">
+            <div class="card-header">
+              <div class="card-icon workflow">⚡</div>
+              <div class="card-title">Alur Penyelesaian</div>
+              <span class="card-number">03</span>
+            </div>
+            <div class="card-body">
+              <img src="../assets/images/II.3.1_workflow_funnel.png" alt="Workflow Funnel" class="card-image" />
+              <div class="key-metrics">
+                <div class="metric success">
+                  <div class="value">99.2%</div>
+                  <div class="label">Close Rate</div>
+                </div>
+                <div class="metric alert">
+                  <div class="value">0%</div>
+                  <div class="label">SLA CRITICAL</div>
+                </div>
+                <div class="metric alert">
+                  <div class="value">269</div>
+                  <div class="label">Hari Avg CRIT</div>
+                </div>
+                <div class="metric">
+                  <div class="value">220</div>
+                  <div class="label">Hari Overall</div>
+                </div>
+              </div>
+              <ul class="insights-list">
+                <li><span class="status-badge critical">PARADOX</span> Complete tapi selalu late</li>
+                <li>Target 1 hari, actual 269 hari (269x!)</li>
+                <li>Systemic issue, bukan people</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 04: Shift Patterns -->
+          <div class="analysis-card shift">
+            <div class="card-header">
+              <div class="card-icon shift">🕐</div>
+              <div class="card-title">Pola Shift & Hari</div>
+              <span class="card-number">04</span>
+            </div>
+            <div class="card-body">
+              <img src="../assets/images/II.4.1_shift_performance_overview.png" alt="Shift Performance" class="card-image" />
+              <div class="key-metrics">
+                <div class="metric">
+                  <div class="value">63%</div>
+                  <div class="label">Shift Pagi</div>
+                </div>
+                <div class="metric success">
+                  <div class="value">25.7%</div>
+                  <div class="label">Detection Malam</div>
+                </div>
+                <div class="metric alert">
+                  <div class="value">17.1%</div>
+                  <div class="label">Detection Siang</div>
+                </div>
+                <div class="metric">
+                  <div class="value">30.6%</div>
+                  <div class="label">Peak: Rabu</div>
+                </div>
+              </div>
+              <ul class="insights-list">
+                <li>Shift C (Malam) = Best practice</li>
+                <li>Monday Effect: Volume tinggi, quality rendah</li>
+                <li>Rabu-Kamis: Optimal inspection</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 05: Asset Tracking -->
+          <div class="analysis-card asset">
+            <div class="card-header">
+              <div class="card-icon asset">🔧</div>
+              <div class="card-title">Tracking Aset</div>
+              <span class="card-number">05</span>
+            </div>
+            <div class="card-body">
+              <img src="../assets/images/II.5_asset_category_distribution.png" alt="Asset Distribution" class="card-image" />
+              <div class="key-metrics">
+                <div class="metric alert">
+                  <div class="value">~800</div>
+                  <div class="label">APAR Findings</div>
+                </div>
+                <div class="metric">
+                  <div class="value">~300</div>
+                  <div class="label">Pump Issues</div>
+                </div>
+                <div class="metric">
+                  <div class="value">~250</div>
+                  <div class="label">Panel Listrik</div>
+                </div>
+                <div class="metric">
+                  <div class="value">~200</div>
+                  <div class="label">Tangga/Railing</div>
+                </div>
+              </div>
+              <ul class="insights-list">
+                <li><span class="status-badge critical">CRITICAL</span> APAR crisis: 800+ findings</li>
+                <li>Predictive maintenance opportunity</li>
+                <li>Asset-specific intervention enabled</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Summary Card -->
+          <div class="analysis-card summary summary-card-special">
+            <div class="card-header">
+              <div class="card-icon summary">📊</div>
+              <div class="card-title">Key Insights Summary</div>
+            </div>
+            <div class="card-body">
+              <ul class="insights-list" style="font-size: 0.78rem">
+                <li><strong>Risk:</strong> UNKNOWN zone paling berbahaya (46.4% unsafe)</li>
+                <li><strong>Team:</strong> 1 PIC handle 47% workload - unsustainable</li>
+                <li><strong>SLA:</strong> 0% compliance untuk CRITICAL findings</li>
+                <li><strong>Pattern:</strong> Shift Malam quality terbaik (25.7%)</li>
+                <li><strong>Asset:</strong> APAR crisis memerlukan immediate action</li>
+                <li><strong>Best Practice:</strong> UTILITY zone & Garda Bangsa</li>
+              </ul>
+              <div class="summary-highlight"><strong>Rekomendasi Prioritas:</strong> Redistribusi PIC, Fast-track CRITICAL, Training Shift B</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== ADVANCED ANALYSIS ==================== -->
+      <div class="section-title advanced">Advanced Analysis: Machine Learning & AI</div>
+      <section class="section-content advanced-section">
+        <div class="analysis-grid">
+          <!-- Card 06: Risk Prediction -->
+          <div class="analysis-card ml">
+            <span class="ai-badge">Machine Learning</span>
+            <div class="card-header">
+              <div class="card-icon ml">🤖</div>
+              <div class="card-title">Model Prediksi Risiko</div>
+              <span class="card-number">06</span>
+            </div>
+            <div class="card-body">
+              <img src="../assets/images/feature_importance.png" alt="Feature Importance" class="card-image" />
+              <div class="key-metrics">
+                <div class="metric success">
+                  <div class="value">75-80%</div>
+                  <div class="label">Accuracy</div>
+                </div>
+                <div class="metric">
+                  <div class="value">30%</div>
+                  <div class="label">Zona Weight</div>
+                </div>
+                <div class="metric">
+                  <div class="value">25%</div>
+                  <div class="label">Area Weight</div>
+                </div>
+                <div class="metric alert">
+                  <div class="value">78%</div>
+                  <div class="label">High Risk Pred</div>
+                </div>
+              </div>
+              <ul class="insights-list">
+                <li>Random Forest classifier</li>
+                <li>Top scenario: COAL + Malam + Weekend</li>
+                <li>Location > Time untuk prediksi</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 07: Smart Recommendation -->
+          <div class="analysis-card ai">
+            <span class="ai-badge">AI Powered</span>
+            <div class="card-header">
+              <div class="card-icon ai">💡</div>
+              <div class="card-title">Smart Recommendation</div>
+              <span class="card-number">07</span>
+            </div>
+            <div class="card-body">
+              <img src="../assets/images/IV.2_smart_recommendation_resolution_analysis.png" alt="Smart Recommendation" class="card-image" />
+              <div class="key-metrics">
+                <div class="metric">
+                  <div class="value">5.575</div>
+                  <div class="label">Knowledge Base</div>
+                </div>
+                <div class="metric success">
+                  <div class="value">70-85%</div>
+                  <div class="label">Similarity Match</div>
+                </div>
+                <div class="metric">
+                  <div class="value">3</div>
+                  <div class="label">Tier Actions</div>
+                </div>
+                <div class="metric">
+                  <div class="value">TF-IDF</div>
+                  <div class="label">Algorithm</div>
+                </div>
+              </div>
+              <ul class="insights-list">
+                <li>Instant guidance dari historical success</li>
+                <li>3-tier: Immediate, Short, Preventive</li>
+                <li>Knowledge tidak hilang saat resign</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Card 08: Anomaly Detection -->
+          <div class="analysis-card anomaly">
+            <span class="ai-badge">Deep Analytics</span>
+            <div class="card-header">
+              <div class="card-icon anomaly">🔍</div>
+              <div class="card-title">Deteksi Anomali</div>
+              <span class="card-number">08</span>
+            </div>
+            <div class="card-body">
+              <img src="../assets/images/IV.3_anomaly_detection_reporter_analysis.png" alt="Anomaly Detection" class="card-image" />
+              <div class="key-metrics">
+                <div class="metric">
+                  <div class="value">12</div>
+                  <div class="label">Volume Spikes</div>
+                </div>
+                <div class="metric alert">
+                  <div class="value">3</div>
+                  <div class="label">Gaming Cases</div>
+                </div>
+                <div class="metric success">
+                  <div class="value">2-5</div>
+                  <div class="label">Hari Lebih Cepat</div>
+                </div>
+                <div class="metric">
+                  <div class="value">IF</div>
+                  <div class="label">Isolation Forest</div>
+                </div>
+              </div>
+              <ul class="insights-list">
+                <li>Early warning system otomatis</li>
+                <li>Gaming prevention: 47 findings/90 menit</li>
+                <li>System downtime detection</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FOOTER ==================== -->
+      <footer class="footer">
+        <div class="footer-left">
+          <div class="footer-logo">
+            <img src="../assets/images/PLN-Nusantara-Power.png" alt="PLN Nusantara Power" />
+          </div>
+          <div class="footer-info">
+            <h4>UP Indramayu — PLN Nusantara Power</h4>
+            <p>IZAT K3 Analytics Dashboard | Data-Driven Safety Excellence</p>
+          </div>
+        </div>
+        <div class="footer-right">
+          <p>© Desember 2025</p>
+          <span class="version">Tim IZAT — UP Indramayu</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

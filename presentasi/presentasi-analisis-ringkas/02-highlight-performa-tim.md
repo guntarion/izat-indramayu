@@ -40,7 +40,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ### Chart Analysis
 
 #### Chart #1: Papan Peringkat Reporter Gabungan
-**Referensi:** `II.2.1_reporter_leaderboard_combined.png`
+![Gambar](assets/images/II.2.1_reporter_leaderboard_combined.png)
 
 **Temuan Utama:**
 - **Suparman** unggul di volume (34 laporan) dengan consistency tinggi
@@ -54,7 +54,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ---
 
 #### Chart #2: Volume Laporan dari Top 10 Reporter
-**Referensi:** `II.2.1_top_reporters_volume.png`
+![Gambar](assets/images/II.2.1_top_reporters_volume.png)
 
 **Temuan Utama:**
 - **Distribusi relatif merata** di top 10 (20-34 laporan)
@@ -68,7 +68,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ---
 
 #### Chart #3: Kualitas Laporan dari Top Reporter
-**Referensi:** `II.2.1_top_reporters_quality.png`
+![Gambar](assets/images/II.2.1_top_reporters_quality.png)
 
 **Temuan Utama:**
 - **Quality score** top reporters berada di range 3,7-4,4
@@ -82,7 +82,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ---
 
 #### Chart #4: Distribusi Reporter Berdasarkan Perusahaan
-**Referensi:** `II.2.1_reporter_by_company.png`
+![Gambar](assets/images/II.2.1_reporter_by_company.png)
 
 **Temuan Utama:**
 - **PT PLN NP Services** mendominasi dengan 278 reporter aktif
@@ -120,7 +120,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ### Chart Analysis
 
 #### Chart #5: Overview Beban Kerja PIC
-**Referensi:** `II.2.2_pic_workload_overview.png`
+![Gambar](assets/images/II.2.2_pic_workload_overview.png)
 
 **Temuan Utama:**
 - **Andrian Denofan** mendominasi **47% dari total temuan** (2.613)
@@ -134,7 +134,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ---
 
 #### Chart #6: Waktu Resolusi Rata-rata per PIC
-**Referensi:** `II.2.2_pic_resolution_time.png`
+![Gambar](assets/images/II.2.2_pic_resolution_time.png)
 
 **Temuan Utama:**
 - **Variasi signifikan**: 110 hari (Andrian) hingga 348 hari (Asep)
@@ -148,7 +148,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ---
 
 #### Chart #7: Skor Performa PIC (Gabungan)
-**Referensi:** `II.2.2_pic_performance_score.png`
+![Gambar](assets/images/II.2.2_pic_performance_score.png)
 
 **Temuan Utama:**
 - **100% close rate untuk semua PIC** - tidak ada yang mengabaikan temuan
@@ -195,7 +195,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ### Chart Analysis
 
 #### Chart #8: Distribusi Kontribusi Laporan per Vendor
-**Referensi:** `II.2.3_vendor_distribution.png`
+![Gambar](assets/images/II.2.3_vendor_distribution.png)
 
 **Temuan Utama:**
 - **PT PLN NP Services** kontribusi terbesar: 1.836 laporan (33%)
@@ -209,7 +209,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ---
 
 #### Chart #9: Scorecard Vendor (Kualitas vs Detection Rate)
-**Referensi:** `II.2.3_vendor_scorecard.png`
+![Gambar](assets/images/II.2.3_vendor_scorecard.png)
 
 **Temuan Utama:**
 - **PT PLN NP (internal)** berada di kuadran ideal: Kualitas tinggi (3,61) + Detection rate baik (37%)
@@ -223,7 +223,7 @@ Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang pe
 ---
 
 #### Chart #10: Perbandingan PLN vs Vendor Eksternal
-**Referensi:** `II.2.3_pln_vs_vendor_comparison.png`
+![Gambar](assets/images/II.2.3_pln_vs_vendor_comparison.png)
 
 **Temuan Utama:**
 - **PLN internal** unggul signifikan di kualitas (3,61 vs 2,3 vendor avg)

@@ -1,0 +1,6 @@
+python-docx==1.1.2
+docxcompose==1.4.0
+lxml==5.3.0
+pymupdf4llm==0.0.17
+docx2pdf==0.1.8
+pypandoc-binary==1.13

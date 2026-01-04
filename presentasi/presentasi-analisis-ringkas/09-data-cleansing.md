@@ -39,7 +39,7 @@
 
 ### Metode Fuzzy Matching
 
-**Referensi:** `assets/images/step1_fuzzy_matching_example.png` (jika ada)
+![Gambar](assets/images/step1_fuzzy_matching_example.png) (jika ada)
 
 **Algoritma:** RapidFuzz library dengan Levenshtein distance
 
@@ -86,7 +86,7 @@
 
 ### Distribusi Zona Operasional
 
-**Referensi:** `assets/images/step2_zona_distribution.png`
+![Gambar](assets/images/step2_zona_distribution.png)
 
 | Zona | Total Temuan | % Total | Karakteristik Utama |
 |------|--------------|---------|---------------------|
@@ -102,7 +102,7 @@
 
 ### Mapping Zona ke Area Kritikal
 
-**Referensi:** `assets/images/step2_area_mapping.png`
+![Gambar](assets/images/step2_area_mapping.png)
 
 **MAIN_UNIT Areas (High Risk):**
 - BOILER: 1.725 temuan - highest volume
@@ -189,7 +189,7 @@
 
 ### Pattern Shift & Hari
 
-**Referensi:** `assets/images/step4_shift_pattern.png`
+![Gambar](assets/images/step4_shift_pattern.png)
 
 **Shift Distribution:**
 - **Shift PAGI:** 2.833 temuan (51%) - dominan
@@ -228,7 +228,7 @@
 
 ### Distribusi Risk Severity
 
-**Referensi:** `assets/images/step5_risk_severity_distribution.png`
+![Gambar](assets/images/step5_risk_severity_distribution.png)
 
 | Risk Severity | Risk Score Range | Jumlah | % Total | SLA Target | Prioritas |
 |---------------|------------------|--------|---------|------------|-----------|
@@ -285,7 +285,7 @@
 
 ### PIC Workload Analysis
 
-**Referensi:** `assets/images/step6_pic_workload.png`
+![Gambar](assets/images/step6_pic_workload.png)
 
 **Kolom Metrik PIC:**
 - `pic_total_findings` - Total temuan assigned
@@ -360,7 +360,7 @@
 
 ### Cross-Category Correlation
 
-**Referensi:** `assets/images/step7_correlation_heatmap.png`
+![Gambar](assets/images/step7_correlation_heatmap.png)
 
 **Key Correlations Discovered:**
 - **Quality Score ↔ Detection Rate:** +0,67 correlation - higher quality reports = more actionable findings

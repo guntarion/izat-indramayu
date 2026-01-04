@@ -49,7 +49,7 @@ Mengoptimalkan penjadwalan inspeksi K3, alokasi SDM, dan meningkatkan efektivita
 ## 📍 BAGIAN A: Analisis Kinerja Per Shift
 
 ### Chart #1: Perbandingan Kinerja Antar Shift
-**Referensi:** Gambar 4.1.1 - `II.4.1_shift_performance_overview.png`
+![Gambar 4.1.1](assets/images/II.4.1_shift_performance_overview.png)
 
 **Temuan Utama:**
 - **Shift A (Pagi) dominasi volume:** 3.537 laporan (63% dari total)
@@ -63,7 +63,7 @@ Mengoptimalkan penjadwalan inspeksi K3, alokasi SDM, dan meningkatkan efektivita
 ---
 
 ### Chart #2: Distribusi Laporan Per Jam
-**Referensi:** Gambar 4.1.2 - `II.4.1_hourly_distribution.png`
+![Gambar 4.1.2](assets/images/II.4.1_hourly_distribution.png)
 
 **Temuan Utama:**
 - **Peak hours pagi:** 08:00-10:00 (awal Shift A)
@@ -77,7 +77,7 @@ Mengoptimalkan penjadwalan inspeksi K3, alokasi SDM, dan meningkatkan efektivita
 ---
 
 ### Chart #3: Distribusi Kategori Temuan Per Shift
-**Referensi:** Gambar 4.1.3 - `II.4.1_shift_kategori_distribution.png`
+![Gambar 4.1.3](assets/images/II.4.1_shift_kategori_distribution.png)
 
 **Temuan Utama:**
 - **Shift A:** Proporsi Positive tinggi, Unsafe Condition moderat
@@ -91,7 +91,7 @@ Mengoptimalkan penjadwalan inspeksi K3, alokasi SDM, dan meningkatkan efektivita
 ---
 
 ### Chart #4: Heatmap Intensitas Shift-Zona
-**Referensi:** Gambar 4.1.4 - `II.4.1_shift_zona_heatmap.png`
+![Gambar 4.1.4](assets/images/II.4.1_shift_zona_heatmap.png)
 
 **Temuan Utama:**
 - **Hotspot:** Shift A x MAIN_UNIT (warna paling gelap)
@@ -105,7 +105,7 @@ Mengoptimalkan penjadwalan inspeksi K3, alokasi SDM, dan meningkatkan efektivita
 ---
 
 ### Chart #5: Tren Bulanan Per Shift
-**Referensi:** Gambar 4.1.5 - `II.4.1_monthly_shift_trend.png`
+![Gambar 4.1.5](assets/images/II.4.1_monthly_shift_trend.png)
 
 **Temuan Utama:**
 - **Shift A:** Tren stabil dengan fluktuasi musiman
@@ -131,7 +131,7 @@ Mengoptimalkan penjadwalan inspeksi K3, alokasi SDM, dan meningkatkan efektivita
 ## 📅 BAGIAN B: Analisis Pola Hari dalam Seminggu
 
 ### Chart #6: Distribusi Laporan Per Hari
-**Referensi:** Gambar 4.2.1 - `II.4.2_daily_distribution.png`
+![Gambar 4.2.1](assets/images/II.4.2_daily_distribution.png)
 
 **Temuan Utama:**
 - **Senin dominan:** 1.454 laporan (26% dari total)
@@ -146,7 +146,7 @@ Mengoptimalkan penjadwalan inspeksi K3, alokasi SDM, dan meningkatkan efektivita
 ---
 
 ### Chart #7: Perbandingan Weekday vs Weekend
-**Referensi:** Gambar 4.2.2 - `II.4.2_weekday_vs_weekend.png`
+![Gambar 4.2.2](assets/images/II.4.2_weekday_vs_weekend.png)
 
 **Temuan Utama:**
 - **Volume gap:** Weekday 910 laporan/hari vs Weekend 513 laporan/hari (+77%)
@@ -160,7 +160,7 @@ Mengoptimalkan penjadwalan inspeksi K3, alokasi SDM, dan meningkatkan efektivita
 ---
 
 ### Chart #8: Heatmap Hari-Shift
-**Referensi:** Gambar 4.2.3 - `II.4.2_day_shift_heatmap.png`
+![Gambar 4.2.3](assets/images/II.4.2_day_shift_heatmap.png)
 
 **Temuan Utama:**
 - **Hotspot:** Senin Shift A (warna paling gelap) - volume tertinggi
@@ -174,7 +174,7 @@ Mengoptimalkan penjadwalan inspeksi K3, alokasi SDM, dan meningkatkan efektivita
 ---
 
 ### Chart #9: Heatmap Hari-Zona
-**Referensi:** Gambar 4.2.4 - `II.4.2_day_zona_heatmap.png`
+![Gambar 4.2.4](assets/images/II.4.2_day_zona_heatmap.png)
 
 **Temuan Utama:**
 - **Hotspot:** Senin x MAIN_UNIT (aktivitas paling tinggi)
