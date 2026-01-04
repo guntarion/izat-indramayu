@@ -2,6 +2,7 @@
  * PLN Theme Stylesheet
  * Analisis Data IZAT - UP Indramayu
  * Based on PLN Corporate Colors from theme-guide-pln.md
+ * Enhanced for Competition 2026
  */
 
 :root {
@@ -13,6 +14,10 @@
   --pln-green: #35B971;
   --pln-light-blue: #00AFF0;
   --pln-yellow: #FFFF00;
+
+  /* AI/ML Purple Theme */
+  --pln-ai-purple: #8B5CF6;
+  --pln-ai-purple-dark: #7C3AED;
 
   /* Neutral Colors */
   --pln-gray-50: #F8FAFC;
@@ -35,6 +40,21 @@
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #00A2B9, #035B71);
   --gradient-hero: linear-gradient(135deg, rgba(0, 162, 185, 0.1), rgba(53, 185, 113, 0.1));
+  --gradient-success: linear-gradient(135deg, #35B971, #2DA55F);
+  --gradient-ai: linear-gradient(135deg, #8B5CF6, #7C3AED);
+  --gradient-accent: linear-gradient(135deg, #FFFF00, #35B971, #00AFF0);
+
+  /* Enhanced Shadows */
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glow-primary: 0 0 30px rgba(0, 162, 185, 0.3);
+  --shadow-glow-success: 0 0 30px rgba(53, 185, 113, 0.3);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* Reset & Base */
@@ -84,12 +104,39 @@ h5 { font-size: 1.1rem; }
 
 /* Header */
 .header {
-  background: white;
-  border-bottom: 1px solid rgba(0, 162, 185, 0.2);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 162, 185, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green), var(--pln-light-blue), var(--pln-primary-blue));
+  background-size: 300% 100%;
+  animation: headerGradientFlow 8s ease infinite;
+}
+
+@keyframes headerGradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 162, 185, 0.15);
 }
 
 .header-content {
@@ -188,23 +235,49 @@ h5 { font-size: 1.1rem; }
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.nav-dropdown-toggle::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.nav-dropdown:hover .nav-dropdown-toggle::before,
+.nav-dropdown-toggle.active::before {
+  width: 80%;
 }
 
 .nav-dropdown-toggle:hover {
-  background: linear-gradient(135deg, rgba(0, 162, 185, 0.1), rgba(3, 91, 113, 0.1));
+  background: linear-gradient(135deg, rgba(0, 162, 185, 0.08), rgba(3, 91, 113, 0.08));
   color: var(--pln-primary-blue);
+  transform: translateY(-2px);
 }
 
 .nav-dropdown-toggle.active {
   background: var(--gradient-primary);
   color: white;
+  box-shadow: 0 4px 15px rgba(0, 162, 185, 0.3);
+}
+
+.nav-dropdown-toggle.active::before {
+  display: none;
 }
 
 .nav-dropdown-toggle::after {
   content: '▼';
-  font-size: 0.6rem;
-  transition: transform 0.3s ease;
+  font-size: 0.55rem;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  opacity: 0.7;
 }
 
 .nav-dropdown:hover .nav-dropdown-toggle::after {
@@ -213,59 +286,96 @@ h5 { font-size: 1.1rem; }
 
 .nav-dropdown-menu {
   position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 220px;
-  background: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--pln-gray-200);
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  min-width: 240px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 1rem;
+  box-shadow:
+    0 20px 40px -10px rgba(0, 0, 0, 0.15),
+    0 10px 20px -5px rgba(0, 162, 185, 0.1),
+    0 0 0 1px rgba(0, 162, 185, 0.1);
+  border: 1px solid rgba(0, 162, 185, 0.15);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
   overflow: hidden;
+  padding: 0.5rem 0;
+}
+
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.98);
+  border-left: 1px solid rgba(0, 162, 185, 0.15);
+  border-top: 1px solid rgba(0, 162, 185, 0.15);
 }
 
 .nav-dropdown:hover .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .nav-dropdown-menu a {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1.25rem;
   color: var(--pln-gray-700);
   font-size: 0.875rem;
   font-weight: 500;
-  transition: all 0.2s ease;
-  border-bottom: 1px solid var(--pln-gray-100);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
 }
 
-.nav-dropdown-menu a:last-child {
-  border-bottom: none;
+.nav-dropdown-menu a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 162, 185, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.nav-dropdown-menu a:hover::before {
+  opacity: 1;
 }
 
 .nav-dropdown-menu a:hover {
-  background: linear-gradient(135deg, rgba(0, 162, 185, 0.1), rgba(53, 185, 113, 0.05));
   color: var(--pln-primary-blue);
-  padding-left: 1.25rem;
+  border-left-color: var(--pln-primary-blue);
+  padding-left: 1.5rem;
+}
+
+.nav-dropdown-menu a:hover .dropdown-icon {
+  transform: scale(1.2) rotate(5deg);
 }
 
 .nav-dropdown-menu a.active {
-  background: linear-gradient(135deg, rgba(0, 162, 185, 0.15), rgba(53, 185, 113, 0.1));
+  background: linear-gradient(90deg, rgba(0, 162, 185, 0.12), rgba(53, 185, 113, 0.08));
   color: var(--pln-primary-blue);
   font-weight: 600;
+  border-left-color: var(--pln-primary-blue);
 }
 
 .nav-dropdown-menu .dropdown-icon {
-  width: 20px;
+  width: 24px;
   text-align: center;
   flex-shrink: 0;
+  font-size: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 /* AI/ML Dropdown special styling */
@@ -675,14 +785,48 @@ tbody tr:last-child td {
 
 /* Footer */
 .footer {
-  background: var(--pln-dark-blue);
+  background: linear-gradient(135deg, var(--pln-dark-blue) 0%, #024255 50%, var(--pln-dark-blue) 100%);
   color: white;
-  padding: 2rem 0;
+  padding: 3rem 0 2rem;
   margin-top: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Footer wave decoration */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23F8FAFC' d='M0,60 C360,20 720,80 1080,40 C1260,20 1380,30 1440,60 L1440,0 L0,0 Z'/%3E%3C/svg%3E") no-repeat center top;
+  background-size: 100% 100%;
+}
+
+/* Footer pattern overlay */
+.footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(0, 162, 185, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(53, 185, 113, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.footer .container {
+  position: relative;
+  z-index: 1;
 }
 
 .footer-content {
   text-align: center;
+  padding-top: 1rem;
 }
 
 .footer p {
@@ -692,9 +836,20 @@ tbody tr:last-child td {
 }
 
 .footer .logo-text {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(90deg, #fff 0%, rgba(0, 175, 240, 0.9) 50%, #fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 3s linear infinite;
+}
+
+@keyframes shimmerText {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
 }
 
 /* Utility Classes */
