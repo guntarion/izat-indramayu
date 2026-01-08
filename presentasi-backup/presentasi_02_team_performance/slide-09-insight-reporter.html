@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insight Reporter (Takeaways)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .insight-card {
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+    .insight-card:nth-child(1) { animation-delay: 0.1s; border-left: 5px solid #f59e0b; }
+    .insight-card:nth-child(2) { animation-delay: 0.2s; border-left: 5px solid var(--pln-primary-blue); }
+    .insight-card:nth-child(3) { animation-delay: 0.3s; border-left: 5px solid var(--pln-green); }
+    .insight-card:nth-child(4) { animation-delay: 0.4s; border-left: 5px solid #8b5cf6; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+    .insight-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+      margin-bottom: 0.75rem;
+    }
+    .insight-action {
+      font-size: 0.9rem;
+      color: #555;
+      padding: 0.75rem;
+      background: #fff;
+      border-radius: 8px;
+    }
+    .action-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--pln-green);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Insight Reporter (Takeaways)</h1>
+  </div>
+  <div class="content">
+    <div class="insight-card">
+      <p class="category">Top Talent</p>
+      <h3 class="insight-title">Suparman (34 lap) & Muhammad Safei (kualitas 4,4)</h3>
+      <div class="insight-action">
+        <p class="action-label">Tindakan</p>
+        <p>Recognition & reward program</p>
+      </div>
+    </div>
+    <div class="insight-card">
+      <p class="category">Consistency</p>
+      <h3 class="insight-title">Top 4 reporter semua dari vendor (bukan PLN internal)</h3>
+      <div class="insight-action">
+        <p class="action-label">Tindakan</p>
+        <p>Benchmark vendor excellence</p>
+      </div>
+    </div>
+    <div class="insight-card">
+      <p class="category">Security Excellence</p>
+      <h3 class="insight-title">Tim Garda Bangsa dominasi leaderboard</h3>
+      <div class="insight-action">
+        <p class="action-label">Tindakan</p>
+        <p>Replikasi model patrol security</p>
+      </div>
+    </div>
+    <div class="insight-card">
+      <p class="category">Quality Leader</p>
+      <h3 class="insight-title">Detection rate 70-88% di top performers</h3>
+      <div class="insight-action">
+        <p class="action-label">Tindakan</p>
+        <p>Share best practices ke all reporters</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

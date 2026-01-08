@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top 7 Hari - Ranking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; }
+    table { width: 100%; border-collapse: collapse; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; font-size: 0.85rem; }
+    th { background: var(--pln-dark-blue); color: #fff; padding: 0.7rem; text-align: left; font-weight: 600; }
+    td { padding: 0.7rem; border-bottom: 1px solid #e5e7eb; }
+    tr:hover td { background: var(--light-gray); }
+    .rank { font-family: 'Poppins', sans-serif; font-size: 1.1rem; }
+    .best { color: var(--pln-green); font-weight: 700; }
+    .worst { color: #dc2626; font-weight: 700; }
+    .status-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+    .status-excellent { background: var(--pln-green); color: #fff; }
+    .status-good { background: #dcfce7; color: #16a34a; }
+    .status-warning { background: #fef3c7; color: #92400e; }
+    .status-bad { background: #fee2e2; color: #dc2626; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Top 7 Hari - Ranking Kinerja</h1></div>
+  <div class="content">
+    <table>
+      <thead><tr><th>Rank</th><th>Hari</th><th>Total Laporan</th><th>Quality Score</th><th>Detection Rate</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="rank">🥇 #1</td><td><strong>Rabu</strong></td><td>673</td><td class="best">2,58</td><td class="best">30,6%</td><td><span class="status-badge status-excellent">SANGAT BAIK</span></td></tr>
+        <tr><td class="rank">🥈 #2</td><td><strong>Kamis</strong></td><td>719</td><td>2,56</td><td>30,3%</td><td><span class="status-badge status-excellent">SANGAT BAIK</span></td></tr>
+        <tr><td class="rank">🥉 #3</td><td><strong>Selasa</strong></td><td>849</td><td>2,56</td><td>28,5%</td><td><span class="status-badge status-good">BAIK</span></td></tr>
+        <tr><td class="rank">#4</td><td><strong>Sabtu</strong></td><td>368</td><td>2,50</td><td>28,3%</td><td><span class="status-badge status-good">BAIK (Anomali!)</span></td></tr>
+        <tr><td class="rank">#5</td><td><strong>Jumat</strong></td><td>854</td><td>2,26</td><td>24,5%</td><td><span class="status-badge status-good">BAIK</span></td></tr>
+        <tr><td class="rank">#6</td><td><strong>Senin</strong></td><td>1.454</td><td>1,81</td><td class="worst">13,5%</td><td><span class="status-badge status-warning">PERLU PENINGKATAN</span></td></tr>
+        <tr><td class="rank">#7</td><td><strong>Minggu</strong></td><td>658</td><td>1,85</td><td class="worst">9,3%</td><td><span class="status-badge status-bad">KURANG EFEKTIF</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

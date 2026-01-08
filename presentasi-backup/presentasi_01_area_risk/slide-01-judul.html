@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highlight Analisis: Risiko Area</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --gradient-hero: linear-gradient(135deg, #035B71 0%, #00A2B9 50%, #35B971 100%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--gradient-hero);
+      position: relative;
+      overflow: hidden;
+    }
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      animation: float 20s infinite ease-in-out;
+    }
+    .bg-circle:nth-child(1) { width: 400px; height: 400px; top: -100px; right: -100px; animation-delay: 0s; }
+    .bg-circle:nth-child(2) { width: 300px; height: 300px; bottom: -50px; left: -50px; animation-delay: -5s; }
+    .bg-circle:nth-child(3) { width: 200px; height: 200px; top: 50%; left: 20%; animation-delay: -10s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(180deg); }
+    }
+    .content {
+      text-align: center;
+      z-index: 10;
+      padding: 2rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255,255,255,0.2);
+      border-radius: 30px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.1s forwards;
+    }
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    }
+    .subtitle {
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.4s forwards;
+    }
+    .org {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.6s forwards;
+    }
+    .stats-row {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.8s forwards;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .accent-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--pln-primary-blue), var(--pln-green));
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-circle"></div>
+  <div class="bg-circle"></div>
+  <div class="bg-circle"></div>
+  <div class="content">
+    <span class="badge">Analisis Data IZAT</span>
+    <h1>Highlight Analisis:<br>Risiko Area</h1>
+    <p class="subtitle">Presentasi Ringkasan Eksekutif UP Indramayu</p>
+    <p class="org">PT PLN Nusantara Power - Unit Pembangkit Indramayu</p>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-number">5.575</div>
+        <div class="stat-label">Total Temuan</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Zona Operasi</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">46</div>
+        <div class="stat-label">Area Dianalisis</div>
+      </div>
+    </div>
+  </div>
+  <div class="accent-bar"></div>
+</body>
+</html>

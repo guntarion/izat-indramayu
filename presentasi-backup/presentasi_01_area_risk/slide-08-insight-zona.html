@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insight Ringkasan Zona Operasi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 0.2s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    th {
+      background: var(--pln-dark-blue);
+      color: #fff;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.95rem;
+      vertical-align: top;
+    }
+    tr:hover td {
+      background: var(--light-gray);
+    }
+    .zona-name {
+      font-weight: 700;
+      color: var(--pln-dark-blue);
+    }
+    .priority-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .priority-segera { background: #fee2e2; color: #dc2626; }
+    .priority-maintain { background: #dbeafe; color: #2563eb; }
+    .priority-prioritas { background: #fef3c7; color: #d97706; }
+    .priority-monitoring { background: #e0e7ff; color: #4f46e5; }
+    .priority-best { background: #dcfce7; color: #16a34a; }
+    .status-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #eab308; }
+    .dot-orange { background: #f97316; }
+    .dot-green { background: #22c55e; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Insight Ringkasan Zona Operasi</h1>
+  </div>
+  <div class="content">
+    <table>
+      <thead>
+        <tr>
+          <th>Zona</th>
+          <th>Karakteristik</th>
+          <th>Prioritas Tindakan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="status-dot dot-red"></span><span class="zona-name">UNKNOWN</span></td>
+          <td>Risk Score tertinggi (1,75), Unsafe Rate 46,4%</td>
+          <td><span class="priority-badge priority-segera">SEGERA: Kategorisasi ulang dan audit menyeluruh</span></td>
+        </tr>
+        <tr>
+          <td><span class="status-dot dot-yellow"></span><span class="zona-name">MAIN_UNIT</span></td>
+          <td>Volume dominan (47%), tapi Unsafe Rate rendah (14,7%)</td>
+          <td><span class="priority-badge priority-maintain">MAINTAIN: Pertahankan inspeksi preventif</span></td>
+        </tr>
+        <tr>
+          <td><span class="status-dot dot-orange"></span><span class="zona-name">SUPPORT</span></td>
+          <td>Unsafe Rate tinggi (32,5%), 1.708 temuan</td>
+          <td><span class="priority-badge priority-prioritas">PRIORITAS: Tingkatkan awareness K3</span></td>
+        </tr>
+        <tr>
+          <td><span class="status-dot dot-yellow"></span><span class="zona-name">COAL_HANDLING</span></td>
+          <td>Risk moderat (1,48), Unsafe Rate 21,7%</td>
+          <td><span class="priority-badge priority-monitoring">MONITORING: Fokus mechanical safety</span></td>
+        </tr>
+        <tr>
+          <td><span class="status-dot dot-green"></span><span class="zona-name">UTILITY</span></td>
+          <td>Risk Score terendah (0,92)</td>
+          <td><span class="priority-badge priority-best">BEST PRACTICE: Replikasi ke zona lain</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overview Singkat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .intro-box {
+      background: var(--light-gray);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-left: 5px solid var(--pln-primary-blue);
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out 0.2s forwards;
+    }
+    .intro-box p {
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.8;
+    }
+    .intro-box strong {
+      color: var(--pln-dark-blue);
+    }
+    .tujuan-box {
+      background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1));
+      border-radius: 16px;
+      padding: 2rem;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out 0.4s forwards;
+    }
+    .tujuan-box h3 {
+      font-size: 1.2rem;
+      color: var(--pln-dark-blue);
+      margin-bottom: 1rem;
+    }
+    .tujuan-box p {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    .stats-row {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out 0.6s forwards;
+    }
+    .stat-card {
+      flex: 1;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .stat-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--pln-primary-blue);
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Overview Singkat</h1>
+  </div>
+  <div class="content">
+    <div class="intro-box">
+      <p><strong>Analisis Performa Tim</strong> mengevaluasi kinerja <strong>652 reporter</strong> dari <strong>15 perusahaan</strong>, <strong>16 PIC</strong>, dan <strong>9 vendor</strong> dalam program IZAT K3 periode Januari 2023 - November 2024 di UP Indramayu.</p>
+    </div>
+    <div class="tujuan-box">
+      <h3>Tujuan Analisis</h3>
+      <p>Mengidentifikasi top performers, beban kerja yang tidak seimbang, dan peluang peningkatan partisipasi K3 untuk optimization resource dan recognition program.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">652</div>
+        <div class="stat-label">Reporter Aktif</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">15</div>
+        <div class="stat-label">Perusahaan</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">16</div>
+        <div class="stat-label">PIC</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">9</div>
+        <div class="stat-label">Vendor</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

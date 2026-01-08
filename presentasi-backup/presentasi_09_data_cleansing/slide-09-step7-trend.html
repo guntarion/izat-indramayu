@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 7: Tren & Komparasi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.3rem; }
+    .step-badge { background: var(--pln-green); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem; }
+    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.3s; }
+    .section:nth-child(3) { animation-delay: 0.4s; grid-column: 1 / -1; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-title::before { content: ''; width: 4px; height: 20px; background: var(--pln-primary-blue); border-radius: 2px; }
+    .trend-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+    .trend-table th { background: var(--pln-dark-blue); color: #fff; padding: 0.5rem; text-align: left; }
+    .trend-table td { padding: 0.35rem 0.5rem; border-bottom: 1px solid #e5e7eb; }
+    .month-name { font-weight: 600; color: var(--pln-dark-blue); }
+    .trend-up { color: #dc2626; }
+    .trend-down { color: var(--pln-green); }
+    .trend-stable { color: #6b7280; }
+    .mom-badge { padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.65rem; font-weight: 600; }
+    .mom-up { background: #fee2e2; color: #dc2626; }
+    .mom-down { background: #ecfdf5; color: #065f46; }
+    .mom-stable { background: #f3f4f6; color: #6b7280; }
+    .benchmark-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .benchmark-table th { background: var(--pln-dark-blue); color: #fff; padding: 0.5rem; text-align: left; font-size: 0.75rem; }
+    .benchmark-table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid #e5e7eb; }
+    .zona-name { font-weight: 600; color: var(--pln-dark-blue); }
+    .best-practice { background: #ecfdf5; }
+    .best-badge { background: var(--pln-green); color: #fff; padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.6rem; font-weight: 600; }
+    .correlation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .corr-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; }
+    .corr-pair { font-weight: 600; color: var(--pln-dark-blue); font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .corr-value { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; }
+    .corr-positive { color: var(--pln-green); }
+    .corr-negative { color: #f59e0b; }
+    .corr-weak { color: #6b7280; }
+    .corr-insight { font-size: 0.7rem; color: #666; margin-top: 0.25rem; }
+    .insight-box { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); border-radius: 8px; padding: 0.75rem 1rem; margin-top: 0.75rem; }
+    .insight-box p { color: #fff; font-size: 0.8rem; }
+    .insight-box strong { color: var(--pln-green); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <span class="step-badge">STEP 7</span>
+    </div>
+    <h1>Tren & Komparasi</h1>
+  </div>
+  <div class="content">
+    <div class="section">
+      <div class="section-title">Time-Series Analysis 2025</div>
+      <table class="trend-table">
+        <thead>
+          <tr>
+            <th>Bulan</th>
+            <th>Temuan</th>
+            <th>Unsafe Rate</th>
+            <th>MoM</th>
+            <th>Trend</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="month-name">Januari</span></td>
+            <td>758</td>
+            <td>15,8%</td>
+            <td>-</td>
+            <td>Baseline</td>
+          </tr>
+          <tr>
+            <td><span class="month-name">Februari</span></td>
+            <td>319</td>
+            <td>18,2%</td>
+            <td><span class="mom-badge mom-down">-58%</span></td>
+            <td class="trend-down">DROP</td>
+          </tr>
+          <tr>
+            <td><span class="month-name">Maret</span></td>
+            <td>691</td>
+            <td>22,1%</td>
+            <td><span class="mom-badge mom-up">+117%</span></td>
+            <td class="trend-up">SURGE</td>
+          </tr>
+          <tr>
+            <td><span class="month-name">April</span></td>
+            <td>317</td>
+            <td>19,6%</td>
+            <td><span class="mom-badge mom-down">-54%</span></td>
+            <td class="trend-down">DROP</td>
+          </tr>
+          <tr>
+            <td><span class="month-name">Mei</span></td>
+            <td>803</td>
+            <td>24,3%</td>
+            <td><span class="mom-badge mom-up">+153%</span></td>
+            <td class="trend-up">SURGE</td>
+          </tr>
+          <tr>
+            <td><span class="month-name">Juni</span></td>
+            <td>322</td>
+            <td>20,5%</td>
+            <td><span class="mom-badge mom-down">-60%</span></td>
+            <td class="trend-down">DROP</td>
+          </tr>
+          <tr>
+            <td><span class="month-name">Juli</span></td>
+            <td>794</td>
+            <td>23,7%</td>
+            <td><span class="mom-badge mom-up">+147%</span></td>
+            <td class="trend-up">SURGE</td>
+          </tr>
+          <tr>
+            <td><span class="month-name">Agustus</span></td>
+            <td>519</td>
+            <td>21,1%</td>
+            <td><span class="mom-badge mom-down">-35%</span></td>
+            <td class="trend-down">Moderate</td>
+          </tr>
+          <tr>
+            <td><span class="month-name">September</span></td>
+            <td>594</td>
+            <td>19,3%</td>
+            <td><span class="mom-badge mom-stable">+14%</span></td>
+            <td class="trend-stable">STABLE</td>
+          </tr>
+          <tr>
+            <td><span class="month-name">Oktober</span></td>
+            <td>458</td>
+            <td>16,8%</td>
+            <td><span class="mom-badge mom-down">-23%</span></td>
+            <td class="trend-down">Moderate</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="insight-box">
+        <p><strong>Pattern:</strong> Fluktuasi tinggi (58-153%) mengindikasikan cyclical activity - kemungkinan terkait shutdown maintenance.</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Zona Benchmarking</div>
+      <table class="benchmark-table">
+        <thead>
+          <tr>
+            <th>Zona</th>
+            <th>Quality</th>
+            <th>Risk</th>
+            <th>Resolution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="zona-name">MAIN_UNIT</span></td>
+            <td>2,35</td>
+            <td>1,37</td>
+            <td>149 hari</td>
+          </tr>
+          <tr>
+            <td><span class="zona-name">COAL_HANDLING</span></td>
+            <td>2,48</td>
+            <td>1,48</td>
+            <td>201 hari</td>
+          </tr>
+          <tr>
+            <td><span class="zona-name">SUPPORT</span></td>
+            <td>2,19</td>
+            <td>1,16</td>
+            <td>267 hari</td>
+          </tr>
+          <tr class="best-practice">
+            <td><span class="zona-name">UTILITY</span> <span class="best-badge">BEST</span></td>
+            <td>2,52</td>
+            <td>0,92</td>
+            <td>184 hari</td>
+          </tr>
+          <tr>
+            <td><span class="zona-name">UNKNOWN</span></td>
+            <td>2,31</td>
+            <td>1,75</td>
+            <td>287 hari</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="section">
+      <div class="section-title">Cross-Category Correlation</div>
+      <div class="correlation-grid">
+        <div class="corr-card">
+          <div class="corr-pair">Quality vs Detection</div>
+          <div class="corr-value corr-positive">+0,67</div>
+          <div class="corr-insight">Higher quality = more actionable findings</div>
+        </div>
+        <div class="corr-card">
+          <div class="corr-pair">Workload vs Resolution</div>
+          <div class="corr-value corr-negative">-0,31</div>
+          <div class="corr-insight">Overloaded PIC surprisingly faster</div>
+        </div>
+        <div class="corr-card">
+          <div class="corr-pair">Risk vs Close Rate</div>
+          <div class="corr-value corr-weak">-0,12</div>
+          <div class="corr-insight">Weak - high risk not slower</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

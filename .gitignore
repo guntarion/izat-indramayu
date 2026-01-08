@@ -3,18 +3,28 @@
 **/.DS_Store
 .venv
 
+# Node.js
+node_modules/
+package-lock.json
+
 # Archives
 *.zip
 
-# Backups
+# Backups (general)
 *-backup/
-presentasi-backup/
+# EXCEPT presentasi-backup which contains source HTML
+!presentasi-backup/
+
+# Generated/Working directories
+output/pptx/*.pptx
+presentasi-for-pptx/
 
 # Playwright test screenshots
 .playwright-mcp/
 
-# Claude Code local files
-.claude/skills/
+# Claude Code local files (except our custom skill)
+.claude/skills/*
+!.claude/skills/html-to-pptx/
 
 # Plan files
 poster/plan/

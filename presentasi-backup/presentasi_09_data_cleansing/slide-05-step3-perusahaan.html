@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 3: Standardisasi Perusahaan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.3rem; }
+    .step-badge { background: var(--pln-green); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; }
+    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.3s; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-title::before { content: ''; width: 4px; height: 20px; background: var(--pln-primary-blue); border-radius: 2px; }
+    .problem-card { background: #fef2f2; border-left: 4px solid #ef4444; padding: 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; }
+    .problem-card p { font-size: 0.85rem; color: #991b1b; }
+    .variant-list { font-family: monospace; font-size: 0.75rem; color: #666; margin-top: 0.5rem; }
+    .solution-card { background: #ecfdf5; border-left: 4px solid var(--pln-green); padding: 1rem; border-radius: 0 8px 8px 0; }
+    .solution-card p { font-size: 0.85rem; color: #065f46; }
+    .output-cols { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+    .output-col { background: var(--pln-primary-blue); color: #fff; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+    .company-table { width: 100%; border-collapse: collapse; }
+    .company-table th { background: var(--pln-dark-blue); color: #fff; padding: 0.6rem; text-align: left; font-size: 0.8rem; }
+    .company-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #e5e7eb; font-size: 0.8rem; }
+    .company-name { font-weight: 600; color: var(--pln-dark-blue); }
+    .category-badge { padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.7rem; font-weight: 600; }
+    .category-vendor { background: #dbeafe; color: #1e40af; }
+    .category-pln { background: #fef3c7; color: #92400e; }
+    .category-other { background: #f3f4f6; color: #4b5563; }
+    .reporter-count { color: var(--pln-green); font-weight: 600; }
+    .insight-box { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); border-radius: 8px; padding: 0.75rem 1rem; margin-top: 1rem; grid-column: 1 / -1; opacity: 0; animation: fadeIn 0.6s ease-out 0.5s forwards; }
+    .insight-box p { color: #fff; font-size: 0.85rem; }
+    .insight-box strong { color: var(--pln-green); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <span class="step-badge">STEP 3</span>
+    </div>
+    <h1>Standardisasi Perusahaan</h1>
+  </div>
+  <div class="content">
+    <div class="section">
+      <div class="section-title">Normalisasi Nama</div>
+      <div class="problem-card">
+        <p><strong>Masalah:</strong> 1 perusahaan punya 5-10 variasi nama</p>
+        <div class="variant-list">
+          PT RBU → "rbu", "PT RBU", "RBU", "PT. RBU", "RAMAYANA BANDAR UTAMA"
+        </div>
+      </div>
+      <div class="solution-card">
+        <p><strong>Solusi:</strong> Fuzzy matching + manual mapping</p>
+        <div class="output-cols">
+          <span class="output-col">perusahaan_clean</span>
+          <span class="output-col">perusahaan_kategori</span>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Distribusi Perusahaan</div>
+      <table class="company-table">
+        <thead>
+          <tr>
+            <th>Kategori</th>
+            <th>Perusahaan</th>
+            <th>Temuan</th>
+            <th>%</th>
+            <th>Reporter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="category-badge category-vendor">VENDOR</span></td>
+            <td><span class="company-name">PT PLN NP Services</span></td>
+            <td>1.836</td>
+            <td>33%</td>
+            <td class="reporter-count">278</td>
+          </tr>
+          <tr>
+            <td><span class="category-badge category-vendor">VENDOR</span></td>
+            <td><span class="company-name">PT RBU</span></td>
+            <td>1.000</td>
+            <td>18%</td>
+            <td class="reporter-count">152</td>
+          </tr>
+          <tr>
+            <td><span class="category-badge category-vendor">VENDOR</span></td>
+            <td><span class="company-name">PT Garda Bangsa (Security)</span></td>
+            <td>809</td>
+            <td>15%</td>
+            <td class="reporter-count">84</td>
+          </tr>
+          <tr>
+            <td><span class="category-badge category-vendor">VENDOR</span></td>
+            <td><span class="company-name">PT MKP</span></td>
+            <td>725</td>
+            <td>13%</td>
+            <td class="reporter-count">105</td>
+          </tr>
+          <tr>
+            <td><span class="category-badge category-pln">PLN</span></td>
+            <td><span class="company-name">PT PLN Nusantara Power</span></td>
+            <td>165</td>
+            <td>3%</td>
+            <td class="reporter-count">33</td>
+          </tr>
+          <tr>
+            <td><span class="category-badge category-other">OTHER</span></td>
+            <td>4 perusahaan lainnya</td>
+            <td>1.040</td>
+            <td>18%</td>
+            <td class="reporter-count">171</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-box">
+      <p><strong>Takeaway:</strong> Vendor mendominasi <strong>82%</strong> reporting volume. PT PLN NP Services memiliki engagement tertinggi dengan 278 reporter aktif.</p>
+    </div>
+  </div>
+</body>
+</html>

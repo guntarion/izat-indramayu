@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE PARADOX: Success or Failure?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); padding: 2rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: #78350f; }
+    .content { flex: 1; padding: 2rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .side-box { border-radius: 12px; padding: 1.5rem; opacity: 0; animation: fadeInUp 0.5s ease-out forwards; }
+    .positive { background: #dcfce7; border-left: 5px solid var(--pln-green); animation-delay: 0.1s; }
+    .negative { background: #fee2e2; border-left: 5px solid #dc2626; animation-delay: 0.2s; }
+    .side-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .positive .side-title { color: #16a34a; }
+    .negative .side-title { color: #dc2626; }
+    .side-box ul { list-style: none; }
+    .side-box li { padding: 0.5rem 0; font-size: 0.95rem; color: #333; border-bottom: 1px solid rgba(0,0,0,0.1); }
+    .conclusion { grid-column: span 2; background: linear-gradient(135deg, var(--pln-dark-blue), var(--pln-primary-blue)); border-radius: 12px; padding: 2rem; text-align: center; opacity: 0; animation: fadeInUp 0.5s ease-out 0.3s forwards; }
+    .conclusion h3 { color: #fff; font-size: 1.5rem; margin-bottom: 1rem; font-family: 'Poppins', sans-serif; }
+    .conclusion p { color: rgba(255,255,255,0.9); font-size: 1rem; font-style: italic; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>THE PARADOX: Success or Failure?</h1></div>
+  <div class="content">
+    <div class="side-box positive">
+      <h3 class="side-title">Sisi Positif</h3>
+      <ul>
+        <li><strong>Close Rate 99,2%</strong> - Hampir semua temuan diselesaikan</li>
+        <li><strong>Konsistensi tinggi</strong> - Jan-Sept close rate 100%</li>
+        <li><strong>Tidak ada abandoned findings</strong> - Komitmen penyelesaian sempurna</li>
+      </ul>
+    </div>
+    <div class="side-box negative">
+      <h3 class="side-title">Sisi Negatif</h3>
+      <ul>
+        <li><strong>SLA Compliance 0%</strong> untuk HIGH & CRITICAL - Tidak ada satu pun yang on-time</li>
+        <li><strong>Gap ekstrem</strong> - 10x hingga 269x lebih lama dari target</li>
+        <li><strong>Prioritization failure</strong> - Semakin critical, semakin lama!</li>
+      </ul>
+    </div>
+    <div class="conclusion">
+      <h3>"We close everything, but we're always late."</h3>
+      <p>Seperti restaurant yang 99% order completed tapi 90% datang 2 jam terlambat.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Metrics - Shift Performance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 2rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; }
+    table { width: 100%; border-collapse: collapse; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; font-size: 0.85rem; }
+    th { background: var(--pln-dark-blue); color: #fff; padding: 0.7rem; text-align: left; font-weight: 600; }
+    td { padding: 0.7rem; border-bottom: 1px solid #e5e7eb; }
+    tr:hover td { background: var(--light-gray); }
+    .best { color: var(--pln-green); font-weight: 700; }
+    .worst { color: #dc2626; font-weight: 700; }
+    .status-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+    .status-good { background: #dcfce7; color: #16a34a; }
+    .status-warning { background: #fef3c7; color: #92400e; }
+    .status-excellent { background: var(--pln-green); color: #fff; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Key Metrics - Kinerja Per Shift</h1></div>
+  <div class="content">
+    <table>
+      <thead><tr><th>Metrik</th><th>Shift A (Pagi)</th><th>Shift B (Siang)</th><th>Shift C (Malam)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Total Laporan</strong></td><td>3.537 (63%)</td><td>1.603 (29%)</td><td>435 (8%)</td></tr>
+        <tr><td><strong>Avg Quality Score</strong></td><td>2,31</td><td class="worst">2,02</td><td class="best">2,43</td></tr>
+        <tr><td><strong>Detection Rate Unsafe</strong></td><td>24,1%</td><td class="worst">17,1%</td><td class="best">25,7%</td></tr>
+        <tr><td><strong>Avg Risk Score</strong></td><td>1,27</td><td>1,22</td><td>1,44</td></tr>
+        <tr><td><strong>Avg Resolusi (hari)</strong></td><td>181</td><td class="best">156</td><td>201</td></tr>
+        <tr><td><strong>Status</strong></td><td><span class="status-badge status-good">Baik</span></td><td><span class="status-badge status-warning">Perlu Peningkatan</span></td><td><span class="status-badge status-excellent">Sangat Baik</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

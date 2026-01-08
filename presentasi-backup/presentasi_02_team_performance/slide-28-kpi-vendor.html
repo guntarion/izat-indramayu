@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success Metrics: Vendor KPIs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pln-dark-blue: #035B71;
+      --pln-primary-blue: #00A2B9;
+      --pln-green: #35B971;
+      --light-gray: #F8F9FA;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%);
+      padding: 2rem 3rem;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 2rem 3rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 0.2s forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    th {
+      background: var(--pln-dark-blue);
+      color: #fff;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.95rem;
+    }
+    tr:hover td { background: var(--light-gray); }
+    .kpi-name {
+      font-weight: 600;
+      color: var(--pln-dark-blue);
+    }
+    .baseline {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: #dc2626;
+    }
+    .target-3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: #f59e0b;
+    }
+    .target-6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--pln-green);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Success Metrics: Vendor KPIs</h1>
+  </div>
+  <div class="content">
+    <table>
+      <thead>
+        <tr>
+          <th>KPI</th>
+          <th>Baseline (Current)</th>
+          <th>Target 3 Bulan</th>
+          <th>Target 6 Bulan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="kpi-name">Min Detection Rate</span></td>
+          <td><span class="baseline">9,8% (PT RBU)</span></td>
+          <td><span class="target-3">&gt; 15% all vendors</span></td>
+          <td><span class="target-6">&gt; 20% all vendors</span></td>
+        </tr>
+        <tr>
+          <td><span class="kpi-name">GOLD Tier Vendors</span></td>
+          <td><span class="baseline">2</span></td>
+          <td><span class="target-3">3</span></td>
+          <td><span class="target-6">4</span></td>
+        </tr>
+        <tr>
+          <td><span class="kpi-name">Avg Vendor Quality</span></td>
+          <td><span class="baseline">2,3</span></td>
+          <td><span class="target-3">2,5</span></td>
+          <td><span class="target-6">2,8</span></td>
+        </tr>
+        <tr>
+          <td><span class="kpi-name">Vendors needing PIP</span></td>
+          <td><span class="baseline">1 (PT RBU)</span></td>
+          <td><span class="target-3">0</span></td>
+          <td><span class="target-6">0</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

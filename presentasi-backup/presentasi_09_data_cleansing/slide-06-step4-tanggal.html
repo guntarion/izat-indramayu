@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 4: Standardisasi Tanggal & Waktu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.3rem; }
+    .step-badge { background: var(--pln-green); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.3s; }
+    .section:nth-child(3) { animation-delay: 0.4s; grid-column: 1 / -1; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-title::before { content: ''; width: 4px; height: 20px; background: var(--pln-primary-blue); border-radius: 2px; }
+    .parsing-card { background: var(--light-gray); padding: 1rem; border-radius: 8px; }
+    .input-formats { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .format-tag { background: #fee2e2; color: #991b1b; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-family: monospace; }
+    .output-cols { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .output-col { background: var(--pln-primary-blue); color: #fff; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; }
+    .derived-list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.3rem; margin-top: 0.75rem; }
+    .derived-list li { font-size: 0.75rem; color: #666; padding: 0.3rem 0.5rem; background: #fff; border-radius: 4px; }
+    .shift-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+    .shift-card { background: var(--light-gray); padding: 0.75rem; border-radius: 8px; text-align: center; }
+    .shift-name { font-weight: 600; color: var(--pln-dark-blue); font-size: 0.9rem; }
+    .shift-time { font-size: 0.7rem; color: #666; margin: 0.25rem 0; }
+    .shift-count { font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--pln-primary-blue); }
+    .shift-pct { font-size: 0.75rem; color: #666; }
+    .resolution-table { width: 100%; border-collapse: collapse; }
+    .resolution-table th { background: var(--pln-dark-blue); color: #fff; padding: 0.5rem; text-align: left; font-size: 0.8rem; }
+    .resolution-table td { padding: 0.4rem 0.5rem; border-bottom: 1px solid #e5e7eb; font-size: 0.8rem; }
+    .time-category { font-weight: 600; color: var(--pln-dark-blue); }
+    .pct-bar { height: 6px; border-radius: 3px; background: var(--pln-primary-blue); }
+    .alert-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-top: 1rem; }
+    .alert-box p { font-size: 0.85rem; color: #991b1b; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <span class="step-badge">STEP 4</span>
+    </div>
+    <h1>Standardisasi Tanggal & Waktu</h1>
+  </div>
+  <div class="content">
+    <div class="section">
+      <div class="section-title">Parsing & Kolom Turunan</div>
+      <div class="parsing-card">
+        <p style="font-size: 0.8rem; color: #666; margin-bottom: 0.5rem;">Input format inconsistent:</p>
+        <div class="input-formats">
+          <span class="format-tag">16/01/25</span>
+          <span class="format-tag">16/01/25 15.07</span>
+          <span class="format-tag">2025-01-16</span>
+        </div>
+        <p style="font-size: 0.8rem; color: #666; margin-bottom: 0.5rem;">Output standardized (+14 kolom):</p>
+        <div class="output-cols">
+          <span class="output-col">tanggal_parsed</span>
+          <span class="output-col">created_parsed</span>
+          <span class="output-col">close_parsed</span>
+        </div>
+        <ul class="derived-list">
+          <li>year</li>
+          <li>month</li>
+          <li>quarter</li>
+          <li>day_of_week</li>
+          <li>hour_of_day</li>
+          <li>shift</li>
+          <li>resolution_days</li>
+          <li>week_number</li>
+          <li>is_weekend</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Distribusi Shift</div>
+      <div class="shift-cards">
+        <div class="shift-card">
+          <div class="shift-name">PAGI</div>
+          <div class="shift-time">06:00 - 14:00</div>
+          <div class="shift-count">2.833</div>
+          <div class="shift-pct">51%</div>
+        </div>
+        <div class="shift-card">
+          <div class="shift-name">SIANG</div>
+          <div class="shift-time">14:00 - 22:00</div>
+          <div class="shift-count">1.589</div>
+          <div class="shift-pct">28%</div>
+        </div>
+        <div class="shift-card">
+          <div class="shift-name">MALAM</div>
+          <div class="shift-time">22:00 - 06:00</div>
+          <div class="shift-count">1.153</div>
+          <div class="shift-pct">21%</div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Metrik Resolusi Temuan</div>
+      <table class="resolution-table">
+        <thead>
+          <tr>
+            <th>Kategori Waktu</th>
+            <th>Range</th>
+            <th>Jumlah</th>
+            <th>%</th>
+            <th style="width: 25%;">Distribusi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="time-category">Same Day</span></td>
+            <td>0 hari</td>
+            <td>128</td>
+            <td>2,3%</td>
+            <td><div class="pct-bar" style="width: 4%;"></div></td>
+          </tr>
+          <tr>
+            <td><span class="time-category">&lt; 7 Hari</span></td>
+            <td>1-7 hari</td>
+            <td>421</td>
+            <td>7,6%</td>
+            <td><div class="pct-bar" style="width: 15%;"></div></td>
+          </tr>
+          <tr>
+            <td><span class="time-category">7-30 Hari</span></td>
+            <td>8-30 hari</td>
+            <td>1.247</td>
+            <td>22,5%</td>
+            <td><div class="pct-bar" style="width: 43%;"></div></td>
+          </tr>
+          <tr>
+            <td><span class="time-category">1-6 Bulan</span></td>
+            <td>31-180 hari</td>
+            <td>2.891</td>
+            <td>52,1%</td>
+            <td><div class="pct-bar" style="width: 100%; background: #f59e0b;"></div></td>
+          </tr>
+          <tr>
+            <td><span class="time-category">&gt; 6 Bulan</span></td>
+            <td>181+ hari</td>
+            <td>844</td>
+            <td>15,5%</td>
+            <td><div class="pct-bar" style="width: 30%; background: #ef4444;"></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert-box">
+        <p><strong>Critical:</strong> 67,6% temuan butuh lebih dari 1 bulan. Rata-rata resolution time: <strong>220 hari</strong> - jauh dari target SLA 14 hari.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Performance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 2rem 3rem; }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
+    .metric { background: var(--light-gray); border-radius: 16px; padding: 1.5rem; text-align: center; }
+    .metric-value { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 700; color: var(--pln-primary-blue); margin-bottom: 0.5rem; }
+    .metric-name { font-weight: 600; color: var(--pln-dark-blue); font-size: 1rem; margin-bottom: 0.5rem; }
+    .metric-desc { font-size: 0.8rem; color: #666; }
+    .interpretation { margin-top: 2rem; background: linear-gradient(135deg, rgba(0,162,185,0.1), rgba(53,185,113,0.1)); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--pln-green); opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
+    .interpretation h3 { font-size: 1rem; color: var(--pln-dark-blue); margin-bottom: 0.75rem; }
+    .interpretation p { font-size: 0.9rem; color: #555; line-height: 1.6; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Model Performance</h1></div>
+  <div class="content">
+    <div class="metrics">
+      <div class="metric"><div class="metric-value">75-80%</div><div class="metric-name">Accuracy</div><div class="metric-desc">Good predictive power</div></div>
+      <div class="metric"><div class="metric-value">70-75%</div><div class="metric-name">Precision</div><div class="metric-desc">Dari prediksi high-risk, 70%+ akurat</div></div>
+      <div class="metric"><div class="metric-value">65-70%</div><div class="metric-name">Recall</div><div class="metric-desc">Detect 65%+ actual high-risk</div></div>
+      <div class="metric"><div class="metric-value">5.575</div><div class="metric-name">Training Data</div><div class="metric-desc">Findings Jan-Okt 2025</div></div>
+    </div>
+    <div class="interpretation">
+      <h3>Interpretasi Model</h3>
+      <p><strong>3 dari 4 prediksi akurat.</strong> Model ini memberikan predictive power yang sufficient untuk operational decision-making. Precision 70-75% berarti ketika model memprediksi high-risk, kemungkinan besar memang benar-benar high-risk. Ini enable proactive resource allocation bukan reactive response.</p>
+    </div>
+  </div>
+</body>
+</html>

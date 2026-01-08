@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top 3 High-Risk Scenarios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); padding: 1.5rem 3rem; }
+    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #fff; margin-bottom: 0.3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 2rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .scenario { display: grid; grid-template-columns: 80px 1fr auto; gap: 1.5rem; align-items: center; background: var(--light-gray); border-radius: 16px; padding: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .scenario:nth-child(1) { animation-delay: 0.2s; }
+    .scenario:nth-child(2) { animation-delay: 0.3s; }
+    .scenario:nth-child(3) { animation-delay: 0.4s; }
+    .scenario-rank { font-family: 'Poppins', sans-serif; font-size: 2.5rem; font-weight: 800; color: #dc2626; text-align: center; }
+    .scenario-details h3 { font-size: 1.1rem; color: var(--pln-dark-blue); margin-bottom: 0.5rem; }
+    .scenario-factors { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .factor { padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+    .factor-zona { background: #dbeafe; color: #1e40af; }
+    .factor-shift { background: #fef3c7; color: #92400e; }
+    .factor-hari { background: #dcfce7; color: #16a34a; }
+    .probability { text-align: center; }
+    .prob-value { font-family: 'Poppins', sans-serif; font-size: 2rem; font-weight: 700; color: #dc2626; }
+    .prob-label { font-size: 0.75rem; color: #666; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="header-badge">MODEL PREDICTION</span>
+    <h1>Top 3 High-Risk Scenarios</h1>
+  </div>
+  <div class="content">
+    <div class="scenario">
+      <div class="scenario-rank">#1</div>
+      <div class="scenario-details">
+        <h3>COAL_HANDLING + Shift Malam + Weekend</h3>
+        <div class="scenario-factors">
+          <span class="factor factor-zona">COAL_HANDLING</span>
+          <span class="factor factor-shift">Shift C (Malam)</span>
+          <span class="factor factor-hari">Weekend</span>
+        </div>
+      </div>
+      <div class="probability"><div class="prob-value">78%</div><div class="prob-label">High-risk probability</div></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-rank">#2</div>
+      <div class="scenario-details">
+        <h3>UNKNOWN Zone + Any Shift + Senin</h3>
+        <div class="scenario-factors">
+          <span class="factor factor-zona">UNKNOWN</span>
+          <span class="factor factor-shift">Any Shift</span>
+          <span class="factor factor-hari">Senin</span>
+        </div>
+      </div>
+      <div class="probability"><div class="prob-value">72%</div><div class="prob-label">High-risk probability</div></div>
+    </div>
+    <div class="scenario">
+      <div class="scenario-rank">#3</div>
+      <div class="scenario-details">
+        <h3>SUPPORT Area + Shift Pagi + Senin</h3>
+        <div class="scenario-factors">
+          <span class="factor factor-zona">SUPPORT</span>
+          <span class="factor factor-shift">Shift A (Pagi)</span>
+          <span class="factor factor-hari">Senin</span>
+        </div>
+      </div>
+      <div class="probability"><div class="prob-value">68%</div><div class="prob-label">High-risk probability</div></div>
+    </div>
+  </div>
+</body>
+</html>

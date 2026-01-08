@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Root Cause Hypothesis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 2rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; }
+    table { width: 100%; border-collapse: collapse; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; font-size: 0.85rem; }
+    th { background: var(--pln-dark-blue); color: #fff; padding: 0.8rem; text-align: left; font-weight: 600; }
+    td { padding: 0.8rem; border-bottom: 1px solid #e5e7eb; }
+    tr:hover td { background: var(--light-gray); }
+    .prob-high { background: #fee2e2; color: #dc2626; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 4px; }
+    .prob-medium { background: #fef3c7; color: #92400e; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 4px; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Root Cause Hypothesis (Need Validation)</h1></div>
+  <div class="content">
+    <table>
+      <thead><tr><th>#</th><th>Hypothesis</th><th>Evidence</th><th>Probability</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>PIC Overload</strong></td><td>Andrian handle 47% workload sendirian</td><td><span class="prob-high">HIGH</span></td></tr>
+        <tr><td>2</td><td><strong>Material Procurement Delay</strong></td><td>Waiting for spare parts dari Jakarta</td><td><span class="prob-medium">MEDIUM</span></td></tr>
+        <tr><td>3</td><td><strong>Budget Approval Process</strong></td><td>Multi-layer approval untuk purchase</td><td><span class="prob-medium">MEDIUM</span></td></tr>
+        <tr><td>4</td><td><strong>Unrealistic SLA Target</strong></td><td>1-2 hari untuk complex repair?</td><td><span class="prob-high">HIGH</span></td></tr>
+        <tr><td>5</td><td><strong>Work Permit Complexity</strong></td><td>Hot work, height work permit process</td><td><span class="prob-medium">LOW-MEDIUM</span></td></tr>
+        <tr><td>6</td><td><strong>Lack of Fast-Track Mechanism</strong></td><td>No emergency process untuk CRITICAL</td><td><span class="prob-high">HIGH</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

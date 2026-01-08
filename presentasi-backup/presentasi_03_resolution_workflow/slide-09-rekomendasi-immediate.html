@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekomendasi Immediate (0-1 Bulan)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); padding: 2rem 3rem; display: flex; align-items: center; gap: 1rem; }
+    .header-badge { background: rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; color: #fff; font-weight: 600; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 2rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .action-card { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center; background: var(--light-gray); border-radius: 12px; padding: 1.5rem; border-left: 5px solid #dc2626; opacity: 0; animation: fadeInLeft 0.5s ease-out forwards; }
+    .action-card:nth-child(1) { animation-delay: 0.1s; }
+    .action-card:nth-child(2) { animation-delay: 0.2s; }
+    .action-card:nth-child(3) { animation-delay: 0.3s; border-left-color: #f59e0b; }
+    .priority-badge { padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; background: #dc2626; color: #fff; }
+    .priority-high { background: #f59e0b; }
+    .action-content h3 { font-size: 1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 0.25rem; }
+    .action-content p { font-size: 0.85rem; color: #666; }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="header-badge">URGENT 0-1 Bulan</span>
+    <h1>Rekomendasi Immediate Actions</h1>
+  </div>
+  <div class="content">
+    <div class="action-card">
+      <span class="priority-badge">CRITICAL</span>
+      <div class="action-content">
+        <h3>Implement Fast-Track Process untuk CRITICAL</h3>
+        <p>CRITICAL findings resolved dalam max 7 hari. Target: SLA compliance 0% → 30%</p>
+      </div>
+    </div>
+    <div class="action-card">
+      <span class="priority-badge">CRITICAL</span>
+      <div class="action-content">
+        <h3>Emergency Task Force untuk 107 CRITICAL Backlog</h3>
+        <p>Close semua 107 CRITICAL findings dalam 30 hari. Clear backlog, reduce risk exposure.</p>
+      </div>
+    </div>
+    <div class="action-card">
+      <span class="priority-badge priority-high">HIGH</span>
+      <div class="action-content">
+        <h3>Daily Stand-up untuk CRITICAL/HIGH Findings</h3>
+        <p>Monitor progress setiap hari. Visibility & accountability.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

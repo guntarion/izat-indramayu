@@ -1,3 +1,9 @@
+## 2026-01-08 11:13:17
+
+feat: add HTML to PPTX conversion system with screenshot-based approach
+
+---
+
 ## 2026-01-04 21:39:56
 
 feat: add premium visual enhancements with floating particles and enhanced navigation

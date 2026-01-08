@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Takeaways</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 2rem 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .takeaway { background: var(--light-gray); border-radius: 12px; padding: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .takeaway:nth-child(1) { animation-delay: 0.2s; border-left: 4px solid #dc2626; }
+    .takeaway:nth-child(2) { animation-delay: 0.3s; border-left: 4px solid var(--pln-primary-blue); }
+    .takeaway:nth-child(3) { animation-delay: 0.4s; border-left: 4px solid var(--pln-green); }
+    .takeaway-num { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--pln-primary-blue); margin-bottom: 0.5rem; }
+    .takeaway h3 { font-size: 1.1rem; color: var(--pln-dark-blue); margin-bottom: 0.5rem; }
+    .takeaway p { font-size: 0.9rem; color: #555; line-height: 1.6; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Key Takeaways</h1></div>
+  <div class="content">
+    <div class="takeaway">
+      <div class="takeaway-num">1</div>
+      <h3>APAR Crisis</h3>
+      <p>800+ findings terkait APAR (Fire Extinguisher) - expired, rusak, missing. Ini compliance risk serius yang memerlukan immediate audit & replacement program.</p>
+    </div>
+    <div class="takeaway">
+      <div class="takeaway-num">2</div>
+      <h3>Predictive Maintenance Opportunity</h3>
+      <p>Equipment dengan high-frequency findings (Pump, Motor) menunjukkan pattern failure. Shift dari reactive ke predictive maintenance bisa significantly reduce downtime.</p>
+    </div>
+    <div class="takeaway">
+      <div class="takeaway-num">3</div>
+      <h3>Asset Health Monitoring</h3>
+      <p>Tracking per equipment unit (contoh: Pump A-01, Pump A-02) enable targeted intervention vs blanket maintenance - lebih efisien, cost-effective, dan mengurangi over-maintenance.</p>
+    </div>
+  </div>
+</body>
+</html>

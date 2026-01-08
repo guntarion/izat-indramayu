@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekomendasi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .section { opacity: 0; animation: fadeIn 0.6s ease-out forwards; }
+    .section:nth-child(1) { animation-delay: 0.2s; }
+    .section:nth-child(2) { animation-delay: 0.4s; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--pln-dark-blue); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--pln-primary-blue); }
+    .action-item { background: var(--light-gray); border-radius: 10px; padding: 1rem; margin-bottom: 0.75rem; }
+    .action-item h4 { font-size: 0.9rem; color: var(--pln-dark-blue); margin-bottom: 0.3rem; }
+    .action-item p { font-size: 0.8rem; color: #666; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>Rekomendasi</h1></div>
+  <div class="content">
+    <div class="section">
+      <div class="section-title">Operational Application</div>
+      <div class="action-item"><h4>1. Daily Briefing</h4><p>Check model prediction untuk shift hari ini, extra vigilance di zona predicted high-risk</p></div>
+      <div class="action-item"><h4>2. Weekly Planning</h4><p>Allocate HSE officer based on 7-day forecast dari model prediction</p></div>
+      <div class="action-item"><h4>3. Resource Optimization</h4><p>Reduce patrol frequency di consistently predicted low-risk zones</p></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Model Maintenance</div>
+      <div class="action-item"><h4>4. Quarterly Retrain</h4><p>Update model dengan data 3 bulan terbaru untuk maintain accuracy</p></div>
+      <div class="action-item"><h4>5. Performance Monitoring</h4><p>Track actual vs predicted. Jika accuracy drop < 70% → investigate & retrain</p></div>
+    </div>
+  </div>
+</body>
+</html>

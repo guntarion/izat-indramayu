@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overview Pipeline Data Cleansing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --pln-dark-blue: #035B71; --pln-primary-blue: #00A2B9; --pln-green: #35B971; --light-gray: #F8F9FA; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; background: #fff; }
+    .header { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); padding: 1.5rem 3rem; }
+    .header-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; color: #fff; margin-bottom: 0.3rem; }
+    .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; }
+    .content { flex: 1; padding: 1.5rem 3rem; overflow: auto; }
+    .pipeline-table { width: 100%; border-collapse: collapse; opacity: 0; animation: fadeIn 0.6s ease-out 0.2s forwards; }
+    .pipeline-table th { background: var(--pln-dark-blue); color: #fff; padding: 0.75rem; text-align: left; font-size: 0.85rem; }
+    .pipeline-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid #e5e7eb; font-size: 0.85rem; }
+    .pipeline-table tr:hover { background: var(--light-gray); }
+    .step-num { font-family: 'Poppins', sans-serif; font-weight: 700; color: var(--pln-primary-blue); font-size: 1rem; }
+    .step-name { font-weight: 600; color: var(--pln-dark-blue); }
+    .col-new { color: var(--pln-green); font-weight: 600; }
+    .insight-box { background: linear-gradient(135deg, var(--pln-dark-blue) 0%, var(--pln-primary-blue) 100%); border-radius: 12px; padding: 1rem 1.5rem; margin-top: 1.5rem; opacity: 0; animation: fadeIn 0.6s ease-out 0.4s forwards; }
+    .insight-box p { color: #fff; font-size: 0.95rem; }
+    .insight-box strong { color: var(--pln-green); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="header-badge">Data Quality Framework</span>
+    <h1>Overview Pipeline Data Cleansing</h1>
+  </div>
+  <div class="content">
+    <table class="pipeline-table">
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>Proses</th>
+          <th>Input</th>
+          <th>Output</th>
+          <th>Kolom Baru</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="step-num">1</span></td>
+          <td><span class="step-name">Koreksi Typo (Fuzzy Matching)</span></td>
+          <td>31</td>
+          <td>37</td>
+          <td class="col-new">+6 kolom _clean</td>
+        </tr>
+        <tr>
+          <td><span class="step-num">2</span></td>
+          <td><span class="step-name">Standardisasi Lokasi</span></td>
+          <td>37</td>
+          <td>41</td>
+          <td class="col-new">+4 kolom lokasi</td>
+        </tr>
+        <tr>
+          <td><span class="step-num">3</span></td>
+          <td><span class="step-name">Standardisasi Perusahaan</span></td>
+          <td>41</td>
+          <td>44</td>
+          <td class="col-new">+3 kolom perusahaan</td>
+        </tr>
+        <tr>
+          <td><span class="step-num">4</span></td>
+          <td><span class="step-name">Standardisasi Tanggal</span></td>
+          <td>44</td>
+          <td>58</td>
+          <td class="col-new">+14 kolom waktu</td>
+        </tr>
+        <tr>
+          <td><span class="step-num">5</span></td>
+          <td><span class="step-name">Risk Severity & Issue Category</span></td>
+          <td>58</td>
+          <td>61</td>
+          <td class="col-new">+3 kolom risiko</td>
+        </tr>
+        <tr>
+          <td><span class="step-num">6</span></td>
+          <td><span class="step-name">Quality & Workload Metrics</span></td>
+          <td>61</td>
+          <td>66</td>
+          <td class="col-new">+5 kolom performa</td>
+        </tr>
+        <tr>
+          <td><span class="step-num">7</span></td>
+          <td><span class="step-name">Tren & Komparasi</span></td>
+          <td>66</td>
+          <td>75</td>
+          <td class="col-new">+9 kolom benchmark</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="insight-box">
+      <p><strong>Transformasi:</strong> Dari 31 kolom mentah → 75 kolom analitis (<strong>141% peningkatan struktur data</strong>)</p>
+    </div>
+  </div>
+</body>
+</html>
